@@ -18,6 +18,18 @@ public sealed class McpServerRevocationSteps
                 _fixture = fixture;
         }
 
+        private static McpRevocationStatusResult RequireRevocationStatusResult()
+        {
+                if (TestSharedState.RevocationStatusResult == null &&
+                    TestSharedState.ToolResult?.Content is McpRevocationStatusResult fromToolResult)
+                {
+                        TestSharedState.RevocationStatusResult = fromToolResult;
+                }
+
+                return TestSharedState.RevocationStatusResult
+                    ?? throw new Exception("No revocation status result available in shared state");
+        }
+
         private async Task<(string serial, string nameHash, string keyHash)> GetCertInfoAsync()
         {
                 if (_issuedCerts.Count == 0)
@@ -344,15 +356,15 @@ public sealed class McpServerRevocationSteps
         [Then("the Checks array MUST contain at least (.+) entries")]
         public void ThenChecksMustContainAtLeast(int count)
         {
-                Assert.NotNull(TestSharedState.RevocationStatusResult);
-                Assert.True(TestSharedState.RevocationStatusResult.Checks.Count >= count);
+                var result = RequireRevocationStatusResult();
+                Assert.True(result.Checks.Count >= count);
         }
 
         [Then("at least one result MUST have status Good")]
         public void ThenAtLeastOneGood()
         {
-                Assert.NotNull(TestSharedState.RevocationStatusResult);
-                Assert.Contains(TestSharedState.RevocationStatusResult.Checks,
+                var result = RequireRevocationStatusResult();
+                Assert.Contains(result.Checks,
                         c => c.Status == McpCertificateStatus.Good);
         }
 
@@ -360,8 +372,8 @@ public sealed class McpServerRevocationSteps
         public void ThenAtLeastOneRevoked(string expectedValueStr)
         {
                 int expectedValue = int.Parse(expectedValueStr.Trim('(', ')'));
-                Assert.NotNull(TestSharedState.RevocationStatusResult);
-                Assert.Contains(TestSharedState.RevocationStatusResult.Checks,
+                var result = RequireRevocationStatusResult();
+                Assert.Contains(result.Checks,
                         c => c.Status == McpCertificateStatus.Revoked);
                 Assert.Equal((int)McpCertificateStatus.Revoked, expectedValue);
         }

@@ -12,46 +12,41 @@ namespace OpenCertServer.Mcp.Tools;
 ///        profileName (string, optional) - CA profile name
 /// Output: List of McpCertStatusCheckResult per serial number
 /// </summary>
-public static class GetRevocationStatusTool
+[McpServerToolType]
+public class GetRevocationStatusTool
 {
-    public static async Task<McpToolResult> Handle(McpToolContext context)
+    [McpServerTool(Name = "get_revocation_status", ReadOnly = true, Idempotent = true, Destructive = false)]
+    [Description("Check revocation status for one or more certificate serial numbers.")]
+    public static async Task<McpRevocationStatusResult> GetRevocationStatus(
+        IStoreCertificates store,
+        [Description("Array of certificate serial numbers (hex strings)")] string[] serialNumbers,
+        [Description("CA profile name (optional, uses default if omitted)")] string? profileName = null,
+        CancellationToken cancellationToken = default)
     {
-        var parameters = context.Parameters as IDictionary<string, object>;
-
-        var serialNumbersObj = parameters?.TryGetValue("serialNumbers", out var snObj) ?? false
-            ? ParameterHelper.GetObjectArray(snObj)
-            : null;
-
-        if (serialNumbersObj == null || !serialNumbersObj.Any())
+        if (serialNumbers.Length == 0)
         {
-            return McpToolResult.Fail("serialNumbers array is required and must not be empty");
+            throw new McpException("serialNumbers array is required and must not be empty");
         }
 
-        var profileName = parameters?.TryGetValue("profileName", out var profileObj) ?? false
-            ? profileObj.ToString()
-            : null;
-
-        var store = context.GetService<IStoreCertificates>();
         var results = new List<McpCertStatusCheckResult>();
 
-        foreach (var snObj2 in serialNumbersObj)
+        foreach (var serialNumber in serialNumbers)
         {
-            var serialNumber = snObj2.ToString();
             if (string.IsNullOrWhiteSpace(serialNumber))
             {
                 continue;
             }
 
             // Validate hex string before conversion
-            if (!ParameterHelper.IsValidHex(serialNumber))
+            if (!IsValidHex(serialNumber))
             {
-                return McpToolResult.Fail($"Invalid hex serial number: {serialNumber}");
+                throw new McpException($"Invalid hex serial number: {serialNumber}");
             }
 
-            var serialBytes = ParameterHelper.HexToBytes(serialNumber);
+            var serialBytes = HexToBytes(serialNumber);
             if (serialBytes == null)
             {
-                return McpToolResult.Fail($"Failed to parse serial number: {serialNumber}");
+                throw new McpException($"Failed to parse serial number: {serialNumber}");
             }
 
             // Build CertId with SHA-256 as the default hash algorithm
@@ -63,7 +58,7 @@ public static class GetRevocationStatusTool
                 serialBytes
             );
 
-            var (_, status, revokedInfo) = await store.GetCertificateStatus(certId, CancellationToken.None);
+            var (_, status, revokedInfo) = await store.GetCertificateStatus(certId, cancellationToken);
 
             results.Add(new McpCertStatusCheckResult
             {
@@ -80,40 +75,52 @@ public static class GetRevocationStatusTool
             });
         }
 
-        return McpToolResult.Ok(new McpRevocationStatusResult
+        return new McpRevocationStatusResult
         {
             Profile = profileName ?? "(default)",
             Checks = results,
             TotalChecks = results.Count
-        });
+        };
     }
 
-    public static McpToolDefinition Create()
+    private static bool IsValidHex(string? value)
     {
-        return new McpToolDefinition
+        if (string.IsNullOrWhiteSpace(value))
         {
-            Name = "get_revocation_status",
-            Description =
-                "Check the revocation status of one or more certificates by serial number. Returns good, revoked, or unknown status for each. More convenient than check_ocsp_status as it doesn't require manual hash computation.",
-            InputSchema = """
-                          {
-                                            "type": "object",
-                                            "properties": {
-                                                "serialNumbers": {
-                                                    "type": "array",
-                                                    "items": { "type": "string" },
-                                                    "description": "Array of certificate serial numbers (hex strings)"
-                                                },
-                                                "profileName": {
-                                                    "type": "string",
-                                                    "description": "CA profile name (optional, uses default if omitted)"
-                                                }
-                                            },
-                                            "required": ["serialNumbers"],
-                                            "additionalProperties": false
-                                        }
-                          """,
-            Handler = Handle
-        };
+            return false;
+        }
+
+        foreach (var c in value)
+        {
+            if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static byte[]? HexToBytes(string? hex)
+    {
+        if (string.IsNullOrWhiteSpace(hex))
+        {
+            return null;
+        }
+
+        if (!IsValidHex(hex))
+        {
+            return null;
+        }
+
+        try
+        {
+            var normalized = hex.Length % 2 == 0 ? hex : "0" + hex;
+            return Convert.FromHexString(normalized);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

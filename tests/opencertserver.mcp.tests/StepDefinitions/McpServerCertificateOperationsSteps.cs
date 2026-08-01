@@ -228,9 +228,8 @@ public sealed class McpServerCertificateOperationsSteps
     [Then("the issued certificate MUST appear in the certificate inventory")]
     public async Task ThenCertMustBeInInventory()
     {
-        Assert.NotNull(TestSharedState.Store);
         var items = new List<CertificateItemInfo>();
-        await foreach (var item in TestSharedState.Store.GetInventory(0, 500, CancellationToken.None))
+        await foreach (var item in _fixture.Store.GetInventory(0, 500, CancellationToken.None))
             items.Add(item);
         Assert.True(items.Count > 0, "Inventory is empty");
     }
@@ -238,9 +237,8 @@ public sealed class McpServerCertificateOperationsSteps
     [Then("the total count MUST be at least 1")]
     public async Task ThenTotalCountAtLeast1()
     {
-        Assert.NotNull(TestSharedState.Store);
         var items = new List<CertificateItemInfo>();
-        await foreach (var item in TestSharedState.Store.GetInventory(0, 500, CancellationToken.None))
+        await foreach (var item in _fixture.Store.GetInventory(0, 500, CancellationToken.None))
             items.Add(item);
         Assert.True(items.Count >= 1);
     }
@@ -248,9 +246,8 @@ public sealed class McpServerCertificateOperationsSteps
     [Then("the certificate MUST be marked as revoked in the inventory")]
     public async Task ThenCertMustBeRevoked()
     {
-        Assert.NotNull(TestSharedState.Store);
         var items = new List<CertificateItemInfo>();
-        await foreach (var item in TestSharedState.Store.GetInventory(0, 500, CancellationToken.None))
+        await foreach (var item in _fixture.Store.GetInventory(0, 500, CancellationToken.None))
             items.Add(item);
         var revoked = items.FirstOrDefault(i => i.RevocationReason != null);
         Assert.NotNull(revoked);
@@ -259,9 +256,8 @@ public sealed class McpServerCertificateOperationsSteps
     [Then("at least one certificate item MUST have IsRevoked true")]
     public async Task ThenAtLeastOneRevoked()
     {
-        Assert.NotNull(TestSharedState.Store);
         var items = new List<CertificateItemInfo>();
-        await foreach (var item in TestSharedState.Store.GetInventory(0, 500, CancellationToken.None))
+        await foreach (var item in _fixture.Store.GetInventory(0, 500, CancellationToken.None))
             items.Add(item);
         Assert.True(items.Any(i => i.IsRevoked), "No certificate is marked as revoked");
     }

@@ -17,7 +17,7 @@ public class McpServerToolsSteps
     [When("the MCP server initializes")]
     public void GivenTheMcpServerIsInitialized()
     {
-        var tools = _fixture.McpServer.GetTools();
+        var tools = _fixture.ToolDefinitions;
         TestSharedState.Tools = tools;
         TestSharedState.Store = _fixture.Store;
     }

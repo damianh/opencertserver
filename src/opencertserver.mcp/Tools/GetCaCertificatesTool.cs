@@ -10,25 +10,20 @@ namespace OpenCertServer.Mcp.Tools;
 ///        includeFullChain (bool, optional) - include rollover certificates in response
 /// Output: Collection of CA certificates with metadata
 /// </summary>
-public static class GetCaCertificatesTool
+[McpServerToolType]
+public class GetCaCertificatesTool
 {
-    public static async Task<McpToolResult> Handle(McpToolContext context)
+    [McpServerTool(Name = "get_ca_certificates", ReadOnly = true, Idempotent = true, Destructive = false)]
+    [Description("Retrieve root/intermediate CA certificates and optional full chain.")]
+    public static async Task<McpCaCertificatesResult> GetCaCertificates(
+        ICertificateAuthority ca,
+        [Description("CA profile name (optional, uses default if omitted)")] string? profileName = null,
+        [Description("Include rollover/transition certificates")] bool includeFullChain = false,
+        CancellationToken cancellationToken = default)
     {
-        var parameters = context.Parameters as IDictionary<string, object>;
-
-        var profileName = parameters?.TryGetValue("profileName", out var profileObj) ?? false
-            ? profileObj.ToString()
-            : null;
-
-        var includeFullChain = parameters?.TryGetValue("includeFullChain", out var chainObj) ?? false
-             ? ParameterHelper.GetBoolean(chainObj, false)
-             : false;
-
-        var ca = context.GetService<ICertificateAuthority>();
-
         var certs = includeFullChain
-            ? await ca.GetPublishedCertificates(profileName, CancellationToken.None)
-            : await ca.GetRootCertificates(profileName, CancellationToken.None);
+            ? await ca.GetPublishedCertificates(profileName, cancellationToken)
+            : await ca.GetRootCertificates(profileName, cancellationToken);
 
         var result = new List<McpCertificateItem>();
 
@@ -52,12 +47,12 @@ public static class GetCaCertificatesTool
             });
         }
 
-        return McpToolResult.Ok(new McpCaCertificatesResult
+        return new McpCaCertificatesResult
         {
             Profiles = [profileName ?? "(default)"],
             Certificates = result,
             Count = result.Count
-        });
+        };
     }
 
     private static string GetSerialNumberString(X509Certificate2 cert)
@@ -66,31 +61,4 @@ public static class GetCaCertificatesTool
         return cert.GetSerialNumberString();
     }
 
-    public static McpToolDefinition Create()
-    {
-        return new McpToolDefinition
-        {
-            Name = "get_ca_certificates",
-            Description =
-                "Retrieve root and intermediate CA certificates. Optionally include rollover certificates from the published bundle. Returns certificate metadata and optionally PEM-encoded certificates.",
-            InputSchema = """
-                          {
-                                          "type": "object",
-                                          "properties": {
-                                              "profileName": {
-                                                  "type": "string",
-                                                  "description": "CA profile name (optional, uses default if omitted)"
-                                              },
-                                              "includeFullChain": {
-                                                  "type": "boolean",
-                                                  "description": "Include rollover/transition certificates",
-                                                  "default": false
-                                              }
-                                          },
-                                          "additionalProperties": false
-                                      }
-                          """,
-            Handler = Handle
-        };
-    }
 }

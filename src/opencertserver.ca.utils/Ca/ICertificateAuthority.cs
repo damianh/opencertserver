@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 /// <summary>
 /// Represents the ICertificateAuthority.
 /// </summary>
-public interface ICertificateAuthority
+public interface ICertificateAuthority : IDisposable
 {
     /// <summary>
     /// Signs a certificate request.
@@ -57,7 +57,9 @@ public interface ICertificateAuthority
     /// <param name="profileName">The name of the profile to get the root certificates for.</param>
     /// <param name="cancellationToken">The cancellation token to use for the operation.</param>
     /// <returns>The root certificates as a collection of X509Certificate2 objects.</returns>
-    Task<X509Certificate2Collection> GetRootCertificates(string? profileName = null, CancellationToken cancellationToken = default);
+    Task<X509Certificate2Collection> GetRootCertificates(
+        string? profileName = null,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the certificates that should be published to EST clients for the specified profile.
@@ -76,7 +78,10 @@ public interface ICertificateAuthority
     /// <param name="reason">The reason for revoking the certificate.</param>
     /// <param name="cancellationToken">The cancellation token to use for the operation.</param>
     /// <returns>True if the certificate was successfully revoked, false otherwise.</returns>
-    Task<bool> RevokeCertificate(string serialNumber, X509RevocationReason reason, CancellationToken cancellationToken = default);
+    Task<bool> RevokeCertificate(
+        string serialNumber,
+        X509RevocationReason reason,
+        CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets the revocation list for the specified profile.

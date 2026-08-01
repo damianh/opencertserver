@@ -4,10 +4,11 @@ using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
-using OpenCertServer.Attestation;
 using OpenCertServer.Attestation.Native;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
+
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 public class AppleSeAttestationSteps : IDisposable
