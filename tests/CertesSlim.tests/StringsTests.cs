@@ -2,7 +2,7 @@
 using CertesSlim.Properties;
 using Xunit;
 
-namespace CertesSlim.Tests.Properties;
+namespace CertesSlim.Tests;
 
 public class StringsTests
 {

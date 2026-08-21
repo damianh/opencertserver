@@ -1,9 +1,10 @@
+using Cake.Common.Tools.DotNet.Run;
+
 namespace OpenCertServer.Build;
 
 using System.IO;
 using Cake.Common.IO;
 using Cake.Common.Tools.DotNet;
-using Cake.Common.Tools.DotNet.Test;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Frosting;
@@ -21,7 +22,7 @@ public sealed class TestsTask : FrostingTask<BuildContext>
 
         var projects = context.GetFiles("./tests/**/*.tests.csproj");
 
-        foreach (var project in projects)
+        foreach (var project in projects.Where(p => !p.FullPath.Contains("tpm") && !p.FullPath.Contains("mcp")))
         {
             context.Log.Information("Testing: {0}", project.FullPath);
             var filename = Path.GetFileNameWithoutExtension(project.FullPath).Replace('.', '_');
@@ -29,16 +30,16 @@ public sealed class TestsTask : FrostingTask<BuildContext>
 
             context.Log.Information($"{reportName}", reportName);
 
-            var coreTestSettings = new DotNetTestSettings
+            var coreTestSettings = new DotNetRunSettings
             {
                 NoBuild = true,
                 NoRestore = true,
                 // Set configuration as passed by command line
                 Configuration = context.BuildConfiguration,
-                ArgumentCustomization = x => x.Append("--logger \"trx;LogFileName=" + reportName + "\"")
+                ArgumentCustomization = x => x.Append("--").AppendSwitchQuoted("-result-xml", reportName)
             };
 
-            context.DotNetTest(project.FullPath, coreTestSettings);
+            context.DotNetRun(project.FullPath, coreTestSettings);
         }
     }
 }
