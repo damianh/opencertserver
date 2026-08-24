@@ -1,9 +1,9 @@
+namespace OpenCertServer.Acme.Server.Stores;
+
 using OpenCertServer.Acme.Abstractions.Model;
 using OpenCertServer.Acme.Abstractions.Storage;
 using OpenCertServer.Acme.Server.Configuration;
 using Microsoft.Extensions.Options;
-
-namespace OpenCertServer.Acme.Server.Stores;
 
 /// <summary>
 /// File-based store for ACME external account keys.
@@ -60,4 +60,3 @@ public sealed class ExternalAccountKeyStore : StoreBase, IStoreExternalAccountKe
         return key?.IsUsed == false ? key : null;
     }
 }
-

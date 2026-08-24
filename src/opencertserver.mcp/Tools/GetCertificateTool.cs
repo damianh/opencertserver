@@ -1,7 +1,7 @@
+namespace OpenCertServer.Mcp.Tools;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
-namespace OpenCertServer.Mcp.Tools;
 
 /// <summary>
 /// Get a specific certificate by serial number.

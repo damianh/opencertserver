@@ -1,9 +1,9 @@
+namespace OpenCertServer.CertServer.Tests.StepDefinitions;
+
 using System.Formats.Asn1;
 using Microsoft.AspNetCore.WebUtilities;
 using OpenCertServer.Ca.Utils.Ca;
 using OpenCertServer.Est.Server.Response;
-
-namespace OpenCertServer.CertServer.Tests.StepDefinitions;
 
 using System.Net;
 using System.Net.Http.Headers;
@@ -909,7 +909,7 @@ public partial class CertificateServerFeatures
     {
         Assert.True(
             ConformanceState.Response is
-                { StatusCode: not HttpStatusCode.Unauthorized and not HttpStatusCode.Forbidden },
+            { StatusCode: not HttpStatusCode.Unauthorized and not HttpStatusCode.Forbidden },
             $"Expected the endpoint to allow anonymous access, but it returned {(int?)ConformanceState.Response?.StatusCode}.");
     }
 

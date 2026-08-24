@@ -1,9 +1,8 @@
 using System.Runtime.CompilerServices;
-using OpenCertServer.Ca.Utils.Ca;
-
 [assembly: InternalsVisibleTo("opencertserver.certserver.tests")]
-
 namespace OpenCertServer.Est.Server;
+
+using OpenCertServer.Ca.Utils.Ca;
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -34,7 +33,7 @@ public static class EstServerExtensions
     {
         public IServiceCollection AddEstServer<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            TCsrTemplateLoader>()
+        TCsrTemplateLoader>()
             where TCsrTemplateLoader : class, ICsrTemplateLoader
         {
             return services
@@ -43,7 +42,7 @@ public static class EstServerExtensions
 
         private IServiceCollection InnerAddEstServer<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            TCsrTemplateLoader>()
+        TCsrTemplateLoader>()
             where TCsrTemplateLoader : class, ICsrTemplateLoader
         {
             return services

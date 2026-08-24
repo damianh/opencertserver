@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿namespace CertesSlim.Tests;
+
+using System.Linq;
 using CertesSlim.Extensions;
 using Xunit;
-
-namespace CertesSlim.Tests;
 
 public class CsrInfoTests
 {

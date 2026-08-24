@@ -1,3 +1,5 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -9,8 +11,6 @@ using OpenCertServer.Attestation.Native;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 public class SgxAttestationSteps

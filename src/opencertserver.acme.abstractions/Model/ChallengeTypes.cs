@@ -1,6 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿namespace OpenCertServer.Acme.Abstractions.Model;
 
-namespace OpenCertServer.Acme.Abstractions.Model;
+using System.Collections.Immutable;
 
 /// <summary>
 /// Provides constants and collections for supported ACME challenge types.

@@ -1,6 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace OpenCertServer.Est.Server.Handlers;
+
+using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Verifies tls-unique proof-of-possession linkage when a request advertises channel-bound proof-of-possession data.

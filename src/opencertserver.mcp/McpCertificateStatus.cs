@@ -6,12 +6,12 @@ namespace OpenCertServer.Mcp;
 /// </summary>
 public enum McpCertificateStatus
 {
-       /// <summary>The certificate is valid and not revoked.</summary>
+    /// <summary>The certificate is valid and not revoked.</summary>
     Good = 1,
 
-       /// <summary>The certificate has been revoked.</summary>
+    /// <summary>The certificate has been revoked.</summary>
     Revoked = 2,
 
-       /// <summary>The certificate status could not be determined (unknown).</summary>
+    /// <summary>The certificate status could not be determined (unknown).</summary>
     Unknown = 3
 }

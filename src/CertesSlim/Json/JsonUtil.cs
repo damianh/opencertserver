@@ -1,10 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Json;
+
+using System.Text.Json.Serialization;
 using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using Microsoft.IdentityModel.Tokens;
 using Directory = CertesSlim.Acme.Resource.Directory;
-
-namespace CertesSlim.Json;
 
 /// <summary>
 /// Defines the serializer context for CertesSlim.

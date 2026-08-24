@@ -1,6 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace OpenCertServer.Ca.Server;
+
+using System.Security.Cryptography.X509Certificates;
 
 internal class ValidateAll : IValidateX509Chains
 {

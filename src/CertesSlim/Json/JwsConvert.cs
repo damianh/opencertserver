@@ -1,6 +1,6 @@
-﻿using CertesSlim.Properties;
+﻿namespace CertesSlim.Json;
 
-namespace CertesSlim.Json;
+using CertesSlim.Properties;
 
 /// <summary>
 /// Base64 URL encoding without padding.

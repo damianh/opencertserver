@@ -1,6 +1,6 @@
-using CertesSlim.Extensions;
-
 namespace OpenCertServer.Acme.AspNetClient.Tests;
+
+using CertesSlim.Extensions;
 
 using System;
 using System.Collections.Generic;

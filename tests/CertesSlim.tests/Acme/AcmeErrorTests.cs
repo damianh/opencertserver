@@ -1,9 +1,9 @@
-﻿using System.Net;
+﻿namespace CertesSlim.Tests.Acme;
+
+using System.Net;
 using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using Xunit;
-
-namespace CertesSlim.Tests.Acme;
 
 public class AcmeErrorTests
 {

@@ -6,14 +6,14 @@ namespace OpenCertServer.Acme.Server;
 /// </summary>
 internal static class ActivityNames
 {
-    internal const string Directory          = "opencertserver.acme.directory";
-    internal const string NewNonce           = "opencertserver.acme.newnonce";
-    internal const string NewAccount         = "opencertserver.acme.newaccount";
-    internal const string NewOrder           = "opencertserver.acme.neworder";
-    internal const string OrderFinalize      = "opencertserver.acme.orderfinalize";
-    internal const string Certificate        = "opencertserver.acme.certificate";
+    internal const string Directory = "opencertserver.acme.directory";
+    internal const string NewNonce = "opencertserver.acme.newnonce";
+    internal const string NewAccount = "opencertserver.acme.newaccount";
+    internal const string NewOrder = "opencertserver.acme.neworder";
+    internal const string OrderFinalize = "opencertserver.acme.orderfinalize";
+    internal const string Certificate = "opencertserver.acme.certificate";
     internal const string ChallengeValidation = "opencertserver.acme.challengevalidation";
-    internal const string KeyChange          = "opencertserver.acme.keychange";
-    internal const string Revoke             = "opencertserver.acme.revoke";
+    internal const string KeyChange = "opencertserver.acme.keychange";
+    internal const string Revoke = "opencertserver.acme.revoke";
 }
 

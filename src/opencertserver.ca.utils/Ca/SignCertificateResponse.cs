@@ -43,7 +43,7 @@ public abstract class SignCertificateResponse
         /// </summary>
         public Error(params Span<string> errors)
         {
-            Errors = [..errors];
+            Errors = [.. errors];
         }
 
         /// <summary>

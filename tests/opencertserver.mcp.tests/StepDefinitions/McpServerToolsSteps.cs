@@ -1,8 +1,8 @@
+namespace OpenCertServer.Mcp.Tests.StepDefinitions;
+
 using OpenCertServer.Mcp.Tests.Support;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Mcp.Tests.StepDefinitions;
 
 [Binding]
 public class McpServerToolsSteps

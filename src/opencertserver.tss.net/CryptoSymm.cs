@@ -2,11 +2,10 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Security.Cryptography;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// A helper class for doing symmetric cryptography based on
@@ -43,7 +42,7 @@ public sealed class SymCipher : IDisposable
     /// <summary>
     /// Block size in bytes.
     /// </summary>
-    public static implicit operator byte[] (SymCipher sym)
+    public static implicit operator byte[](SymCipher sym)
     {
         return sym?.KeyData;
     }
@@ -88,10 +87,11 @@ public sealed class SymCipher : IDisposable
         }
 
         SymmetricAlgorithm alg = null; // = new RijndaelManaged();
-//        var limitedSupport = false;
+                                       //        var limitedSupport = false;
         var feedbackSize = 0;
 
-        switch (symDef.Algorithm) {
+        switch (symDef.Algorithm)
+        {
             case TpmAlgId.Aes:
                 alg = Aes.Create();
                 alg.Mode = mode;
@@ -144,7 +144,7 @@ public sealed class SymCipher : IDisposable
         }
 
         var symCipher = new SymCipher(alg, mode);
-//        symCipher.LimitedSupport = limitedSupport;
+        //        symCipher.LimitedSupport = limitedSupport;
         return symCipher;
     } // Create()
 
@@ -193,14 +193,14 @@ public sealed class SymCipher : IDisposable
         for (var i = 0; i < paddedData.Length; i += iv.Length)
         {
             using (var outStream = new MemoryStream())
-                using (var s = new CryptoStream(outStream, enc, CryptoStreamMode.Write))
-                {
-                    s.Write(iv, 0, iv.Length);
-                    s.FlushFinalBlock();
-                    outStream.ToArray().CopyTo(iv, 0);
-                    for (var j = 0; j < iv.Length; ++j)
-                        paddedData[i + j] = iv[j] ^= paddedData[i + j];
-                }
+            using (var s = new CryptoStream(outStream, enc, CryptoStreamMode.Write))
+            {
+                s.Write(iv, 0, iv.Length);
+                s.FlushFinalBlock();
+                outStream.ToArray().CopyTo(iv, 0);
+                for (var j = 0; j < iv.Length; ++j)
+                    paddedData[i + j] = iv[j] ^= paddedData[i + j];
+            }
         }
     }
 
@@ -257,7 +257,7 @@ public sealed class SymCipher : IDisposable
                 res = Globs.CopyData(paddedData, res.Length - iv.Length, iv.Length);
             }
 
-            switch(_mode)
+            switch (_mode)
             {
                 case CipherMode.CBC:
                 case CipherMode.CFB:
@@ -279,17 +279,17 @@ public sealed class SymCipher : IDisposable
         for (var i = 0; i < paddedData.Length; i += iv.Length)
         {
             using (var outStream = new MemoryStream())
-                using (var s = new CryptoStream(outStream, enc, CryptoStreamMode.Write))
+            using (var s = new CryptoStream(outStream, enc, CryptoStreamMode.Write))
+            {
+                s.Write(iv, 0, iv.Length);
+                s.FlushFinalBlock();
+                outStream.ToArray().CopyTo(tempOut, 0);
+                for (var j = 0; j < iv.Length; ++j)
                 {
-                    s.Write(iv, 0, iv.Length);
-                    s.FlushFinalBlock();
-                    outStream.ToArray().CopyTo(tempOut, 0);
-                    for (var j = 0; j < iv.Length; ++j)
-                    {
-                        iv[j] = paddedData[i + j];
-                        paddedData[i + j] = (byte)((tempOut[j] ^ iv[j]) & 0x000000FF);
-                    }
+                    iv[j] = paddedData[i + j];
+                    paddedData[i + j] = (byte)((tempOut[j] ^ iv[j]) & 0x000000FF);
                 }
+            }
         }
     }
 
@@ -341,7 +341,7 @@ public sealed class SymCipher : IDisposable
                 res = Globs.CopyData(tempOut, res.Length / iv.Length, iv.Length);
             }
 
-            switch(_mode)
+            switch (_mode)
             {
                 case CipherMode.CBC:
                 case CipherMode.CFB:

@@ -30,7 +30,7 @@ public sealed class Identifier
     }
 
     [Fact]
-    public void Ctor_Sets_Wildcard() 
+    public void Ctor_Sets_Wildcard()
     {
         var sut = new Model.Identifier("dns", "*.example.com");
 

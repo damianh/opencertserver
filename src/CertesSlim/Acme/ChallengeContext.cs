@@ -1,6 +1,6 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using CertesSlim.Acme.Resource;
 
 /// <summary>
 /// Represents the context for ACME challenge operations.
@@ -66,4 +66,4 @@ internal class ChallengeContext : EntityContext<Challenge>, IChallengeContext
     }
 }
 
-internal class EmptyObject{}
+internal class EmptyObject { }

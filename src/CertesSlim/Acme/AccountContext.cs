@@ -1,10 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿namespace CertesSlim.Acme;
+
+using System.Security.Cryptography;
 using System.Text.Json;
 using CertesSlim.Acme.Resource;
 using CertesSlim.Extensions;
 using CertesSlim.Json;
-
-namespace CertesSlim.Acme;
 
 /// <summary>
 /// Represents the context for ACME account operations.

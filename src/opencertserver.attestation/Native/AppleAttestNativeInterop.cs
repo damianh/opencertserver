@@ -1,7 +1,7 @@
+namespace OpenCertServer.Attestation.Native;
+
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-
-namespace OpenCertServer.Attestation.Native;
 
 /// <summary>
 /// Native bindings for the Apple DeviceCheck/AppAttest framework shim.

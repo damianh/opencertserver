@@ -1,10 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿namespace CertesSlim.Json;
+
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using Microsoft.IdentityModel.Tokens;
-
-namespace CertesSlim.Json;
 
 /// <summary>
 /// Represents a signer for JSON Web Signature.

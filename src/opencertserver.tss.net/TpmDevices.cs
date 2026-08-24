@@ -2,16 +2,14 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+// TPM Commands.  All commands acknowledge processing by returning a UINT32 == 0.
+// RemoteHandshake also returns information about the target TPM, and SendCommand
+// returns the TPM response BYTE array.
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-
-// TPM Commands.  All commands acknowledge processing by returning a UINT32 == 0.
-// RemoteHandshake also returns information about the target TPM, and SendCommand
-// returns the TPM response BYTE array.
-
-namespace OpenCertServer.Tpm2Lib;
 #if !TSS_NO_TCP
 public enum TcpTpmCommands
 {
@@ -306,9 +304,9 @@ public sealed class TcpTpmDevice : Tpm2Device
 {
     private const int ClientVersion = 1;
 
-    private NetworkStream   CommandStream = null,
+    private NetworkStream CommandStream = null,
                             PlatformStream = null;
-    private TcpClient       CommandClient = null,
+    private TcpClient CommandClient = null,
                             PlatformClient = null;
     private readonly string ServerName;
     private readonly int CommandServerPort;
@@ -320,7 +318,6 @@ public sealed class TcpTpmDevice : Tpm2Device
     private volatile bool CancelSignalled;
     private readonly bool LinuxTrm;
     private bool OldTrm;
-
 
     /// <summary>
     /// Set the remote host (domain name or IPv4-dotted name) and listening ports.
@@ -430,7 +427,7 @@ public sealed class TcpTpmDevice : Tpm2Device
             {
                 WriteInt(CommandStream, cmd);
             }
-            catch (Exception) {}
+            catch (Exception) { }
             CommandStream.Flush();
             CommandStream.Dispose();
             CommandStream = null;

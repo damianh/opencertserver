@@ -1,7 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using CertesSlim.Pkcs;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using System.Security.Cryptography.X509Certificates;
+using CertesSlim.Pkcs;
 
 /// <summary>
 /// Represents the certificate chain downloaded from ACME server.
@@ -53,7 +53,7 @@ public class CertificateChain
             return true;
         }
 
-        X509Certificate2[] allcerts = [Certificate, ..Issuers];
+        X509Certificate2[] allcerts = [Certificate, .. Issuers];
         return allcerts
             .Any(cert => cert.IssuerName.Name.Contains(preferredChain));
     }
@@ -77,7 +77,7 @@ public class CertificateChain
 
         var issuers = certStore.GetIssuers(Certificate);
 
-        X509Certificate2[] allcerts = [Certificate, ..issuers];
+        X509Certificate2[] allcerts = [Certificate, .. issuers];
         return string.Join("\n", allcerts.Select(c => c.ExportCertificatePem()));
     }
 }

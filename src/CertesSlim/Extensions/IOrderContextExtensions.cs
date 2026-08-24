@@ -1,9 +1,9 @@
-﻿using CertesSlim.Acme;
+﻿namespace CertesSlim.Extensions;
+
+using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using CertesSlim.Pkcs;
 using CertesSlim.Properties;
-
-namespace CertesSlim.Extensions;
 
 /// <summary>
 /// Extension methods for <see cref="IOrderContext"/>.

@@ -16,7 +16,7 @@ public class GeneralNames : IAsnValue
     /// <param name="names">The sequence of names</param>
     public GeneralNames(params Span<GeneralName> names)
     {
-        Names = [..names];
+        Names = [.. names];
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public class GeneralNames : IAsnValue
             names.Add(new GeneralName(seq));
         }
 
-        Names = [..names];
+        Names = [.. names];
     }
 
     /// <summary>

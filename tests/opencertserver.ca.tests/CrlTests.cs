@@ -1,11 +1,11 @@
+namespace OpenCertServer.Ca.Tests;
+
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using OpenCertServer.Ca.Utils;
 using OpenCertServer.Ca.Utils.X509Extensions;
 using Xunit;
-
-namespace OpenCertServer.Ca.Tests;
 
 public class CrlTests
 {

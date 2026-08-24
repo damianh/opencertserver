@@ -1,10 +1,10 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Runtime.InteropServices;
 using OpenCertServer.Attestation;
 using OpenCertServer.Attestation.Native;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 /// <summary>
 /// Tests that call the real <see cref="AmdSnpNativeInterop"/> — no mocks.

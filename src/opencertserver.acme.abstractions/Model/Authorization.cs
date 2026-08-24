@@ -1,7 +1,7 @@
-﻿using CertesSlim.Acme.Resource;
-using OpenCertServer.Acme.Abstractions.Exceptions;
+﻿namespace OpenCertServer.Acme.Abstractions.Model;
 
-namespace OpenCertServer.Acme.Abstractions.Model;
+using CertesSlim.Acme.Resource;
+using OpenCertServer.Acme.Abstractions.Exceptions;
 
 using System;
 using System.Collections.Generic;
@@ -84,7 +84,6 @@ public sealed class Authorization
     /// </summary>
     public List<Challenge> Challenges { get; private set; }
 
-
     /// <summary>
     /// Gets the challenge with the specified challenge ID, or null if not found.
     /// </summary>
@@ -105,7 +104,6 @@ public sealed class Authorization
     /// </summary>
     public void ClearChallenges()
         => Challenges.Clear();
-
 
     /// <summary>
     /// Sets the status of the authorization, enforcing valid status transitions.

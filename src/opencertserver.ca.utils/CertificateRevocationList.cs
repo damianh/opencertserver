@@ -375,7 +375,7 @@ public class CertificateRevocationList
             var crlExtensions = crlExtensionsExplicit.ReadSequence();
             crlExtensionsExplicit.ThrowIfNotEmpty();
 
-            crlExtensionList = [..crlExtensions.ReadCrlExtensions()];
+            crlExtensionList = [.. crlExtensions.ReadCrlExtensions()];
         }
 
         tbsCertList.ThrowIfNotEmpty();

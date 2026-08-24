@@ -1,10 +1,10 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace CertesSlim.Tests;
+
+using CertesSlim.Acme.Resource;
 using CertesSlim.Extensions;
 using NSubstitute;
 using Xunit;
 using Directory = CertesSlim.Acme.Resource.Directory;
-
-namespace CertesSlim.Tests;
 
 public class IAcmeContextExtensionsTests
 {

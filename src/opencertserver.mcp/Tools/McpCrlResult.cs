@@ -10,7 +10,7 @@ public class McpCrlResult
     public required DateTimeOffset LastUpdate { get; set; }
     public required DateTimeOffset NextUpdate { get; set; }
 
-     // New parsed fields
+    // New parsed fields
     public int Version { get; set; }
     public string? CrlNumber { get; set; }
     public string? Issuer { get; set; }

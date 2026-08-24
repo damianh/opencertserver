@@ -1,8 +1,8 @@
-﻿using System.Reflection;
+﻿namespace CertesSlim.Pkcs;
+
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using CertesSlim.Properties;
-
-namespace CertesSlim.Pkcs;
 
 /// <summary>
 /// Represents a collection of X509 certificates.

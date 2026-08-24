@@ -2,13 +2,12 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// AsymCryptoSystem is a helper class for doing asymmetric cryptography using TPM data
@@ -33,7 +32,7 @@ public sealed class AsymCryptoSystem : IDisposable
     /// </summary>
     /// <param name="keyParams"></param>
     /// <returns></returns>
-    public AsymCryptoSystem (TpmPublic keyParams)
+    public AsymCryptoSystem(TpmPublic keyParams)
     {
         var keyAlgId = keyParams.type;
         _publicParms = keyParams.Copy();
@@ -41,32 +40,32 @@ public sealed class AsymCryptoSystem : IDisposable
         switch (keyAlgId)
         {
             case TpmAlgId.Rsa:
-            {
-                var rsaParams = keyParams.parameters as RsaParms;
-                _rsaProvider = RSA.Create(rsaParams.keyBits);
-                var modulus = _rsaProvider.ExportParameters(true).Modulus;
-                var pubId = new Tpm2bPublicKeyRsa(modulus);
-                _publicParms.unique = pubId;
-                break;
-            }
+                {
+                    var rsaParams = keyParams.parameters as RsaParms;
+                    _rsaProvider = RSA.Create(rsaParams.keyBits);
+                    var modulus = _rsaProvider.ExportParameters(true).Modulus;
+                    var pubId = new Tpm2bPublicKeyRsa(modulus);
+                    _publicParms.unique = pubId;
+                    break;
+                }
             case TpmAlgId.Ecc:
-            {
-                var curve = RawEccKey.GetEccCurve(keyParams);
-                ECPoint pub;
-                if (keyParams.objectAttributes.HasFlag(ObjectAttr.Sign))
                 {
-                    _ecdsaProvider = ECDsa.Create(curve);
-                    pub = _ecdsaProvider.ExportParameters(false).Q;
-                }
-                else
-                {
-                    _ecDhProvider = ECDiffieHellman.Create(curve);
-                    pub = _ecDhProvider.ExportParameters(false).Q;
-                }
+                    var curve = RawEccKey.GetEccCurve(keyParams);
+                    ECPoint pub;
+                    if (keyParams.objectAttributes.HasFlag(ObjectAttr.Sign))
+                    {
+                        _ecdsaProvider = ECDsa.Create(curve);
+                        pub = _ecdsaProvider.ExportParameters(false).Q;
+                    }
+                    else
+                    {
+                        _ecDhProvider = ECDiffieHellman.Create(curve);
+                        pub = _ecDhProvider.ExportParameters(false).Q;
+                    }
 
-                _publicParms.unique = new EccPoint(pub.X, pub.Y);
-                break;
-            }
+                    _publicParms.unique = new EccPoint(pub.X, pub.Y);
+                    break;
+                }
             default:
                 throw new ArgumentException("Algorithm not supported");
         }
@@ -95,58 +94,58 @@ public sealed class AsymCryptoSystem : IDisposable
         switch (keyAlgId)
         {
             case TpmAlgId.Rsa:
-            {
-                RawRsa rr = null;
-                byte[] prime1 = null,
-                       prime2 = null;
-                var rsaParams = (RsaParms)pubKey.parameters;
-                if (privKey != null)
                 {
-                    rr = new RawRsa(pubKey, privKey);
-                    prime1 = RawRsa.ToBigEndian(rr.P, rsaParams.keyBits / 16);
-                    prime2 = RawRsa.ToBigEndian(rr.Q, rsaParams.keyBits / 16);
-                }
-                var exponent = rsaParams.exponent != 0
-                    ? Globs.HostToNet(rsaParams.exponent)
-                    : RsaParms.DefaultExponent;
-                var modulus = (pubKey.unique as Tpm2bPublicKeyRsa).buffer;
-                var dotNetPubParms = new RSAParameters() {Exponent = exponent, Modulus = modulus};
-                if (privKey != null)
-                {
-                    dotNetPubParms.P = prime1;
-                    dotNetPubParms.Q = prime2;
-                    dotNetPubParms.D = RawRsa.ToBigEndian(rr.D, rsaParams.keyBits / 8);
-                    dotNetPubParms.InverseQ = RawRsa.ToBigEndian(rr.InverseQ, rsaParams.keyBits / 16);
-                    dotNetPubParms.DP = RawRsa.ToBigEndian(rr.Dp, rsaParams.keyBits / 16);
-                    dotNetPubParms.DQ = RawRsa.ToBigEndian(rr.Dq, rsaParams.keyBits / 16);
-                }
+                    RawRsa rr = null;
+                    byte[] prime1 = null,
+                           prime2 = null;
+                    var rsaParams = (RsaParms)pubKey.parameters;
+                    if (privKey != null)
+                    {
+                        rr = new RawRsa(pubKey, privKey);
+                        prime1 = RawRsa.ToBigEndian(rr.P, rsaParams.keyBits / 16);
+                        prime2 = RawRsa.ToBigEndian(rr.Q, rsaParams.keyBits / 16);
+                    }
+                    var exponent = rsaParams.exponent != 0
+                        ? Globs.HostToNet(rsaParams.exponent)
+                        : RsaParms.DefaultExponent;
+                    var modulus = (pubKey.unique as Tpm2bPublicKeyRsa).buffer;
+                    var dotNetPubParms = new RSAParameters() { Exponent = exponent, Modulus = modulus };
+                    if (privKey != null)
+                    {
+                        dotNetPubParms.P = prime1;
+                        dotNetPubParms.Q = prime2;
+                        dotNetPubParms.D = RawRsa.ToBigEndian(rr.D, rsaParams.keyBits / 8);
+                        dotNetPubParms.InverseQ = RawRsa.ToBigEndian(rr.InverseQ, rsaParams.keyBits / 16);
+                        dotNetPubParms.DP = RawRsa.ToBigEndian(rr.Dp, rsaParams.keyBits / 16);
+                        dotNetPubParms.DQ = RawRsa.ToBigEndian(rr.Dq, rsaParams.keyBits / 16);
+                    }
 
-                cs._rsaProvider = RSA.Create();
-                cs._rsaProvider.ImportParameters(dotNetPubParms);
-                break;
-            }
+                    cs._rsaProvider = RSA.Create();
+                    cs._rsaProvider.ImportParameters(dotNetPubParms);
+                    break;
+                }
             case TpmAlgId.Ecc:
-            {
-                var eccParms = (EccParms)pubKey.parameters;
-                var eccPub = (EccPoint)pubKey.unique;
-                var isEcdsa = eccParms.scheme.GetUnionSelector() == TpmAlgId.Ecdsa;
-                var parms = RawEccKey.GetEccParameters(eccPub, eccParms.curveID);
-                if (privKey != null)
                 {
-                    var raw = new RawEccKey(pubKey, privKey);
-                    parms.D = raw.D;
-                }
+                    var eccParms = (EccParms)pubKey.parameters;
+                    var eccPub = (EccPoint)pubKey.unique;
+                    var isEcdsa = eccParms.scheme.GetUnionSelector() == TpmAlgId.Ecdsa;
+                    var parms = RawEccKey.GetEccParameters(eccPub, eccParms.curveID);
+                    if (privKey != null)
+                    {
+                        var raw = new RawEccKey(pubKey, privKey);
+                        parms.D = raw.D;
+                    }
 
-                if (isEcdsa)
-                {
-                    cs._ecdsaProvider = ECDsa.Create(parms);
+                    if (isEcdsa)
+                    {
+                        cs._ecdsaProvider = ECDsa.Create(parms);
+                    }
+                    else
+                    {
+                        cs._ecDhProvider = ECDiffieHellman.Create(parms);
+                    }
+                    break;
                 }
-                else
-                {
-                    cs._ecDhProvider = ECDiffieHellman.Create(parms);
-                }
-                break;
-            }
             default:
                 throw new ArgumentException("Algorithm not supported");
         }
@@ -243,23 +242,23 @@ public sealed class AsymCryptoSystem : IDisposable
             switch (sigScheme)
             {
                 case TpmAlgId.Rsassa:
-                {
-                    if (sigHash == TpmAlgId.Null)
                     {
-                        sigHash = (rsaParams.scheme as SigSchemeRsassa).hashAlg;
+                        if (sigHash == TpmAlgId.Null)
+                        {
+                            sigHash = (rsaParams.scheme as SigSchemeRsassa).hashAlg;
+                        }
+                        var sig = _rsaProvider.SignData(data, CryptoLib.GetHashAlgorithmName(sigHash), RSASignaturePadding.Pkcs1);
+                        return new SignatureRsassa(sigHash, sig);
                     }
-                    var sig = _rsaProvider.SignData(data, CryptoLib.GetHashAlgorithmName(sigHash), RSASignaturePadding.Pkcs1);
-                    return new SignatureRsassa(sigHash, sig);
-                }
                 case TpmAlgId.Rsapss:
-                {
-                    if (sigHash == TpmAlgId.Null)
                     {
-                        sigHash = (rsaParams.scheme as SigSchemeRsapss).hashAlg;
+                        if (sigHash == TpmAlgId.Null)
+                        {
+                            sigHash = (rsaParams.scheme as SigSchemeRsapss).hashAlg;
+                        }
+                        var sig = _rsaProvider.SignData(data, CryptoLib.GetHashAlgorithmName(sigHash), RSASignaturePadding.Pss);
+                        return new SignatureRsapss(sigHash, sig);
                     }
-                    var sig = _rsaProvider.SignData(data, CryptoLib.GetHashAlgorithmName(sigHash), RSASignaturePadding.Pss);
-                    return new SignatureRsapss(sigHash, sig);
-                }
             }
             throw new ArgumentException("Unsupported signature scheme");
         }
@@ -537,7 +536,7 @@ public class RawRsa
     /// </summary>
     /// <param name="numBits"></param>
     /// <param name="publicExponent"></param>
-    public RawRsa (int numBits, int publicExponent = 65537)
+    public RawRsa(int numBits, int publicExponent = 65537)
     {
         using (var prov = RSA.Create(numBits))
         {

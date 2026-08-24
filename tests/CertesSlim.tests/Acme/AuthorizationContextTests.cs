@@ -1,4 +1,6 @@
-﻿using System;
+﻿namespace CertesSlim.Tests.Acme;
+
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CertesSlim.Acme;
@@ -6,8 +8,6 @@ using CertesSlim.Acme.Resource;
 using CertesSlim.Json;
 using NSubstitute;
 using Xunit;
-
-namespace CertesSlim.Tests.Acme;
 
 public class AuthorizationContextTests
 {

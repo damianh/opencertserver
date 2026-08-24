@@ -1,6 +1,6 @@
-using OpenCertServer.Tpm2Lib;
-
 namespace OpenCertServer.Tpm;
+
+using OpenCertServer.Tpm2Lib;
 
 using System;
 using System.Security.Cryptography;
@@ -50,15 +50,15 @@ public sealed class TssTpmKeyProvider : ITpmKeyProvider
     {
         ArgumentNullException.ThrowIfNull(options);
 
-            _device = options.Mode switch
-            {
-                TpmMode.Linux => new LinuxTpmDevice(),
-                TpmMode.Windows => new TbsDevice(),
-                TpmMode.Simulator => options.SimulatorPlatformPort.HasValue
-                    ? new TcpTpmDevice(options.SimulatorHost, options.SimulatorPort, options.SimulatorPlatformPort.Value)
-                    : new TcpTpmDevice(options.SimulatorHost, options.SimulatorPort),
-                _ => throw new InvalidOperationException($"Unknown TpmMode '{options.Mode}'.")
-            };
+        _device = options.Mode switch
+        {
+            TpmMode.Linux => new LinuxTpmDevice(),
+            TpmMode.Windows => new TbsDevice(),
+            TpmMode.Simulator => options.SimulatorPlatformPort.HasValue
+                ? new TcpTpmDevice(options.SimulatorHost, options.SimulatorPort, options.SimulatorPlatformPort.Value)
+                : new TcpTpmDevice(options.SimulatorHost, options.SimulatorPort),
+            _ => throw new InvalidOperationException($"Unknown TpmMode '{options.Mode}'.")
+        };
 
         // The newer TSS.NET requires an explicit Connect() call; the old NuGet package
         // (Microsoft.TSS 2.1.1) handled this lazily. For Linux and Windows the device
@@ -364,4 +364,3 @@ public sealed class TssTpmKeyProvider : ITpmKeyProvider
         return value.AsSpan(value.Length - size).ToArray();
     }
 }
-

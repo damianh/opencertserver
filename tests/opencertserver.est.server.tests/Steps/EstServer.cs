@@ -272,23 +272,23 @@ public class EstServer
         switch (keytype)
         {
             case "RSA":
-            {
-                using var rsa = RSA.Create();
-                rsa.ImportSubjectPublicKeyInfo(publicKey, out _);
-                rsa.ImportRSAPrivateKey(privateKey, out _);
-                var (_, c) = await client.ReEnroll(rsa, cert[0]);
-                cert = c;
-                break;
-            }
+                {
+                    using var rsa = RSA.Create();
+                    rsa.ImportSubjectPublicKeyInfo(publicKey, out _);
+                    rsa.ImportRSAPrivateKey(privateKey, out _);
+                    var (_, c) = await client.ReEnroll(rsa, cert[0]);
+                    cert = c;
+                    break;
+                }
             case "ECDsa":
-            {
-                using var ecdsa = ECDsa.Create();
-                ecdsa.ImportSubjectPublicKeyInfo(publicKey, out _);
-                ecdsa.ImportECPrivateKey(privateKey, out _);
-                var (_, c) = await client.ReEnroll(ecdsa, cert[0]);
-                cert = c;
-                break;
-            }
+                {
+                    using var ecdsa = ECDsa.Create();
+                    ecdsa.ImportSubjectPublicKeyInfo(publicKey, out _);
+                    ecdsa.ImportECPrivateKey(privateKey, out _);
+                    var (_, c) = await client.ReEnroll(ecdsa, cert[0]);
+                    cert = c;
+                    break;
+                }
             default:
                 throw new InvalidOperationException($"Unknown key type: {keytype}");
         }

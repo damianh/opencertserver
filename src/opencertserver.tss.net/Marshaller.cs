@@ -53,7 +53,7 @@ public class Marshaller
     public static byte[] GetTpmRepresentation(params object[] theObjects)
     {
         var m = new Marshaller();
-        foreach(var o in theObjects)
+        foreach (var o in theObjects)
         {
             m.Put(o, null);
         }
@@ -154,7 +154,7 @@ public class Marshaller
     /// <param name="finish"></param>
     public static void GetFragmentInfo(object o, string qualifiedName, out int start, out int finish)
     {
-        var m = new Marshaller {QualifiedName = qualifiedName.Split(new[] {'.'}), QualNamePos = 0};
+        var m = new Marshaller { QualifiedName = qualifiedName.Split(new[] { '.' }), QualNamePos = 0 };
         m.PutInternal(o, "");
         start = m.ElementStart;
         finish = m.ElementEnd;
@@ -183,66 +183,66 @@ public class Marshaller
                 structureBase.ToNet(this);
                 break;
             case Enum:
-            {
-                var underlyingType = Enum.GetUnderlyingType(o.GetType());
-                if (underlyingType == typeof(byte))
                 {
-                    // ReSharper disable once SuggestUseVarKeywordEvident
-                    // ReSharper disable once PossibleInvalidCastException
-                    var x = (byte)o;
-                    ToNetValueType(x, name);
-                }
-                else if (underlyingType == typeof(ushort))
-                {
-                    // ReSharper disable once SuggestUseVarKeywordEvident
-                    // ReSharper disable once PossibleInvalidCastException
-                    var x = (ushort)o;
-                    ToNetValueType(x, name);
-                }
-                else if (underlyingType == typeof(uint))
-                {
-                    // ReSharper disable once SuggestUseVarKeywordEvident
-                    // ReSharper disable once PossibleInvalidCastException
-                    var x = (uint)o;
-                    ToNetValueType(x, name);
-                }
-                else if (underlyingType == typeof(sbyte))
-                {
-                    // ReSharper disable once SuggestUseVarKeywordEvident
-                    // ReSharper disable once PossibleInvalidCastException
-                    var x = (byte)((sbyte)o);
-                    ToNetValueType(x, name);
-                }
-                else if (underlyingType == typeof(ulong))
-                {
-                    // ReSharper disable once SuggestUseVarKeywordEvident
-                    // ReSharper disable once PossibleInvalidCastException
-                    var x = (ulong)o;
-                    ToNetValueType(x, name);
-                }
-                else
-                {
-                    throw new ArgumentException("PutInternal: Unsupported enum type");
-                }
+                    var underlyingType = Enum.GetUnderlyingType(o.GetType());
+                    if (underlyingType == typeof(byte))
+                    {
+                        // ReSharper disable once SuggestUseVarKeywordEvident
+                        // ReSharper disable once PossibleInvalidCastException
+                        var x = (byte)o;
+                        ToNetValueType(x, name);
+                    }
+                    else if (underlyingType == typeof(ushort))
+                    {
+                        // ReSharper disable once SuggestUseVarKeywordEvident
+                        // ReSharper disable once PossibleInvalidCastException
+                        var x = (ushort)o;
+                        ToNetValueType(x, name);
+                    }
+                    else if (underlyingType == typeof(uint))
+                    {
+                        // ReSharper disable once SuggestUseVarKeywordEvident
+                        // ReSharper disable once PossibleInvalidCastException
+                        var x = (uint)o;
+                        ToNetValueType(x, name);
+                    }
+                    else if (underlyingType == typeof(sbyte))
+                    {
+                        // ReSharper disable once SuggestUseVarKeywordEvident
+                        // ReSharper disable once PossibleInvalidCastException
+                        var x = (byte)((sbyte)o);
+                        ToNetValueType(x, name);
+                    }
+                    else if (underlyingType == typeof(ulong))
+                    {
+                        // ReSharper disable once SuggestUseVarKeywordEvident
+                        // ReSharper disable once PossibleInvalidCastException
+                        var x = (ulong)o;
+                        ToNetValueType(x, name);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("PutInternal: Unsupported enum type");
+                    }
 
-                break;
-            }
+                    break;
+                }
             case ValueType:
                 ToNetValueType(o, name);
                 break;
             // ReSharper disable once CanBeReplacedWithTryCastAndCheckForNull
             case Array array:
-            {
-                var a = array;
-                var count = 0;
-                foreach (var elem in a)
                 {
-                    Put(elem, name + count);
-                    count++;
-                }
+                    var a = array;
+                    var count = 0;
+                    foreach (var elem in a)
+                    {
+                        Put(elem, name + count);
+                        count++;
+                    }
 
-                break;
-            }
+                    break;
+                }
             default:
                 throw new NotImplementedException("PutInternal: Unsupported object type");
         }

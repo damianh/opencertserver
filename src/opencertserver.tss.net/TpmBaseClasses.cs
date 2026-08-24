@@ -2,6 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Reflection;
@@ -9,8 +10,6 @@ using System.Runtime.Serialization;
 #if LEGACY_SERIALIZATION
 using System.Runtime.Serialization.Formatters.Soap;
 #endif // LEGACY_SERIALIZATION
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// Abstract base class for all TPM structures.
@@ -51,25 +50,25 @@ public abstract partial class TpmStructureBase
     /// Implicit conversion of a TPM data structure to byte-array by means of
     /// marshaling it to the TPM's network representation.
     /// </summary>
-    public static implicit operator byte[] (TpmStructureBase src)
+    public static implicit operator byte[](TpmStructureBase src)
     {
         return src.GetTpmRepresentation();
     }
 
-    public static bool operator == (TpmStructureBase lhs, TpmStructureBase rhs)
+    public static bool operator ==(TpmStructureBase lhs, TpmStructureBase rhs)
     {
         if ((object)lhs == null)
         {
-            return (object)rhs == null;  
+            return (object)rhs == null;
         }
         return lhs.Equals(rhs);
     }
 
-    public static bool operator != (TpmStructureBase lhs, TpmStructureBase rhs)
+    public static bool operator !=(TpmStructureBase lhs, TpmStructureBase rhs)
     {
         if ((object)lhs == null)
         {
-            return (object)rhs != null;  
+            return (object)rhs != null;
         }
         return !lhs.Equals(rhs);
     }
@@ -88,7 +87,7 @@ public abstract partial class TpmStructureBase
     public override int GetHashCode()
     {
         var objectData = GetTpmRepresentation();
-        return  BitConverter.ToInt32(objectData.Length <= sizeof(int) ? objectData : CryptoLib.HashData(TpmAlgId.Sha1, objectData), 0);
+        return BitConverter.ToInt32(objectData.Length <= sizeof(int) ? objectData : CryptoLib.HashData(TpmAlgId.Sha1, objectData), 0);
     }
 
     public void Copy()
@@ -111,38 +110,38 @@ public abstract partial class TpmStructureBase
         /// <summary>
         /// Reflection information associated with this structure member.
         /// </summary>
-        MemberInfo                  Info;
+        MemberInfo Info;
 
         /// <summary>
         /// Reference to the info of the selector or size tag field associated with this member.
         /// </summary>
-        public TpmStructMemberInfo  Tag;
+        public TpmStructMemberInfo Tag;
 
         /// <summary>
         /// Marshaling attribute of this structure member.
         /// </summary>
-        public MarshalType          WireType;
+        public MarshalType WireType;
 
         /// <summary>
         /// (Unmarshaled) Value of this structure member.
         /// </summary>
-        public object               Value;
+        public object Value;
 
-        public int                  SizeLength;
-        public string               SizeName;
+        public int SizeLength;
+        public string SizeName;
 
-        public TpmStructMemberInfo (MemberInfo mi)
+        public TpmStructMemberInfo(MemberInfo mi)
         {
             Info = mi;
             WireType = MarshalType.Normal;
         }
 
-        public static implicit operator TpmStructMemberInfo (MemberInfo mi)
+        public static implicit operator TpmStructMemberInfo(MemberInfo mi)
         {
             return new TpmStructMemberInfo(mi);
         }
 
-        public static implicit operator MemberInfo (TpmStructMemberInfo tsmi)
+        public static implicit operator MemberInfo(TpmStructMemberInfo tsmi)
         {
             return tsmi.Info;
         }
@@ -183,7 +182,7 @@ public abstract partial class TpmStructureBase
             tags = new Dictionary<string, TpmStructMemberInfo>();
             //untaggedFields = new Dictionary<string, TpmStructMemberInfo>();
         }
-        foreach (var bf in new BindingFlags[] {BindingFlags.Public | BindingFlags.NonPublic})
+        foreach (var bf in new BindingFlags[] { BindingFlags.Public | BindingFlags.NonPublic })
         {
             var candidateMembers = t.GetMembers(BindingFlags.Instance | bf);
             foreach (var mi in candidateMembers)
@@ -233,18 +232,18 @@ public abstract partial class TpmStructureBase
                         switch (marshalType)
                         {
                             case MarshalType.UnionSelector:
-                            {
-                                tags.Add(mi.Name, tsmi);
-                                dbg.Trace("Preproc Selector: " + mi.Name);
-                                break;
-                            }
+                                {
+                                    tags.Add(mi.Name, tsmi);
+                                    dbg.Trace("Preproc Selector: " + mi.Name);
+                                    break;
+                                }
                             case MarshalType.Union:
-                            {
-                                var selector = a.ConstructorArguments[2].Value;
-                                dbg.Trace("Preproc Union " + mi.Name + " with selector " + selector);
-                                tsmi.Tag = tags[(string)selector];
-                                break;
-                            }
+                                {
+                                    var selector = a.ConstructorArguments[2].Value;
+                                    dbg.Trace("Preproc Union " + mi.Name + " with selector " + selector);
+                                    tsmi.Tag = tags[(string)selector];
+                                    break;
+                                }
                         }
                     }
                     break;
@@ -285,7 +284,7 @@ public abstract partial class TpmStructureBase
         {
             var mem = members[i];
             var memVal = Globs.GetMember(mem, this);
-            dbg.Trace(i + ": " + mem.Name  +  " = " + memVal);
+            dbg.Trace(i + ": " + mem.Name + " = " + memVal);
             if (mem.SizeLength > 0)
             {
                 var arr = mem.WireType == MarshalType.VariableLengthArray;
@@ -304,11 +303,11 @@ public abstract partial class TpmStructureBase
     {
         memInfo.Value = m.GetArray(memType.GetElementType(), size, memInfo.Name);
         var unmSize = ((Array)memInfo.Value).Length;
-        if (unmSize != size )
+        if (unmSize != size)
         {
             var msg = string.Format("Invalid size {0} (instead of "
               + "{1}) for unmarshaled {2}.{3}",
-                unmSize, size, GetType(), memInfo.Name); 
+                unmSize, size, GetType(), memInfo.Name);
             throw new TssException(msg);
         }
     }
@@ -331,74 +330,74 @@ public abstract partial class TpmStructureBase
             var memType = Globs.GetMemberType(memInfo);
             var wireType = memInfo.WireType;
             var size = -1;
-            switch(wireType)
+            switch (wireType)
             {
                 case MarshalType.Union:
-                {
-                    dbg.Trace("Union " + memType.Name +
-                        " with selector " + memInfo.Tag.Value);
-                    var elt = UnionElementFromSelector(memType, memInfo.Tag.Value);
-                    memInfo.Value = m.Get(elt, memType.Name);
-                    break;
-                }
-                case MarshalType.FixedLengthArray:
-                {
-                    var arr = Globs.GetMember(memInfo, this);
-                    memInfo.Value = m.GetArray(memType.GetElementType(),
-                        (arr as Array).Length, memInfo.Name);
-                    break;
-                }
-                case MarshalType.SpecialVariableLengthArray:
-                {
-                    size = CryptoLib.DigestSize((TpmAlgId)members[i - 1].Value);
-                    UnmarshalArray(m, memInfo, memType, size);
-                    break;
-                }
-                case MarshalType.VariableLengthArray:
-                {
-                    size = m.GetSizeTag(memInfo.SizeLength, memInfo.SizeName);
-                    UnmarshalArray(m, memInfo, memType, size);
-                    break;
-                }
-                case MarshalType.EncryptedVariableLengthArray:
-                {
-                    var unmarshaled = m.GetGetPos() - mshlStartPos;
-                    size = m.SizedStructLen[m.SizedStructLen.Count - 1] - (int)unmarshaled;
-                    UnmarshalArray(m, memInfo, memType, size);
-                    break;
-                }
-                case MarshalType.SizedStruct:
-                {
-                    size = m.GetSizeTag(memInfo.SizeLength, memInfo.SizeName);
-                    if (size == 0)
                     {
+                        dbg.Trace("Union " + memType.Name +
+                            " with selector " + memInfo.Tag.Value);
+                        var elt = UnionElementFromSelector(memType, memInfo.Tag.Value);
+                        memInfo.Value = m.Get(elt, memType.Name);
                         break;
                     }
-
-                    m.SizedStructLen.Add(size);
-                    memInfo.Value = m.Get(memType, memInfo.Name);
-                    var unmSize = Marshaller.GetTpmRepresentation(memInfo.Value).Length;
-                    if (unmSize != size )
+                case MarshalType.FixedLengthArray:
                     {
-                        if (unmSize < size && memType.Name == "TpmPublic")
-                        {
-                            var pub = memInfo.Value as TpmPublic;
-                            var label = Marshaller.GetTpmRepresentation(pub.unique);
-                            var context = m.GetArray(typeof(byte), size - unmSize, "")
-                                as byte[];
-                            pub.unique = new TpmDerive(label, context);
-                        }
-                        else
-                        {
-                            var msg = string.Format("Invalid size {0} (instead of "
-                              + "{1}) for unmarshaled {2}.{3}",
-                                unmSize, size, GetType(), memInfo.Name); 
-                            throw new TssException(msg);
-                        }
+                        var arr = Globs.GetMember(memInfo, this);
+                        memInfo.Value = m.GetArray(memType.GetElementType(),
+                            (arr as Array).Length, memInfo.Name);
+                        break;
                     }
-                    m.SizedStructLen.RemoveAt(m.SizedStructLen.Count - 1);
-                    break;
-                }
+                case MarshalType.SpecialVariableLengthArray:
+                    {
+                        size = CryptoLib.DigestSize((TpmAlgId)members[i - 1].Value);
+                        UnmarshalArray(m, memInfo, memType, size);
+                        break;
+                    }
+                case MarshalType.VariableLengthArray:
+                    {
+                        size = m.GetSizeTag(memInfo.SizeLength, memInfo.SizeName);
+                        UnmarshalArray(m, memInfo, memType, size);
+                        break;
+                    }
+                case MarshalType.EncryptedVariableLengthArray:
+                    {
+                        var unmarshaled = m.GetGetPos() - mshlStartPos;
+                        size = m.SizedStructLen[m.SizedStructLen.Count - 1] - (int)unmarshaled;
+                        UnmarshalArray(m, memInfo, memType, size);
+                        break;
+                    }
+                case MarshalType.SizedStruct:
+                    {
+                        size = m.GetSizeTag(memInfo.SizeLength, memInfo.SizeName);
+                        if (size == 0)
+                        {
+                            break;
+                        }
+
+                        m.SizedStructLen.Add(size);
+                        memInfo.Value = m.Get(memType, memInfo.Name);
+                        var unmSize = Marshaller.GetTpmRepresentation(memInfo.Value).Length;
+                        if (unmSize != size)
+                        {
+                            if (unmSize < size && memType.Name == "TpmPublic")
+                            {
+                                var pub = memInfo.Value as TpmPublic;
+                                var label = Marshaller.GetTpmRepresentation(pub.unique);
+                                var context = m.GetArray(typeof(byte), size - unmSize, "")
+                                    as byte[];
+                                pub.unique = new TpmDerive(label, context);
+                            }
+                            else
+                            {
+                                var msg = string.Format("Invalid size {0} (instead of "
+                                  + "{1}) for unmarshaled {2}.{3}",
+                                    unmSize, size, GetType(), memInfo.Name);
+                                throw new TssException(msg);
+                            }
+                        }
+                        m.SizedStructLen.RemoveAt(m.SizedStructLen.Count - 1);
+                        break;
+                    }
                 default:
                     // Only attempt unmarshaling a field, if it is not sized or
                     // if its size is non-zero.
@@ -623,7 +622,7 @@ public abstract partial class TpmStructureBase
 [DataContract]
 public class EmptyResponse : TpmStructureBase
 {
-    public EmptyResponse() {}
+    public EmptyResponse() { }
 
     new public EmptyResponse Copy()
     {

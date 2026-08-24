@@ -1,3 +1,5 @@
+namespace OpenCertServer.CertServer.Tests.StepDefinitions;
+
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -10,8 +12,6 @@ using Microsoft.IdentityModel.Tokens;
 using OpenCertServer.Acme.Abstractions.Services;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.CertServer.Tests.StepDefinitions;
 
 using AcmeAccount = Acme.Abstractions.Model.Account;
 using AcmeChallenge = Acme.Abstractions.Model.Challenge;

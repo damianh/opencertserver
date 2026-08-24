@@ -1,6 +1,6 @@
-﻿using OpenCertServer.Acme.Abstractions.Exceptions;
+﻿namespace OpenCertServer.Acme.Server.Stores;
 
-namespace OpenCertServer.Acme.Server.Stores;
+using OpenCertServer.Acme.Abstractions.Exceptions;
 
 using Abstractions.Model;
 using Abstractions.Storage;

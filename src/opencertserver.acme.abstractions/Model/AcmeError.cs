@@ -1,6 +1,6 @@
-using OpenCertServer.Acme.Abstractions.Exceptions;
-
 namespace OpenCertServer.Acme.Abstractions.Model;
+
+using OpenCertServer.Acme.Abstractions.Exceptions;
 
 using System.Collections.Generic;
 using System.Linq;

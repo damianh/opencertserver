@@ -271,7 +271,7 @@ public partial class CertificateServerFeatures
         var tbsRequest = new TbsRequest(requestList: [new Request(certId)]);
         var signature = tbsRequest.Sign(_key);
         // Tamper with the signature to make it invalid
-        signature = new Signature(signature.AlgorithmIdentifier, [..signature.SignatureBytes.Reverse()], signature.Certs);
+        signature = new Signature(signature.AlgorithmIdentifier, [.. signature.SignatureBytes.Reverse()], signature.Certs);
         var ocspRequest = new OcspRequest(tbsRequest, signature);
         var (resp, http) = await SendOcspRequestAsync(ocspRequest);
         OcspState.LastResponse = resp;

@@ -1,8 +1,8 @@
-﻿using System.Text;
+﻿namespace CertesSlim.Tests.Jws;
+
+using System.Text;
 using CertesSlim.Json;
 using Xunit;
-
-namespace CertesSlim.Tests.Jws;
 
 public class JwsConvertTests
 {

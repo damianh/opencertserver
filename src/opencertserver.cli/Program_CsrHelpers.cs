@@ -1,3 +1,5 @@
+namespace opencertserver.cli;
+
 using System;
 using System.CommandLine;
 using System.IO;
@@ -7,8 +9,6 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using OpenCertServer.Ca.Utils;
-
-namespace opencertserver.cli;
 
 internal static partial class Program
 {

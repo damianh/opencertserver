@@ -2,13 +2,12 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Collections;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// Wrapper structure for hash operations and representations used by the TPM
@@ -141,7 +140,7 @@ public partial class TpmHash
     /// <param name="lhs">Left-hand side operand</param>
     /// <param name="rhs">Right-hand side operand</param>
     /// <returns></returns>
-    public static bool operator == (TpmHash? lhs, TpmHash? rhs)
+    public static bool operator ==(TpmHash? lhs, TpmHash? rhs)
     {
         return (object)lhs == null ? (object)rhs == null
             : (object)rhs != null &&
@@ -160,7 +159,7 @@ public partial class TpmHash
     /// <param name="lhs">Left hand side operand</param>
     /// <param name="rhs">Right hand side operand</param>
     /// <returns></returns>
-    public static bool operator != (TpmHash lhs, TpmHash rhs)
+    public static bool operator !=(TpmHash lhs, TpmHash rhs)
     {
         return !(lhs == rhs);
     }
@@ -390,7 +389,7 @@ public class AuthValue : TpmStructureBase
     /// <param name="lhs">Left hand side operand</param>
     /// <param name="rhs">Right hand side operand</param>
     /// <returns></returns>
-    public static bool operator == (AuthValue lhs, AuthValue rhs)
+    public static bool operator ==(AuthValue lhs, AuthValue rhs)
     {
         return (object)lhs == null ? (object)rhs == null
             : (object)rhs != null &&
@@ -404,7 +403,7 @@ public class AuthValue : TpmStructureBase
     /// <param name="lhs">Left hand side operand</param>
     /// <param name="rhs">Right hand side operand</param>
     /// <returns></returns>
-    public static bool operator != (AuthValue lhs, AuthValue rhs)
+    public static bool operator !=(AuthValue lhs, AuthValue rhs)
     {
         return !(lhs == rhs);
     }
@@ -442,7 +441,8 @@ public class AuthValue : TpmStructureBase
         }
 
         byte[] trial = null;
-        do {
+        do
+        {
             trial = Globs.GetRandomBytes(numBytes);
         } while (trial[numBytes - 1] == 0);
         return new AuthValue(trial);
@@ -502,8 +502,8 @@ public class TpmHandleX
         set { Handle.Auth = value; }
     }
 
-    public static implicit operator TpmHandleX (TpmHandle from) { return new TpmHandleX(from); }
-    public static implicit operator TpmHandle (TpmHandleX from) { return from.Handle; }
+    public static implicit operator TpmHandleX(TpmHandle from) { return new TpmHandleX(from); }
+    public static implicit operator TpmHandle(TpmHandleX from) { return from.Handle; }
 }
 
 #if false
@@ -665,7 +665,7 @@ public partial class TpmHandle
     /// <param name="reservedHandle"></param>
     public TpmHandle(TpmRh reservedHandle)
         : this((uint)reservedHandle)
-    {}
+    { }
 
     /// <summary>
     /// Create a handle of the given type with the given uint index (in the range
@@ -673,9 +673,9 @@ public partial class TpmHandle
     /// </summary>
     /// <param name="handleType"></param>
     /// <param name="index"></param>
-    public TpmHandle (Ht handleType, uint index)
+    public TpmHandle(Ht handleType, uint index)
         : this(((uint)handleType << 24) + index)
-    {}
+    { }
 
     /// <summary>
     /// Create a handle of the given type with the given uint index (in the range
@@ -683,9 +683,9 @@ public partial class TpmHandle
     /// </summary>
     /// <param name="handleType"></param>
     /// <param name="index"></param>
-    public TpmHandle (Ht handleType, int index)
+    public TpmHandle(Ht handleType, int index)
         : this(((uint)handleType << 24) + (uint)index)
-    {}
+    { }
 
     /// <summary>
     /// Returns true if the two arguments either are both null references or
@@ -694,9 +694,9 @@ public partial class TpmHandle
     /// <param name="lhs">Left hand side operand</param>
     /// <param name="rhs">Right hand side operand</param>
     /// <returns></returns>
-    public static bool operator == (TpmHandle? lhs, TpmHandle? rhs)
+    public static bool operator ==(TpmHandle? lhs, TpmHandle? rhs)
     {
-        return  (object)lhs == null ? (object)rhs == null
+        return (object)lhs == null ? (object)rhs == null
             : (object)rhs != null && (lhs.handle == rhs.handle);
     }
 
@@ -707,7 +707,7 @@ public partial class TpmHandle
     /// <param name="lhs">Left hand side operand</param>
     /// <param name="rhs">Right hand side operand</param>
     /// <returns></returns>
-    public static bool operator != (TpmHandle? lhs, TpmHandle? rhs)
+    public static bool operator !=(TpmHandle? lhs, TpmHandle? rhs)
     {
         return !(lhs == rhs);
     }
@@ -753,7 +753,7 @@ public partial class TpmHandle
         return handle & 0xFFffFF;
     }
 
-    public static ParametrizedHandle operator + (TpmHandle h, object param)
+    public static ParametrizedHandle operator +(TpmHandle h, object param)
     {
         return new ParametrizedHandle(h) + param;
     }
@@ -957,7 +957,7 @@ public partial class PcrSelect
 
     public void UnselectPcrs(uint[] pcrNumbers)
     {
-        foreach(var pcrNumber in pcrNumbers)
+        foreach (var pcrNumber in pcrNumbers)
         {
             UnselectPcr(pcrNumber);
         }
@@ -1183,7 +1183,6 @@ public partial class PcrValue
     }
 
 }
-
 
 /// <summary>
 /// Collection of PcrValues. Methods to convert to and from commonly used PCR structures.
@@ -1434,13 +1433,13 @@ public partial class SymDefObject : IPublicParmsUnion
 
     internal override void ToHost(Marshaller m)
     {
-        Algorithm = (TpmAlgId)m.Get(typeof (TpmAlgId), "algorithm");
+        Algorithm = (TpmAlgId)m.Get(typeof(TpmAlgId), "algorithm");
         if (Algorithm is TpmAlgId.None or TpmAlgId.Null)
         {
             return;
         }
-        KeyBits = (ushort)m.Get(typeof (ushort), "keyBits");
-        Mode = (TpmAlgId)m.Get(typeof (TpmAlgId), "mode");
+        KeyBits = (ushort)m.Get(typeof(ushort), "keyBits");
+        Mode = (TpmAlgId)m.Get(typeof(TpmAlgId), "mode");
     }
 } // class SymDefObject
 
@@ -1470,7 +1469,7 @@ public partial class EccPoint
     /// </summary>
     /// <param name="lhs">Left-hand side operand</param>
     /// <param name="rhs">Right-hand side operand</param>
-    public static bool operator == (EccPoint? lhs, EccPoint? rhs)
+    public static bool operator ==(EccPoint? lhs, EccPoint? rhs)
     {
         return (object)lhs == null ? (object)rhs == null
             : (object)rhs != null &&
@@ -1483,7 +1482,7 @@ public partial class EccPoint
     /// </summary>
     /// <param name="lhs">Left hand side operand</param>
     /// <param name="rhs">Right hand side operand</param>
-    public static bool operator != (EccPoint lhs, EccPoint rhs)
+    public static bool operator !=(EccPoint lhs, EccPoint rhs)
     {
         return !(lhs == rhs);
     }
@@ -1507,13 +1506,13 @@ public class ParametrizedHandle
     internal TpmHandle Handle;
     internal ArrayList Params;
 
-    public ParametrizedHandle (TpmHandle h)
+    public ParametrizedHandle(TpmHandle h)
     {
         Handle = h;
         Params = new ArrayList();
     }
 
-    public static ParametrizedHandle operator + (ParametrizedHandle ph, object param)
+    public static ParametrizedHandle operator +(ParametrizedHandle ph, object param)
     {
         ph.Params.Add(param);
         return ph;

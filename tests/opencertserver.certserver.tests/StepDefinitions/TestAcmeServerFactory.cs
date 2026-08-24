@@ -1,3 +1,5 @@
+namespace OpenCertServer.CertServer.Tests.StepDefinitions;
+
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +13,6 @@ using OpenCertServer.Acme.Abstractions.Services;
 using OpenCertServer.Acme.Server;
 using OpenCertServer.Acme.Server.Configuration;
 using OpenCertServer.Acme.Server.Extensions;
-
-namespace OpenCertServer.CertServer.Tests.StepDefinitions;
 
 using AcmeAccount = Acme.Abstractions.Model.Account;
 using AcmeChallenge = Acme.Abstractions.Model.Challenge;

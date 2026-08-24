@@ -1,7 +1,7 @@
-﻿using System.Net;
-using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Acme.Resource;
 
-namespace CertesSlim.Acme.Resource;
+using System.Net;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents the ACME Order resource.

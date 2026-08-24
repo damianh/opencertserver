@@ -1,8 +1,8 @@
-﻿using System.Globalization;
+﻿namespace CertesSlim.Tests;
+
+using System.Globalization;
 using CertesSlim.Properties;
 using Xunit;
-
-namespace CertesSlim.Tests;
 
 public class StringsTests
 {

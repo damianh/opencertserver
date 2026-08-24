@@ -81,7 +81,8 @@ internal class ObjectContextManager
 
         // Make a new slot context of the requisite type
         var tbsHandle = GetFreeHandle(owner, tpmHandle);
-        var newContext = new ObjectContext {
+        var newContext = new ObjectContext
+        {
             OwnerHandle = new TpmHandle(tbsHandle),
             TheTpmHandle = tpmHandle,
             TheSlotType = newSlotType,
@@ -134,7 +135,7 @@ internal class ObjectContextManager
         if (Tbs.SlotTypeFromHandle(callerHandle) == Tbs.SlotType.NoSlot)
         {
             // Indicates that this is a TPM resident object (NV-slot, primary-handle, PWAP-handle, etc.)
-            var temp = new ObjectContext {TheTpmHandle = callerHandle};
+            var temp = new ObjectContext { TheTpmHandle = callerHandle };
             return temp;
         }
 

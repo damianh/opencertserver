@@ -9,6 +9,6 @@ public sealed class NotFoundException : MalformedRequestException
     /// Initializes a new instance of the <see cref="NotFoundException"/> class with a standard error message.
     /// </summary>
     public NotFoundException()
-        :base("The requested resource could not be found.")
+        : base("The requested resource could not be found.")
     { }
 }

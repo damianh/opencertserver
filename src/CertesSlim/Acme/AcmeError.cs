@@ -1,7 +1,7 @@
-﻿using System.Net;
-using CertesSlim.Acme.Resource;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using System.Net;
+using CertesSlim.Acme.Resource;
 
 /// <summary>
 /// Represents an error returned from ACME server.
@@ -30,7 +30,7 @@ public class AcmeError
     /// <value>
     /// The identifier for this error.
     /// </value>
-    public Identifier? Identifier { get; set;}
+    public Identifier? Identifier { get; set; }
 
     /// <summary>
     /// Gets or sets the subproblems.

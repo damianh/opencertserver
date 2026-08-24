@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace OpenCertServer.Ca.Server.Handlers;
+
+using Microsoft.AspNetCore.Mvc;
 
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;

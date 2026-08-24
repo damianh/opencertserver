@@ -1,6 +1,6 @@
-using System.Text.Json.Serialization;
-
 namespace CertesSlim.Acme;
+
+using System.Text.Json.Serialization;
 
 internal class Header
 {

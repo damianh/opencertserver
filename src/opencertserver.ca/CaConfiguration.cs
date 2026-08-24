@@ -1,6 +1,6 @@
-using OpenCertServer.Ca.Utils.Ca;
-
 namespace OpenCertServer.Ca;
+
+using OpenCertServer.Ca.Utils.Ca;
 
 /// <summary>
 /// Defines the configuration for the Certificate Authority.

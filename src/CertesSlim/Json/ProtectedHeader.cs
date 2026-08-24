@@ -1,7 +1,7 @@
+namespace CertesSlim.Json;
+
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
-
-namespace CertesSlim.Json;
 
 internal class ProtectedHeader
 {

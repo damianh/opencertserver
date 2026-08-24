@@ -1,9 +1,9 @@
+namespace OpenCertServer.Attestation;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using OpenCertServer.Attestation.Native;
-
-namespace OpenCertServer.Attestation;
 
 public static class ServiceCollectionExtensions
 {

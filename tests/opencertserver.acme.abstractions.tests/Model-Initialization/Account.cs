@@ -1,7 +1,7 @@
-﻿using CertesSlim.Acme.Resource;
-using Microsoft.IdentityModel.Tokens;
+﻿namespace OpenCertServer.Acme.Abstractions.Tests.Model_Initialization;
 
-namespace OpenCertServer.Acme.Abstractions.Tests.Model_Initialization;
+using CertesSlim.Acme.Resource;
+using Microsoft.IdentityModel.Tokens;
 
 using System;
 using System.Collections.Generic;

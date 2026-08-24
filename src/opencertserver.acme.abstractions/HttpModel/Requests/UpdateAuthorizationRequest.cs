@@ -1,6 +1,6 @@
-using CertesSlim.Acme.Resource;
-
 namespace OpenCertServer.Acme.Abstractions.HttpModel.Requests;
+
+using CertesSlim.Acme.Resource;
 
 /// <summary>
 /// Represents a request to retrieve or update an ACME authorization resource.
@@ -12,4 +12,3 @@ public sealed class UpdateAuthorizationRequest
     /// </summary>
     public AuthorizationStatus? Status { get; set; }
 }
-

@@ -1,11 +1,11 @@
+namespace OpenCertServer.Attestation;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenCertServer.Attestation.Native;
-
-namespace OpenCertServer.Attestation;
 
 /// <summary>
 /// Apple Secure Enclave / App Attest provider.
@@ -107,18 +107,18 @@ public sealed class AppleSeProvider : IAttestationProvider
     {
         _logger.LogInformation("Forwarding attestation object to Apple verification server: {Url}", _options.VerifyUrl);
 
-var attestationBase64 = Convert.ToBase64String(attestationObject);
-using var ms = new System.IO.MemoryStream();
-using (var writer = new System.Text.Json.Utf8JsonWriter(ms))
-{
-    writer.WriteStartObject();
-    writer.WriteString("teamId", _options.TeamId);
-    writer.WriteString("appId", _options.AppId);
-    writer.WriteString("attestation", attestationBase64);
-    writer.WriteEndObject();
-}
-using var content = new ByteArrayContent(ms.ToArray());
-content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+        var attestationBase64 = Convert.ToBase64String(attestationObject);
+        using var ms = new System.IO.MemoryStream();
+        using (var writer = new System.Text.Json.Utf8JsonWriter(ms))
+        {
+            writer.WriteStartObject();
+            writer.WriteString("teamId", _options.TeamId);
+            writer.WriteString("appId", _options.AppId);
+            writer.WriteString("attestation", attestationBase64);
+            writer.WriteEndObject();
+        }
+        using var content = new ByteArrayContent(ms.ToArray());
+        content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
         var endpoint = new Uri($"{_options.VerifyUrl}/v1/attestation/verify");
         HttpResponseMessage response;

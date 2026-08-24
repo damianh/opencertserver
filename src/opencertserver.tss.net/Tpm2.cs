@@ -2,16 +2,15 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
-
 #if WINDOWS_UWP
-using System.Threading.Tasks;
 #else
 #endif
+namespace OpenCertServer.Tpm2Lib;
+
+using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// Mode of the Tpm2 object operations.
@@ -187,7 +186,6 @@ public sealed partial class Tpm2 : IDisposable
     /// </summary>
     internal TpmHandle[] PcrHandles;
 
-
     //
     // The following variables apply to the next command invocation. They
     // are typically set using the follwing style:
@@ -245,7 +243,6 @@ public sealed partial class Tpm2 : IDisposable
     /// pending or next TPM command completion.
     /// </summary>
     bool ResetPp = false;
-
 
     /// <summary>
     /// Error number returned by the previously completed command. Note that in
@@ -680,7 +677,6 @@ public sealed partial class Tpm2 : IDisposable
 
     public delegate void InjectCmdCallback(Tpm2 tpm, TpmCc nextCmd);
 
-
     private TraceCallback TheTraceCallback;
     private ParamsTraceCallback TheParamsTraceCallback;
     private CmdParamsCallback TheCmdParamsCallback;
@@ -850,7 +846,7 @@ public sealed partial class Tpm2 : IDisposable
     private ReentrancyGuardContext MyGuard = new ReentrancyGuardContext();
 #endif
 
-//static bool initialized = false;
+    //static bool initialized = false;
     /// <summary>
     /// DispatchMethod is called by auto-generated command action code. It assembles a byte[] containing
     /// the formatted TPM command based on the params passed in explicitly, and the sessions currently attached
@@ -1024,7 +1020,7 @@ public sealed partial class Tpm2 : IDisposable
                 var nvRateRecoveryCount = 0;
 
                 // No more than 4 retries on NV_RATE error
-                for (;;)
+                for (; ; )
                 {
                     responseReceivedTime = commandSentTime = DateTime.Now;
 
@@ -1937,28 +1933,28 @@ public sealed partial class Tpm2 : IDisposable
                     {
                         case Ht.Transient:
                         case Ht.Persistent:
-                        {
-                            byte[] qualName = null;
-                            ReadPublic(h, out name, out qualName);
-                            break;
-                        }
-                        case Ht.NvIndex:
-                        {
-                            var pub = NvReadPublic(h, out name);
-                            // Do not cache the name of the NV index if it is
-                            // not yet written or if it has an attribute that
-                            // allows its written state to be reset or its
-                            // contents to be locked.
-                            if (!pub.attributes.HasFlag(NvAttr.Written) ||
-                                0 != (pub.attributes & NvAttr.Orderly |
-                                    (NvAttr.ReadStclear | NvAttr.ClearStclear |
-                                        NvAttr.Writedefine | NvAttr.Globallock)))
                             {
-                                TempNames.Add(h);
+                                byte[] qualName = null;
+                                ReadPublic(h, out name, out qualName);
+                                break;
                             }
+                        case Ht.NvIndex:
+                            {
+                                var pub = NvReadPublic(h, out name);
+                                // Do not cache the name of the NV index if it is
+                                // not yet written or if it has an attribute that
+                                // allows its written state to be reset or its
+                                // contents to be locked.
+                                if (!pub.attributes.HasFlag(NvAttr.Written) ||
+                                    0 != (pub.attributes & NvAttr.Orderly |
+                                        (NvAttr.ReadStclear | NvAttr.ClearStclear |
+                                            NvAttr.Writedefine | NvAttr.Globallock)))
+                                {
+                                    TempNames.Add(h);
+                                }
 
-                            break;
-                        }
+                                break;
+                            }
                     }
                 }
                 catch (TpmException)
@@ -2237,7 +2233,6 @@ public sealed partial class Tpm2 : IDisposable
         return parms;
     } // DoParmEncryption()
 
-
     /// <summary>
     /// Updates information associated by the library with TPM entity handles upon
     /// successful completion of a command that either creates a new entity or
@@ -2263,213 +2258,213 @@ public sealed partial class Tpm2 : IDisposable
         switch (ordinal)
         {
             case TpmCc.Create:
-            {
-                var req = (Tpm2CreateRequest)inParms;
-                var resp = (Tpm2CreateResponse)outParms;
-                var priv = TpmHash.FromData(PrivHashAlg, resp.outPrivate.buffer);
-                AuthValues[priv] = Globs.CopyData(req.inSensitive.userAuth);
-                break;
-            }
+                {
+                    var req = (Tpm2CreateRequest)inParms;
+                    var resp = (Tpm2CreateResponse)outParms;
+                    var priv = TpmHash.FromData(PrivHashAlg, resp.outPrivate.buffer);
+                    AuthValues[priv] = Globs.CopyData(req.inSensitive.userAuth);
+                    break;
+                }
             case TpmCc.CreatePrimary:
-            {
-                var req = (Tpm2CreatePrimaryRequest)inParms;
-                var resp = (Tpm2CreatePrimaryResponse)outParms;
-                resp.handle.Auth = req.inSensitive.userAuth;
-                ProcessName(resp.handle, resp.name, resp.outPublic);
-                break;
-            }
+                {
+                    var req = (Tpm2CreatePrimaryRequest)inParms;
+                    var resp = (Tpm2CreatePrimaryResponse)outParms;
+                    resp.handle.Auth = req.inSensitive.userAuth;
+                    ProcessName(resp.handle, resp.name, resp.outPublic);
+                    break;
+                }
             case TpmCc.CreateLoaded:
-            {
-                var req = (Tpm2CreateLoadedRequest)inParms;
-                var resp = (Tpm2CreateLoadedResponse)outParms;
-                resp.handle.Auth = req.inSensitive.userAuth;
-                ProcessName(resp.handle, resp.name, resp.outPublic);
-                break;
-            }
+                {
+                    var req = (Tpm2CreateLoadedRequest)inParms;
+                    var resp = (Tpm2CreateLoadedResponse)outParms;
+                    resp.handle.Auth = req.inSensitive.userAuth;
+                    ProcessName(resp.handle, resp.name, resp.outPublic);
+                    break;
+                }
             case TpmCc.Load:
-            {
-                var req = (Tpm2LoadRequest)inParms;
-                var resp = (Tpm2LoadResponse)outParms;
-                var priv = TpmHash.FromData(PrivHashAlg, req.inPrivate.buffer);
-                if (AuthValues.ContainsKey(priv))
                 {
-                    resp.handle.Auth = AuthValues[priv];
-                }
+                    var req = (Tpm2LoadRequest)inParms;
+                    var resp = (Tpm2LoadResponse)outParms;
+                    var priv = TpmHash.FromData(PrivHashAlg, req.inPrivate.buffer);
+                    if (AuthValues.ContainsKey(priv))
+                    {
+                        resp.handle.Auth = AuthValues[priv];
+                    }
 
-                ProcessName(resp.handle, resp.name, req.inPublic);
-                break;
-            }
-            case TpmCc.LoadExternal:
-            {
-                var req = (Tpm2LoadExternalRequest)inParms;
-
-                if (req.inPublic.nameAlg != TpmAlgId.Null)
-                {
-                    var resp = (Tpm2LoadExternalResponse)outParms;
-                    var name = req.inPublic.GetName();
                     ProcessName(resp.handle, resp.name, req.inPublic);
+                    break;
                 }
+            case TpmCc.LoadExternal:
+                {
+                    var req = (Tpm2LoadExternalRequest)inParms;
 
-                break;
-            }
+                    if (req.inPublic.nameAlg != TpmAlgId.Null)
+                    {
+                        var resp = (Tpm2LoadExternalResponse)outParms;
+                        var name = req.inPublic.GetName();
+                        ProcessName(resp.handle, resp.name, req.inPublic);
+                    }
+
+                    break;
+                }
             case TpmCc.StartAuthSession:
-            {
-                var req = (Tpm2StartAuthSessionRequest)inParms;
-                var resp = (Tpm2StartAuthSessionResponse)outParms;
-                SessionParams[resp.handle] =
-                    new AuthSession(req.sessionType, req.tpmKey, req.bind,
-                        req.nonceCaller, resp.nonceTPM,
-                        req.symmetric, req.authHash);
-                break;
-            }
+                {
+                    var req = (Tpm2StartAuthSessionRequest)inParms;
+                    var resp = (Tpm2StartAuthSessionResponse)outParms;
+                    SessionParams[resp.handle] =
+                        new AuthSession(req.sessionType, req.tpmKey, req.bind,
+                            req.nonceCaller, resp.nonceTPM,
+                            req.symmetric, req.authHash);
+                    break;
+                }
             case TpmCc.HmacStart: // alias to TpmCc.MacStart
-            {
-                if (inParms is Tpm2HmacStartRequest parms)
                 {
-                    var resp = (Tpm2HmacStartResponse)outParms;
-                    resp.handle.Auth = parms.auth;
-                    resp.handle.Name = null;
-                }
-                else
-                {
-                    Debug.Assert(inParms is Tpm2MacStartRequest);
-                    var req = (Tpm2MacStartRequest)inParms;
-                    var resp = (Tpm2MacStartResponse)outParms;
-                    resp.handle.Auth = req.auth;
-                    resp.handle.Name = null;
-                }
+                    if (inParms is Tpm2HmacStartRequest parms)
+                    {
+                        var resp = (Tpm2HmacStartResponse)outParms;
+                        resp.handle.Auth = parms.auth;
+                        resp.handle.Name = null;
+                    }
+                    else
+                    {
+                        Debug.Assert(inParms is Tpm2MacStartRequest);
+                        var req = (Tpm2MacStartRequest)inParms;
+                        var resp = (Tpm2MacStartResponse)outParms;
+                        resp.handle.Auth = req.auth;
+                        resp.handle.Name = null;
+                    }
 
-                break;
-            }
+                    break;
+                }
             case TpmCc.NvDefineSpace:
-            {
-                var req = (Tpm2NvDefineSpaceRequest)inParms;
-                req.publicInfo.nvIndex.Auth = req.auth;
-                req.publicInfo.nvIndex.Name = null;
-                break;
-            }
+                {
+                    var req = (Tpm2NvDefineSpaceRequest)inParms;
+                    req.publicInfo.nvIndex.Auth = req.auth;
+                    req.publicInfo.nvIndex.Name = null;
+                    break;
+                }
             case TpmCc.NvChangeAuth:
-            {
-                var req = (Tpm2NvChangeAuthRequest)inParms;
-                req.nvIndex.Auth = req.newAuth;
-                break;
-            }
+                {
+                    var req = (Tpm2NvChangeAuthRequest)inParms;
+                    req.nvIndex.Auth = req.newAuth;
+                    break;
+                }
             case TpmCc.ObjectChangeAuth:
-            {
-                var req = (Tpm2ObjectChangeAuthRequest)inParms;
-                var resp = (Tpm2ObjectChangeAuthResponse)outParms;
-                var priv = TpmHash.FromData(PrivHashAlg, resp.outPrivate.buffer);
-                AuthValues[priv] = Globs.CopyData(req.newAuth);
-                break;
-            }
+                {
+                    var req = (Tpm2ObjectChangeAuthRequest)inParms;
+                    var resp = (Tpm2ObjectChangeAuthResponse)outParms;
+                    var priv = TpmHash.FromData(PrivHashAlg, resp.outPrivate.buffer);
+                    AuthValues[priv] = Globs.CopyData(req.newAuth);
+                    break;
+                }
             case TpmCc.HierarchyChangeAuth:
-            {
-                var req = (Tpm2HierarchyChangeAuthRequest)inParms;
-                AuthValue auth = Globs.CopyData(req.newAuth);
-                switch (req.authHandle.handle)
                 {
-                    case (uint)TpmRh.Owner: OwnerAuth = auth; break;
-                    case (uint)TpmRh.Endorsement: EndorsementAuth = auth; break;
-                    case (uint)TpmRh.Platform: PlatformAuth = auth; break;
-                    case (uint)TpmRh.Lockout: LockoutAuth = auth; break;
-                }
+                    var req = (Tpm2HierarchyChangeAuthRequest)inParms;
+                    AuthValue auth = Globs.CopyData(req.newAuth);
+                    switch (req.authHandle.handle)
+                    {
+                        case (uint)TpmRh.Owner: OwnerAuth = auth; break;
+                        case (uint)TpmRh.Endorsement: EndorsementAuth = auth; break;
+                        case (uint)TpmRh.Platform: PlatformAuth = auth; break;
+                        case (uint)TpmRh.Lockout: LockoutAuth = auth; break;
+                    }
 
-                req.authHandle.Auth = auth;
-                break;
-            }
+                    req.authHandle.Auth = auth;
+                    break;
+                }
             case TpmCc.PcrSetAuthValue:
-            {
-                var req = (Tpm2PcrSetAuthValueRequest)inParms;
-                req.pcrHandle.Auth = req.auth;
-                if (PcrHandles == null)
                 {
-                    var numPcrs = GetProperty(this, Pt.PcrCount);
-                    PcrHandles = new TpmHandle[numPcrs];
-                }
+                    var req = (Tpm2PcrSetAuthValueRequest)inParms;
+                    req.pcrHandle.Auth = req.auth;
+                    if (PcrHandles == null)
+                    {
+                        var numPcrs = GetProperty(this, Pt.PcrCount);
+                        PcrHandles = new TpmHandle[numPcrs];
+                    }
 
-                var pcrId = (int)req.pcrHandle.GetOffset();
-                Debug.Assert(pcrId < PcrHandles.Length);
-                PcrHandles[pcrId] = req.pcrHandle;
-                break;
-            }
+                    var pcrId = (int)req.pcrHandle.GetOffset();
+                    Debug.Assert(pcrId < PcrHandles.Length);
+                    PcrHandles[pcrId] = req.pcrHandle;
+                    break;
+                }
             case TpmCc.EvictControl:
-            {
-                var req = (Tpm2EvictControlRequest)inParms;
-                if (req.objectHandle.GetType() != Ht.Persistent)
                 {
-                    req.persistentHandle.Auth = req.objectHandle.Auth;
-                    req.persistentHandle.Name = req.objectHandle.Name;
-                }
+                    var req = (Tpm2EvictControlRequest)inParms;
+                    if (req.objectHandle.GetType() != Ht.Persistent)
+                    {
+                        req.persistentHandle.Auth = req.objectHandle.Auth;
+                        req.persistentHandle.Name = req.objectHandle.Name;
+                    }
 
-                break;
-            }
+                    break;
+                }
             case TpmCc.Clear:
-            {
-                OwnerAuth = new AuthValue();
-                EndorsementAuth = new AuthValue();
-                LockoutAuth = new AuthValue();
-                break;
-            }
-            case TpmCc.NvWrite:
-            {
-                var req = (Tpm2NvWriteRequest)inParms;
-                // Force name recalculation before next use
-                req.nvIndex.Name = null;
-                break;
-            }
-            case TpmCc.NvWriteLock:
-            {
-                var req = (Tpm2NvWriteLockRequest)inParms;
-                // Force name recalculation before next use
-                req.nvIndex.Name = null;
-                break;
-            }
-            case TpmCc.NvReadLock:
-            {
-                var req = (Tpm2NvReadLockRequest)inParms;
-                // Force name recalculation before next use
-                req.nvIndex.Name = null;
-                break;
-            }
-            case TpmCc.HashSequenceStart:
-            {
-                var req = (Tpm2HashSequenceStartRequest)inParms;
-                var resp = (Tpm2HashSequenceStartResponse)outParms;
-                resp.handle.Auth = req.auth;
-                break;
-            }
-            case TpmCc.Startup:
-            {
-                var req = (Tpm2StartupRequest)inParms;
-                if (req.startupType == Su.Clear)
                 {
-                    PlatformAuth = new AuthValue();
+                    OwnerAuth = new AuthValue();
+                    EndorsementAuth = new AuthValue();
+                    LockoutAuth = new AuthValue();
+                    break;
                 }
+            case TpmCc.NvWrite:
+                {
+                    var req = (Tpm2NvWriteRequest)inParms;
+                    // Force name recalculation before next use
+                    req.nvIndex.Name = null;
+                    break;
+                }
+            case TpmCc.NvWriteLock:
+                {
+                    var req = (Tpm2NvWriteLockRequest)inParms;
+                    // Force name recalculation before next use
+                    req.nvIndex.Name = null;
+                    break;
+                }
+            case TpmCc.NvReadLock:
+                {
+                    var req = (Tpm2NvReadLockRequest)inParms;
+                    // Force name recalculation before next use
+                    req.nvIndex.Name = null;
+                    break;
+                }
+            case TpmCc.HashSequenceStart:
+                {
+                    var req = (Tpm2HashSequenceStartRequest)inParms;
+                    var resp = (Tpm2HashSequenceStartResponse)outParms;
+                    resp.handle.Auth = req.auth;
+                    break;
+                }
+            case TpmCc.Startup:
+                {
+                    var req = (Tpm2StartupRequest)inParms;
+                    if (req.startupType == Su.Clear)
+                    {
+                        PlatformAuth = new AuthValue();
+                    }
 
-                break;
-            }
+                    break;
+                }
             case TpmCc.ContextSave:
-            {
-                var req = (Tpm2ContextSaveRequest)inParms;
-                var resp = (Tpm2ContextSaveResponse)outParms;
-                resp.context.savedHandle.Auth = req.saveHandle.Auth;
-                resp.context.savedHandle.Name = req.saveHandle.Name;
-                break;
-            }
+                {
+                    var req = (Tpm2ContextSaveRequest)inParms;
+                    var resp = (Tpm2ContextSaveResponse)outParms;
+                    resp.context.savedHandle.Auth = req.saveHandle.Auth;
+                    resp.context.savedHandle.Name = req.saveHandle.Name;
+                    break;
+                }
             case TpmCc.ContextLoad:
-            {
-                var req = (Tpm2ContextLoadRequest)inParms;
-                var resp = (Tpm2ContextLoadResponse)outParms;
-                resp.handle.Auth = req.context.savedHandle.Auth;
-                resp.handle.Name = req.context.savedHandle.Name;
-                break;
-            }
+                {
+                    var req = (Tpm2ContextLoadRequest)inParms;
+                    var resp = (Tpm2ContextLoadResponse)outParms;
+                    resp.handle.Auth = req.context.savedHandle.Auth;
+                    resp.handle.Name = req.context.savedHandle.Name;
+                    break;
+                }
             case TpmCc.NvUndefineSpaceSpecial:
-            {
-                var req = (Tpm2NvUndefineSpaceSpecialRequest)inParms;
-                req.nvIndex.Auth = null;
-                break;
-            }
+                {
+                    var req = (Tpm2NvUndefineSpaceSpecialRequest)inParms;
+                    req.nvIndex.Auth = null;
+                    break;
+                }
         }
     } // UpdateHandleData()
 

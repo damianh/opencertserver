@@ -1,10 +1,10 @@
+namespace OpenCertServer.Acme.Server.Extensions;
+
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using CertesSlim.Json;
 using Microsoft.IdentityModel.Tokens;
 using OpenCertServer.Acme.Abstractions.HttpModel.Requests;
-
-namespace OpenCertServer.Acme.Server.Extensions;
 
 public static class JwsPayloadExtensions
 {

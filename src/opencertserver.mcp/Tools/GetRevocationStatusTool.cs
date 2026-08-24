@@ -1,7 +1,7 @@
+namespace OpenCertServer.Mcp.Tools;
+
 using System.Security.Cryptography;
 using OpenCertServer.Ca.Utils.X509;
-
-namespace OpenCertServer.Mcp.Tools;
 
 /// <summary>
 /// Check the revocation status of one or more certificates by serial number.

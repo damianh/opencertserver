@@ -1,10 +1,10 @@
+namespace OpenCertServer.Mcp.Tests.StepDefinitions;
+
 using System.Security.Cryptography;
 using OpenCertServer.Mcp.Tests.Support;
 using OpenCertServer.Mcp.Tools;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Mcp.Tests.StepDefinitions;
 
 [Binding]
 public sealed class McpServerCertificateQuerySteps

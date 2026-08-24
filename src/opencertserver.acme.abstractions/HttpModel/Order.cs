@@ -1,6 +1,6 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace OpenCertServer.Acme.Abstractions.HttpModel;
 
-namespace OpenCertServer.Acme.Abstractions.HttpModel;
+using CertesSlim.Acme.Resource;
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -36,7 +36,7 @@ public sealed class Order
 
         Identifiers = model.Identifiers.Select(x => new Identifier(x)).ToList();
 
-        Authorizations = [..authorizationUrls];
+        Authorizations = [.. authorizationUrls];
 
         Finalize = finalizeUrl;
 

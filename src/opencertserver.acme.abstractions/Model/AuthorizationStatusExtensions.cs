@@ -1,6 +1,6 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace OpenCertServer.Acme.Abstractions.Model;
 
-namespace OpenCertServer.Acme.Abstractions.Model;
+using CertesSlim.Acme.Resource;
 
 using System.Linq;
 

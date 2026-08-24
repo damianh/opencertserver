@@ -1,6 +1,6 @@
-using System.Runtime.InteropServices;
-
 namespace OpenCertServer.Attestation.Native;
+
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Production implementation of <see cref="IAmdSnpNativeInterop"/> that calls into

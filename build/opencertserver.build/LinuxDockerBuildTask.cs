@@ -1,9 +1,9 @@
+namespace OpenCertServer.Build;
+
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.Publish;
 using Cake.Docker;
 using Cake.Frosting;
-
-namespace OpenCertServer.Build;
 
 [TaskName("Linux-Docker-Build")]
 [IsDependentOn(typeof(PackTask))]

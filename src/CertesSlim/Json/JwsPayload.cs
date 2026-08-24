@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Json;
 
-namespace CertesSlim.Json;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents data signed with JWS.

@@ -1,8 +1,8 @@
+namespace OpenCertServer.Ca.Tests.X509;
+
 using System.Formats.Asn1;
 using OpenCertServer.Ca.Utils.X509;
 using Xunit;
-
-namespace OpenCertServer.Ca.Tests.X509;
 
 public class DirectoryStringTests
 {
@@ -10,7 +10,7 @@ public class DirectoryStringTests
     [InlineData(UniversalTagNumber.TeletexString)]
     [InlineData(UniversalTagNumber.PrintableString)]
     // TODO: Enable UniversalString test when supported
-//    [InlineData(UniversalTagNumber.UniversalString)]
+    //    [InlineData(UniversalTagNumber.UniversalString)]
     [InlineData(UniversalTagNumber.UTF8String)]
     [InlineData(UniversalTagNumber.BMPString)]
     public void CanReloadDirectoryString(UniversalTagNumber tagNumber)

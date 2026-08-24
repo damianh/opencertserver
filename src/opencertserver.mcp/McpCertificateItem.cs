@@ -1,6 +1,6 @@
-using System.Security.Cryptography;
-
 namespace OpenCertServer.Mcp;
+
+using System.Security.Cryptography;
 
 using System.Security.Cryptography.X509Certificates;
 

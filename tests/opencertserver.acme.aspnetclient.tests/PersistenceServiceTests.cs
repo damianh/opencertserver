@@ -1,6 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿namespace OpenCertServer.Acme.AspNetClient.Tests;
 
-namespace OpenCertServer.Acme.AspNetClient.Tests;
+using Microsoft.IdentityModel.Tokens;
 
 using System;
 using System.Threading.Tasks;

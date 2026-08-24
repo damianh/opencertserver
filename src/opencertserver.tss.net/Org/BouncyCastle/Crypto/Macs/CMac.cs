@@ -1,7 +1,7 @@
+namespace OpenCertServer.Tpm2Lib.Org.BouncyCastle.Crypto.Macs;
+
 using System.Security.Cryptography;
 using OpenCertServer.Tpm2Lib.Org.BouncyCastle.Crypto.Parameters;
-
-namespace OpenCertServer.Tpm2Lib.Org.BouncyCastle.Crypto.Macs;
 
 /// <summary>
 /// Minimal AES-CMAC implementation compatible with the small subset used by

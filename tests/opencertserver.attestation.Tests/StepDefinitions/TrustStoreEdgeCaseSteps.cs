@@ -1,3 +1,5 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
@@ -6,8 +8,6 @@ using NSubstitute;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 [Scope(Feature = "TrustStore Edge Cases")]

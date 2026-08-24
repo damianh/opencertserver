@@ -1,8 +1,8 @@
+namespace OpenCertServer.Ca.Tests.X509;
+
 using System.Formats.Asn1;
 using OpenCertServer.Ca.Utils.X509;
 using Xunit;
-
-namespace OpenCertServer.Ca.Tests.X509;
 
 public class GeneralNameTests
 {

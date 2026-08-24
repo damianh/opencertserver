@@ -2,14 +2,13 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using BouncyCastleAESKey = OpenCertServer.Tpm2Lib.Org.BouncyCastle.Crypto.Parameters.KeyParameter;
 using BouncyCastleCMAC = OpenCertServer.Tpm2Lib.Org.BouncyCastle.Crypto.Macs.CMac;
-
-namespace OpenCertServer.Tpm2Lib;
 
 public static class CryptoLib
 {
@@ -112,7 +111,7 @@ public static class CryptoLib
         throw new ArgumentException("BlockSize{}: Unsupported hash or MAC  algorithm");
     }
 
-    public static TpmAlgId SchemeHash (ISignatureUnion sig)
+    public static TpmAlgId SchemeHash(ISignatureUnion sig)
     {
         if (sig is SignatureRsa rsa)
         {

@@ -110,7 +110,7 @@ public class SessionBase
     /// </summary>
     public static implicit operator SessionBase(Auth authType)
     {
-        switch(authType)
+        switch (authType)
         {
             case Auth.None: return None;
             case Auth.Hmac: return Hmac;
@@ -146,21 +146,21 @@ public class AuthSession : SessionBase
     /// and initial value of NonceTpm is returned by this command. NonceCaller
     /// and NonceTpm will then be updated correspondingly before and after each
     /// command using the session.
-    public TpmSe       SessionType;
-    public byte[]?      Salt;
-    public TpmHandle   BindObject;
-    public byte[]?      NonceCaller;
-    public byte[]      NonceTpm;
+    public TpmSe SessionType;
+    public byte[]? Salt;
+    public TpmHandle BindObject;
+    public byte[]? NonceCaller;
+    public byte[] NonceTpm;
 
     /// <summary>
     /// Symmetric cipher to be used for encrypting and decrypting sessions.
     /// </summary>
-    public SymDef?      Symmetric;
+    public SymDef? Symmetric;
 
     /// <summary>
     /// Hash algorithm used by this session.
     /// </summary>
-    public TpmAlgId    AuthHash;
+    public TpmAlgId AuthHash;
 
     public SessionAttr Attrs;
 
@@ -204,7 +204,7 @@ public class AuthSession : SessionBase
             throw new ArgumentException("AuthSession: Attempt to construct from parametrized non-session handle");
         }
         Handle = ph.Handle;
-        foreach(var param in ph.Params)
+        foreach (var param in ph.Params)
         {
             if (param is SessionAttr attr)
             {
@@ -246,7 +246,7 @@ public class AuthSession : SessionBase
     /// <summary>
     /// Sets parameters associated with the session.
     /// </summary>
-    internal void Init (AuthSession @params)
+    internal void Init(AuthSession @params)
     {
         SessionType = @params.SessionType;
         BindObject = @params.BindObject;

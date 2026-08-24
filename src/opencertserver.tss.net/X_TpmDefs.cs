@@ -1,6 +1,6 @@
-using System.Runtime.Serialization;
-
 namespace OpenCertServer.Tpm2Lib;
+
+using System.Runtime.Serialization;
 
 /// <summary> Table 2 is the list of algorithms to which the TCG has assigned an algorithm
 /// identifier along with its numeric identifier. </summary>
@@ -537,7 +537,7 @@ public enum Generated : uint
     /// <summary> 0xFF TCG (FF 54 43 4716) </summary>
     [EnumMember]
     [SpecTypeName("TPM_GENERATED_VALUE")]
-    Value = unchecked (0xff544347)
+    Value = unchecked(0xff544347)
 }
 
 [DataContract]
@@ -1079,7 +1079,7 @@ public enum TpmCc : uint
     /// <summary> Used for testing of command dispatch </summary>
     [EnumMember]
     [SpecTypeName("TPM_CC_Vendor_TCG_Test")]
-    VendorTcgTest = CcVend+0x0000 // 0x20000000
+    VendorTcgTest = CcVend + 0x0000 // 0x20000000
 }
 
 /// <summary> Architecturally defined constants </summary>
@@ -1147,7 +1147,7 @@ public enum ImplementationConstants : uint
 
     [EnumMember]
     [SpecTypeName("MAX_CAP_DATA")]
-    MaxCapData = (1024/*MAX_CAP_BUFFER*/-_TpmCapSize-sizeof(uint)), // 0x3F8
+    MaxCapData = (1024/*MAX_CAP_BUFFER*/- _TpmCapSize - sizeof(uint)), // 0x3F8
 
     [EnumMember]
     [SpecTypeName("MAX_CAP_ALGS")]
@@ -2036,21 +2036,21 @@ public enum ClockAdjust : sbyte
     /// <summary> Slow the Clock update rate by one coarse adjustment step. </summary>
     [EnumMember]
     [SpecTypeName("TPM_CLOCK_COARSE_SLOWER")]
-    CoarseSlower = unchecked (-3),
+    CoarseSlower = unchecked(-3),
     [Obsolete("Use ClockAdjust.CoarseSlower instead")]
     TpmClockCoarseSlower = -3,
 
     /// <summary> Slow the Clock update rate by one medium adjustment step. </summary>
     [EnumMember]
     [SpecTypeName("TPM_CLOCK_MEDIUM_SLOWER")]
-    MediumSlower = unchecked (-2),
+    MediumSlower = unchecked(-2),
     [Obsolete("Use ClockAdjust.MediumSlower instead")]
     TpmClockMediumSlower = -2,
 
     /// <summary> Slow the Clock update rate by one fine adjustment step. </summary>
     [EnumMember]
     [SpecTypeName("TPM_CLOCK_FINE_SLOWER")]
-    FineSlower = unchecked (-1),
+    FineSlower = unchecked(-1),
     [Obsolete("Use ClockAdjust.FineSlower instead")]
     TpmClockFineSlower = -1,
 
@@ -3410,7 +3410,7 @@ public enum Implementation : uint
 
     [EnumMember]
     [SpecTypeName("PCR_SELECT_MAX")]
-    PcrSelectMax = ((ImplementationPcr+7)/8), // 0x3
+    PcrSelectMax = ((ImplementationPcr + 7) / 8), // 0x3
 
     /// <summary> The number of PCR required by the relevant platform specification </summary>
     [EnumMember]
@@ -3611,7 +3611,7 @@ public enum Implementation : uint
 
     [EnumMember]
     [SpecTypeName("RSA_MAX_PRIME")]
-    RsaMaxPrime = (ImplementationConstants.MaxRsaKeyBytes/2), // 0x80
+    RsaMaxPrime = (ImplementationConstants.MaxRsaKeyBytes / 2), // 0x80
 
     [EnumMember]
     [SpecTypeName("RSA_PRIVATE_SIZE")]
@@ -3644,7 +3644,7 @@ public enum TpmHc : uint
     /// <summary> To mask off the variable part </summary>
     [EnumMember]
     [SpecTypeName("HR_RANGE_MASK")]
-    HrRangeMask = unchecked (0xFF000000),
+    HrRangeMask = unchecked(0xFF000000),
 
     [EnumMember]
     [SpecTypeName("HR_SHIFT")]
@@ -3686,7 +3686,7 @@ public enum TpmHc : uint
     /// <summary> Last PCR </summary>
     [EnumMember]
     [SpecTypeName("PCR_LAST")]
-    PcrLast = (PcrFirst + Implementation.ImplementationPcr-1), // 0x17
+    PcrLast = (PcrFirst + Implementation.ImplementationPcr - 1), // 0x17
 
     /// <summary> First HMAC session </summary>
     [EnumMember]
@@ -3696,7 +3696,7 @@ public enum TpmHc : uint
     /// <summary> Last HMAC session </summary>
     [EnumMember]
     [SpecTypeName("HMAC_SESSION_LAST")]
-    HmacSessionLast = (HmacSessionFirst+Implementation.MaxActiveSessions-1), // 0x200003F
+    HmacSessionLast = (HmacSessionFirst + Implementation.MaxActiveSessions - 1), // 0x200003F
 
     /// <summary> Used in GetCapability </summary>
     [EnumMember]
@@ -3716,7 +3716,7 @@ public enum TpmHc : uint
     /// <summary> Last policy session </summary>
     [EnumMember]
     [SpecTypeName("POLICY_SESSION_LAST")]
-    PolicySessionLast = (PolicySessionFirst + Implementation.MaxActiveSessions-1), // 0x300003F
+    PolicySessionLast = (PolicySessionFirst + Implementation.MaxActiveSessions - 1), // 0x300003F
 
     /// <summary> First transient object </summary>
     [EnumMember]
@@ -3736,7 +3736,7 @@ public enum TpmHc : uint
     /// <summary> Last transient object </summary>
     [EnumMember]
     [SpecTypeName("TRANSIENT_LAST")]
-    TransientLast = (TransientFirst+Implementation.MaxLoadedObjects-1), // 0x80000002
+    TransientLast = (TransientFirst + Implementation.MaxLoadedObjects - 1), // 0x80000002
 
     /// <summary> First persistent object </summary>
     [EnumMember]
@@ -3789,17 +3789,17 @@ public enum TpmHc : uint
     /// <summary> AC Handle </summary>
     [EnumMember]
     [SpecTypeName("HR_AC")]
-    HrAc = unchecked ((uint)Ht.Ac << (int)HrShift), // 0x90000000
+    HrAc = unchecked((uint)Ht.Ac << (int)HrShift), // 0x90000000
 
     /// <summary> First Attached Component </summary>
     [EnumMember]
     [SpecTypeName("AC_FIRST")]
-    AcFirst = unchecked (HrAc + 0), // 0x90000000
+    AcFirst = unchecked(HrAc + 0), // 0x90000000
 
     /// <summary> Last Attached Component </summary>
     [EnumMember]
     [SpecTypeName("AC_LAST")]
-    AcLast = unchecked (HrAc + 0x0000FFFF) // 0x9000FFFF
+    AcLast = unchecked(HrAc + 0x0000FFFF) // 0x9000FFFF
 }
 
 /// <summary> This structure defines the attributes of an algorithm. </summary>
@@ -4863,14 +4863,14 @@ public abstract partial class TpmStructureBase
         {
             throw new Exception("Unknown union interface type " + unionInterface.Name);
         }
-        throw new Exception("Unknown selector value" + selector + " for " + unionInterface.Name +  " union");
+        throw new Exception("Unknown selector value" + selector + " for " + unionInterface.Name + " union");
     }
 }
 
 /// <summary> Handle of a loaded TPM key or other object [TSS] </summary>
 [DataContract]
 [SpecTypeName("TPM_HANDLE")]
-public partial class TpmHandle: TpmStructureBase
+public partial class TpmHandle : TpmStructureBase
 {
     /// <summary> Handle value </summary>
     [MarshalAs(0)]
@@ -4903,9 +4903,9 @@ public partial class TpmHandle: TpmStructureBase
 /// initialized with its own empty element. </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_UNION")]
-public partial class NullUnion: TpmStructureBase, ISymDetailsUnion, ISchemeKeyedhashUnion, ISigSchemeUnion, IKdfSchemeUnion, IAsymSchemeUnion, ISignatureUnion
+public partial class NullUnion : TpmStructureBase, ISymDetailsUnion, ISchemeKeyedhashUnion, ISigSchemeUnion, IKdfSchemeUnion, IAsymSchemeUnion, ISignatureUnion
 {
-    public NullUnion() {}
+    public NullUnion() { }
 
     public virtual TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -4919,9 +4919,9 @@ public partial class NullUnion: TpmStructureBase, ISymDetailsUnion, ISchemeKeyed
 /// the entry empty, TPMS_EMPTY may be selected. </summary>
 [DataContract]
 [SpecTypeName("TPMS_EMPTY")]
-public partial class Empty: TpmStructureBase, IAsymSchemeUnion
+public partial class Empty : TpmStructureBase, IAsymSchemeUnion
 {
-    public Empty() {}
+    public Empty() { }
 
     public virtual TpmAlgId GetUnionSelector() { return TpmAlgId.Rsaes; }
 
@@ -4936,7 +4936,7 @@ public partial class Empty: TpmStructureBase, IAsymSchemeUnion
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(AlgorithmAttr))]
 [SpecTypeName("TPMS_ALGORITHM_DESCRIPTION")]
-public partial class AlgorithmDescription: TpmStructureBase
+public partial class AlgorithmDescription : TpmStructureBase
 {
     /// <summary> An algorithm </summary>
     [MarshalAs(0)]
@@ -4975,7 +4975,7 @@ public partial class AlgorithmDescription: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMT_HA")]
-public partial class TpmHash: TpmStructureBase, ISignatureUnion
+public partial class TpmHash : TpmStructureBase, ISignatureUnion
 {
     [MarshalAs(0)]
     [DataMember]
@@ -5017,7 +5017,7 @@ public partial class TpmHash: TpmStructureBase, ISignatureUnion
 /// largest digest produced by any hash algorithm implemented on the TPM. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_DIGEST")]
-public partial class Tpm2bDigest: TpmStructureBase, IPublicIdUnion
+public partial class Tpm2bDigest : TpmStructureBase, IPublicIdUnion
 {
     /// <summary> The buffer area that can be no larger than a digest </summary>
     [Range(MaxVal = 0u /*sizeof(TPMU_HA)*/)]
@@ -5025,7 +5025,7 @@ public partial class Tpm2bDigest: TpmStructureBase, IPublicIdUnion
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bDigest() {}
+    public Tpm2bDigest() { }
 
     public Tpm2bDigest(Tpm2bDigest src) { buffer = src.buffer; }
 
@@ -5043,14 +5043,14 @@ public partial class Tpm2bDigest: TpmStructureBase, IPublicIdUnion
 /// than the size of the Name of an object. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_DATA")]
-public partial class Tpm2bData: TpmStructureBase
+public partial class Tpm2bData : TpmStructureBase
 {
     [Range(MaxVal = 66u /*sizeof(TPMT_HA)*/)]
     [MarshalAs(0, MarshalType.VariableLengthArray, "size", 2)]
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bData() {}
+    public Tpm2bData() { }
 
     public Tpm2bData(Tpm2bData src) { buffer = src.buffer; }
 
@@ -5065,14 +5065,14 @@ public partial class Tpm2bData: TpmStructureBase
 /// <summary> Table 83 Definition of Types for TPM2B_NONCE </summary>
 [DataContract]
 [SpecTypeName("TPM2B_NONCE")]
-public partial class Tpm2bNonce: Tpm2bDigest
+public partial class Tpm2bNonce : Tpm2bDigest
 {
-    public Tpm2bNonce() {}
+    public Tpm2bNonce() { }
 
-    public Tpm2bNonce(Tpm2bNonce _Tpm2bNonce) : base(_Tpm2bNonce) {}
+    public Tpm2bNonce(Tpm2bNonce _Tpm2bNonce) : base(_Tpm2bNonce) { }
 
     /// <param name = "_buffer"> The buffer area that can be no larger than a digest </param>
-    public Tpm2bNonce(byte[] _buffer) : base(_buffer) {}
+    public Tpm2bNonce(byte[] _buffer) : base(_buffer) { }
 
     new public Tpm2bNonce Copy() { return CreateCopy<Tpm2bNonce>(); }
 
@@ -5086,14 +5086,14 @@ public partial class Tpm2bNonce: Tpm2bDigest
 /// object will be able to handle the authValue of the object. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_AUTH")]
-public partial class Tpm2bAuth: Tpm2bDigest
+public partial class Tpm2bAuth : Tpm2bDigest
 {
-    public Tpm2bAuth() {}
+    public Tpm2bAuth() { }
 
-    public Tpm2bAuth(Tpm2bAuth _Tpm2bAuth) : base(_Tpm2bAuth) {}
+    public Tpm2bAuth(Tpm2bAuth _Tpm2bAuth) : base(_Tpm2bAuth) { }
 
     /// <param name = "_buffer"> The buffer area that can be no larger than a digest </param>
-    public Tpm2bAuth(byte[] _buffer) : base(_buffer) {}
+    public Tpm2bAuth(byte[] _buffer) : base(_buffer) { }
 
     new public Tpm2bAuth Copy() { return CreateCopy<Tpm2bAuth>(); }
 
@@ -5106,14 +5106,14 @@ public partial class Tpm2bAuth: Tpm2bDigest
 /// produced by any of the hash algorithms implemented on the TPM. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_OPERAND")]
-public partial class Tpm2bOperand: Tpm2bDigest
+public partial class Tpm2bOperand : Tpm2bDigest
 {
-    public Tpm2bOperand() {}
+    public Tpm2bOperand() { }
 
-    public Tpm2bOperand(Tpm2bOperand _Tpm2bOperand) : base(_Tpm2bOperand) {}
+    public Tpm2bOperand(Tpm2bOperand _Tpm2bOperand) : base(_Tpm2bOperand) { }
 
     /// <param name = "_buffer"> The buffer area that can be no larger than a digest </param>
-    public Tpm2bOperand(byte[] _buffer) : base(_buffer) {}
+    public Tpm2bOperand(byte[] _buffer) : base(_buffer) { }
 
     new public Tpm2bOperand Copy() { return CreateCopy<Tpm2bOperand>(); }
 
@@ -5123,7 +5123,7 @@ public partial class Tpm2bOperand: Tpm2bDigest
 /// <summary> This type is a sized buffer that can hold event data. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_EVENT")]
-public partial class Tpm2bEvent: TpmStructureBase
+public partial class Tpm2bEvent : TpmStructureBase
 {
     /// <summary> The operand </summary>
     [Range(MaxVal = 1024u /*1024*/)]
@@ -5131,7 +5131,7 @@ public partial class Tpm2bEvent: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bEvent() {}
+    public Tpm2bEvent() { }
 
     public Tpm2bEvent(Tpm2bEvent src) { buffer = src.buffer; }
 
@@ -5148,7 +5148,7 @@ public partial class Tpm2bEvent: TpmStructureBase
 /// TPM2_FieldUpgradeData(). </summary>
 [DataContract]
 [SpecTypeName("TPM2B_MAX_BUFFER")]
-public partial class Tpm2bMaxBuffer: TpmStructureBase
+public partial class Tpm2bMaxBuffer : TpmStructureBase
 {
     /// <summary> The operand </summary>
     [Range(MaxVal = 1024u /*MAX_DIGEST_BUFFER*/)]
@@ -5156,7 +5156,7 @@ public partial class Tpm2bMaxBuffer: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bMaxBuffer() {}
+    public Tpm2bMaxBuffer() { }
 
     public Tpm2bMaxBuffer(Tpm2bMaxBuffer src) { buffer = src.buffer; }
 
@@ -5172,7 +5172,7 @@ public partial class Tpm2bMaxBuffer: TpmStructureBase
 /// data commands such as TPM2_NV_Read(), TPM2_NV_Write(), and TPM2_NV_Certify(). </summary>
 [DataContract]
 [SpecTypeName("TPM2B_MAX_NV_BUFFER")]
-public partial class Tpm2bMaxNvBuffer: TpmStructureBase
+public partial class Tpm2bMaxNvBuffer : TpmStructureBase
 {
     /// <summary> The operand
     /// NOTE MAX_NV_BUFFER_SIZE is TPM-dependent </summary>
@@ -5181,7 +5181,7 @@ public partial class Tpm2bMaxNvBuffer: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bMaxNvBuffer() {}
+    public Tpm2bMaxNvBuffer() { }
 
     public Tpm2bMaxNvBuffer(Tpm2bMaxNvBuffer src) { buffer = src.buffer; }
 
@@ -5198,7 +5198,7 @@ public partial class Tpm2bMaxNvBuffer: TpmStructureBase
 /// authorization. The size shall be 8 or less. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_TIMEOUT")]
-public partial class Tpm2bTimeout: TpmStructureBase
+public partial class Tpm2bTimeout : TpmStructureBase
 {
     /// <summary> The timeout value </summary>
     [Range(MaxVal = 8u /*sizeof(UINT64)*/)]
@@ -5206,7 +5206,7 @@ public partial class Tpm2bTimeout: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bTimeout() {}
+    public Tpm2bTimeout() { }
 
     public Tpm2bTimeout(Tpm2bTimeout src) { buffer = src.buffer; }
 
@@ -5223,7 +5223,7 @@ public partial class Tpm2bTimeout: TpmStructureBase
 /// implemented symmetric cipher implemented on the TPM. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_IV")]
-public partial class Tpm2bIv: TpmStructureBase
+public partial class Tpm2bIv : TpmStructureBase
 {
     /// <summary> The IV value </summary>
     [Range(MaxVal = 16u /*MAX_SYM_BLOCK_SIZE*/)]
@@ -5231,7 +5231,7 @@ public partial class Tpm2bIv: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bIv() {}
+    public Tpm2bIv() { }
 
     public Tpm2bIv(Tpm2bIv src) { buffer = src.buffer; }
 
@@ -5246,7 +5246,7 @@ public partial class Tpm2bIv: TpmStructureBase
 /// <summary> This buffer holds a Name for any entity type. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_NAME")]
-public partial class Tpm2bName: TpmStructureBase
+public partial class Tpm2bName : TpmStructureBase
 {
     /// <summary> The Name structure </summary>
     [Range(MaxVal = 0u /*sizeof(TPMU_NAME)*/)]
@@ -5254,7 +5254,7 @@ public partial class Tpm2bName: TpmStructureBase
     [DataMember]
     public byte[] name;
 
-    public Tpm2bName() {}
+    public Tpm2bName() { }
 
     public Tpm2bName(Tpm2bName src) { name = src.name; }
 
@@ -5269,7 +5269,7 @@ public partial class Tpm2bName: TpmStructureBase
 /// <summary> This structure provides a standard method of specifying a list of PCR. </summary>
 [DataContract]
 [SpecTypeName("TPMS_PCR_SELECT")]
-public partial class PcrSelect: TpmStructureBase
+public partial class PcrSelect : TpmStructureBase
 {
     /// <summary> The bit map of selected PCR </summary>
     [Range(MinVal = 3u /*PCR_SELECT_MIN*/, MaxVal = 3u /*PCR_SELECT_MAX*/)]
@@ -5277,7 +5277,7 @@ public partial class PcrSelect: TpmStructureBase
     [DataMember]
     public byte[]? pcrSelect;
 
-    public PcrSelect() {}
+    public PcrSelect() { }
 
     public PcrSelect(PcrSelect src) { pcrSelect = src.pcrSelect; }
 
@@ -5293,7 +5293,7 @@ public partial class PcrSelect: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_PCR_SELECTION")]
-public partial class PcrSelection: TpmStructureBase
+public partial class PcrSelection : TpmStructureBase
 {
     /// <summary> The hash algorithm associated with the selection </summary>
     [MarshalAs(0)]
@@ -5333,7 +5333,7 @@ public partial class PcrSelection: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("TPMT_TK_CREATION")]
-public partial class TkCreation: TpmStructureBase
+public partial class TkCreation : TpmStructureBase
 {
     /// <summary> Ticket structure tag </summary>
     [Range(OnlyVal = 32801u /*TPM_ST_CREATION*/)]
@@ -5379,7 +5379,7 @@ public partial class TkCreation: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("TPMT_TK_VERIFIED")]
-public partial class TkVerified: TpmStructureBase
+public partial class TkVerified : TpmStructureBase
 {
     /// <summary> Ticket structure tag </summary>
     [Range(OnlyVal = 32802u /*TPM_ST_VERIFIED*/)]
@@ -5426,7 +5426,7 @@ public partial class TkVerified: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(TpmSt))]
 [SpecTypeName("TPMT_TK_AUTH")]
-public partial class TkAuth: TpmStructureBase
+public partial class TkAuth : TpmStructureBase
 {
     /// <summary> Ticket structure tag </summary>
     [Range(Values = [32805u /*TPM_ST_AUTH_SIGNED*/, 32803u /*TPM_ST_AUTH_SECRET*/])]
@@ -5475,7 +5475,7 @@ public partial class TkAuth: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("TPMT_TK_HASHCHECK")]
-public partial class TkHashcheck: TpmStructureBase
+public partial class TkHashcheck : TpmStructureBase
 {
     /// <summary> Ticket structure tag </summary>
     [Range(OnlyVal = 32804u /*TPM_ST_HASHCHECK*/)]
@@ -5521,7 +5521,7 @@ public partial class TkHashcheck: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(AlgorithmAttr))]
 [SpecTypeName("TPMS_ALG_PROPERTY")]
-public partial class AlgProperty: TpmStructureBase
+public partial class AlgProperty : TpmStructureBase
 {
     /// <summary> An algorithm identifier </summary>
     [MarshalAs(0)]
@@ -5559,7 +5559,7 @@ public partial class AlgProperty: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Pt))]
 [SpecTypeName("TPMS_TAGGED_PROPERTY")]
-public partial class TaggedProperty: TpmStructureBase
+public partial class TaggedProperty : TpmStructureBase
 {
     /// <summary> A property identifier </summary>
     [MarshalAs(0)]
@@ -5571,7 +5571,7 @@ public partial class TaggedProperty: TpmStructureBase
     [DataMember]
     public uint value { get; set; }
 
-    public TaggedProperty() {}
+    public TaggedProperty() { }
 
     public TaggedProperty(TaggedProperty src)
     {
@@ -5597,7 +5597,7 @@ public partial class TaggedProperty: TpmStructureBase
 [DataContract]
 [KnownType(typeof(PtPcr))]
 [SpecTypeName("TPMS_TAGGED_PCR_SELECT")]
-public partial class TaggedPcrSelect: TpmStructureBase
+public partial class TaggedPcrSelect : TpmStructureBase
 {
     /// <summary> The property identifier </summary>
     [MarshalAs(0)]
@@ -5610,7 +5610,7 @@ public partial class TaggedPcrSelect: TpmStructureBase
     [DataMember]
     public byte[] pcrSelect;
 
-    public TaggedPcrSelect() {}
+    public TaggedPcrSelect() { }
 
     public TaggedPcrSelect(TaggedPcrSelect src)
     {
@@ -5637,7 +5637,7 @@ public partial class TaggedPcrSelect: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("TPMS_TAGGED_POLICY")]
-public partial class TaggedPolicy: TpmStructureBase
+public partial class TaggedPolicy : TpmStructureBase
 {
     /// <summary> A permanent handle </summary>
     [MarshalAs(0)]
@@ -5675,7 +5675,7 @@ public partial class TaggedPolicy: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(ActAttr))]
 [SpecTypeName("TPMS_ACT_DATA")]
-public partial class ActData: TpmStructureBase
+public partial class ActData : TpmStructureBase
 {
     /// <summary> A permanent handle </summary>
     [MarshalAs(0)]
@@ -5720,7 +5720,7 @@ public partial class ActData: TpmStructureBase
 /// depending on the command. </summary>
 [DataContract]
 [SpecTypeName("TPML_CC")]
-public partial class CcArray: TpmStructureBase, ICapabilitiesUnion
+public partial class CcArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> A list of command codes
     /// The maximum only applies to a command code list in a command. The response size is
@@ -5730,7 +5730,7 @@ public partial class CcArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public TpmCc[] commandCodes;
 
-    public CcArray() {}
+    public CcArray() { }
 
     public CcArray(CcArray src) { commandCodes = src.commandCodes; }
 
@@ -5750,7 +5750,7 @@ public partial class CcArray: TpmStructureBase, ICapabilitiesUnion
 /// </summary>
 [DataContract]
 [SpecTypeName("TPML_CCA")]
-public partial class CcaArray: TpmStructureBase, ICapabilitiesUnion
+public partial class CcaArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> A list of command codes attributes </summary>
     [Range(MaxVal = 410u /*MAX_CAP_CC*/)]
@@ -5758,7 +5758,7 @@ public partial class CcaArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public CcAttr[] commandAttributes;
 
-    public CcaArray() {}
+    public CcaArray() { }
 
     public CcaArray(CcaArray src) { commandAttributes = src.commandAttributes; }
 
@@ -5775,7 +5775,7 @@ public partial class CcaArray: TpmStructureBase, ICapabilitiesUnion
 /// <summary> This list is returned by TPM2_IncrementalSelfTest(). </summary>
 [DataContract]
 [SpecTypeName("TPML_ALG")]
-public partial class AlgArray: TpmStructureBase
+public partial class AlgArray : TpmStructureBase
 {
     /// <summary> A list of algorithm IDs
     /// The maximum only applies to an algorithm list in a command. The response size is
@@ -5785,7 +5785,7 @@ public partial class AlgArray: TpmStructureBase
     [DataMember]
     public TpmAlgId[] algorithms;
 
-    public AlgArray() {}
+    public AlgArray() { }
 
     public AlgArray(AlgArray src) { algorithms = src.algorithms; }
 
@@ -5803,7 +5803,7 @@ public partial class AlgArray: TpmStructureBase
 /// the capability in TPM2_GetCapability() is TPM_CAP_HANDLE. </summary>
 [DataContract]
 [SpecTypeName("TPML_HANDLE")]
-public partial class HandleArray: TpmStructureBase, ICapabilitiesUnion
+public partial class HandleArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> An array of handles </summary>
     [Range(MaxVal = 254u /*MAX_CAP_HANDLES*/)]
@@ -5811,7 +5811,7 @@ public partial class HandleArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public TpmHandle[] handle;
 
-    public HandleArray() {}
+    public HandleArray() { }
 
     public HandleArray(HandleArray src) { handle = src.handle; }
 
@@ -5829,7 +5829,7 @@ public partial class HandleArray: TpmStructureBase, ICapabilitiesUnion
 /// TPM2_PolicyOR() and in TPM2_PCR_Read(). </summary>
 [DataContract]
 [SpecTypeName("TPML_DIGEST")]
-public partial class DigestArray: TpmStructureBase
+public partial class DigestArray : TpmStructureBase
 {
     /// <summary> A list of digests
     /// For TPM2_PolicyOR(), all digests will have been computed using the digest of the
@@ -5840,7 +5840,7 @@ public partial class DigestArray: TpmStructureBase
     [DataMember]
     public Tpm2bDigest[] digests;
 
-    public DigestArray() {}
+    public DigestArray() { }
 
     public DigestArray(DigestArray src) { digests = src.digests; }
 
@@ -5860,7 +5860,7 @@ public partial class DigestArray: TpmStructureBase
 /// TPM2_PCR_Extend(). </summary>
 [DataContract]
 [SpecTypeName("TPML_DIGEST_VALUES")]
-public partial class DigestValuesArray: TpmStructureBase
+public partial class DigestValuesArray : TpmStructureBase
 {
     /// <summary> A list of tagged digests </summary>
     [Range(MaxVal = 3u /*HASH_COUNT*/)]
@@ -5868,7 +5868,7 @@ public partial class DigestValuesArray: TpmStructureBase
     [DataMember]
     public TpmHash[] digests;
 
-    public DigestValuesArray() {}
+    public DigestValuesArray() { }
 
     public DigestValuesArray(DigestValuesArray src) { digests = src.digests; }
 
@@ -5884,7 +5884,7 @@ public partial class DigestValuesArray: TpmStructureBase
 /// more than one PCR value may be selected. </summary>
 [DataContract]
 [SpecTypeName("TPML_PCR_SELECTION")]
-public partial class PcrSelectionArray: TpmStructureBase, ICapabilitiesUnion
+public partial class PcrSelectionArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> List of selections </summary>
     [Range(MaxVal = 3u /*HASH_COUNT*/)]
@@ -5892,7 +5892,7 @@ public partial class PcrSelectionArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public PcrSelection[] pcrSelections;
 
-    public PcrSelectionArray() {}
+    public PcrSelectionArray() { }
 
     public PcrSelectionArray(PcrSelectionArray src) { pcrSelections = src.pcrSelections; }
 
@@ -5910,7 +5910,7 @@ public partial class PcrSelectionArray: TpmStructureBase, ICapabilitiesUnion
 /// returned in a TPM2_GetCapability(). </summary>
 [DataContract]
 [SpecTypeName("TPML_ALG_PROPERTY")]
-public partial class AlgPropertyArray: TpmStructureBase, ICapabilitiesUnion
+public partial class AlgPropertyArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> List of properties </summary>
     [Range(MaxVal = 169u /*MAX_CAP_ALGS*/)]
@@ -5918,7 +5918,7 @@ public partial class AlgPropertyArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public AlgProperty[] algProperties;
 
-    public AlgPropertyArray() {}
+    public AlgPropertyArray() { }
 
     public AlgPropertyArray(AlgPropertyArray src) { algProperties = src.algProperties; }
 
@@ -5936,7 +5936,7 @@ public partial class AlgPropertyArray: TpmStructureBase, ICapabilitiesUnion
 /// TPMS_TAGGED_PROPERTY values. It is returned by a TPM2_GetCapability(). </summary>
 [DataContract]
 [SpecTypeName("TPML_TAGGED_TPM_PROPERTY")]
-public partial class TaggedTpmPropertyArray: TpmStructureBase, ICapabilitiesUnion
+public partial class TaggedTpmPropertyArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> An array of tagged properties </summary>
     [Range(MaxVal = 127u /*MAX_TPM_PROPERTIES*/)]
@@ -5944,7 +5944,7 @@ public partial class TaggedTpmPropertyArray: TpmStructureBase, ICapabilitiesUnio
     [DataMember]
     public TaggedProperty[] tpmProperty;
 
-    public TaggedTpmPropertyArray() {}
+    public TaggedTpmPropertyArray() { }
 
     public TaggedTpmPropertyArray(TaggedTpmPropertyArray src) { tpmProperty = src.tpmProperty; }
 
@@ -5962,7 +5962,7 @@ public partial class TaggedTpmPropertyArray: TpmStructureBase, ICapabilitiesUnio
 /// values. It is returned by a TPM2_GetCapability(). </summary>
 [DataContract]
 [SpecTypeName("TPML_TAGGED_PCR_PROPERTY")]
-public partial class TaggedPcrPropertyArray: TpmStructureBase, ICapabilitiesUnion
+public partial class TaggedPcrPropertyArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> A tagged PCR selection </summary>
     [Range(MaxVal = 203u /*MAX_PCR_PROPERTIES*/)]
@@ -5970,7 +5970,7 @@ public partial class TaggedPcrPropertyArray: TpmStructureBase, ICapabilitiesUnio
     [DataMember]
     public TaggedPcrSelect[] pcrProperty;
 
-    public TaggedPcrPropertyArray() {}
+    public TaggedPcrPropertyArray() { }
 
     public TaggedPcrPropertyArray(TaggedPcrPropertyArray src) { pcrProperty = src.pcrProperty; }
 
@@ -5988,7 +5988,7 @@ public partial class TaggedPcrPropertyArray: TpmStructureBase, ICapabilitiesUnio
 /// is returned by a TPM2_GetCapability(). </summary>
 [DataContract]
 [SpecTypeName("TPML_ECC_CURVE")]
-public partial class EccCurveArray: TpmStructureBase, ICapabilitiesUnion
+public partial class EccCurveArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> Array of ECC curve identifiers </summary>
     [Range(MaxVal = 508u /*MAX_ECC_CURVES*/)]
@@ -5996,7 +5996,7 @@ public partial class EccCurveArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public EccCurve[] eccCurves;
 
-    public EccCurveArray() {}
+    public EccCurveArray() { }
 
     public EccCurveArray(EccCurveArray src) { eccCurves = src.eccCurves; }
 
@@ -6015,7 +6015,7 @@ public partial class EccCurveArray: TpmStructureBase, ICapabilitiesUnion
 /// that cannot have a policy is not included in the list. </summary>
 [DataContract]
 [SpecTypeName("TPML_TAGGED_POLICY")]
-public partial class TaggedPolicyArray: TpmStructureBase, ICapabilitiesUnion
+public partial class TaggedPolicyArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> Array of tagged policies </summary>
     [Range(MaxVal = 14u /*MAX_TAGGED_POLICIES*/)]
@@ -6023,7 +6023,7 @@ public partial class TaggedPolicyArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public TaggedPolicy[] policies;
 
-    public TaggedPolicyArray() {}
+    public TaggedPolicyArray() { }
 
     public TaggedPolicyArray(TaggedPolicyArray src) { policies = src.policies; }
 
@@ -6041,7 +6041,7 @@ public partial class TaggedPolicyArray: TpmStructureBase, ICapabilitiesUnion
 /// be generated by TPM2_GetCapabilty(). Only implemented ACT are present in the list </summary>
 [DataContract]
 [SpecTypeName("TPML_ACT_DATA")]
-public partial class ActDataArray: TpmStructureBase, ICapabilitiesUnion
+public partial class ActDataArray : TpmStructureBase, ICapabilitiesUnion
 {
     /// <summary> Array of ACT data </summary>
     [Range(MaxVal = 84u /*MAX_ACT_DATA*/)]
@@ -6049,7 +6049,7 @@ public partial class ActDataArray: TpmStructureBase, ICapabilitiesUnion
     [DataMember]
     public ActData[] actData;
 
-    public ActDataArray() {}
+    public ActDataArray() { }
 
     public ActDataArray(ActDataArray src) { actData = src.actData; }
 
@@ -6077,11 +6077,12 @@ public partial class ActDataArray: TpmStructureBase, ICapabilitiesUnion
 [KnownType(typeof(TaggedPolicyArray))]
 [KnownType(typeof(TaggedTpmPropertyArray))]
 [SpecTypeName("TPMS_CAPABILITY_DATA")]
-public partial class CapabilityData: TpmStructureBase
+public partial class CapabilityData : TpmStructureBase
 {
     /// <summary> The capability </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public Cap capability {
+    public Cap capability
+    {
         get { return data.GetUnionSelector(); }
     }
 
@@ -6093,7 +6094,7 @@ public partial class CapabilityData: TpmStructureBase
     [DataMember]
     public ICapabilitiesUnion data { get; set; }
 
-    public CapabilityData() {}
+    public CapabilityData() { }
 
     public CapabilityData(CapabilityData src) { data = src.data; }
 
@@ -6111,7 +6112,7 @@ public partial class CapabilityData: TpmStructureBase
 /// <summary> This structure is used in each of the attestation commands. </summary>
 [DataContract]
 [SpecTypeName("TPMS_CLOCK_INFO")]
-public partial class ClockInfo: TpmStructureBase
+public partial class ClockInfo : TpmStructureBase
 {
     /// <summary> Time value in milliseconds that advances while the TPM is powered
     /// NOTE The interpretation of the time-origin (clock=0) is out of the scope of this
@@ -6140,7 +6141,7 @@ public partial class ClockInfo: TpmStructureBase
     [DataMember]
     public byte safe { get; set; }
 
-    public ClockInfo() {}
+    public ClockInfo() { }
 
     public ClockInfo(ClockInfo src)
     {
@@ -6180,7 +6181,7 @@ public partial class ClockInfo: TpmStructureBase
 [DataContract]
 [KnownType(typeof(ClockInfo))]
 [SpecTypeName("TPMS_TIME_INFO")]
-public partial class TimeInfo: TpmStructureBase
+public partial class TimeInfo : TpmStructureBase
 {
     /// <summary> Time in milliseconds since the TIme circuit was last reset
     /// This structure element is used to report on the TPM's Time value. </summary>
@@ -6193,7 +6194,7 @@ public partial class TimeInfo: TpmStructureBase
     [DataMember]
     public ClockInfo clockInfo { get; set; }
 
-    public TimeInfo() {}
+    public TimeInfo() { }
 
     public TimeInfo(TimeInfo src)
     {
@@ -6219,7 +6220,7 @@ public partial class TimeInfo: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TimeInfo))]
 [SpecTypeName("TPMS_TIME_ATTEST_INFO")]
-public partial class TimeAttestInfo: TpmStructureBase, IAttestUnion
+public partial class TimeAttestInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> The Time, Clock, resetCount, restartCount, and Safe indicator </summary>
     [MarshalAs(0)]
@@ -6231,7 +6232,7 @@ public partial class TimeAttestInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public ulong firmwareVersion { get; set; }
 
-    public TimeAttestInfo() {}
+    public TimeAttestInfo() { }
 
     public TimeAttestInfo(TimeAttestInfo src)
     {
@@ -6258,7 +6259,7 @@ public partial class TimeAttestInfo: TpmStructureBase, IAttestUnion
 /// <summary> This is the attested data for TPM2_Certify(). </summary>
 [DataContract]
 [SpecTypeName("TPMS_CERTIFY_INFO")]
-public partial class CertifyInfo: TpmStructureBase, IAttestUnion
+public partial class CertifyInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> Name of the certified object </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "nameSize", 2)]
@@ -6270,7 +6271,7 @@ public partial class CertifyInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public byte[] qualifiedName;
 
-    public CertifyInfo() {}
+    public CertifyInfo() { }
 
     public CertifyInfo(CertifyInfo src)
     {
@@ -6296,7 +6297,7 @@ public partial class CertifyInfo: TpmStructureBase, IAttestUnion
 /// <summary> This is the attested data for TPM2_Quote(). </summary>
 [DataContract]
 [SpecTypeName("TPMS_QUOTE_INFO")]
-public partial class QuoteInfo: TpmStructureBase, IAttestUnion
+public partial class QuoteInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> Information on algID, PCR selected and digest </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "pcrSelectCount", 4)]
@@ -6308,7 +6309,7 @@ public partial class QuoteInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public byte[] pcrDigest;
 
-    public QuoteInfo() {}
+    public QuoteInfo() { }
 
     public QuoteInfo(QuoteInfo src)
     {
@@ -6335,7 +6336,7 @@ public partial class QuoteInfo: TpmStructureBase, IAttestUnion
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_COMMAND_AUDIT_INFO")]
-public partial class CommandAuditInfo: TpmStructureBase, IAttestUnion
+public partial class CommandAuditInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> The monotonic audit counter </summary>
     [MarshalAs(0)]
@@ -6389,7 +6390,7 @@ public partial class CommandAuditInfo: TpmStructureBase, IAttestUnion
 /// <summary> This is the attested data for TPM2_GetSessionAuditDigest(). </summary>
 [DataContract]
 [SpecTypeName("TPMS_SESSION_AUDIT_INFO")]
-public partial class SessionAuditInfo: TpmStructureBase, IAttestUnion
+public partial class SessionAuditInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> Current exclusive status of the session
     /// TRUE if all of the commands recorded in the sessionDigest were executed without any
@@ -6403,7 +6404,7 @@ public partial class SessionAuditInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public byte[] sessionDigest;
 
-    public SessionAuditInfo() {}
+    public SessionAuditInfo() { }
 
     public SessionAuditInfo(SessionAuditInfo src)
     {
@@ -6431,7 +6432,7 @@ public partial class SessionAuditInfo: TpmStructureBase, IAttestUnion
 /// <summary> This is the attested data for TPM2_CertifyCreation(). </summary>
 [DataContract]
 [SpecTypeName("TPMS_CREATION_INFO")]
-public partial class CreationInfo: TpmStructureBase, IAttestUnion
+public partial class CreationInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> Name of the object </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "objectNameSize", 2)]
@@ -6443,7 +6444,7 @@ public partial class CreationInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public byte[] creationHash;
 
-    public CreationInfo() {}
+    public CreationInfo() { }
 
     public CreationInfo(CreationInfo src)
     {
@@ -6470,7 +6471,7 @@ public partial class CreationInfo: TpmStructureBase, IAttestUnion
 /// is certified by TPM2_NV_Certify(). </summary>
 [DataContract]
 [SpecTypeName("TPMS_NV_CERTIFY_INFO")]
-public partial class NvCertifyInfo: TpmStructureBase, IAttestUnion
+public partial class NvCertifyInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> Name of the NV Index </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "indexNameSize", 2)]
@@ -6487,7 +6488,7 @@ public partial class NvCertifyInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public byte[] nvContents;
 
-    public NvCertifyInfo() {}
+    public NvCertifyInfo() { }
 
     public NvCertifyInfo(NvCertifyInfo src)
     {
@@ -6518,7 +6519,7 @@ public partial class NvCertifyInfo: TpmStructureBase, IAttestUnion
 /// signing scheme. </summary>
 [DataContract]
 [SpecTypeName("TPMS_NV_DIGEST_CERTIFY_INFO")]
-public partial class NvDigestCertifyInfo: TpmStructureBase, IAttestUnion
+public partial class NvDigestCertifyInfo : TpmStructureBase, IAttestUnion
 {
     /// <summary> Name of the NV Index </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "indexNameSize", 2)]
@@ -6530,7 +6531,7 @@ public partial class NvDigestCertifyInfo: TpmStructureBase, IAttestUnion
     [DataMember]
     public byte[] nvDigest;
 
-    public NvDigestCertifyInfo() {}
+    public NvDigestCertifyInfo() { }
 
     public NvDigestCertifyInfo(NvDigestCertifyInfo src)
     {
@@ -6568,7 +6569,7 @@ public partial class NvDigestCertifyInfo: TpmStructureBase, IAttestUnion
 [KnownType(typeof(SessionAuditInfo))]
 [KnownType(typeof(TimeAttestInfo))]
 [SpecTypeName("TPMS_ATTEST")]
-public partial class Attest: TpmStructureBase
+public partial class Attest : TpmStructureBase
 {
     /// <summary> The indication that this structure was created by a TPM (always
     /// TPM_GENERATED_VALUE) </summary>
@@ -6578,7 +6579,8 @@ public partial class Attest: TpmStructureBase
 
     /// <summary> Type of the attestation structure </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmSt type {
+    public TpmSt type
+    {
         get { return attested.GetUnionSelector(); }
     }
 
@@ -6612,7 +6614,7 @@ public partial class Attest: TpmStructureBase
     [DataMember]
     public IAttestUnion attested { get; set; }
 
-    public Attest() {}
+    public Attest() { }
 
     public Attest(Attest src)
     {
@@ -6657,7 +6659,7 @@ public partial class Attest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Attest))]
 [SpecTypeName("TPM2B_ATTEST")]
-public partial class Tpm2bAttest: TpmStructureBase
+public partial class Tpm2bAttest : TpmStructureBase
 {
     /// <summary> The signed structure </summary>
     [Range(MaxVal = 68u /*sizeof(TPMS_ATTEST)*/)]
@@ -6665,7 +6667,7 @@ public partial class Tpm2bAttest: TpmStructureBase
     [DataMember]
     public Attest attestationData { get; set; }
 
-    public Tpm2bAttest() {}
+    public Tpm2bAttest() { }
 
     public Tpm2bAttest(Tpm2bAttest src) { attestationData = src.attestationData; }
 
@@ -6683,7 +6685,7 @@ public partial class Tpm2bAttest: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(SessionAttr))]
 [SpecTypeName("TPMS_AUTH_COMMAND")]
-public partial class AuthCommand: TpmStructureBase
+public partial class AuthCommand : TpmStructureBase
 {
     /// <summary> The session handle </summary>
     [MarshalAs(0)]
@@ -6739,7 +6741,7 @@ public partial class AuthCommand: TpmStructureBase
 [DataContract]
 [KnownType(typeof(SessionAttr))]
 [SpecTypeName("TPMS_AUTH_RESPONSE")]
-public partial class AuthResponse: TpmStructureBase
+public partial class AuthResponse : TpmStructureBase
 {
     /// <summary> The session nonce, may be the Empty Buffer </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "nonceSize", 2)]
@@ -6756,7 +6758,7 @@ public partial class AuthResponse: TpmStructureBase
     [DataMember]
     public byte[] hmac;
 
-    public AuthResponse() {}
+    public AuthResponse() { }
 
     public AuthResponse(AuthResponse src)
     {
@@ -6785,9 +6787,9 @@ public partial class AuthResponse: TpmStructureBase
 /// </summary>
 [DataContract]
 [SpecTypeName("TPMS_TDES_SYM_DETAILS")]
-public partial class TdesSymDetails: NullUnion
+public partial class TdesSymDetails : NullUnion
 {
-    public TdesSymDetails() {}
+    public TdesSymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Tdes; }
 
@@ -6800,9 +6802,9 @@ public partial class TdesSymDetails: NullUnion
 /// no data to marshal) for selector algorithm TPM_ALG_AES for the union TPMU_SYM_DETAILS </summary>
 [DataContract]
 [SpecTypeName("TPMS_AES_SYM_DETAILS")]
-public partial class AesSymDetails: NullUnion
+public partial class AesSymDetails : NullUnion
 {
-    public AesSymDetails() {}
+    public AesSymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Aes; }
 
@@ -6815,9 +6817,9 @@ public partial class AesSymDetails: NullUnion
 /// no data to marshal) for selector algorithm TPM_ALG_SM4 for the union TPMU_SYM_DETAILS </summary>
 [DataContract]
 [SpecTypeName("TPMS_SM4_SYM_DETAILS")]
-public partial class Sm4SymDetails: NullUnion
+public partial class Sm4SymDetails : NullUnion
 {
-    public Sm4SymDetails() {}
+    public Sm4SymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Sm4; }
 
@@ -6831,9 +6833,9 @@ public partial class Sm4SymDetails: NullUnion
 /// TPMU_SYM_DETAILS </summary>
 [DataContract]
 [SpecTypeName("TPMS_CAMELLIA_SYM_DETAILS")]
-public partial class CamelliaSymDetails: NullUnion
+public partial class CamelliaSymDetails : NullUnion
 {
-    public CamelliaSymDetails() {}
+    public CamelliaSymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Camellia; }
 
@@ -6846,9 +6848,9 @@ public partial class CamelliaSymDetails: NullUnion
 /// no data to marshal) for selector algorithm TPM_ALG_ANY for the union TPMU_SYM_DETAILS </summary>
 [DataContract]
 [SpecTypeName("TPMS_ANY_SYM_DETAILS")]
-public partial class AnySymDetails: NullUnion
+public partial class AnySymDetails : NullUnion
 {
-    public AnySymDetails() {}
+    public AnySymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Any; }
 
@@ -6861,9 +6863,9 @@ public partial class AnySymDetails: NullUnion
 /// no data to marshal) for selector algorithm TPM_ALG_XOR for the union TPMU_SYM_DETAILS </summary>
 [DataContract]
 [SpecTypeName("TPMS_XOR_SYM_DETAILS")]
-public partial class XorSymDetails: NullUnion
+public partial class XorSymDetails : NullUnion
 {
-    public XorSymDetails() {}
+    public XorSymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Xor; }
 
@@ -6877,9 +6879,9 @@ public partial class XorSymDetails: NullUnion
 /// </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_SYM_DETAILS")]
-public partial class NullSymDetails: NullUnion
+public partial class NullSymDetails : NullUnion
 {
-    public NullSymDetails() {}
+    public NullSymDetails() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -6894,7 +6896,7 @@ public partial class NullSymDetails: NullUnion
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMT_SYM_DEF")]
-public partial class SymDef: TpmStructureBase
+public partial class SymDef : TpmStructureBase
 {
     /// <summary> Indicates a symmetric algorithm </summary>
     [MarshalAs(0)]
@@ -6945,7 +6947,7 @@ public partial class SymDef: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMT_SYM_DEF_OBJECT")]
-public partial class SymDefObject: TpmStructureBase
+public partial class SymDefObject : TpmStructureBase
 {
     /// <summary> Selects a symmetric block cipher
     /// When used in the parameter area of a parent object, this shall be a supported block
@@ -7000,7 +7002,7 @@ public partial class SymDefObject: TpmStructureBase
 /// asymmetric object. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_SYM_KEY")]
-public partial class Tpm2bSymKey: TpmStructureBase, ISensitiveCompositeUnion
+public partial class Tpm2bSymKey : TpmStructureBase, ISensitiveCompositeUnion
 {
     /// <summary> The key </summary>
     [Range(MaxVal = 32u /*MAX_SYM_KEY_BYTES*/)]
@@ -7008,7 +7010,7 @@ public partial class Tpm2bSymKey: TpmStructureBase, ISensitiveCompositeUnion
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bSymKey() {}
+    public Tpm2bSymKey() { }
 
     public Tpm2bSymKey(Tpm2bSymKey src) { buffer = src.buffer; }
 
@@ -7026,14 +7028,14 @@ public partial class Tpm2bSymKey: TpmStructureBase, ISensitiveCompositeUnion
 [DataContract]
 [KnownType(typeof(SymDefObject))]
 [SpecTypeName("TPMS_SYMCIPHER_PARMS")]
-public partial class SymcipherParms: TpmStructureBase, IPublicParmsUnion
+public partial class SymcipherParms : TpmStructureBase, IPublicParmsUnion
 {
     /// <summary> A symmetric block cipher </summary>
     [MarshalAs(0)]
     [DataMember]
     public SymDefObject sym { get; set; }
 
-    public SymcipherParms() {}
+    public SymcipherParms() { }
 
     public SymcipherParms(SymcipherParms src) { sym = src.sym; }
 
@@ -7052,7 +7054,7 @@ public partial class SymcipherParms: TpmStructureBase, IPublicParmsUnion
 /// device and the largest ECC parameter (MAX_ECC_KEY_BYTES) but no more than 32 bytes. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_LABEL")]
-public partial class Tpm2bLabel: TpmStructureBase
+public partial class Tpm2bLabel : TpmStructureBase
 {
     /// <summary> Symmetric data for a created object or the label and context for a derived
     /// object </summary>
@@ -7061,7 +7063,7 @@ public partial class Tpm2bLabel: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bLabel() {}
+    public Tpm2bLabel() { }
 
     public Tpm2bLabel(Tpm2bLabel src) { buffer = src.buffer; }
 
@@ -7079,7 +7081,7 @@ public partial class Tpm2bLabel: TpmStructureBase
 /// inPublic area template take precedence over the values in the inSensitive parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_DERIVE")]
-public partial class TpmDerive: TpmStructureBase, ISensitiveCreateUnion, IPublicIdUnion
+public partial class TpmDerive : TpmStructureBase, ISensitiveCreateUnion, IPublicIdUnion
 {
     [MarshalAs(0, MarshalType.VariableLengthArray, "labelSize", 2)]
     [DataMember]
@@ -7089,7 +7091,7 @@ public partial class TpmDerive: TpmStructureBase, ISensitiveCreateUnion, IPublic
     [DataMember]
     public byte[] context;
 
-    public TpmDerive() {}
+    public TpmDerive() { }
 
     public TpmDerive(TpmDerive src)
     {
@@ -7116,7 +7118,7 @@ public partial class TpmDerive: TpmStructureBase, ISensitiveCreateUnion, IPublic
 [DataContract]
 [KnownType(typeof(TpmDerive))]
 [SpecTypeName("TPM2B_DERIVE")]
-public partial class Tpm2bDerive: TpmStructureBase
+public partial class Tpm2bDerive : TpmStructureBase
 {
     /// <summary> Symmetric data for a created object or the label and context for a derived
     /// object </summary>
@@ -7125,7 +7127,7 @@ public partial class Tpm2bDerive: TpmStructureBase
     [DataMember]
     public TpmDerive buffer { get; set; }
 
-    public Tpm2bDerive() {}
+    public Tpm2bDerive() { }
 
     public Tpm2bDerive(Tpm2bDerive src) { buffer = src.buffer; }
 
@@ -7141,7 +7143,7 @@ public partial class Tpm2bDerive: TpmStructureBase
 /// <summary> This buffer wraps the TPMU_SENSITIVE_CREATE structure. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_SENSITIVE_DATA")]
-public partial class Tpm2bSensitiveData: TpmStructureBase, ISensitiveCompositeUnion
+public partial class Tpm2bSensitiveData : TpmStructureBase, ISensitiveCompositeUnion
 {
     /// <summary> Symmetric data for a created object or the label and context for a derived
     /// object </summary>
@@ -7150,7 +7152,7 @@ public partial class Tpm2bSensitiveData: TpmStructureBase, ISensitiveCompositeUn
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bSensitiveData() {}
+    public Tpm2bSensitiveData() { }
 
     public Tpm2bSensitiveData(Tpm2bSensitiveData src) { buffer = src.buffer; }
 
@@ -7170,7 +7172,7 @@ public partial class Tpm2bSensitiveData: TpmStructureBase, ISensitiveCompositeUn
 /// </summary>
 [DataContract]
 [SpecTypeName("TPMS_SENSITIVE_CREATE")]
-public partial class SensitiveCreate: TpmStructureBase
+public partial class SensitiveCreate : TpmStructureBase
 {
     /// <summary> The USER auth secret value </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "userAuthSize", 2)]
@@ -7182,7 +7184,7 @@ public partial class SensitiveCreate: TpmStructureBase
     [DataMember]
     public byte[] data;
 
-    public SensitiveCreate() {}
+    public SensitiveCreate() { }
 
     public SensitiveCreate(SensitiveCreate src)
     {
@@ -7210,14 +7212,14 @@ public partial class SensitiveCreate: TpmStructureBase
 [DataContract]
 [KnownType(typeof(SensitiveCreate))]
 [SpecTypeName("TPM2B_SENSITIVE_CREATE")]
-public partial class Tpm2bSensitiveCreate: TpmStructureBase
+public partial class Tpm2bSensitiveCreate : TpmStructureBase
 {
     /// <summary> Data to be sealed or a symmetric key value. </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "size", 2)]
     [DataMember]
     public SensitiveCreate sensitive { get; set; }
 
-    public Tpm2bSensitiveCreate() {}
+    public Tpm2bSensitiveCreate() { }
 
     public Tpm2bSensitiveCreate(Tpm2bSensitiveCreate src) { sensitive = src.sensitive; }
 
@@ -7234,7 +7236,7 @@ public partial class Tpm2bSensitiveCreate: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_SCHEME_HASH")]
-public partial class SchemeHash: TpmStructureBase, ISchemeKeyedhashUnion, ISigSchemeUnion, IKdfSchemeUnion, IAsymSchemeUnion, ISignatureUnion
+public partial class SchemeHash : TpmStructureBase, ISchemeKeyedhashUnion, ISigSchemeUnion, IKdfSchemeUnion, IAsymSchemeUnion, ISignatureUnion
 {
     /// <summary> The hash algorithm used to digest the message </summary>
     [MarshalAs(0)]
@@ -7259,7 +7261,7 @@ public partial class SchemeHash: TpmStructureBase, ISchemeKeyedhashUnion, ISigSc
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_SCHEME_ECDAA")]
-public partial class SchemeEcdaa: TpmStructureBase, ISigSchemeUnion, IAsymSchemeUnion
+public partial class SchemeEcdaa : TpmStructureBase, ISigSchemeUnion, IAsymSchemeUnion
 {
     /// <summary> The hash algorithm used to digest the message </summary>
     [MarshalAs(0)]
@@ -7298,14 +7300,14 @@ public partial class SchemeEcdaa: TpmStructureBase, ISigSchemeUnion, IAsymScheme
 /// <summary> Table 155 Definition of Types for HMAC_SIG_SCHEME </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_HMAC")]
-public partial class SchemeHmac: SchemeHash
+public partial class SchemeHmac : SchemeHash
 {
-    public SchemeHmac() {}
+    public SchemeHmac() { }
 
-    public SchemeHmac(SchemeHmac _SchemeHmac) : base(_SchemeHmac) {}
+    public SchemeHmac(SchemeHmac _SchemeHmac) : base(_SchemeHmac) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeHmac(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeHmac(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Hmac; }
 
@@ -7318,7 +7320,7 @@ public partial class SchemeHmac: SchemeHash
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_SCHEME_XOR")]
-public partial class SchemeXor: TpmStructureBase, ISchemeKeyedhashUnion
+public partial class SchemeXor : TpmStructureBase, ISchemeKeyedhashUnion
 {
     /// <summary> The hash algorithm used to digest the message </summary>
     [MarshalAs(0)]
@@ -7362,9 +7364,9 @@ public partial class SchemeXor: TpmStructureBase, ISchemeKeyedhashUnion
 /// TPMU_SCHEME_KEYEDHASH </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_SCHEME_KEYEDHASH")]
-public partial class NullSchemeKeyedhash: NullUnion
+public partial class NullSchemeKeyedhash : NullUnion
 {
-    public NullSchemeKeyedhash() {}
+    public NullSchemeKeyedhash() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -7380,11 +7382,12 @@ public partial class NullSchemeKeyedhash: NullUnion
 [KnownType(typeof(SchemeHmac))]
 [KnownType(typeof(SchemeXor))]
 [SpecTypeName("TPMT_KEYEDHASH_SCHEME")]
-public partial class KeyedhashScheme: TpmStructureBase
+public partial class KeyedhashScheme : TpmStructureBase
 {
     /// <summary> Selects the scheme </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -7394,7 +7397,7 @@ public partial class KeyedhashScheme: TpmStructureBase
     [DataMember]
     public ISchemeKeyedhashUnion details { get; set; }
 
-    public KeyedhashScheme() {}
+    public KeyedhashScheme() { }
 
     public KeyedhashScheme(KeyedhashScheme src) { details = src.details; }
 
@@ -7411,14 +7414,14 @@ public partial class KeyedhashScheme: TpmStructureBase
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIG_SCHEME_RSASSA")]
-public partial class SigSchemeRsassa: SchemeHash
+public partial class SigSchemeRsassa : SchemeHash
 {
-    public SigSchemeRsassa() {}
+    public SigSchemeRsassa() { }
 
-    public SigSchemeRsassa(SigSchemeRsassa _SigSchemeRsassa) : base(_SigSchemeRsassa) {}
+    public SigSchemeRsassa(SigSchemeRsassa _SigSchemeRsassa) : base(_SigSchemeRsassa) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SigSchemeRsassa(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SigSchemeRsassa(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Rsassa; }
 
@@ -7431,14 +7434,14 @@ public partial class SigSchemeRsassa: SchemeHash
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIG_SCHEME_RSAPSS")]
-public partial class SigSchemeRsapss: SchemeHash
+public partial class SigSchemeRsapss : SchemeHash
 {
-    public SigSchemeRsapss() {}
+    public SigSchemeRsapss() { }
 
-    public SigSchemeRsapss(SigSchemeRsapss _SigSchemeRsapss) : base(_SigSchemeRsapss) {}
+    public SigSchemeRsapss(SigSchemeRsapss _SigSchemeRsapss) : base(_SigSchemeRsapss) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SigSchemeRsapss(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SigSchemeRsapss(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Rsapss; }
 
@@ -7452,14 +7455,14 @@ public partial class SigSchemeRsapss: SchemeHash
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIG_SCHEME_ECDSA")]
-public partial class SigSchemeEcdsa: SchemeHash
+public partial class SigSchemeEcdsa : SchemeHash
 {
-    public SigSchemeEcdsa() {}
+    public SigSchemeEcdsa() { }
 
-    public SigSchemeEcdsa(SigSchemeEcdsa _SigSchemeEcdsa) : base(_SigSchemeEcdsa) {}
+    public SigSchemeEcdsa(SigSchemeEcdsa _SigSchemeEcdsa) : base(_SigSchemeEcdsa) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SigSchemeEcdsa(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SigSchemeEcdsa(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecdsa; }
 
@@ -7473,14 +7476,14 @@ public partial class SigSchemeEcdsa: SchemeHash
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIG_SCHEME_SM2")]
-public partial class SigSchemeSm2: SchemeHash
+public partial class SigSchemeSm2 : SchemeHash
 {
-    public SigSchemeSm2() {}
+    public SigSchemeSm2() { }
 
-    public SigSchemeSm2(SigSchemeSm2 _SigSchemeSm2) : base(_SigSchemeSm2) {}
+    public SigSchemeSm2(SigSchemeSm2 _SigSchemeSm2) : base(_SigSchemeSm2) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SigSchemeSm2(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SigSchemeSm2(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Sm2; }
 
@@ -7494,14 +7497,14 @@ public partial class SigSchemeSm2: SchemeHash
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIG_SCHEME_ECSCHNORR")]
-public partial class SigSchemeEcschnorr: SchemeHash
+public partial class SigSchemeEcschnorr : SchemeHash
 {
-    public SigSchemeEcschnorr() {}
+    public SigSchemeEcschnorr() { }
 
-    public SigSchemeEcschnorr(SigSchemeEcschnorr _SigSchemeEcschnorr) : base(_SigSchemeEcschnorr) {}
+    public SigSchemeEcschnorr(SigSchemeEcschnorr _SigSchemeEcschnorr) : base(_SigSchemeEcschnorr) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SigSchemeEcschnorr(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SigSchemeEcschnorr(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecschnorr; }
 
@@ -7515,18 +7518,18 @@ public partial class SigSchemeEcschnorr: SchemeHash
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIG_SCHEME_ECDAA")]
-public partial class SigSchemeEcdaa: SchemeEcdaa
+public partial class SigSchemeEcdaa : SchemeEcdaa
 {
-    public SigSchemeEcdaa() {}
+    public SigSchemeEcdaa() { }
 
-    public SigSchemeEcdaa(SigSchemeEcdaa _SigSchemeEcdaa) : base(_SigSchemeEcdaa) {}
+    public SigSchemeEcdaa(SigSchemeEcdaa _SigSchemeEcdaa) : base(_SigSchemeEcdaa) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
     /// <param name = "_count"> The counter value that is used between TPM2_Commit() and the sign
     ///        operation </param>
     public SigSchemeEcdaa(TpmAlgId _hashAlg, ushort _count)
         : base(_hashAlg, _count)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecdaa; }
 
@@ -7539,9 +7542,9 @@ public partial class SigSchemeEcdaa: SchemeEcdaa
 /// no data to marshal) for selector algorithm TPM_ALG_NULL for the union TPMU_SIG_SCHEME </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_SIG_SCHEME")]
-public partial class NullSigScheme: NullUnion
+public partial class NullSigScheme : NullUnion
 {
-    public NullSigScheme() {}
+    public NullSigScheme() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -7563,11 +7566,12 @@ public partial class NullSigScheme: NullUnion
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("TPMT_SIG_SCHEME")]
-public partial class SigScheme: TpmStructureBase
+public partial class SigScheme : TpmStructureBase
 {
     /// <summary> Scheme selector </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -7578,7 +7582,7 @@ public partial class SigScheme: TpmStructureBase
     [DataMember]
     public ISigSchemeUnion details { get; set; }
 
-    public SigScheme() {}
+    public SigScheme() { }
 
     public SigScheme(SigScheme src) { details = src.details; }
 
@@ -7596,14 +7600,14 @@ public partial class SigScheme: TpmStructureBase
 /// controlling parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_ENC_SCHEME_OAEP")]
-public partial class EncSchemeOaep: SchemeHash
+public partial class EncSchemeOaep : SchemeHash
 {
-    public EncSchemeOaep() {}
+    public EncSchemeOaep() { }
 
-    public EncSchemeOaep(EncSchemeOaep _EncSchemeOaep) : base(_EncSchemeOaep) {}
+    public EncSchemeOaep(EncSchemeOaep _EncSchemeOaep) : base(_EncSchemeOaep) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public EncSchemeOaep(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public EncSchemeOaep(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Oaep; }
 
@@ -7616,9 +7620,9 @@ public partial class EncSchemeOaep: SchemeHash
 /// controlling parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_ENC_SCHEME_RSAES")]
-public partial class EncSchemeRsaes: Empty
+public partial class EncSchemeRsaes : Empty
 {
-    public EncSchemeRsaes() {}
+    public EncSchemeRsaes() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Rsaes; }
 
@@ -7631,14 +7635,14 @@ public partial class EncSchemeRsaes: Empty
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_KEY_SCHEME_ECDH")]
-public partial class KeySchemeEcdh: SchemeHash
+public partial class KeySchemeEcdh : SchemeHash
 {
-    public KeySchemeEcdh() {}
+    public KeySchemeEcdh() { }
 
-    public KeySchemeEcdh(KeySchemeEcdh _KeySchemeEcdh) : base(_KeySchemeEcdh) {}
+    public KeySchemeEcdh(KeySchemeEcdh _KeySchemeEcdh) : base(_KeySchemeEcdh) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public KeySchemeEcdh(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public KeySchemeEcdh(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecdh; }
 
@@ -7651,14 +7655,14 @@ public partial class KeySchemeEcdh: SchemeHash
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_KEY_SCHEME_ECMQV")]
-public partial class KeySchemeEcmqv: SchemeHash
+public partial class KeySchemeEcmqv : SchemeHash
 {
-    public KeySchemeEcmqv() {}
+    public KeySchemeEcmqv() { }
 
-    public KeySchemeEcmqv(KeySchemeEcmqv _KeySchemeEcmqv) : base(_KeySchemeEcmqv) {}
+    public KeySchemeEcmqv(KeySchemeEcmqv _KeySchemeEcmqv) : base(_KeySchemeEcmqv) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public KeySchemeEcmqv(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public KeySchemeEcmqv(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecmqv; }
 
@@ -7672,14 +7676,14 @@ public partial class KeySchemeEcmqv: SchemeHash
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_KDF_SCHEME_MGF1")]
-public partial class KdfSchemeMgf1: SchemeHash
+public partial class KdfSchemeMgf1 : SchemeHash
 {
-    public KdfSchemeMgf1() {}
+    public KdfSchemeMgf1() { }
 
-    public KdfSchemeMgf1(KdfSchemeMgf1 _KdfSchemeMgf1) : base(_KdfSchemeMgf1) {}
+    public KdfSchemeMgf1(KdfSchemeMgf1 _KdfSchemeMgf1) : base(_KdfSchemeMgf1) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public KdfSchemeMgf1(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public KdfSchemeMgf1(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Mgf1; }
 
@@ -7693,14 +7697,14 @@ public partial class KdfSchemeMgf1: SchemeHash
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_KDF_SCHEME_KDF1_SP800_56A")]
-public partial class KdfSchemeKdf1Sp80056a: SchemeHash
+public partial class KdfSchemeKdf1Sp80056a : SchemeHash
 {
-    public KdfSchemeKdf1Sp80056a() {}
+    public KdfSchemeKdf1Sp80056a() { }
 
-    public KdfSchemeKdf1Sp80056a(KdfSchemeKdf1Sp80056a _KdfSchemeKdf1Sp80056a) : base(_KdfSchemeKdf1Sp80056a) {}
+    public KdfSchemeKdf1Sp80056a(KdfSchemeKdf1Sp80056a _KdfSchemeKdf1Sp80056a) : base(_KdfSchemeKdf1Sp80056a) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public KdfSchemeKdf1Sp80056a(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public KdfSchemeKdf1Sp80056a(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Kdf1Sp80056a; }
 
@@ -7714,14 +7718,14 @@ public partial class KdfSchemeKdf1Sp80056a: SchemeHash
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_KDF_SCHEME_KDF2")]
-public partial class KdfSchemeKdf2: SchemeHash
+public partial class KdfSchemeKdf2 : SchemeHash
 {
-    public KdfSchemeKdf2() {}
+    public KdfSchemeKdf2() { }
 
-    public KdfSchemeKdf2(KdfSchemeKdf2 _KdfSchemeKdf2) : base(_KdfSchemeKdf2) {}
+    public KdfSchemeKdf2(KdfSchemeKdf2 _KdfSchemeKdf2) : base(_KdfSchemeKdf2) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public KdfSchemeKdf2(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public KdfSchemeKdf2(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Kdf2; }
 
@@ -7735,14 +7739,14 @@ public partial class KdfSchemeKdf2: SchemeHash
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_KDF_SCHEME_KDF1_SP800_108")]
-public partial class KdfSchemeKdf1Sp800108: SchemeHash
+public partial class KdfSchemeKdf1Sp800108 : SchemeHash
 {
-    public KdfSchemeKdf1Sp800108() {}
+    public KdfSchemeKdf1Sp800108() { }
 
-    public KdfSchemeKdf1Sp800108(KdfSchemeKdf1Sp800108 _KdfSchemeKdf1Sp800108) : base(_KdfSchemeKdf1Sp800108) {}
+    public KdfSchemeKdf1Sp800108(KdfSchemeKdf1Sp800108 _KdfSchemeKdf1Sp800108) : base(_KdfSchemeKdf1Sp800108) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public KdfSchemeKdf1Sp800108(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public KdfSchemeKdf1Sp800108(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Kdf1Sp800108; }
 
@@ -7755,9 +7759,9 @@ public partial class KdfSchemeKdf1Sp800108: SchemeHash
 /// no data to marshal) for selector algorithm TPM_ALG_NULL for the union TPMU_KDF_SCHEME </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_KDF_SCHEME")]
-public partial class NullKdfScheme: NullUnion
+public partial class NullKdfScheme : NullUnion
 {
-    public NullKdfScheme() {}
+    public NullKdfScheme() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -7776,11 +7780,12 @@ public partial class NullKdfScheme: NullUnion
 [KnownType(typeof(NullKdfScheme))]
 [KnownType(typeof(SchemeHash))]
 [SpecTypeName("TPMT_KDF_SCHEME")]
-public partial class KdfScheme: TpmStructureBase
+public partial class KdfScheme : TpmStructureBase
 {
     /// <summary> Scheme selector </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -7791,7 +7796,7 @@ public partial class KdfScheme: TpmStructureBase
     [DataMember]
     public IKdfSchemeUnion details { get; set; }
 
-    public KdfScheme() {}
+    public KdfScheme() { }
 
     public KdfScheme(KdfScheme src) { details = src.details; }
 
@@ -7810,9 +7815,9 @@ public partial class KdfScheme: TpmStructureBase
 /// </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_ASYM_SCHEME")]
-public partial class NullAsymScheme: NullUnion
+public partial class NullAsymScheme : NullUnion
 {
-    public NullAsymScheme() {}
+    public NullAsymScheme() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -7839,11 +7844,12 @@ public partial class NullAsymScheme: NullUnion
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("TPMT_ASYM_SCHEME")]
-public partial class AsymScheme: TpmStructureBase
+public partial class AsymScheme : TpmStructureBase
 {
     /// <summary> Scheme selector </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -7855,7 +7861,7 @@ public partial class AsymScheme: TpmStructureBase
     [DataMember]
     public IAsymSchemeUnion details { get; set; }
 
-    public AsymScheme() {}
+    public AsymScheme() { }
 
     public AsymScheme(AsymScheme src) { details = src.details; }
 
@@ -7886,11 +7892,12 @@ public partial class AsymScheme: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("TPMT_RSA_SCHEME")]
-public partial class RsaScheme: TpmStructureBase
+public partial class RsaScheme : TpmStructureBase
 {
     /// <summary> Scheme selector </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -7902,7 +7909,7 @@ public partial class RsaScheme: TpmStructureBase
     [DataMember]
     public IAsymSchemeUnion details { get; set; }
 
-    public RsaScheme() {}
+    public RsaScheme() { }
 
     public RsaScheme(RsaScheme src) { details = src.details; }
 
@@ -7933,11 +7940,12 @@ public partial class RsaScheme: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("TPMT_RSA_DECRYPT")]
-public partial class RsaDecrypt: TpmStructureBase
+public partial class RsaDecrypt : TpmStructureBase
 {
     /// <summary> Scheme selector </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -7949,7 +7957,7 @@ public partial class RsaDecrypt: TpmStructureBase
     [DataMember]
     public IAsymSchemeUnion details { get; set; }
 
-    public RsaDecrypt() {}
+    public RsaDecrypt() { }
 
     public RsaDecrypt(RsaDecrypt src) { details = src.details; }
 
@@ -7967,7 +7975,7 @@ public partial class RsaDecrypt: TpmStructureBase
 /// <summary> This sized buffer holds the largest RSA public key supported by the TPM. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_PUBLIC_KEY_RSA")]
-public partial class Tpm2bPublicKeyRsa: TpmStructureBase, IPublicIdUnion
+public partial class Tpm2bPublicKeyRsa : TpmStructureBase, IPublicIdUnion
 {
     /// <summary> Value </summary>
     [Range(MaxVal = 256u /*MAX_RSA_KEY_BYTES*/)]
@@ -7975,7 +7983,7 @@ public partial class Tpm2bPublicKeyRsa: TpmStructureBase, IPublicIdUnion
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bPublicKeyRsa() {}
+    public Tpm2bPublicKeyRsa() { }
 
     public Tpm2bPublicKeyRsa(Tpm2bPublicKeyRsa src) { buffer = src.buffer; }
 
@@ -7992,14 +8000,14 @@ public partial class Tpm2bPublicKeyRsa: TpmStructureBase, IPublicIdUnion
 /// <summary> This sized buffer holds the largest RSA prime number supported by the TPM. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_PRIVATE_KEY_RSA")]
-public partial class Tpm2bPrivateKeyRsa: TpmStructureBase, ISensitiveCompositeUnion
+public partial class Tpm2bPrivateKeyRsa : TpmStructureBase, ISensitiveCompositeUnion
 {
     [Range(MaxVal = 640u /*RSA_PRIVATE_SIZE*/)]
     [MarshalAs(0, MarshalType.VariableLengthArray, "size", 2)]
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bPrivateKeyRsa() {}
+    public Tpm2bPrivateKeyRsa() { }
 
     public Tpm2bPrivateKeyRsa(Tpm2bPrivateKeyRsa src) { buffer = src.buffer; }
 
@@ -8017,7 +8025,7 @@ public partial class Tpm2bPrivateKeyRsa: TpmStructureBase, ISensitiveCompositeUn
 /// the TPM. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_ECC_PARAMETER")]
-public partial class Tpm2bEccParameter: TpmStructureBase, ISensitiveCompositeUnion
+public partial class Tpm2bEccParameter : TpmStructureBase, ISensitiveCompositeUnion
 {
     /// <summary> The parameter data </summary>
     [Range(MaxVal = 48u /*MAX_ECC_KEY_BYTES*/)]
@@ -8025,7 +8033,7 @@ public partial class Tpm2bEccParameter: TpmStructureBase, ISensitiveCompositeUni
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bEccParameter() {}
+    public Tpm2bEccParameter() { }
 
     public Tpm2bEccParameter(Tpm2bEccParameter src) { buffer = src.buffer; }
 
@@ -8043,7 +8051,7 @@ public partial class Tpm2bEccParameter: TpmStructureBase, ISensitiveCompositeUni
 /// point. </summary>
 [DataContract]
 [SpecTypeName("TPMS_ECC_POINT")]
-public partial class EccPoint: TpmStructureBase, IPublicIdUnion
+public partial class EccPoint : TpmStructureBase, IPublicIdUnion
 {
     /// <summary> X coordinate </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "xSize", 2)]
@@ -8055,7 +8063,7 @@ public partial class EccPoint: TpmStructureBase, IPublicIdUnion
     [DataMember]
     public byte[] y;
 
-    public EccPoint() {}
+    public EccPoint() { }
 
     public EccPoint(EccPoint src)
     {
@@ -8083,14 +8091,14 @@ public partial class EccPoint: TpmStructureBase, IPublicIdUnion
 [DataContract]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("TPM2B_ECC_POINT")]
-public partial class Tpm2bEccPoint: TpmStructureBase
+public partial class Tpm2bEccPoint : TpmStructureBase
 {
     /// <summary> Coordinates </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "size", 2)]
     [DataMember]
     public EccPoint point { get; set; }
 
-    public Tpm2bEccPoint() {}
+    public Tpm2bEccPoint() { }
 
     public Tpm2bEccPoint(Tpm2bEccPoint src) { point = src.point; }
 
@@ -8118,11 +8126,12 @@ public partial class Tpm2bEccPoint: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("TPMT_ECC_SCHEME")]
-public partial class EccScheme: TpmStructureBase
+public partial class EccScheme : TpmStructureBase
 {
     /// <summary> Scheme selector </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId scheme {
+    public TpmAlgId scheme
+    {
         get { return details?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8134,7 +8143,7 @@ public partial class EccScheme: TpmStructureBase
     [DataMember]
     public IAsymSchemeUnion details { get; set; }
 
-    public EccScheme() {}
+    public EccScheme() { }
 
     public EccScheme(EccScheme src) { details = src.details; }
 
@@ -8172,7 +8181,7 @@ public partial class EccScheme: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("TPMS_ALGORITHM_DETAIL_ECC")]
-public partial class AlgorithmDetailEcc: TpmStructureBase
+public partial class AlgorithmDetailEcc : TpmStructureBase
 {
     /// <summary> Identifier for the curve </summary>
     [MarshalAs(0)]
@@ -8186,7 +8195,8 @@ public partial class AlgorithmDetailEcc: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId kdfScheme {
+    public TpmAlgId kdfScheme
+    {
         get { return kdf?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8200,7 +8210,8 @@ public partial class AlgorithmDetailEcc: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(4, MarshalType.UnionSelector)]
-    public TpmAlgId signScheme {
+    public TpmAlgId signScheme
+    {
         get { return sign?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8248,7 +8259,7 @@ public partial class AlgorithmDetailEcc: TpmStructureBase
     [DataMember]
     public byte[] h;
 
-    public AlgorithmDetailEcc() {}
+    public AlgorithmDetailEcc() { }
 
     public AlgorithmDetailEcc(AlgorithmDetailEcc src)
     {
@@ -8307,7 +8318,7 @@ public partial class AlgorithmDetailEcc: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_SIGNATURE_RSA")]
-public partial class SignatureRsa: TpmStructureBase, ISignatureUnion
+public partial class SignatureRsa : TpmStructureBase, ISignatureUnion
 {
     /// <summary> The hash algorithm used to digest the message
     /// TPM_ALG_NULL is not allowed. </summary>
@@ -8347,18 +8358,18 @@ public partial class SignatureRsa: TpmStructureBase, ISignatureUnion
 /// <summary> Table 185 Definition of {RSA} TPMS_SIGNATURE_RSA Structure </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIGNATURE_RSASSA")]
-public partial class SignatureRsassa: SignatureRsa
+public partial class SignatureRsassa : SignatureRsa
 {
-    public SignatureRsassa() {}
+    public SignatureRsassa() { }
 
-    public SignatureRsassa(SignatureRsassa _SignatureRsassa) : base(_SignatureRsassa) {}
+    public SignatureRsassa(SignatureRsassa _SignatureRsassa) : base(_SignatureRsassa) { }
 
     /// <param name = "_hash"> The hash algorithm used to digest the message
     ///        TPM_ALG_NULL is not allowed. </param>
     /// <param name = "_sig"> The signature is the size of a public key. </param>
     public SignatureRsassa(TpmAlgId _hash, byte[] _sig)
         : base(_hash, _sig)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Rsassa; }
 
@@ -8370,18 +8381,18 @@ public partial class SignatureRsassa: SignatureRsa
 /// <summary> Table 185 Definition of {RSA} TPMS_SIGNATURE_RSA Structure </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIGNATURE_RSAPSS")]
-public partial class SignatureRsapss: SignatureRsa
+public partial class SignatureRsapss : SignatureRsa
 {
-    public SignatureRsapss() {}
+    public SignatureRsapss() { }
 
-    public SignatureRsapss(SignatureRsapss _SignatureRsapss) : base(_SignatureRsapss) {}
+    public SignatureRsapss(SignatureRsapss _SignatureRsapss) : base(_SignatureRsapss) { }
 
     /// <param name = "_hash"> The hash algorithm used to digest the message
     ///        TPM_ALG_NULL is not allowed. </param>
     /// <param name = "_sig"> The signature is the size of a public key. </param>
     public SignatureRsapss(TpmAlgId _hash, byte[] _sig)
         : base(_hash, _sig)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Rsapss; }
 
@@ -8394,7 +8405,7 @@ public partial class SignatureRsapss: SignatureRsa
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("TPMS_SIGNATURE_ECC")]
-public partial class SignatureEcc: TpmStructureBase, ISignatureUnion
+public partial class SignatureEcc : TpmStructureBase, ISignatureUnion
 {
     /// <summary> The hash algorithm used in the signature process
     /// TPM_ALG_NULL is not allowed. </summary>
@@ -8440,11 +8451,11 @@ public partial class SignatureEcc: TpmStructureBase, ISignatureUnion
 /// <summary> Table 187 Definition of {ECC} TPMS_SIGNATURE_ECC Structure </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIGNATURE_ECDSA")]
-public partial class SignatureEcdsa: SignatureEcc
+public partial class SignatureEcdsa : SignatureEcc
 {
-    public SignatureEcdsa() {}
+    public SignatureEcdsa() { }
 
-    public SignatureEcdsa(SignatureEcdsa _SignatureEcdsa) : base(_SignatureEcdsa) {}
+    public SignatureEcdsa(SignatureEcdsa _SignatureEcdsa) : base(_SignatureEcdsa) { }
 
     /// <param name = "_hash"> The hash algorithm used in the signature process
     ///        TPM_ALG_NULL is not allowed. </param>
@@ -8452,7 +8463,7 @@ public partial class SignatureEcdsa: SignatureEcc
     /// <param name = "_signatureS"> TBD </param>
     public SignatureEcdsa(TpmAlgId _hash, byte[] _signatureR, byte[] _signatureS)
         : base(_hash, _signatureR, _signatureS)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecdsa; }
 
@@ -8464,11 +8475,11 @@ public partial class SignatureEcdsa: SignatureEcc
 /// <summary> Table 187 Definition of {ECC} TPMS_SIGNATURE_ECC Structure </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIGNATURE_ECDAA")]
-public partial class SignatureEcdaa: SignatureEcc
+public partial class SignatureEcdaa : SignatureEcc
 {
-    public SignatureEcdaa() {}
+    public SignatureEcdaa() { }
 
-    public SignatureEcdaa(SignatureEcdaa _SignatureEcdaa) : base(_SignatureEcdaa) {}
+    public SignatureEcdaa(SignatureEcdaa _SignatureEcdaa) : base(_SignatureEcdaa) { }
 
     /// <param name = "_hash"> The hash algorithm used in the signature process
     ///        TPM_ALG_NULL is not allowed. </param>
@@ -8476,7 +8487,7 @@ public partial class SignatureEcdaa: SignatureEcc
     /// <param name = "_signatureS"> TBD </param>
     public SignatureEcdaa(TpmAlgId _hash, byte[] _signatureR, byte[] _signatureS)
         : base(_hash, _signatureR, _signatureS)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecdaa; }
 
@@ -8488,11 +8499,11 @@ public partial class SignatureEcdaa: SignatureEcc
 /// <summary> Table 187 Definition of {ECC} TPMS_SIGNATURE_ECC Structure </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIGNATURE_SM2")]
-public partial class SignatureSm2: SignatureEcc
+public partial class SignatureSm2 : SignatureEcc
 {
-    public SignatureSm2() {}
+    public SignatureSm2() { }
 
-    public SignatureSm2(SignatureSm2 _SignatureSm2) : base(_SignatureSm2) {}
+    public SignatureSm2(SignatureSm2 _SignatureSm2) : base(_SignatureSm2) { }
 
     /// <param name = "_hash"> The hash algorithm used in the signature process
     ///        TPM_ALG_NULL is not allowed. </param>
@@ -8500,7 +8511,7 @@ public partial class SignatureSm2: SignatureEcc
     /// <param name = "_signatureS"> TBD </param>
     public SignatureSm2(TpmAlgId _hash, byte[] _signatureR, byte[] _signatureS)
         : base(_hash, _signatureR, _signatureS)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Sm2; }
 
@@ -8512,11 +8523,11 @@ public partial class SignatureSm2: SignatureEcc
 /// <summary> Table 187 Definition of {ECC} TPMS_SIGNATURE_ECC Structure </summary>
 [DataContract]
 [SpecTypeName("TPMS_SIGNATURE_ECSCHNORR")]
-public partial class SignatureEcschnorr: SignatureEcc
+public partial class SignatureEcschnorr : SignatureEcc
 {
-    public SignatureEcschnorr() {}
+    public SignatureEcschnorr() { }
 
-    public SignatureEcschnorr(SignatureEcschnorr _SignatureEcschnorr) : base(_SignatureEcschnorr) {}
+    public SignatureEcschnorr(SignatureEcschnorr _SignatureEcschnorr) : base(_SignatureEcschnorr) { }
 
     /// <param name = "_hash"> The hash algorithm used in the signature process
     ///        TPM_ALG_NULL is not allowed. </param>
@@ -8524,7 +8535,7 @@ public partial class SignatureEcschnorr: SignatureEcc
     /// <param name = "_signatureS"> TBD </param>
     public SignatureEcschnorr(TpmAlgId _hash, byte[] _signatureR, byte[] _signatureS)
         : base(_hash, _signatureR, _signatureS)
-    {}
+    { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Ecschnorr; }
 
@@ -8537,9 +8548,9 @@ public partial class SignatureEcschnorr: SignatureEcc
 /// no data to marshal) for selector algorithm TPM_ALG_NULL for the union TPMU_SIGNATURE </summary>
 [DataContract]
 [SpecTypeName("TPMS_NULL_SIGNATURE")]
-public partial class NullSignature: NullUnion
+public partial class NullSignature : NullUnion
 {
-    public NullSignature() {}
+    public NullSignature() { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Null; }
 
@@ -8565,11 +8576,12 @@ public partial class NullSignature: NullUnion
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("TPMT_SIGNATURE")]
-public partial class Signature: TpmStructureBase
+public partial class Signature : TpmStructureBase
 {
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId sigAlg {
+    public TpmAlgId sigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8580,7 +8592,7 @@ public partial class Signature: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Signature() {}
+    public Signature() { }
 
     public Signature(Signature src) { signature = src.signature; }
 
@@ -8597,7 +8609,7 @@ public partial class Signature: TpmStructureBase
 /// <summary> Table 192 Definition of TPM2B_ENCRYPTED_SECRET Structure </summary>
 [DataContract]
 [SpecTypeName("TPM2B_ENCRYPTED_SECRET")]
-public partial class Tpm2bEncryptedSecret: TpmStructureBase
+public partial class Tpm2bEncryptedSecret : TpmStructureBase
 {
     /// <summary> Secret </summary>
     [Range(MaxVal = 0u /*sizeof(TPMU_ENCRYPTED_SECRET)*/)]
@@ -8605,7 +8617,7 @@ public partial class Tpm2bEncryptedSecret: TpmStructureBase
     [DataMember]
     public byte[] secret;
 
-    public Tpm2bEncryptedSecret() {}
+    public Tpm2bEncryptedSecret() { }
 
     public Tpm2bEncryptedSecret(Tpm2bEncryptedSecret src) { secret = src.secret; }
 
@@ -8625,11 +8637,12 @@ public partial class Tpm2bEncryptedSecret: TpmStructureBase
 [KnownType(typeof(SchemeHmac))]
 [KnownType(typeof(SchemeXor))]
 [SpecTypeName("TPMS_KEYEDHASH_PARMS")]
-public partial class KeyedhashParms: TpmStructureBase, IPublicParmsUnion
+public partial class KeyedhashParms : TpmStructureBase, IPublicParmsUnion
 {
     /// <summary> Selects the scheme </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId schemeScheme {
+    public TpmAlgId schemeScheme
+    {
         get { return scheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8641,7 +8654,7 @@ public partial class KeyedhashParms: TpmStructureBase, IPublicParmsUnion
     [DataMember]
     public ISchemeKeyedhashUnion scheme { get; set; }
 
-    public KeyedhashParms() {}
+    public KeyedhashParms() { }
 
     public KeyedhashParms(KeyedhashParms src) { scheme = src.scheme; }
 
@@ -8677,7 +8690,7 @@ public partial class KeyedhashParms: TpmStructureBase, IPublicParmsUnion
 [KnownType(typeof(SigSchemeSm2))]
 [KnownType(typeof(SymDefObject))]
 [SpecTypeName("TPMS_ASYM_PARMS")]
-public partial class AsymParms: TpmStructureBase, IPublicParmsUnion
+public partial class AsymParms : TpmStructureBase, IPublicParmsUnion
 {
     /// <summary> The companion symmetric algorithm for a restricted decryption key and shall
     /// be set to a supported symmetric algorithm
@@ -8689,7 +8702,8 @@ public partial class AsymParms: TpmStructureBase, IPublicParmsUnion
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId schemeScheme {
+    public TpmAlgId schemeScheme
+    {
         get { return scheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8703,7 +8717,7 @@ public partial class AsymParms: TpmStructureBase, IPublicParmsUnion
     [DataMember]
     public IAsymSchemeUnion scheme { get; set; }
 
-    public AsymParms() {}
+    public AsymParms() { }
 
     public AsymParms(AsymParms src)
     {
@@ -8756,7 +8770,7 @@ public partial class AsymParms: TpmStructureBase, IPublicParmsUnion
 [KnownType(typeof(SigSchemeSm2))]
 [KnownType(typeof(SymDefObject))]
 [SpecTypeName("TPMS_RSA_PARMS")]
-public partial class RsaParms: TpmStructureBase, IPublicParmsUnion
+public partial class RsaParms : TpmStructureBase, IPublicParmsUnion
 {
     /// <summary> For a restricted decryption key, shall be set to a supported symmetric
     /// algorithm, key size, and mode.
@@ -8768,7 +8782,8 @@ public partial class RsaParms: TpmStructureBase, IPublicParmsUnion
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId schemeScheme {
+    public TpmAlgId schemeScheme
+    {
         get { return scheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8798,7 +8813,7 @@ public partial class RsaParms: TpmStructureBase, IPublicParmsUnion
     [DataMember]
     public uint exponent { get; set; }
 
-    public RsaParms() {}
+    public RsaParms() { }
 
     public RsaParms(RsaParms src)
     {
@@ -8864,7 +8879,7 @@ public partial class RsaParms: TpmStructureBase, IPublicParmsUnion
 [KnownType(typeof(SigSchemeSm2))]
 [KnownType(typeof(SymDefObject))]
 [SpecTypeName("TPMS_ECC_PARMS")]
-public partial class EccParms: TpmStructureBase, IPublicParmsUnion
+public partial class EccParms : TpmStructureBase, IPublicParmsUnion
 {
     /// <summary> For a restricted decryption key, shall be set to a supported symmetric
     /// algorithm, key size. and mode.
@@ -8876,7 +8891,8 @@ public partial class EccParms: TpmStructureBase, IPublicParmsUnion
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId schemeScheme {
+    public TpmAlgId schemeScheme
+    {
         get { return scheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8900,7 +8916,8 @@ public partial class EccParms: TpmStructureBase, IPublicParmsUnion
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(4, MarshalType.UnionSelector)]
-    public TpmAlgId kdfScheme {
+    public TpmAlgId kdfScheme
+    {
         get { return kdf?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -8915,7 +8932,7 @@ public partial class EccParms: TpmStructureBase, IPublicParmsUnion
     [DataMember]
     public IKdfSchemeUnion kdf { get; set; }
 
-    public EccParms() {}
+    public EccParms() { }
 
     public EccParms(EccParms src)
     {
@@ -8973,11 +8990,12 @@ public partial class EccParms: TpmStructureBase, IPublicParmsUnion
 [KnownType(typeof(RsaParms))]
 [KnownType(typeof(SymcipherParms))]
 [SpecTypeName("TPMT_PUBLIC_PARMS")]
-public partial class PublicParms: TpmStructureBase
+public partial class PublicParms : TpmStructureBase
 {
     /// <summary> The algorithm to be tested </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId type {
+    public TpmAlgId type
+    {
         get { return parameters.GetUnionSelector(); }
     }
 
@@ -8987,7 +9005,7 @@ public partial class PublicParms: TpmStructureBase
     [DataMember]
     public IPublicParmsUnion parameters { get; set; }
 
-    public PublicParms() {}
+    public PublicParms() { }
 
     public PublicParms(PublicParms src) { parameters = src.parameters; }
 
@@ -9016,11 +9034,12 @@ public partial class PublicParms: TpmStructureBase
 [KnownType(typeof(RsaParms))]
 [KnownType(typeof(SymcipherParms))]
 [SpecTypeName("TPMT_PUBLIC")]
-public partial class TpmPublic: TpmStructureBase
+public partial class TpmPublic : TpmStructureBase
 {
     /// <summary> Algorithm associated with this object </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId type {
+    public TpmAlgId type
+    {
         get { return parameters.GetUnionSelector(); }
     }
 
@@ -9102,7 +9121,7 @@ public partial class TpmPublic: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("TPM2B_PUBLIC")]
-public partial class Tpm2bPublic: TpmStructureBase
+public partial class Tpm2bPublic : TpmStructureBase
 {
     /// <summary> The public area
     /// NOTE The + indicates that the caller may specify that use of TPM_ALG_NULL is allowed
@@ -9111,7 +9130,7 @@ public partial class Tpm2bPublic: TpmStructureBase
     [DataMember]
     public TpmPublic publicArea { get; set; }
 
-    public Tpm2bPublic() {}
+    public Tpm2bPublic() { }
 
     public Tpm2bPublic(Tpm2bPublic src) { publicArea = src.publicArea; }
 
@@ -9128,7 +9147,7 @@ public partial class Tpm2bPublic: TpmStructureBase
 /// <summary> This sized buffer is used to embed a TPMT_TEMPLATE for TPM2_CreateLoaded(). </summary>
 [DataContract]
 [SpecTypeName("TPM2B_TEMPLATE")]
-public partial class Tpm2bTemplate: TpmStructureBase
+public partial class Tpm2bTemplate : TpmStructureBase
 {
     /// <summary> The public area </summary>
     [Range(MaxVal = 30u /*sizeof(TPMT_PUBLIC)*/)]
@@ -9136,7 +9155,7 @@ public partial class Tpm2bTemplate: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bTemplate() {}
+    public Tpm2bTemplate() { }
 
     public Tpm2bTemplate(Tpm2bTemplate src) { buffer = src.buffer; }
 
@@ -9156,14 +9175,14 @@ public partial class Tpm2bTemplate: TpmStructureBase
 /// of such vendor-specific calculations. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_PRIVATE_VENDOR_SPECIFIC")]
-public partial class Tpm2bPrivateVendorSpecific: TpmStructureBase, ISensitiveCompositeUnion
+public partial class Tpm2bPrivateVendorSpecific : TpmStructureBase, ISensitiveCompositeUnion
 {
     [Range(MaxVal = 640u /*PRIVATE_VENDOR_SPECIFIC_BYTES*/)]
     [MarshalAs(0, MarshalType.VariableLengthArray, "size", 2)]
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bPrivateVendorSpecific() {}
+    public Tpm2bPrivateVendorSpecific() { }
 
     public Tpm2bPrivateVendorSpecific(Tpm2bPrivateVendorSpecific src) { buffer = src.buffer; }
 
@@ -9188,12 +9207,13 @@ public partial class Tpm2bPrivateVendorSpecific: TpmStructureBase, ISensitiveCom
 [KnownType(typeof(Tpm2bSensitiveData))]
 [KnownType(typeof(Tpm2bSymKey))]
 [SpecTypeName("TPMT_SENSITIVE")]
-public partial class Sensitive: TpmStructureBase
+public partial class Sensitive : TpmStructureBase
 {
     /// <summary> Identifier for the sensitive area
     /// This shall be the same as the type parameter of the associated public area. </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId sensitiveType {
+    public TpmAlgId sensitiveType
+    {
         get { return sensitive.GetUnionSelector(); }
     }
 
@@ -9216,7 +9236,7 @@ public partial class Sensitive: TpmStructureBase
     [DataMember]
     public ISensitiveCompositeUnion sensitive { get; set; }
 
-    public Sensitive() {}
+    public Sensitive() { }
 
     public Sensitive(Sensitive src)
     {
@@ -9250,14 +9270,14 @@ public partial class Sensitive: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Sensitive))]
 [SpecTypeName("TPM2B_SENSITIVE")]
-public partial class Tpm2bSensitive: TpmStructureBase
+public partial class Tpm2bSensitive : TpmStructureBase
 {
     /// <summary> An unencrypted sensitive area </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "size", 2)]
     [DataMember]
     public Sensitive sensitiveArea { get; set; }
 
-    public Tpm2bSensitive() {}
+    public Tpm2bSensitive() { }
 
     public Tpm2bSensitive(Tpm2bSensitive src) { sensitiveArea = src.sensitiveArea; }
 
@@ -9274,7 +9294,7 @@ public partial class Tpm2bSensitive: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Sensitive))]
 [SpecTypeName("_PRIVATE")]
-public partial class _Private: TpmStructureBase
+public partial class _Private : TpmStructureBase
 {
     [MarshalAs(0, MarshalType.VariableLengthArray, "integrityOuterSize", 2)]
     [DataMember]
@@ -9290,7 +9310,7 @@ public partial class _Private: TpmStructureBase
     [DataMember]
     public Sensitive sensitive { get; set; }
 
-    public _Private() {}
+    public _Private() { }
 
     public _Private(_Private src)
     {
@@ -9318,7 +9338,7 @@ public partial class _Private: TpmStructureBase
 /// create, load, and modify the sensitive area of an object. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_PRIVATE")]
-public partial class TpmPrivate: TpmStructureBase
+public partial class TpmPrivate : TpmStructureBase
 {
     /// <summary> An encrypted private area </summary>
     [Range(MaxVal = 1024u /*sizeof(_PRIVATE)*/)]
@@ -9326,7 +9346,7 @@ public partial class TpmPrivate: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public TpmPrivate() {}
+    public TpmPrivate() { }
 
     public TpmPrivate(TpmPrivate src) { buffer = src.buffer; }
 
@@ -9341,7 +9361,7 @@ public partial class TpmPrivate: TpmStructureBase
 /// <summary> This structure is used for sizing the TPM2B_ID_OBJECT. </summary>
 [DataContract]
 [SpecTypeName("TPMS_ID_OBJECT")]
-public partial class IdObject: TpmStructureBase
+public partial class IdObject : TpmStructureBase
 {
     /// <summary> HMAC using the nameAlg of the storage key on the target TPM </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "integrityHMACSize", 2)]
@@ -9357,7 +9377,7 @@ public partial class IdObject: TpmStructureBase
     [DataMember]
     public byte[] encIdentity;
 
-    public IdObject() {}
+    public IdObject() { }
 
     public IdObject(IdObject src)
     {
@@ -9389,7 +9409,7 @@ public partial class IdObject: TpmStructureBase
 [DataContract]
 [KnownType(typeof(IdObject))]
 [SpecTypeName("TPM2B_ID_OBJECT")]
-public partial class Tpm2bIdObject: TpmStructureBase
+public partial class Tpm2bIdObject : TpmStructureBase
 {
     /// <summary> An encrypted credential area </summary>
     [Range(MaxVal = 2u /*sizeof(TPMS_ID_OBJECT)*/)]
@@ -9397,7 +9417,7 @@ public partial class Tpm2bIdObject: TpmStructureBase
     [DataMember]
     public IdObject credential { get; set; }
 
-    public Tpm2bIdObject() {}
+    public Tpm2bIdObject() { }
 
     public Tpm2bIdObject(Tpm2bIdObject src) { credential = src.credential; }
 
@@ -9414,7 +9434,7 @@ public partial class Tpm2bIdObject: TpmStructureBase
 /// is the least significant octets. </summary>
 [DataContract]
 [SpecTypeName("TPMS_NV_PIN_COUNTER_PARAMETERS")]
-public partial class NvPinCounterParameters: TpmStructureBase
+public partial class NvPinCounterParameters : TpmStructureBase
 {
     /// <summary> This counter shows the current number of successful authValue authorization
     /// attempts to access a TPM_NT_PIN_PASS index or the current number of unsuccessful
@@ -9429,7 +9449,7 @@ public partial class NvPinCounterParameters: TpmStructureBase
     [DataMember]
     public uint pinLimit { get; set; }
 
-    public NvPinCounterParameters() {}
+    public NvPinCounterParameters() { }
 
     public NvPinCounterParameters(NvPinCounterParameters src)
     {
@@ -9459,7 +9479,7 @@ public partial class NvPinCounterParameters: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(NvAttr))]
 [SpecTypeName("TPMS_NV_PUBLIC")]
-public partial class NvPublic: TpmStructureBase
+public partial class NvPublic : TpmStructureBase
 {
     /// <summary> The handle of the data area </summary>
     [MarshalAs(0)]
@@ -9535,14 +9555,14 @@ public partial class NvPublic: TpmStructureBase
 [DataContract]
 [KnownType(typeof(NvPublic))]
 [SpecTypeName("TPM2B_NV_PUBLIC")]
-public partial class Tpm2bNvPublic: TpmStructureBase
+public partial class Tpm2bNvPublic : TpmStructureBase
 {
     /// <summary> The public area </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "size", 2)]
     [DataMember]
     public NvPublic nvPublic { get; set; }
 
-    public Tpm2bNvPublic() {}
+    public Tpm2bNvPublic() { }
 
     public Tpm2bNvPublic(Tpm2bNvPublic src) { nvPublic = src.nvPublic; }
 
@@ -9558,7 +9578,7 @@ public partial class Tpm2bNvPublic: TpmStructureBase
 /// full structure is encrypted. </summary>
 [DataContract]
 [SpecTypeName("TPM2B_CONTEXT_SENSITIVE")]
-public partial class Tpm2bContextSensitive: TpmStructureBase
+public partial class Tpm2bContextSensitive : TpmStructureBase
 {
     /// <summary> The sensitive data </summary>
     [Range(MaxVal = 1264u /*MAX_CONTEXT_SIZE*/)]
@@ -9566,7 +9586,7 @@ public partial class Tpm2bContextSensitive: TpmStructureBase
     [DataMember]
     public byte[] buffer;
 
-    public Tpm2bContextSensitive() {}
+    public Tpm2bContextSensitive() { }
 
     public Tpm2bContextSensitive(Tpm2bContextSensitive src) { buffer = src.buffer; }
 
@@ -9582,7 +9602,7 @@ public partial class Tpm2bContextSensitive: TpmStructureBase
 /// context. </summary>
 [DataContract]
 [SpecTypeName("TPMS_CONTEXT_DATA")]
-public partial class ContextData: TpmStructureBase
+public partial class ContextData : TpmStructureBase
 {
     /// <summary> The integrity value </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "integritySize", 2)]
@@ -9594,7 +9614,7 @@ public partial class ContextData: TpmStructureBase
     [DataMember]
     public byte[] encrypted;
 
-    public ContextData() {}
+    public ContextData() { }
 
     public ContextData(ContextData src)
     {
@@ -9619,14 +9639,14 @@ public partial class ContextData: TpmStructureBase
 [DataContract]
 [KnownType(typeof(ContextData))]
 [SpecTypeName("TPM2B_CONTEXT_DATA")]
-public partial class Tpm2bContextData: TpmStructureBase
+public partial class Tpm2bContextData : TpmStructureBase
 {
     [Range(MaxVal = 2u /*sizeof(TPMS_CONTEXT_DATA)*/)]
     [MarshalAs(0, MarshalType.SizedStruct, "size", 2)]
     [DataMember]
     public ContextData buffer { get; set; }
 
-    public Tpm2bContextData() {}
+    public Tpm2bContextData() { }
 
     public Tpm2bContextData(Tpm2bContextData src) { buffer = src.buffer; }
 
@@ -9646,7 +9666,7 @@ public partial class Tpm2bContextData: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(ContextData))]
 [SpecTypeName("TPMS_CONTEXT")]
-public partial class Context: TpmStructureBase
+public partial class Context : TpmStructureBase
 {
     /// <summary> The sequence number of the context
     /// NOTE Transient object contexts and session contexts used different counters. </summary>
@@ -9712,7 +9732,7 @@ public partial class Context: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(LocalityAttr))]
 [SpecTypeName("TPMS_CREATION_DATA")]
-public partial class CreationData: TpmStructureBase
+public partial class CreationData : TpmStructureBase
 {
     /// <summary> List indicating the PCR included in pcrDigest </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "pcrSelectCount", 4)]
@@ -9806,13 +9826,13 @@ public partial class CreationData: TpmStructureBase
 [DataContract]
 [KnownType(typeof(CreationData))]
 [SpecTypeName("TPM2B_CREATION_DATA")]
-public partial class Tpm2bCreationData: TpmStructureBase
+public partial class Tpm2bCreationData : TpmStructureBase
 {
     [MarshalAs(0, MarshalType.SizedStruct, "size", 2)]
     [DataMember]
     public CreationData creationData { get; set; }
 
-    public Tpm2bCreationData() {}
+    public Tpm2bCreationData() { }
 
     public Tpm2bCreationData(Tpm2bCreationData src) { creationData = src.creationData; }
 
@@ -9829,7 +9849,7 @@ public partial class Tpm2bCreationData: TpmStructureBase
 [DataContract]
 [KnownType(typeof(At))]
 [SpecTypeName("TPMS_AC_OUTPUT")]
-public partial class AcOutput: TpmStructureBase
+public partial class AcOutput : TpmStructureBase
 {
     /// <summary> Tag indicating the contents of data </summary>
     [MarshalAs(0)]
@@ -9841,7 +9861,7 @@ public partial class AcOutput: TpmStructureBase
     [DataMember]
     public uint data { get; set; }
 
-    public AcOutput() {}
+    public AcOutput() { }
 
     public AcOutput(AcOutput src)
     {
@@ -9865,7 +9885,7 @@ public partial class AcOutput: TpmStructureBase
 /// <summary> This list is only used in TPM2_AC_GetCapability(). </summary>
 [DataContract]
 [SpecTypeName("TPML_AC_CAPABILITIES")]
-public partial class AcCapabilitiesArray: TpmStructureBase
+public partial class AcCapabilitiesArray : TpmStructureBase
 {
     /// <summary> A list of AC values </summary>
     [Range(MaxVal = 127u /*MAX_AC_CAPABILITIES*/)]
@@ -9873,7 +9893,7 @@ public partial class AcCapabilitiesArray: TpmStructureBase
     [DataMember]
     public AcOutput[] acCapabilities;
 
-    public AcCapabilitiesArray() {}
+    public AcCapabilitiesArray() { }
 
     public AcCapabilitiesArray(AcCapabilitiesArray src) { acCapabilities = src.acCapabilities; }
 
@@ -9894,14 +9914,14 @@ public partial class AcCapabilitiesArray: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Su))]
 [SpecTypeName("Startup_In")]
-public partial class Tpm2StartupRequest: TpmStructureBase
+public partial class Tpm2StartupRequest : TpmStructureBase
 {
     /// <summary> TPM_SU_CLEAR or TPM_SU_STATE </summary>
     [MarshalAs(0)]
     [DataMember]
     public Su startupType { get; set; }
 
-    public Tpm2StartupRequest() {}
+    public Tpm2StartupRequest() { }
 
     /// <param name = "_startupType"> TPM_SU_CLEAR or TPM_SU_STATE </param>
     public Tpm2StartupRequest(Su _startupType) { startupType = _startupType; }
@@ -9916,14 +9936,14 @@ public partial class Tpm2StartupRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Su))]
 [SpecTypeName("Shutdown_In")]
-public partial class Tpm2ShutdownRequest: TpmStructureBase
+public partial class Tpm2ShutdownRequest : TpmStructureBase
 {
     /// <summary> TPM_SU_CLEAR or TPM_SU_STATE </summary>
     [MarshalAs(0)]
     [DataMember]
     public Su shutdownType { get; set; }
 
-    public Tpm2ShutdownRequest() {}
+    public Tpm2ShutdownRequest() { }
 
     /// <param name = "_shutdownType"> TPM_SU_CLEAR or TPM_SU_STATE </param>
     public Tpm2ShutdownRequest(Su _shutdownType) { shutdownType = _shutdownType; }
@@ -9938,7 +9958,7 @@ public partial class Tpm2ShutdownRequest: TpmStructureBase
 /// test those functions that have not previously been tested. </summary>
 [DataContract]
 [SpecTypeName("SelfTest_In")]
-public partial class Tpm2SelfTestRequest: TpmStructureBase
+public partial class Tpm2SelfTestRequest : TpmStructureBase
 {
     /// <summary> YES if full test to be performed
     /// NO if only test of untested functions required </summary>
@@ -9946,7 +9966,7 @@ public partial class Tpm2SelfTestRequest: TpmStructureBase
     [DataMember]
     public byte fullTest { get; set; }
 
-    public Tpm2SelfTestRequest() {}
+    public Tpm2SelfTestRequest() { }
 
     /// <param name = "_fullTest"> YES if full test to be performed
     ///        NO if only test of untested functions required </param>
@@ -9960,14 +9980,14 @@ public partial class Tpm2SelfTestRequest: TpmStructureBase
 /// <summary> This command causes the TPM to perform a test of the selected algorithms. </summary>
 [DataContract]
 [SpecTypeName("IncrementalSelfTest_In")]
-public partial class Tpm2IncrementalSelfTestRequest: TpmStructureBase
+public partial class Tpm2IncrementalSelfTestRequest : TpmStructureBase
 {
     /// <summary> List of algorithms that should be tested </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "toTestCount", 4)]
     [DataMember]
     public TpmAlgId[] toTest;
 
-    public Tpm2IncrementalSelfTestRequest() {}
+    public Tpm2IncrementalSelfTestRequest() { }
 
     /// <param name = "_toTest"> List of algorithms that should be tested </param>
     public Tpm2IncrementalSelfTestRequest(TpmAlgId[] _toTest) { toTest = _toTest; }
@@ -9980,14 +10000,14 @@ public partial class Tpm2IncrementalSelfTestRequest: TpmStructureBase
 /// <summary> This command causes the TPM to perform a test of the selected algorithms. </summary>
 [DataContract]
 [SpecTypeName("IncrementalSelfTest_Out")]
-public partial class Tpm2IncrementalSelfTestResponse: TpmStructureBase
+public partial class Tpm2IncrementalSelfTestResponse : TpmStructureBase
 {
     /// <summary> List of algorithms that need testing </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "toDoListCount", 4)]
     [DataMember]
     public TpmAlgId[] toDoList;
 
-    public Tpm2IncrementalSelfTestResponse() {}
+    public Tpm2IncrementalSelfTestResponse() { }
 
     public Tpm2IncrementalSelfTestResponse(Tpm2IncrementalSelfTestResponse src) { toDoList = src.toDoList; }
 
@@ -10000,9 +10020,9 @@ public partial class Tpm2IncrementalSelfTestResponse: TpmStructureBase
 /// of a self-test and an indication of the test status. </summary>
 [DataContract]
 [SpecTypeName("GetTestResult_In")]
-public partial class Tpm2GetTestResultRequest: TpmStructureBase
+public partial class Tpm2GetTestResultRequest : TpmStructureBase
 {
-    public Tpm2GetTestResultRequest() {}
+    public Tpm2GetTestResultRequest() { }
 
     new public Tpm2GetTestResultRequest Copy() { return CreateCopy<Tpm2GetTestResultRequest>(); }
 
@@ -10014,7 +10034,7 @@ public partial class Tpm2GetTestResultRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmRc))]
 [SpecTypeName("GetTestResult_Out")]
-public partial class Tpm2GetTestResultResponse: TpmStructureBase
+public partial class Tpm2GetTestResultResponse : TpmStructureBase
 {
     /// <summary> Test result data
     /// contains manufacturer-specific information </summary>
@@ -10026,7 +10046,7 @@ public partial class Tpm2GetTestResultResponse: TpmStructureBase
     [DataMember]
     public TpmRc testResult { get; set; }
 
-    public Tpm2GetTestResultResponse() {}
+    public Tpm2GetTestResultResponse() { }
 
     public Tpm2GetTestResultResponse(Tpm2GetTestResultResponse src)
     {
@@ -10048,7 +10068,7 @@ public partial class Tpm2GetTestResultResponse: TpmStructureBase
 [KnownType(typeof(TpmSe))]
 [KnownType(typeof(SymDef))]
 [SpecTypeName("StartAuthSession_In")]
-public partial class Tpm2StartAuthSessionRequest: TpmStructureBase
+public partial class Tpm2StartAuthSessionRequest : TpmStructureBase
 {
     /// <summary> Handle of a loaded decrypt key used to encrypt salt
     /// may be TPM_RH_NULL
@@ -10139,7 +10159,7 @@ public partial class Tpm2StartAuthSessionRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("StartAuthSession_Out")]
-public partial class Tpm2StartAuthSessionResponse: TpmStructureBase
+public partial class Tpm2StartAuthSessionResponse : TpmStructureBase
 {
     /// <summary> Handle for the newly created session </summary>
     [MarshalAs(0)]
@@ -10173,7 +10193,7 @@ public partial class Tpm2StartAuthSessionResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyRestart_In")]
-public partial class Tpm2PolicyRestartRequest: TpmStructureBase
+public partial class Tpm2PolicyRestartRequest : TpmStructureBase
 {
     /// <summary> The handle for the policy session </summary>
     [MarshalAs(0)]
@@ -10202,7 +10222,7 @@ public partial class Tpm2PolicyRestartRequest: TpmStructureBase
 [KnownType(typeof(SensitiveCreate))]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("Create_In")]
-public partial class Tpm2CreateRequest: TpmStructureBase
+public partial class Tpm2CreateRequest : TpmStructureBase
 {
     /// <summary> Handle of parent for new object
     /// Auth Index: 1
@@ -10270,7 +10290,7 @@ public partial class Tpm2CreateRequest: TpmStructureBase
 [KnownType(typeof(TpmPublic))]
 [KnownType(typeof(TkCreation))]
 [SpecTypeName("Create_Out")]
-public partial class Tpm2CreateResponse: TpmStructureBase
+public partial class Tpm2CreateResponse : TpmStructureBase
 {
     /// <summary> The private portion of the object </summary>
     [MarshalAs(0)]
@@ -10298,7 +10318,7 @@ public partial class Tpm2CreateResponse: TpmStructureBase
     [DataMember]
     public TkCreation creationTicket { get; set; }
 
-    public Tpm2CreateResponse() {}
+    public Tpm2CreateResponse() { }
 
     public Tpm2CreateResponse(Tpm2CreateResponse src)
     {
@@ -10322,7 +10342,7 @@ public partial class Tpm2CreateResponse: TpmStructureBase
 [KnownType(typeof(TpmPrivate))]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("Load_In")]
-public partial class Tpm2LoadRequest: TpmStructureBase
+public partial class Tpm2LoadRequest : TpmStructureBase
 {
     /// <summary> TPM handle of parent key; shall not be a reserved handle
     /// Auth Index: 1
@@ -10366,7 +10386,7 @@ public partial class Tpm2LoadRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("Load_Out")]
-public partial class Tpm2LoadResponse: TpmStructureBase
+public partial class Tpm2LoadResponse : TpmStructureBase
 {
     /// <summary> Handle of type TPM_HT_TRANSIENT for the loaded object </summary>
     [MarshalAs(0)]
@@ -10399,7 +10419,7 @@ public partial class Tpm2LoadResponse: TpmStructureBase
 [KnownType(typeof(TpmPublic))]
 [KnownType(typeof(Sensitive))]
 [SpecTypeName("LoadExternal_In")]
-public partial class Tpm2LoadExternalRequest: TpmStructureBase
+public partial class Tpm2LoadExternalRequest : TpmStructureBase
 {
     /// <summary> The sensitive portion of the object (optional) </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "inPrivateSize", 2)]
@@ -10439,7 +10459,7 @@ public partial class Tpm2LoadExternalRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("LoadExternal_Out")]
-public partial class Tpm2LoadExternalResponse: TpmStructureBase
+public partial class Tpm2LoadExternalResponse : TpmStructureBase
 {
     /// <summary> Handle of type TPM_HT_TRANSIENT for the loaded object </summary>
     [MarshalAs(0)]
@@ -10468,7 +10488,7 @@ public partial class Tpm2LoadExternalResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ReadPublic_In")]
-public partial class Tpm2ReadPublicRequest: TpmStructureBase
+public partial class Tpm2ReadPublicRequest : TpmStructureBase
 {
     /// <summary> TPM handle of an object
     /// Auth Index: None </summary>
@@ -10491,7 +10511,7 @@ public partial class Tpm2ReadPublicRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("ReadPublic_Out")]
-public partial class Tpm2ReadPublicResponse: TpmStructureBase
+public partial class Tpm2ReadPublicResponse : TpmStructureBase
 {
     /// <summary> Structure containing the public area of an object </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "outPublicSize", 2)]
@@ -10508,7 +10528,7 @@ public partial class Tpm2ReadPublicResponse: TpmStructureBase
     [DataMember]
     public byte[] qualifiedName;
 
-    public Tpm2ReadPublicResponse() {}
+    public Tpm2ReadPublicResponse() { }
 
     public Tpm2ReadPublicResponse(Tpm2ReadPublicResponse src)
     {
@@ -10528,7 +10548,7 @@ public partial class Tpm2ReadPublicResponse: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(IdObject))]
 [SpecTypeName("ActivateCredential_In")]
-public partial class Tpm2ActivateCredentialRequest: TpmStructureBase
+public partial class Tpm2ActivateCredentialRequest : TpmStructureBase
 {
     /// <summary> Handle of the object associated with certificate in credentialBlob
     /// Auth Index: 1
@@ -10586,7 +10606,7 @@ public partial class Tpm2ActivateCredentialRequest: TpmStructureBase
 /// that ensures that the TPM has validated the parameters of the credentialed object. </summary>
 [DataContract]
 [SpecTypeName("ActivateCredential_Out")]
-public partial class Tpm2ActivateCredentialResponse: TpmStructureBase
+public partial class Tpm2ActivateCredentialResponse : TpmStructureBase
 {
     /// <summary> The decrypted certificate information
     /// the data should be no larger than the size of the digest of the nameAlg associated
@@ -10595,7 +10615,7 @@ public partial class Tpm2ActivateCredentialResponse: TpmStructureBase
     [DataMember]
     public byte[] certInfo;
 
-    public Tpm2ActivateCredentialResponse() {}
+    public Tpm2ActivateCredentialResponse() { }
 
     public Tpm2ActivateCredentialResponse(Tpm2ActivateCredentialResponse src) { certInfo = src.certInfo; }
 
@@ -10609,7 +10629,7 @@ public partial class Tpm2ActivateCredentialResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("MakeCredential_In")]
-public partial class Tpm2MakeCredentialRequest: TpmStructureBase
+public partial class Tpm2MakeCredentialRequest : TpmStructureBase
 {
     /// <summary> Loaded public area, used to encrypt the sensitive area containing the
     /// credential key
@@ -10652,7 +10672,7 @@ public partial class Tpm2MakeCredentialRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(IdObject))]
 [SpecTypeName("MakeCredential_Out")]
-public partial class Tpm2MakeCredentialResponse: TpmStructureBase
+public partial class Tpm2MakeCredentialResponse : TpmStructureBase
 {
     /// <summary> The credential </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "credentialBlobSize", 2)]
@@ -10665,7 +10685,7 @@ public partial class Tpm2MakeCredentialResponse: TpmStructureBase
     [DataMember]
     public byte[] secret;
 
-    public Tpm2MakeCredentialResponse() {}
+    public Tpm2MakeCredentialResponse() { }
 
     public Tpm2MakeCredentialResponse(Tpm2MakeCredentialResponse src)
     {
@@ -10682,7 +10702,7 @@ public partial class Tpm2MakeCredentialResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("Unseal_In")]
-public partial class Tpm2UnsealRequest: TpmStructureBase
+public partial class Tpm2UnsealRequest : TpmStructureBase
 {
     /// <summary> Handle of a loaded data object
     /// Auth Index: 1
@@ -10706,7 +10726,7 @@ public partial class Tpm2UnsealRequest: TpmStructureBase
 /// <summary> This command returns the data in a loaded Sealed Data Object. </summary>
 [DataContract]
 [SpecTypeName("Unseal_Out")]
-public partial class Tpm2UnsealResponse: TpmStructureBase
+public partial class Tpm2UnsealResponse : TpmStructureBase
 {
     /// <summary> Unsealed data
     /// Size of outData is limited to be no more than 128 octets. </summary>
@@ -10714,7 +10734,7 @@ public partial class Tpm2UnsealResponse: TpmStructureBase
     [DataMember]
     public byte[] outData;
 
-    public Tpm2UnsealResponse() {}
+    public Tpm2UnsealResponse() { }
 
     public Tpm2UnsealResponse(Tpm2UnsealResponse src) { outData = src.outData; }
 
@@ -10728,7 +10748,7 @@ public partial class Tpm2UnsealResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ObjectChangeAuth_In")]
-public partial class Tpm2ObjectChangeAuthRequest: TpmStructureBase
+public partial class Tpm2ObjectChangeAuthRequest : TpmStructureBase
 {
     /// <summary> Handle of the object
     /// Auth Index: 1
@@ -10777,14 +10797,14 @@ public partial class Tpm2ObjectChangeAuthRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPrivate))]
 [SpecTypeName("ObjectChangeAuth_Out")]
-public partial class Tpm2ObjectChangeAuthResponse: TpmStructureBase
+public partial class Tpm2ObjectChangeAuthResponse : TpmStructureBase
 {
     /// <summary> Private area containing the new authorization value </summary>
     [MarshalAs(0)]
     [DataMember]
     public TpmPrivate outPrivate { get; set; }
 
-    public Tpm2ObjectChangeAuthResponse() {}
+    public Tpm2ObjectChangeAuthResponse() { }
 
     public Tpm2ObjectChangeAuthResponse(Tpm2ObjectChangeAuthResponse src) { outPrivate = src.outPrivate; }
 
@@ -10803,7 +10823,7 @@ public partial class Tpm2ObjectChangeAuthResponse: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(SensitiveCreate))]
 [SpecTypeName("CreateLoaded_In")]
-public partial class Tpm2CreateLoadedRequest: TpmStructureBase
+public partial class Tpm2CreateLoadedRequest : TpmStructureBase
 {
     /// <summary> Handle of a transient storage key, a persistent storage key,
     /// TPM_RH_ENDORSEMENT, TPM_RH_OWNER, TPM_RH_PLATFORM+{PP}, or TPM_RH_NULL
@@ -10854,7 +10874,7 @@ public partial class Tpm2CreateLoadedRequest: TpmStructureBase
 [KnownType(typeof(TpmPrivate))]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("CreateLoaded_Out")]
-public partial class Tpm2CreateLoadedResponse: TpmStructureBase
+public partial class Tpm2CreateLoadedResponse : TpmStructureBase
 {
     /// <summary> Handle of type TPM_HT_TRANSIENT for created object </summary>
     [MarshalAs(0)]
@@ -10899,7 +10919,7 @@ public partial class Tpm2CreateLoadedResponse: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(SymDefObject))]
 [SpecTypeName("Duplicate_In")]
-public partial class Tpm2DuplicateRequest: TpmStructureBase
+public partial class Tpm2DuplicateRequest : TpmStructureBase
 {
     /// <summary> Loaded object to duplicate
     /// Auth Index: 1
@@ -10964,7 +10984,7 @@ public partial class Tpm2DuplicateRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPrivate))]
 [SpecTypeName("Duplicate_Out")]
-public partial class Tpm2DuplicateResponse: TpmStructureBase
+public partial class Tpm2DuplicateResponse : TpmStructureBase
 {
     /// <summary> If the caller provided an encryption key or if symmetricAlg was
     /// TPM_ALG_NULL, then this will be the Empty Buffer; otherwise, it shall contain the
@@ -10984,7 +11004,7 @@ public partial class Tpm2DuplicateResponse: TpmStructureBase
     [DataMember]
     public byte[] outSymSeed;
 
-    public Tpm2DuplicateResponse() {}
+    public Tpm2DuplicateResponse() { }
 
     public Tpm2DuplicateResponse(Tpm2DuplicateResponse src)
     {
@@ -11009,7 +11029,7 @@ public partial class Tpm2DuplicateResponse: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(TpmPrivate))]
 [SpecTypeName("Rewrap_In")]
-public partial class Tpm2RewrapRequest: TpmStructureBase
+public partial class Tpm2RewrapRequest : TpmStructureBase
 {
     /// <summary> Parent of object
     /// Auth Index: 1
@@ -11080,7 +11100,7 @@ public partial class Tpm2RewrapRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPrivate))]
 [SpecTypeName("Rewrap_Out")]
-public partial class Tpm2RewrapResponse: TpmStructureBase
+public partial class Tpm2RewrapResponse : TpmStructureBase
 {
     /// <summary> An object encrypted using symmetric key derived from outSymSeed </summary>
     [MarshalAs(0)]
@@ -11092,7 +11112,7 @@ public partial class Tpm2RewrapResponse: TpmStructureBase
     [DataMember]
     public byte[] outSymSeed;
 
-    public Tpm2RewrapResponse() {}
+    public Tpm2RewrapResponse() { }
 
     public Tpm2RewrapResponse(Tpm2RewrapResponse src)
     {
@@ -11115,7 +11135,7 @@ public partial class Tpm2RewrapResponse: TpmStructureBase
 [KnownType(typeof(TpmPublic))]
 [KnownType(typeof(SymDefObject))]
 [SpecTypeName("Import_In")]
-public partial class Tpm2ImportRequest: TpmStructureBase
+public partial class Tpm2ImportRequest : TpmStructureBase
 {
     /// <summary> The handle of the new parent for the object
     /// Auth Index: 1
@@ -11201,14 +11221,14 @@ public partial class Tpm2ImportRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPrivate))]
 [SpecTypeName("Import_Out")]
-public partial class Tpm2ImportResponse: TpmStructureBase
+public partial class Tpm2ImportResponse : TpmStructureBase
 {
     /// <summary> The sensitive area encrypted with the symmetric key of parentHandle </summary>
     [MarshalAs(0)]
     [DataMember]
     public TpmPrivate outPrivate { get; set; }
 
-    public Tpm2ImportResponse() {}
+    public Tpm2ImportResponse() { }
 
     public Tpm2ImportResponse(Tpm2ImportResponse src) { outPrivate = src.outPrivate; }
 
@@ -11238,7 +11258,7 @@ public partial class Tpm2ImportResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("RSA_Encrypt_In")]
-public partial class Tpm2RsaEncryptRequest: TpmStructureBase
+public partial class Tpm2RsaEncryptRequest : TpmStructureBase
 {
     /// <summary> Reference to public portion of RSA key to use for encryption
     /// Auth Index: None </summary>
@@ -11256,7 +11276,8 @@ public partial class Tpm2RsaEncryptRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -11312,14 +11333,14 @@ public partial class Tpm2RsaEncryptRequest: TpmStructureBase
 /// (TPM_RC_SCHEME). </summary>
 [DataContract]
 [SpecTypeName("RSA_Encrypt_Out")]
-public partial class Tpm2RsaEncryptResponse: TpmStructureBase
+public partial class Tpm2RsaEncryptResponse : TpmStructureBase
 {
     /// <summary> Encrypted output </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outDataSize", 2)]
     [DataMember]
     public byte[] outData;
 
-    public Tpm2RsaEncryptResponse() {}
+    public Tpm2RsaEncryptResponse() { }
 
     public Tpm2RsaEncryptResponse(Tpm2RsaEncryptResponse src) { outData = src.outData; }
 
@@ -11346,7 +11367,7 @@ public partial class Tpm2RsaEncryptResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("RSA_Decrypt_In")]
-public partial class Tpm2RsaDecryptRequest: TpmStructureBase
+public partial class Tpm2RsaDecryptRequest : TpmStructureBase
 {
     /// <summary> RSA key to use for decryption
     /// Auth Index: 1
@@ -11363,7 +11384,8 @@ public partial class Tpm2RsaDecryptRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -11411,14 +11433,14 @@ public partial class Tpm2RsaDecryptRequest: TpmStructureBase
 /// according to IETF RFC 8017 ((PKCS#1). </summary>
 [DataContract]
 [SpecTypeName("RSA_Decrypt_Out")]
-public partial class Tpm2RsaDecryptResponse: TpmStructureBase
+public partial class Tpm2RsaDecryptResponse : TpmStructureBase
 {
     /// <summary> Decrypted output </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "messageSize", 2)]
     [DataMember]
     public byte[] message;
 
-    public Tpm2RsaDecryptResponse() {}
+    public Tpm2RsaDecryptResponse() { }
 
     public Tpm2RsaDecryptResponse(Tpm2RsaDecryptResponse src) { message = src.message; }
 
@@ -11433,7 +11455,7 @@ public partial class Tpm2RsaDecryptResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ECDH_KeyGen_In")]
-public partial class Tpm2EcdhKeyGenRequest: TpmStructureBase
+public partial class Tpm2EcdhKeyGenRequest : TpmStructureBase
 {
     /// <summary> Handle of a loaded ECC key public area.
     /// Auth Index: None </summary>
@@ -11459,7 +11481,7 @@ public partial class Tpm2EcdhKeyGenRequest: TpmStructureBase
 [KnownType(typeof(EccPoint))]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("ECDH_KeyGen_Out")]
-public partial class Tpm2EcdhKeyGenResponse: TpmStructureBase
+public partial class Tpm2EcdhKeyGenResponse : TpmStructureBase
 {
     /// <summary> Results of P h[de]Qs </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "zPointSize", 2)]
@@ -11471,7 +11493,7 @@ public partial class Tpm2EcdhKeyGenResponse: TpmStructureBase
     [DataMember]
     public EccPoint pubPoint { get; set; }
 
-    public Tpm2EcdhKeyGenResponse() {}
+    public Tpm2EcdhKeyGenResponse() { }
 
     public Tpm2EcdhKeyGenResponse(Tpm2EcdhKeyGenResponse src)
     {
@@ -11492,7 +11514,7 @@ public partial class Tpm2EcdhKeyGenResponse: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("ECDH_ZGen_In")]
-public partial class Tpm2EcdhZGenRequest: TpmStructureBase
+public partial class Tpm2EcdhZGenRequest : TpmStructureBase
 {
     /// <summary> Handle of a loaded ECC key
     /// Auth Index: 1
@@ -11530,7 +11552,7 @@ public partial class Tpm2EcdhZGenRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("ECDH_ZGen_Out")]
-public partial class Tpm2EcdhZGenResponse: TpmStructureBase
+public partial class Tpm2EcdhZGenResponse : TpmStructureBase
 {
     /// <summary> X and Y coordinates of the product of the multiplication Z = (xZ , yZ)
     /// [hdS]QB </summary>
@@ -11538,7 +11560,7 @@ public partial class Tpm2EcdhZGenResponse: TpmStructureBase
     [DataMember]
     public EccPoint outPoint { get; set; }
 
-    public Tpm2EcdhZGenResponse() {}
+    public Tpm2EcdhZGenResponse() { }
 
     public Tpm2EcdhZGenResponse(Tpm2EcdhZGenResponse src) { outPoint = src.outPoint; }
 
@@ -11552,14 +11574,14 @@ public partial class Tpm2EcdhZGenResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(EccCurve))]
 [SpecTypeName("ECC_Parameters_In")]
-public partial class Tpm2EccParametersRequest: TpmStructureBase
+public partial class Tpm2EccParametersRequest : TpmStructureBase
 {
     /// <summary> Parameter set selector </summary>
     [MarshalAs(0)]
     [DataMember]
     public EccCurve curveID { get; set; }
 
-    public Tpm2EccParametersRequest() {}
+    public Tpm2EccParametersRequest() { }
 
     /// <param name = "_curveID"> Parameter set selector </param>
     public Tpm2EccParametersRequest(EccCurve _curveID) { curveID = _curveID; }
@@ -11574,14 +11596,14 @@ public partial class Tpm2EccParametersRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(AlgorithmDetailEcc))]
 [SpecTypeName("ECC_Parameters_Out")]
-public partial class Tpm2EccParametersResponse: TpmStructureBase
+public partial class Tpm2EccParametersResponse : TpmStructureBase
 {
     /// <summary> ECC parameters for the selected curve </summary>
     [MarshalAs(0)]
     [DataMember]
     public AlgorithmDetailEcc parameters { get; set; }
 
-    public Tpm2EccParametersResponse() {}
+    public Tpm2EccParametersResponse() { }
 
     public Tpm2EccParametersResponse(Tpm2EccParametersResponse src) { parameters = src.parameters; }
 
@@ -11600,7 +11622,7 @@ public partial class Tpm2EccParametersResponse: TpmStructureBase
 [KnownType(typeof(EccPoint))]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("ZGen_2Phase_In")]
-public partial class Tpm2ZGen2PhaseRequest: TpmStructureBase
+public partial class Tpm2ZGen2PhaseRequest : TpmStructureBase
 {
     /// <summary> Handle of an unrestricted decryption key ECC
     /// The private key referenced by this handle is used as dS,A
@@ -11666,7 +11688,7 @@ public partial class Tpm2ZGen2PhaseRequest: TpmStructureBase
 [KnownType(typeof(EccPoint))]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("ZGen_2Phase_Out")]
-public partial class Tpm2ZGen2PhaseResponse: TpmStructureBase
+public partial class Tpm2ZGen2PhaseResponse : TpmStructureBase
 {
     /// <summary> X and Y coordinates of the computed value (scheme dependent) </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "outZ1Size", 2)]
@@ -11678,7 +11700,7 @@ public partial class Tpm2ZGen2PhaseResponse: TpmStructureBase
     [DataMember]
     public EccPoint outZ2 { get; set; }
 
-    public Tpm2ZGen2PhaseResponse() {}
+    public Tpm2ZGen2PhaseResponse() { }
 
     public Tpm2ZGen2PhaseResponse(Tpm2ZGen2PhaseResponse src)
     {
@@ -11702,7 +11724,7 @@ public partial class Tpm2ZGen2PhaseResponse: TpmStructureBase
 [KnownType(typeof(NullKdfScheme))]
 [KnownType(typeof(SchemeHash))]
 [SpecTypeName("ECC_Encrypt_In")]
-public partial class Tpm2EccEncryptRequest: TpmStructureBase
+public partial class Tpm2EccEncryptRequest : TpmStructureBase
 {
     /// <summary> Reference to public portion of ECC key to use for encryption
     /// Auth Index: None </summary>
@@ -11717,7 +11739,8 @@ public partial class Tpm2EccEncryptRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -11752,7 +11775,7 @@ public partial class Tpm2EccEncryptRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("ECC_Encrypt_Out")]
-public partial class Tpm2EccEncryptResponse: TpmStructureBase
+public partial class Tpm2EccEncryptResponse : TpmStructureBase
 {
     /// <summary> The public ephemeral key used for ECDH </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "C1Size", 2)]
@@ -11769,7 +11792,7 @@ public partial class Tpm2EccEncryptResponse: TpmStructureBase
     [DataMember]
     public byte[] C3;
 
-    public Tpm2EccEncryptResponse() {}
+    public Tpm2EccEncryptResponse() { }
 
     public Tpm2EccEncryptResponse(Tpm2EccEncryptResponse src)
     {
@@ -11795,7 +11818,7 @@ public partial class Tpm2EccEncryptResponse: TpmStructureBase
 [KnownType(typeof(NullKdfScheme))]
 [KnownType(typeof(SchemeHash))]
 [SpecTypeName("ECC_Decrypt_In")]
-public partial class Tpm2EccDecryptRequest: TpmStructureBase
+public partial class Tpm2EccDecryptRequest : TpmStructureBase
 {
     /// <summary> ECC key to use for decryption
     /// Auth Index: 1
@@ -11821,7 +11844,8 @@ public partial class Tpm2EccDecryptRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(4, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -11860,14 +11884,14 @@ public partial class Tpm2EccDecryptRequest: TpmStructureBase
 /// <summary> This command performs ECC decryption. </summary>
 [DataContract]
 [SpecTypeName("ECC_Decrypt_Out")]
-public partial class Tpm2EccDecryptResponse: TpmStructureBase
+public partial class Tpm2EccDecryptResponse : TpmStructureBase
 {
     /// <summary> Decrypted output </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "plainTextSize", 2)]
     [DataMember]
     public byte[] plainText;
 
-    public Tpm2EccDecryptResponse() {}
+    public Tpm2EccDecryptResponse() { }
 
     public Tpm2EccDecryptResponse(Tpm2EccDecryptResponse src) { plainText = src.plainText; }
 
@@ -11882,7 +11906,7 @@ public partial class Tpm2EccDecryptResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("EncryptDecrypt_In")]
-public partial class Tpm2EncryptDecryptRequest: TpmStructureBase
+public partial class Tpm2EncryptDecryptRequest : TpmStructureBase
 {
     /// <summary> The symmetric key used for the operation
     /// Auth Index: 1
@@ -11946,7 +11970,7 @@ public partial class Tpm2EncryptDecryptRequest: TpmStructureBase
 /// This should be reflected in platform-specific specifications. </summary>
 [DataContract]
 [SpecTypeName("EncryptDecrypt_Out")]
-public partial class Tpm2EncryptDecryptResponse: TpmStructureBase
+public partial class Tpm2EncryptDecryptResponse : TpmStructureBase
 {
     /// <summary> Encrypted or decrypted output </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outDataSize", 2)]
@@ -11958,7 +11982,7 @@ public partial class Tpm2EncryptDecryptResponse: TpmStructureBase
     [DataMember]
     public byte[] ivOut;
 
-    public Tpm2EncryptDecryptResponse() {}
+    public Tpm2EncryptDecryptResponse() { }
 
     public Tpm2EncryptDecryptResponse(Tpm2EncryptDecryptResponse src)
     {
@@ -11977,7 +12001,7 @@ public partial class Tpm2EncryptDecryptResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("EncryptDecrypt2_In")]
-public partial class Tpm2EncryptDecrypt2Request: TpmStructureBase
+public partial class Tpm2EncryptDecrypt2Request : TpmStructureBase
 {
     /// <summary> The symmetric key used for the operation
     /// Auth Index: 1
@@ -12041,7 +12065,7 @@ public partial class Tpm2EncryptDecrypt2Request: TpmStructureBase
 /// parameter is the first parameter. This permits inData to be parameter encrypted. </summary>
 [DataContract]
 [SpecTypeName("EncryptDecrypt2_Out")]
-public partial class Tpm2EncryptDecrypt2Response: TpmStructureBase
+public partial class Tpm2EncryptDecrypt2Response : TpmStructureBase
 {
     /// <summary> Encrypted or decrypted output </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outDataSize", 2)]
@@ -12053,7 +12077,7 @@ public partial class Tpm2EncryptDecrypt2Response: TpmStructureBase
     [DataMember]
     public byte[] ivOut;
 
-    public Tpm2EncryptDecrypt2Response() {}
+    public Tpm2EncryptDecrypt2Response() { }
 
     public Tpm2EncryptDecrypt2Response(Tpm2EncryptDecrypt2Response src)
     {
@@ -12072,7 +12096,7 @@ public partial class Tpm2EncryptDecrypt2Response: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("Hash_In")]
-public partial class Tpm2HashRequest: TpmStructureBase
+public partial class Tpm2HashRequest : TpmStructureBase
 {
     /// <summary> Data to be hashed </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "dataSize", 2)]
@@ -12115,7 +12139,7 @@ public partial class Tpm2HashRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TkHashcheck))]
 [SpecTypeName("Hash_Out")]
-public partial class Tpm2HashResponse: TpmStructureBase
+public partial class Tpm2HashResponse : TpmStructureBase
 {
     /// <summary> Results </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outHashSize", 2)]
@@ -12129,7 +12153,7 @@ public partial class Tpm2HashResponse: TpmStructureBase
     [DataMember]
     public TkHashcheck validation { get; set; }
 
-    public Tpm2HashResponse() {}
+    public Tpm2HashResponse() { }
 
     public Tpm2HashResponse(Tpm2HashResponse src)
     {
@@ -12148,7 +12172,7 @@ public partial class Tpm2HashResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("HMAC_In")]
-public partial class Tpm2HmacRequest: TpmStructureBase
+public partial class Tpm2HmacRequest : TpmStructureBase
 {
     /// <summary> Handle for the symmetric signing key providing the HMAC key
     /// Auth Index: 1
@@ -12194,14 +12218,14 @@ public partial class Tpm2HmacRequest: TpmStructureBase
 /// algorithm. </summary>
 [DataContract]
 [SpecTypeName("HMAC_Out")]
-public partial class Tpm2HmacResponse: TpmStructureBase
+public partial class Tpm2HmacResponse : TpmStructureBase
 {
     /// <summary> The returned HMAC in a sized buffer </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outHMACSize", 2)]
     [DataMember]
     public byte[] outHMAC;
 
-    public Tpm2HmacResponse() {}
+    public Tpm2HmacResponse() { }
 
     public Tpm2HmacResponse(Tpm2HmacResponse src) { outHMAC = src.outHMAC; }
 
@@ -12216,7 +12240,7 @@ public partial class Tpm2HmacResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("MAC_In")]
-public partial class Tpm2MacRequest: TpmStructureBase
+public partial class Tpm2MacRequest : TpmStructureBase
 {
     /// <summary> Handle for the symmetric signing key providing the MAC key
     /// Auth Index: 1
@@ -12262,14 +12286,14 @@ public partial class Tpm2MacRequest: TpmStructureBase
 /// using the indicated algorithm. </summary>
 [DataContract]
 [SpecTypeName("MAC_Out")]
-public partial class Tpm2MacResponse: TpmStructureBase
+public partial class Tpm2MacResponse : TpmStructureBase
 {
     /// <summary> The returned MAC in a sized buffer </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outMACSize", 2)]
     [DataMember]
     public byte[] outMAC;
 
-    public Tpm2MacResponse() {}
+    public Tpm2MacResponse() { }
 
     public Tpm2MacResponse(Tpm2MacResponse src) { outMAC = src.outMAC; }
 
@@ -12282,14 +12306,14 @@ public partial class Tpm2MacResponse: TpmStructureBase
 /// generator (RNG). </summary>
 [DataContract]
 [SpecTypeName("GetRandom_In")]
-public partial class Tpm2GetRandomRequest: TpmStructureBase
+public partial class Tpm2GetRandomRequest : TpmStructureBase
 {
     /// <summary> Number of octets to return </summary>
     [MarshalAs(0)]
     [DataMember]
     public ushort bytesRequested { get; set; }
 
-    public Tpm2GetRandomRequest() {}
+    public Tpm2GetRandomRequest() { }
 
     /// <param name = "_bytesRequested"> Number of octets to return </param>
     public Tpm2GetRandomRequest(ushort _bytesRequested) { bytesRequested = _bytesRequested; }
@@ -12303,14 +12327,14 @@ public partial class Tpm2GetRandomRequest: TpmStructureBase
 /// generator (RNG). </summary>
 [DataContract]
 [SpecTypeName("GetRandom_Out")]
-public partial class Tpm2GetRandomResponse: TpmStructureBase
+public partial class Tpm2GetRandomResponse : TpmStructureBase
 {
     /// <summary> The random octets </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "randomBytesSize", 2)]
     [DataMember]
     public byte[] randomBytes;
 
-    public Tpm2GetRandomResponse() {}
+    public Tpm2GetRandomResponse() { }
 
     public Tpm2GetRandomResponse(Tpm2GetRandomResponse src) { randomBytes = src.randomBytes; }
 
@@ -12322,14 +12346,14 @@ public partial class Tpm2GetRandomResponse: TpmStructureBase
 /// <summary> This command is used to add "additional information" to the RNG state. </summary>
 [DataContract]
 [SpecTypeName("StirRandom_In")]
-public partial class Tpm2StirRandomRequest: TpmStructureBase
+public partial class Tpm2StirRandomRequest : TpmStructureBase
 {
     /// <summary> Additional information </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "inDataSize", 2)]
     [DataMember]
     public byte[] inData;
 
-    public Tpm2StirRandomRequest() {}
+    public Tpm2StirRandomRequest() { }
 
     /// <param name = "_inData"> Additional information </param>
     public Tpm2StirRandomRequest(byte[] _inData) { inData = _inData; }
@@ -12346,7 +12370,7 @@ public partial class Tpm2StirRandomRequest: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("HMAC_Start_In")]
-public partial class Tpm2HmacStartRequest: TpmStructureBase
+public partial class Tpm2HmacStartRequest : TpmStructureBase
 {
     /// <summary> Handle of an HMAC key
     /// Auth Index: 1
@@ -12394,7 +12418,7 @@ public partial class Tpm2HmacStartRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("HMAC_Start_Out")]
-public partial class Tpm2HmacStartResponse: TpmStructureBase
+public partial class Tpm2HmacStartResponse : TpmStructureBase
 {
     /// <summary> A handle to reference the sequence </summary>
     [MarshalAs(0)]
@@ -12417,7 +12441,7 @@ public partial class Tpm2HmacStartResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("MAC_Start_In")]
-public partial class Tpm2MacStartRequest: TpmStructureBase
+public partial class Tpm2MacStartRequest : TpmStructureBase
 {
     /// <summary> Handle of a MAC key
     /// Auth Index: 1
@@ -12465,7 +12489,7 @@ public partial class Tpm2MacStartRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("MAC_Start_Out")]
-public partial class Tpm2MacStartResponse: TpmStructureBase
+public partial class Tpm2MacStartResponse : TpmStructureBase
 {
     /// <summary> A handle to reference the sequence </summary>
     [MarshalAs(0)]
@@ -12488,7 +12512,7 @@ public partial class Tpm2MacStartResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmAlgId))]
 [SpecTypeName("HashSequenceStart_In")]
-public partial class Tpm2HashSequenceStartRequest: TpmStructureBase
+public partial class Tpm2HashSequenceStartRequest : TpmStructureBase
 {
     /// <summary> Authorization value for subsequent use of the sequence </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "authSize", 2)]
@@ -12524,7 +12548,7 @@ public partial class Tpm2HashSequenceStartRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("HashSequenceStart_Out")]
-public partial class Tpm2HashSequenceStartResponse: TpmStructureBase
+public partial class Tpm2HashSequenceStartResponse : TpmStructureBase
 {
     /// <summary> A handle to reference the sequence </summary>
     [MarshalAs(0)]
@@ -12545,7 +12569,7 @@ public partial class Tpm2HashSequenceStartResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("SequenceUpdate_In")]
-public partial class Tpm2SequenceUpdateRequest: TpmStructureBase
+public partial class Tpm2SequenceUpdateRequest : TpmStructureBase
 {
     /// <summary> Handle for the sequence object
     /// Auth Index: 1
@@ -12581,7 +12605,7 @@ public partial class Tpm2SequenceUpdateRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("SequenceComplete_In")]
-public partial class Tpm2SequenceCompleteRequest: TpmStructureBase
+public partial class Tpm2SequenceCompleteRequest : TpmStructureBase
 {
     /// <summary> Authorization for the sequence
     /// Auth Index: 1
@@ -12628,7 +12652,7 @@ public partial class Tpm2SequenceCompleteRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TkHashcheck))]
 [SpecTypeName("SequenceComplete_Out")]
-public partial class Tpm2SequenceCompleteResponse: TpmStructureBase
+public partial class Tpm2SequenceCompleteResponse : TpmStructureBase
 {
     /// <summary> The returned HMAC or digest in a sized buffer </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "resultSize", 2)]
@@ -12642,7 +12666,7 @@ public partial class Tpm2SequenceCompleteResponse: TpmStructureBase
     [DataMember]
     public TkHashcheck validation { get; set; }
 
-    public Tpm2SequenceCompleteResponse() {}
+    public Tpm2SequenceCompleteResponse() { }
 
     public Tpm2SequenceCompleteResponse(Tpm2SequenceCompleteResponse src)
     {
@@ -12664,7 +12688,7 @@ public partial class Tpm2SequenceCompleteResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("EventSequenceComplete_In")]
-public partial class Tpm2EventSequenceCompleteRequest: TpmStructureBase
+public partial class Tpm2EventSequenceCompleteRequest : TpmStructureBase
 {
     /// <summary> PCR to be extended with the Event data
     /// Auth Index: 1
@@ -12718,14 +12742,14 @@ public partial class Tpm2EventSequenceCompleteRequest: TpmStructureBase
 /// list. </summary>
 [DataContract]
 [SpecTypeName("EventSequenceComplete_Out")]
-public partial class Tpm2EventSequenceCompleteResponse: TpmStructureBase
+public partial class Tpm2EventSequenceCompleteResponse : TpmStructureBase
 {
     /// <summary> List of digests computed for the PCR </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "resultsCount", 4)]
     [DataMember]
     public TpmHash[] results;
 
-    public Tpm2EventSequenceCompleteResponse() {}
+    public Tpm2EventSequenceCompleteResponse() { }
 
     public Tpm2EventSequenceCompleteResponse(Tpm2EventSequenceCompleteResponse src) { results = src.results; }
 
@@ -12752,7 +12776,7 @@ public partial class Tpm2EventSequenceCompleteResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("Certify_In")]
-public partial class Tpm2CertifyRequest: TpmStructureBase
+public partial class Tpm2CertifyRequest : TpmStructureBase
 {
     /// <summary> Handle of the object to be certified
     /// Auth Index: 1
@@ -12775,7 +12799,8 @@ public partial class Tpm2CertifyRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(3, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -12833,7 +12858,7 @@ public partial class Tpm2CertifyRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("Certify_Out")]
-public partial class Tpm2CertifyResponse: TpmStructureBase
+public partial class Tpm2CertifyResponse : TpmStructureBase
 {
     /// <summary> The structure that was signed </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "certifyInfoSize", 2)]
@@ -12842,7 +12867,8 @@ public partial class Tpm2CertifyResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -12854,7 +12880,7 @@ public partial class Tpm2CertifyResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2CertifyResponse() {}
+    public Tpm2CertifyResponse() { }
 
     public Tpm2CertifyResponse(Tpm2CertifyResponse src)
     {
@@ -12885,7 +12911,7 @@ public partial class Tpm2CertifyResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeSm2))]
 [KnownType(typeof(TkCreation))]
 [SpecTypeName("CertifyCreation_In")]
-public partial class Tpm2CertifyCreationRequest: TpmStructureBase
+public partial class Tpm2CertifyCreationRequest : TpmStructureBase
 {
     /// <summary> Handle of the key that will sign the attestation block
     /// Auth Index: 1
@@ -12912,7 +12938,8 @@ public partial class Tpm2CertifyCreationRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(4, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -12978,7 +13005,7 @@ public partial class Tpm2CertifyCreationRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("CertifyCreation_Out")]
-public partial class Tpm2CertifyCreationResponse: TpmStructureBase
+public partial class Tpm2CertifyCreationResponse : TpmStructureBase
 {
     /// <summary> The structure that was signed </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "certifyInfoSize", 2)]
@@ -12987,7 +13014,8 @@ public partial class Tpm2CertifyCreationResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -12998,7 +13026,7 @@ public partial class Tpm2CertifyCreationResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2CertifyCreationResponse() {}
+    public Tpm2CertifyCreationResponse() { }
 
     public Tpm2CertifyCreationResponse(Tpm2CertifyCreationResponse src)
     {
@@ -13025,7 +13053,7 @@ public partial class Tpm2CertifyCreationResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("Quote_In")]
-public partial class Tpm2QuoteRequest: TpmStructureBase
+public partial class Tpm2QuoteRequest : TpmStructureBase
 {
     /// <summary> Handle of key that will perform signature
     /// Auth Index: 1
@@ -13041,7 +13069,8 @@ public partial class Tpm2QuoteRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13094,7 +13123,7 @@ public partial class Tpm2QuoteRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("Quote_Out")]
-public partial class Tpm2QuoteResponse: TpmStructureBase
+public partial class Tpm2QuoteResponse : TpmStructureBase
 {
     /// <summary> The quoted information </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "quotedSize", 2)]
@@ -13103,7 +13132,8 @@ public partial class Tpm2QuoteResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13114,7 +13144,7 @@ public partial class Tpm2QuoteResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2QuoteResponse() {}
+    public Tpm2QuoteResponse() { }
 
     public Tpm2QuoteResponse(Tpm2QuoteResponse src)
     {
@@ -13141,7 +13171,7 @@ public partial class Tpm2QuoteResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("GetSessionAuditDigest_In")]
-public partial class Tpm2GetSessionAuditDigestRequest: TpmStructureBase
+public partial class Tpm2GetSessionAuditDigestRequest : TpmStructureBase
 {
     /// <summary> Handle of the privacy administrator (TPM_RH_ENDORSEMENT)
     /// Auth Index: 1
@@ -13170,7 +13200,8 @@ public partial class Tpm2GetSessionAuditDigestRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(4, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13228,7 +13259,7 @@ public partial class Tpm2GetSessionAuditDigestRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("GetSessionAuditDigest_Out")]
-public partial class Tpm2GetSessionAuditDigestResponse: TpmStructureBase
+public partial class Tpm2GetSessionAuditDigestResponse : TpmStructureBase
 {
     /// <summary> The audit information that was signed </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "auditInfoSize", 2)]
@@ -13237,7 +13268,8 @@ public partial class Tpm2GetSessionAuditDigestResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13248,7 +13280,7 @@ public partial class Tpm2GetSessionAuditDigestResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2GetSessionAuditDigestResponse() {}
+    public Tpm2GetSessionAuditDigestResponse() { }
 
     public Tpm2GetSessionAuditDigestResponse(Tpm2GetSessionAuditDigestResponse src)
     {
@@ -13277,7 +13309,7 @@ public partial class Tpm2GetSessionAuditDigestResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("GetCommandAuditDigest_In")]
-public partial class Tpm2GetCommandAuditDigestRequest: TpmStructureBase
+public partial class Tpm2GetCommandAuditDigestRequest : TpmStructureBase
 {
     /// <summary> Handle of the privacy administrator (TPM_RH_ENDORSEMENT)
     /// Auth Index: 1
@@ -13300,7 +13332,8 @@ public partial class Tpm2GetCommandAuditDigestRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(3, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13356,7 +13389,7 @@ public partial class Tpm2GetCommandAuditDigestRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("GetCommandAuditDigest_Out")]
-public partial class Tpm2GetCommandAuditDigestResponse: TpmStructureBase
+public partial class Tpm2GetCommandAuditDigestResponse : TpmStructureBase
 {
     /// <summary> The auditInfo that was signed </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "auditInfoSize", 2)]
@@ -13365,7 +13398,8 @@ public partial class Tpm2GetCommandAuditDigestResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13376,7 +13410,7 @@ public partial class Tpm2GetCommandAuditDigestResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2GetCommandAuditDigestResponse() {}
+    public Tpm2GetCommandAuditDigestResponse() { }
 
     public Tpm2GetCommandAuditDigestResponse(Tpm2GetCommandAuditDigestResponse src)
     {
@@ -13403,7 +13437,7 @@ public partial class Tpm2GetCommandAuditDigestResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("GetTime_In")]
-public partial class Tpm2GetTimeRequest: TpmStructureBase
+public partial class Tpm2GetTimeRequest : TpmStructureBase
 {
     /// <summary> Handle of the privacy administrator (TPM_RH_ENDORSEMENT)
     /// Auth Index: 1
@@ -13426,7 +13460,8 @@ public partial class Tpm2GetTimeRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(3, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13481,7 +13516,7 @@ public partial class Tpm2GetTimeRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("GetTime_Out")]
-public partial class Tpm2GetTimeResponse: TpmStructureBase
+public partial class Tpm2GetTimeResponse : TpmStructureBase
 {
     /// <summary> Standard TPM-generated attestation block </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "timeInfoSize", 2)]
@@ -13490,7 +13525,8 @@ public partial class Tpm2GetTimeResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13501,7 +13537,7 @@ public partial class Tpm2GetTimeResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2GetTimeResponse() {}
+    public Tpm2GetTimeResponse() { }
 
     public Tpm2GetTimeResponse(Tpm2GetTimeResponse src)
     {
@@ -13533,7 +13569,7 @@ public partial class Tpm2GetTimeResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("CertifyX509_In")]
-public partial class Tpm2CertifyX509Request: TpmStructureBase
+public partial class Tpm2CertifyX509Request : TpmStructureBase
 {
     /// <summary> Handle of the object to be certified
     /// Auth Index: 1
@@ -13556,7 +13592,8 @@ public partial class Tpm2CertifyX509Request: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(3, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13621,7 +13658,7 @@ public partial class Tpm2CertifyX509Request: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("CertifyX509_Out")]
-public partial class Tpm2CertifyX509Response: TpmStructureBase
+public partial class Tpm2CertifyX509Response : TpmStructureBase
 {
     /// <summary> A DER encoded SEQUENCE containing the DER encoded fields added to
     /// partialCertificate to make it a complete RFC5280 TBSCertificate. </summary>
@@ -13636,7 +13673,8 @@ public partial class Tpm2CertifyX509Response: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13647,7 +13685,7 @@ public partial class Tpm2CertifyX509Response: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2CertifyX509Response() {}
+    public Tpm2CertifyX509Response() { }
 
     public Tpm2CertifyX509Response(Tpm2CertifyX509Response src)
     {
@@ -13669,7 +13707,7 @@ public partial class Tpm2CertifyX509Response: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("Commit_In")]
-public partial class Tpm2CommitRequest: TpmStructureBase
+public partial class Tpm2CommitRequest : TpmStructureBase
 {
     /// <summary> Handle of the key that will be used in the signing operation
     /// Auth Index: 1
@@ -13723,7 +13761,7 @@ public partial class Tpm2CommitRequest: TpmStructureBase
 [KnownType(typeof(EccPoint))]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("Commit_Out")]
-public partial class Tpm2CommitResponse: TpmStructureBase
+public partial class Tpm2CommitResponse : TpmStructureBase
 {
     /// <summary> ECC point K [ds](x2, y2) </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "KSize", 2)]
@@ -13745,7 +13783,7 @@ public partial class Tpm2CommitResponse: TpmStructureBase
     [DataMember]
     public ushort counter { get; set; }
 
-    public Tpm2CommitResponse() {}
+    public Tpm2CommitResponse() { }
 
     public Tpm2CommitResponse(Tpm2CommitResponse src)
     {
@@ -13765,14 +13803,14 @@ public partial class Tpm2CommitResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(EccCurve))]
 [SpecTypeName("EC_Ephemeral_In")]
-public partial class Tpm2EcEphemeralRequest: TpmStructureBase
+public partial class Tpm2EcEphemeralRequest : TpmStructureBase
 {
     /// <summary> The curve for the computed ephemeral point </summary>
     [MarshalAs(0)]
     [DataMember]
     public EccCurve curveID { get; set; }
 
-    public Tpm2EcEphemeralRequest() {}
+    public Tpm2EcEphemeralRequest() { }
 
     /// <param name = "_curveID"> The curve for the computed ephemeral point </param>
     public Tpm2EcEphemeralRequest(EccCurve _curveID) { curveID = _curveID; }
@@ -13787,7 +13825,7 @@ public partial class Tpm2EcEphemeralRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(EccPoint))]
 [SpecTypeName("EC_Ephemeral_Out")]
-public partial class Tpm2EcEphemeralResponse: TpmStructureBase
+public partial class Tpm2EcEphemeralResponse : TpmStructureBase
 {
     /// <summary> Ephemeral public key Q [r]G </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "QSize", 2)]
@@ -13799,7 +13837,7 @@ public partial class Tpm2EcEphemeralResponse: TpmStructureBase
     [DataMember]
     public ushort counter { get; set; }
 
-    public Tpm2EcEphemeralResponse() {}
+    public Tpm2EcEphemeralResponse() { }
 
     public Tpm2EcEphemeralResponse(Tpm2EcEphemeralResponse src)
     {
@@ -13827,7 +13865,7 @@ public partial class Tpm2EcEphemeralResponse: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("VerifySignature_In")]
-public partial class Tpm2VerifySignatureRequest: TpmStructureBase
+public partial class Tpm2VerifySignatureRequest : TpmStructureBase
 {
     /// <summary> Handle of public key that will be used in the validation
     /// Auth Index: None </summary>
@@ -13842,7 +13880,8 @@ public partial class Tpm2VerifySignatureRequest: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13878,13 +13917,13 @@ public partial class Tpm2VerifySignatureRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TkVerified))]
 [SpecTypeName("VerifySignature_Out")]
-public partial class Tpm2VerifySignatureResponse: TpmStructureBase
+public partial class Tpm2VerifySignatureResponse : TpmStructureBase
 {
     [MarshalAs(0)]
     [DataMember]
     public TkVerified validation { get; set; }
 
-    public Tpm2VerifySignatureResponse() {}
+    public Tpm2VerifySignatureResponse() { }
 
     public Tpm2VerifySignatureResponse(Tpm2VerifySignatureResponse src) { validation = src.validation; }
 
@@ -13909,7 +13948,7 @@ public partial class Tpm2VerifySignatureResponse: TpmStructureBase
 [KnownType(typeof(SigSchemeSm2))]
 [KnownType(typeof(TkHashcheck))]
 [SpecTypeName("Sign_In")]
-public partial class Tpm2SignRequest: TpmStructureBase
+public partial class Tpm2SignRequest : TpmStructureBase
 {
     /// <summary> Handle of key that will perform signing
     /// Auth Index: 1
@@ -13925,7 +13964,8 @@ public partial class Tpm2SignRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(2, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13982,11 +14022,12 @@ public partial class Tpm2SignRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("Sign_Out")]
-public partial class Tpm2SignResponse: TpmStructureBase
+public partial class Tpm2SignResponse : TpmStructureBase
 {
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -13997,7 +14038,7 @@ public partial class Tpm2SignResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2SignResponse() {}
+    public Tpm2SignResponse() { }
 
     public Tpm2SignResponse(Tpm2SignResponse src) { signature = src.signature; }
 
@@ -14013,7 +14054,7 @@ public partial class Tpm2SignResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("SetCommandCodeAuditStatus_In")]
-public partial class Tpm2SetCommandCodeAuditStatusRequest: TpmStructureBase
+public partial class Tpm2SetCommandCodeAuditStatusRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -14072,7 +14113,7 @@ public partial class Tpm2SetCommandCodeAuditStatusRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PCR_Extend_In")]
-public partial class Tpm2PcrExtendRequest: TpmStructureBase
+public partial class Tpm2PcrExtendRequest : TpmStructureBase
 {
     /// <summary> Handle of the PCR
     /// Auth Handle: 1
@@ -14107,7 +14148,7 @@ public partial class Tpm2PcrExtendRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PCR_Event_In")]
-public partial class Tpm2PcrEventRequest: TpmStructureBase
+public partial class Tpm2PcrEventRequest : TpmStructureBase
 {
     /// <summary> Handle of the PCR
     /// Auth Handle: 1
@@ -14141,13 +14182,13 @@ public partial class Tpm2PcrEventRequest: TpmStructureBase
 /// <summary> This command is used to cause an update to the indicated PCR. </summary>
 [DataContract]
 [SpecTypeName("PCR_Event_Out")]
-public partial class Tpm2PcrEventResponse: TpmStructureBase
+public partial class Tpm2PcrEventResponse : TpmStructureBase
 {
     [MarshalAs(0, MarshalType.VariableLengthArray, "digestsCount", 4)]
     [DataMember]
     public TpmHash[] digests;
 
-    public Tpm2PcrEventResponse() {}
+    public Tpm2PcrEventResponse() { }
 
     public Tpm2PcrEventResponse(Tpm2PcrEventResponse src) { digests = src.digests; }
 
@@ -14159,14 +14200,14 @@ public partial class Tpm2PcrEventResponse: TpmStructureBase
 /// <summary> This command returns the values of all PCR specified in pcrSelectionIn. </summary>
 [DataContract]
 [SpecTypeName("PCR_Read_In")]
-public partial class Tpm2PcrReadRequest: TpmStructureBase
+public partial class Tpm2PcrReadRequest : TpmStructureBase
 {
     /// <summary> The selection of PCR to read </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "pcrSelectionInCount", 4)]
     [DataMember]
     public PcrSelection[] pcrSelectionIn;
 
-    public Tpm2PcrReadRequest() {}
+    public Tpm2PcrReadRequest() { }
 
     /// <param name = "_pcrSelectionIn"> The selection of PCR to read </param>
     public Tpm2PcrReadRequest(PcrSelection[] _pcrSelectionIn) { pcrSelectionIn = _pcrSelectionIn; }
@@ -14179,7 +14220,7 @@ public partial class Tpm2PcrReadRequest: TpmStructureBase
 /// <summary> This command returns the values of all PCR specified in pcrSelectionIn. </summary>
 [DataContract]
 [SpecTypeName("PCR_Read_Out")]
-public partial class Tpm2PcrReadResponse: TpmStructureBase
+public partial class Tpm2PcrReadResponse : TpmStructureBase
 {
     /// <summary> The current value of the PCR update counter </summary>
     [MarshalAs(0)]
@@ -14197,7 +14238,7 @@ public partial class Tpm2PcrReadResponse: TpmStructureBase
     [DataMember]
     public Tpm2bDigest[] pcrValues;
 
-    public Tpm2PcrReadResponse() {}
+    public Tpm2PcrReadResponse() { }
 
     public Tpm2PcrReadResponse(Tpm2PcrReadResponse src)
     {
@@ -14216,7 +14257,7 @@ public partial class Tpm2PcrReadResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PCR_Allocate_In")]
-public partial class Tpm2PcrAllocateRequest: TpmStructureBase
+public partial class Tpm2PcrAllocateRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -14251,7 +14292,7 @@ public partial class Tpm2PcrAllocateRequest: TpmStructureBase
 /// algorithms. This command requires Platform Authorization. </summary>
 [DataContract]
 [SpecTypeName("PCR_Allocate_Out")]
-public partial class Tpm2PcrAllocateResponse: TpmStructureBase
+public partial class Tpm2PcrAllocateResponse : TpmStructureBase
 {
     /// <summary> YES if the allocation succeeded </summary>
     [MarshalAs(0)]
@@ -14273,7 +14314,7 @@ public partial class Tpm2PcrAllocateResponse: TpmStructureBase
     [DataMember]
     public uint sizeAvailable { get; set; }
 
-    public Tpm2PcrAllocateResponse() {}
+    public Tpm2PcrAllocateResponse() { }
 
     public Tpm2PcrAllocateResponse(Tpm2PcrAllocateResponse src)
     {
@@ -14294,7 +14335,7 @@ public partial class Tpm2PcrAllocateResponse: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PCR_SetAuthPolicy_In")]
-public partial class Tpm2PcrSetAuthPolicyRequest: TpmStructureBase
+public partial class Tpm2PcrSetAuthPolicyRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -14348,7 +14389,7 @@ public partial class Tpm2PcrSetAuthPolicyRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PCR_SetAuthValue_In")]
-public partial class Tpm2PcrSetAuthValueRequest: TpmStructureBase
+public partial class Tpm2PcrSetAuthValueRequest : TpmStructureBase
 {
     /// <summary> Handle for a PCR that may have an authorization value set
     /// Auth Index: 1
@@ -14386,7 +14427,7 @@ public partial class Tpm2PcrSetAuthValueRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PCR_Reset_In")]
-public partial class Tpm2PcrResetRequest: TpmStructureBase
+public partial class Tpm2PcrResetRequest : TpmStructureBase
 {
     /// <summary> The PCR to reset
     /// Auth Index: 1
@@ -14423,7 +14464,7 @@ public partial class Tpm2PcrResetRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("PolicySigned_In")]
-public partial class Tpm2PolicySignedRequest: TpmStructureBase
+public partial class Tpm2PolicySignedRequest : TpmStructureBase
 {
     /// <summary> Handle for a key that will validate the signature
     /// Auth Index: None </summary>
@@ -14466,7 +14507,8 @@ public partial class Tpm2PolicySignedRequest: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(6, MarshalType.UnionSelector)]
-    public TpmAlgId authSigAlg {
+    public TpmAlgId authSigAlg
+    {
         get { return auth?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -14524,7 +14566,7 @@ public partial class Tpm2PolicySignedRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TkAuth))]
 [SpecTypeName("PolicySigned_Out")]
-public partial class Tpm2PolicySignedResponse: TpmStructureBase
+public partial class Tpm2PolicySignedResponse : TpmStructureBase
 {
     /// <summary> Implementation-specific time value, used to indicate to the TPM when the
     /// ticket expires
@@ -14539,7 +14581,7 @@ public partial class Tpm2PolicySignedResponse: TpmStructureBase
     [DataMember]
     public TkAuth policyTicket { get; set; }
 
-    public Tpm2PolicySignedResponse() {}
+    public Tpm2PolicySignedResponse() { }
 
     public Tpm2PolicySignedResponse(Tpm2PolicySignedResponse src)
     {
@@ -14560,7 +14602,7 @@ public partial class Tpm2PolicySignedResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicySecret_In")]
-public partial class Tpm2PolicySecretRequest: TpmStructureBase
+public partial class Tpm2PolicySecretRequest : TpmStructureBase
 {
     /// <summary> Handle for an entity providing the authorization
     /// Auth Index: 1
@@ -14648,7 +14690,7 @@ public partial class Tpm2PolicySecretRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TkAuth))]
 [SpecTypeName("PolicySecret_Out")]
-public partial class Tpm2PolicySecretResponse: TpmStructureBase
+public partial class Tpm2PolicySecretResponse : TpmStructureBase
 {
     /// <summary> Implementation-specific time value used to indicate to the TPM when the
     /// ticket expires </summary>
@@ -14662,7 +14704,7 @@ public partial class Tpm2PolicySecretResponse: TpmStructureBase
     [DataMember]
     public TkAuth policyTicket { get; set; }
 
-    public Tpm2PolicySecretResponse() {}
+    public Tpm2PolicySecretResponse() { }
 
     public Tpm2PolicySecretResponse(Tpm2PolicySecretResponse src)
     {
@@ -14682,7 +14724,7 @@ public partial class Tpm2PolicySecretResponse: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(TkAuth))]
 [SpecTypeName("PolicyTicket_In")]
-public partial class Tpm2PolicyTicketRequest: TpmStructureBase
+public partial class Tpm2PolicyTicketRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -14755,7 +14797,7 @@ public partial class Tpm2PolicyTicketRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyOR_In")]
-public partial class Tpm2PolicyORRequest: TpmStructureBase
+public partial class Tpm2PolicyORRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -14791,7 +14833,7 @@ public partial class Tpm2PolicyORRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyPCR_In")]
-public partial class Tpm2PolicyPCRRequest: TpmStructureBase
+public partial class Tpm2PolicyPCRRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -14835,7 +14877,7 @@ public partial class Tpm2PolicyPCRRequest: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(LocalityAttr))]
 [SpecTypeName("PolicyLocality_In")]
-public partial class Tpm2PolicyLocalityRequest: TpmStructureBase
+public partial class Tpm2PolicyLocalityRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -14871,7 +14913,7 @@ public partial class Tpm2PolicyLocalityRequest: TpmStructureBase
 [KnownType(typeof(Eo))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyNV_In")]
-public partial class Tpm2PolicyNVRequest: TpmStructureBase
+public partial class Tpm2PolicyNVRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -14945,7 +14987,7 @@ public partial class Tpm2PolicyNVRequest: TpmStructureBase
 [KnownType(typeof(Eo))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyCounterTimer_In")]
-public partial class Tpm2PolicyCounterTimerRequest: TpmStructureBase
+public partial class Tpm2PolicyCounterTimerRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -14995,7 +15037,7 @@ public partial class Tpm2PolicyCounterTimerRequest: TpmStructureBase
 [KnownType(typeof(TpmCc))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyCommandCode_In")]
-public partial class Tpm2PolicyCommandCodeRequest: TpmStructureBase
+public partial class Tpm2PolicyCommandCodeRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15029,7 +15071,7 @@ public partial class Tpm2PolicyCommandCodeRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyPhysicalPresence_In")]
-public partial class Tpm2PolicyPhysicalPresenceRequest: TpmStructureBase
+public partial class Tpm2PolicyPhysicalPresenceRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15053,7 +15095,7 @@ public partial class Tpm2PolicyPhysicalPresenceRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyCpHash_In")]
-public partial class Tpm2PolicyCpHashRequest: TpmStructureBase
+public partial class Tpm2PolicyCpHashRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15089,7 +15131,7 @@ public partial class Tpm2PolicyCpHashRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyNameHash_In")]
-public partial class Tpm2PolicyNameHashRequest: TpmStructureBase
+public partial class Tpm2PolicyNameHashRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15123,7 +15165,7 @@ public partial class Tpm2PolicyNameHashRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyDuplicationSelect_In")]
-public partial class Tpm2PolicyDuplicationSelectRequest: TpmStructureBase
+public partial class Tpm2PolicyDuplicationSelectRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15175,7 +15217,7 @@ public partial class Tpm2PolicyDuplicationSelectRequest: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(TkVerified))]
 [SpecTypeName("PolicyAuthorize_In")]
-public partial class Tpm2PolicyAuthorizeRequest: TpmStructureBase
+public partial class Tpm2PolicyAuthorizeRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15231,7 +15273,7 @@ public partial class Tpm2PolicyAuthorizeRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyAuthValue_In")]
-public partial class Tpm2PolicyAuthValueRequest: TpmStructureBase
+public partial class Tpm2PolicyAuthValueRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15255,7 +15297,7 @@ public partial class Tpm2PolicyAuthValueRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyPassword_In")]
-public partial class Tpm2PolicyPasswordRequest: TpmStructureBase
+public partial class Tpm2PolicyPasswordRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15280,7 +15322,7 @@ public partial class Tpm2PolicyPasswordRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyGetDigest_In")]
-public partial class Tpm2PolicyGetDigestRequest: TpmStructureBase
+public partial class Tpm2PolicyGetDigestRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session
     /// Auth Index: None </summary>
@@ -15304,14 +15346,14 @@ public partial class Tpm2PolicyGetDigestRequest: TpmStructureBase
 /// authPolicy for an object. </summary>
 [DataContract]
 [SpecTypeName("PolicyGetDigest_Out")]
-public partial class Tpm2PolicyGetDigestResponse: TpmStructureBase
+public partial class Tpm2PolicyGetDigestResponse : TpmStructureBase
 {
     /// <summary> The current value of the policySessionpolicyDigest </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "policyDigestSize", 2)]
     [DataMember]
     public byte[] policyDigest;
 
-    public Tpm2PolicyGetDigestResponse() {}
+    public Tpm2PolicyGetDigestResponse() { }
 
     public Tpm2PolicyGetDigestResponse(Tpm2PolicyGetDigestResponse src) { policyDigest = src.policyDigest; }
 
@@ -15326,7 +15368,7 @@ public partial class Tpm2PolicyGetDigestResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyNvWritten_In")]
-public partial class Tpm2PolicyNvWrittenRequest: TpmStructureBase
+public partial class Tpm2PolicyNvWrittenRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15363,7 +15405,7 @@ public partial class Tpm2PolicyNvWrittenRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyTemplate_In")]
-public partial class Tpm2PolicyTemplateRequest: TpmStructureBase
+public partial class Tpm2PolicyTemplateRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -15400,7 +15442,7 @@ public partial class Tpm2PolicyTemplateRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PolicyAuthorizeNV_In")]
-public partial class Tpm2PolicyAuthorizeNVRequest: TpmStructureBase
+public partial class Tpm2PolicyAuthorizeNVRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -15457,7 +15499,7 @@ public partial class Tpm2PolicyAuthorizeNVRequest: TpmStructureBase
 [KnownType(typeof(SensitiveCreate))]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("CreatePrimary_In")]
-public partial class Tpm2CreatePrimaryRequest: TpmStructureBase
+public partial class Tpm2CreatePrimaryRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_ENDORSEMENT, TPM_RH_OWNER, TPM_RH_PLATFORM+{PP}, or TPM_RH_NULL
     /// Auth Index: 1
@@ -15524,7 +15566,7 @@ public partial class Tpm2CreatePrimaryRequest: TpmStructureBase
 [KnownType(typeof(TpmPublic))]
 [KnownType(typeof(TkCreation))]
 [SpecTypeName("CreatePrimary_Out")]
-public partial class Tpm2CreatePrimaryResponse: TpmStructureBase
+public partial class Tpm2CreatePrimaryResponse : TpmStructureBase
 {
     /// <summary> Handle of type TPM_HT_TRANSIENT for created Primary Object </summary>
     [MarshalAs(0)]
@@ -15580,7 +15622,7 @@ public partial class Tpm2CreatePrimaryResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("HierarchyControl_In")]
-public partial class Tpm2HierarchyControlRequest: TpmStructureBase
+public partial class Tpm2HierarchyControlRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_ENDORSEMENT, TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -15633,7 +15675,7 @@ public partial class Tpm2HierarchyControlRequest: TpmStructureBase
 [KnownType(typeof(TpmAlgId))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("SetPrimaryPolicy_In")]
-public partial class Tpm2SetPrimaryPolicyRequest: TpmStructureBase
+public partial class Tpm2SetPrimaryPolicyRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_LOCKOUT, TPM_RH_ENDORSEMENT, TPM_RH_OWNER, TPMI_RH_ACT or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -15685,7 +15727,7 @@ public partial class Tpm2SetPrimaryPolicyRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ChangePPS_In")]
-public partial class Tpm2ChangePPSRequest: TpmStructureBase
+public partial class Tpm2ChangePPSRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -15715,7 +15757,7 @@ public partial class Tpm2ChangePPSRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ChangeEPS_In")]
-public partial class Tpm2ChangeEPSRequest: TpmStructureBase
+public partial class Tpm2ChangeEPSRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM+{PP}
     /// Auth Handle: 1
@@ -15740,7 +15782,7 @@ public partial class Tpm2ChangeEPSRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("Clear_In")]
-public partial class Tpm2ClearRequest: TpmStructureBase
+public partial class Tpm2ClearRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_LOCKOUT or TPM_RH_PLATFORM+{PP}
     /// Auth Handle: 1
@@ -15765,7 +15807,7 @@ public partial class Tpm2ClearRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ClearControl_In")]
-public partial class Tpm2ClearControlRequest: TpmStructureBase
+public partial class Tpm2ClearControlRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_LOCKOUT or TPM_RH_PLATFORM+{PP}
     /// Auth Handle: 1
@@ -15803,7 +15845,7 @@ public partial class Tpm2ClearControlRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("HierarchyChangeAuth_In")]
-public partial class Tpm2HierarchyChangeAuthRequest: TpmStructureBase
+public partial class Tpm2HierarchyChangeAuthRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_LOCKOUT, TPM_RH_ENDORSEMENT, TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -15840,7 +15882,7 @@ public partial class Tpm2HierarchyChangeAuthRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("DictionaryAttackLockReset_In")]
-public partial class Tpm2DictionaryAttackLockResetRequest: TpmStructureBase
+public partial class Tpm2DictionaryAttackLockResetRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_LOCKOUT
     /// Auth Index: 1
@@ -15865,7 +15907,7 @@ public partial class Tpm2DictionaryAttackLockResetRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("DictionaryAttackParameters_In")]
-public partial class Tpm2DictionaryAttackParametersRequest: TpmStructureBase
+public partial class Tpm2DictionaryAttackParametersRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_LOCKOUT
     /// Auth Index: 1
@@ -15922,7 +15964,7 @@ public partial class Tpm2DictionaryAttackParametersRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("PP_Commands_In")]
-public partial class Tpm2PpCommandsRequest: TpmStructureBase
+public partial class Tpm2PpCommandsRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM+PP
     /// Auth Index: 1
@@ -15969,7 +16011,7 @@ public partial class Tpm2PpCommandsRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("SetAlgorithmSet_In")]
-public partial class Tpm2SetAlgorithmSetRequest: TpmStructureBase
+public partial class Tpm2SetAlgorithmSetRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM
     /// Auth Index: 1
@@ -16016,7 +16058,7 @@ public partial class Tpm2SetAlgorithmSetRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("FieldUpgradeStart_In")]
-public partial class Tpm2FieldUpgradeStartRequest: TpmStructureBase
+public partial class Tpm2FieldUpgradeStartRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_PLATFORM+{PP}
     /// Auth Index:1
@@ -16039,7 +16081,8 @@ public partial class Tpm2FieldUpgradeStartRequest: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(3, MarshalType.UnionSelector)]
-    public TpmAlgId manifestSignatureSigAlg {
+    public TpmAlgId manifestSignatureSigAlg
+    {
         get { return manifestSignature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -16088,14 +16131,14 @@ public partial class Tpm2FieldUpgradeStartRequest: TpmStructureBase
 /// TPM_RC_FIELDUPGRADE. </summary>
 [DataContract]
 [SpecTypeName("FieldUpgradeData_In")]
-public partial class Tpm2FieldUpgradeDataRequest: TpmStructureBase
+public partial class Tpm2FieldUpgradeDataRequest : TpmStructureBase
 {
     /// <summary> Field upgrade image data </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "fuDataSize", 2)]
     [DataMember]
     public byte[] fuData;
 
-    public Tpm2FieldUpgradeDataRequest() {}
+    public Tpm2FieldUpgradeDataRequest() { }
 
     /// <param name = "_fuData"> Field upgrade image data </param>
     public Tpm2FieldUpgradeDataRequest(byte[] _fuData) { fuData = _fuData; }
@@ -16114,7 +16157,7 @@ public partial class Tpm2FieldUpgradeDataRequest: TpmStructureBase
 [KnownType(typeof(TpmHash))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("FieldUpgradeData_Out")]
-public partial class Tpm2FieldUpgradeDataResponse: TpmStructureBase
+public partial class Tpm2FieldUpgradeDataResponse : TpmStructureBase
 {
     /// <summary> Tagged digest of the next block
     /// TPM_ALG_NULL if field update is complete </summary>
@@ -16127,7 +16170,7 @@ public partial class Tpm2FieldUpgradeDataResponse: TpmStructureBase
     [DataMember]
     public TpmHash firstDigest { get; set; }
 
-    public Tpm2FieldUpgradeDataResponse() {}
+    public Tpm2FieldUpgradeDataResponse() { }
 
     public Tpm2FieldUpgradeDataResponse(Tpm2FieldUpgradeDataResponse src)
     {
@@ -16144,7 +16187,7 @@ public partial class Tpm2FieldUpgradeDataResponse: TpmStructureBase
 /// TPM. </summary>
 [DataContract]
 [SpecTypeName("FirmwareRead_In")]
-public partial class Tpm2FirmwareReadRequest: TpmStructureBase
+public partial class Tpm2FirmwareReadRequest : TpmStructureBase
 {
     /// <summary> The number of previous calls to this command in this sequence
     /// set to 0 on the first call </summary>
@@ -16152,7 +16195,7 @@ public partial class Tpm2FirmwareReadRequest: TpmStructureBase
     [DataMember]
     public uint sequenceNumber { get; set; }
 
-    public Tpm2FirmwareReadRequest() {}
+    public Tpm2FirmwareReadRequest() { }
 
     /// <param name = "_sequenceNumber"> The number of previous calls to this command in this sequence
     ///        set to 0 on the first call </param>
@@ -16167,14 +16210,14 @@ public partial class Tpm2FirmwareReadRequest: TpmStructureBase
 /// TPM. </summary>
 [DataContract]
 [SpecTypeName("FirmwareRead_Out")]
-public partial class Tpm2FirmwareReadResponse: TpmStructureBase
+public partial class Tpm2FirmwareReadResponse : TpmStructureBase
 {
     /// <summary> Field upgrade image data </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "fuDataSize", 2)]
     [DataMember]
     public byte[] fuData;
 
-    public Tpm2FirmwareReadResponse() {}
+    public Tpm2FirmwareReadResponse() { }
 
     public Tpm2FirmwareReadResponse(Tpm2FirmwareReadResponse src) { fuData = src.fuData; }
 
@@ -16188,7 +16231,7 @@ public partial class Tpm2FirmwareReadResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ContextSave_In")]
-public partial class Tpm2ContextSaveRequest: TpmStructureBase
+public partial class Tpm2ContextSaveRequest : TpmStructureBase
 {
     /// <summary> Handle of the resource to save
     /// Auth Index: None </summary>
@@ -16212,13 +16255,13 @@ public partial class Tpm2ContextSaveRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Context))]
 [SpecTypeName("ContextSave_Out")]
-public partial class Tpm2ContextSaveResponse: TpmStructureBase
+public partial class Tpm2ContextSaveResponse : TpmStructureBase
 {
     [MarshalAs(0)]
     [DataMember]
     public Context context { get; set; }
 
-    public Tpm2ContextSaveResponse() {}
+    public Tpm2ContextSaveResponse() { }
 
     public Tpm2ContextSaveResponse(Tpm2ContextSaveResponse src) { context = src.context; }
 
@@ -16232,14 +16275,14 @@ public partial class Tpm2ContextSaveResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Context))]
 [SpecTypeName("ContextLoad_In")]
-public partial class Tpm2ContextLoadRequest: TpmStructureBase
+public partial class Tpm2ContextLoadRequest : TpmStructureBase
 {
     /// <summary> The context blob </summary>
     [MarshalAs(0)]
     [DataMember]
     public Context context { get; set; }
 
-    public Tpm2ContextLoadRequest() {}
+    public Tpm2ContextLoadRequest() { }
 
     /// <param name = "_context"> The context blob </param>
     public Tpm2ContextLoadRequest(Context _context) { context = _context; }
@@ -16254,7 +16297,7 @@ public partial class Tpm2ContextLoadRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ContextLoad_Out")]
-public partial class Tpm2ContextLoadResponse: TpmStructureBase
+public partial class Tpm2ContextLoadResponse : TpmStructureBase
 {
     /// <summary> The handle assigned to the resource after it has been successfully loaded </summary>
     [MarshalAs(0)]
@@ -16275,7 +16318,7 @@ public partial class Tpm2ContextLoadResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("FlushContext_In")]
-public partial class Tpm2FlushContextRequest: TpmStructureBase
+public partial class Tpm2FlushContextRequest : TpmStructureBase
 {
     /// <summary> The handle of the item to flush
     /// NOTE This is a use of a handle as a parameter. </summary>
@@ -16299,7 +16342,7 @@ public partial class Tpm2FlushContextRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("EvictControl_In")]
-public partial class Tpm2EvictControlRequest: TpmStructureBase
+public partial class Tpm2EvictControlRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Handle: 1
@@ -16354,9 +16397,9 @@ public partial class Tpm2EvictControlRequest: TpmStructureBase
 /// current setting of Time, Clock, resetCount, and restartCount. </summary>
 [DataContract]
 [SpecTypeName("ReadClock_In")]
-public partial class Tpm2ReadClockRequest: TpmStructureBase
+public partial class Tpm2ReadClockRequest : TpmStructureBase
 {
-    public Tpm2ReadClockRequest() {}
+    public Tpm2ReadClockRequest() { }
 
     new public Tpm2ReadClockRequest Copy() { return CreateCopy<Tpm2ReadClockRequest>(); }
 
@@ -16368,13 +16411,13 @@ public partial class Tpm2ReadClockRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TimeInfo))]
 [SpecTypeName("ReadClock_Out")]
-public partial class Tpm2ReadClockResponse: TpmStructureBase
+public partial class Tpm2ReadClockResponse : TpmStructureBase
 {
     [MarshalAs(0)]
     [DataMember]
     public TimeInfo currentTime { get; set; }
 
-    public Tpm2ReadClockResponse() {}
+    public Tpm2ReadClockResponse() { }
 
     public Tpm2ReadClockResponse(Tpm2ReadClockResponse src) { currentTime = src.currentTime; }
 
@@ -16391,7 +16434,7 @@ public partial class Tpm2ReadClockResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ClockSet_In")]
-public partial class Tpm2ClockSetRequest: TpmStructureBase
+public partial class Tpm2ClockSetRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Handle: 1
@@ -16428,7 +16471,7 @@ public partial class Tpm2ClockSetRequest: TpmStructureBase
 [KnownType(typeof(ClockAdjust))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ClockRateAdjust_In")]
-public partial class Tpm2ClockRateAdjustRequest: TpmStructureBase
+public partial class Tpm2ClockRateAdjustRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Handle: 1
@@ -16464,7 +16507,7 @@ public partial class Tpm2ClockRateAdjustRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(Cap))]
 [SpecTypeName("GetCapability_In")]
-public partial class Tpm2GetCapabilityRequest: TpmStructureBase
+public partial class Tpm2GetCapabilityRequest : TpmStructureBase
 {
     /// <summary> Group selection; determines the format of the response </summary>
     [MarshalAs(0)]
@@ -16481,7 +16524,7 @@ public partial class Tpm2GetCapabilityRequest: TpmStructureBase
     [DataMember]
     public uint propertyCount { get; set; }
 
-    public Tpm2GetCapabilityRequest() {}
+    public Tpm2GetCapabilityRequest() { }
 
     /// <param name = "_capability"> Group selection; determines the format of the response </param>
     /// <param name = "_property"> Further definition of information </param>
@@ -16513,7 +16556,7 @@ public partial class Tpm2GetCapabilityRequest: TpmStructureBase
 [KnownType(typeof(TaggedPolicyArray))]
 [KnownType(typeof(TaggedTpmPropertyArray))]
 [SpecTypeName("GetCapability_Out")]
-public partial class Tpm2GetCapabilityResponse: TpmStructureBase
+public partial class Tpm2GetCapabilityResponse : TpmStructureBase
 {
     /// <summary> Flag to indicate if there are more values of this type </summary>
     [MarshalAs(0)]
@@ -16522,7 +16565,8 @@ public partial class Tpm2GetCapabilityResponse: TpmStructureBase
 
     /// <summary> The capability </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public Cap capabilityDataCapability {
+    public Cap capabilityDataCapability
+    {
         get { return capabilityData.GetUnionSelector(); }
     }
 
@@ -16534,7 +16578,7 @@ public partial class Tpm2GetCapabilityResponse: TpmStructureBase
     [DataMember]
     public ICapabilitiesUnion capabilityData { get; set; }
 
-    public Tpm2GetCapabilityResponse() {}
+    public Tpm2GetCapabilityResponse() { }
 
     public Tpm2GetCapabilityResponse(Tpm2GetCapabilityResponse src)
     {
@@ -16557,11 +16601,12 @@ public partial class Tpm2GetCapabilityResponse: TpmStructureBase
 [KnownType(typeof(RsaParms))]
 [KnownType(typeof(SymcipherParms))]
 [SpecTypeName("TestParms_In")]
-public partial class Tpm2TestParmsRequest: TpmStructureBase
+public partial class Tpm2TestParmsRequest : TpmStructureBase
 {
     /// <summary> The algorithm to be tested </summary>
     [MarshalAs(0, MarshalType.UnionSelector)]
-    public TpmAlgId parametersType {
+    public TpmAlgId parametersType
+    {
         get { return parameters.GetUnionSelector(); }
     }
 
@@ -16571,7 +16616,7 @@ public partial class Tpm2TestParmsRequest: TpmStructureBase
     [DataMember]
     public IPublicParmsUnion parameters { get; set; }
 
-    public Tpm2TestParmsRequest() {}
+    public Tpm2TestParmsRequest() { }
 
     /// <param name = "_parameters"> Algorithm parameters to be validated
     ///        One of: KeyedhashParms, SymcipherParms, RsaParms, EccParms, AsymParms. </param>
@@ -16589,7 +16634,7 @@ public partial class Tpm2TestParmsRequest: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(NvPublic))]
 [SpecTypeName("NV_DefineSpace_In")]
-public partial class Tpm2NvDefineSpaceRequest: TpmStructureBase
+public partial class Tpm2NvDefineSpaceRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -16631,7 +16676,7 @@ public partial class Tpm2NvDefineSpaceRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_UndefineSpace_In")]
-public partial class Tpm2NvUndefineSpaceRequest: TpmStructureBase
+public partial class Tpm2NvUndefineSpaceRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -16673,7 +16718,7 @@ public partial class Tpm2NvUndefineSpaceRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_UndefineSpaceSpecial_In")]
-public partial class Tpm2NvUndefineSpaceSpecialRequest: TpmStructureBase
+public partial class Tpm2NvUndefineSpaceSpecialRequest : TpmStructureBase
 {
     /// <summary> Index to be deleted
     /// Auth Index: 1
@@ -16718,7 +16763,7 @@ public partial class Tpm2NvUndefineSpaceSpecialRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_ReadPublic_In")]
-public partial class Tpm2NvReadPublicRequest: TpmStructureBase
+public partial class Tpm2NvReadPublicRequest : TpmStructureBase
 {
     /// <summary> The NV Index
     /// Auth Index: None </summary>
@@ -16743,7 +16788,7 @@ public partial class Tpm2NvReadPublicRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(NvPublic))]
 [SpecTypeName("NV_ReadPublic_Out")]
-public partial class Tpm2NvReadPublicResponse: TpmStructureBase
+public partial class Tpm2NvReadPublicResponse : TpmStructureBase
 {
     /// <summary> The public area of the NV Index </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "nvPublicSize", 2)]
@@ -16755,7 +16800,7 @@ public partial class Tpm2NvReadPublicResponse: TpmStructureBase
     [DataMember]
     public byte[] nvName;
 
-    public Tpm2NvReadPublicResponse() {}
+    public Tpm2NvReadPublicResponse() { }
 
     public Tpm2NvReadPublicResponse(Tpm2NvReadPublicResponse src)
     {
@@ -16773,7 +16818,7 @@ public partial class Tpm2NvReadPublicResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_Write_In")]
-public partial class Tpm2NvWriteRequest: TpmStructureBase
+public partial class Tpm2NvWriteRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -16829,7 +16874,7 @@ public partial class Tpm2NvWriteRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_Increment_In")]
-public partial class Tpm2NvIncrementRequest: TpmStructureBase
+public partial class Tpm2NvIncrementRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -16871,7 +16916,7 @@ public partial class Tpm2NvIncrementRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_Extend_In")]
-public partial class Tpm2NvExtendRequest: TpmStructureBase
+public partial class Tpm2NvExtendRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -16921,7 +16966,7 @@ public partial class Tpm2NvExtendRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_SetBits_In")]
-public partial class Tpm2NvSetBitsRequest: TpmStructureBase
+public partial class Tpm2NvSetBitsRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -16971,7 +17016,7 @@ public partial class Tpm2NvSetBitsRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_WriteLock_In")]
-public partial class Tpm2NvWriteLockRequest: TpmStructureBase
+public partial class Tpm2NvWriteLockRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -17013,7 +17058,7 @@ public partial class Tpm2NvWriteLockRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_GlobalWriteLock_In")]
-public partial class Tpm2NvGlobalWriteLockRequest: TpmStructureBase
+public partial class Tpm2NvGlobalWriteLockRequest : TpmStructureBase
 {
     /// <summary> TPM_RH_OWNER or TPM_RH_PLATFORM+{PP}
     /// Auth Index: 1
@@ -17039,7 +17084,7 @@ public partial class Tpm2NvGlobalWriteLockRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_Read_In")]
-public partial class Tpm2NvReadRequest: TpmStructureBase
+public partial class Tpm2NvReadRequest : TpmStructureBase
 {
     /// <summary> The handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -17096,14 +17141,14 @@ public partial class Tpm2NvReadRequest: TpmStructureBase
 /// TPM2_NV_DefineSpace(). </summary>
 [DataContract]
 [SpecTypeName("NV_Read_Out")]
-public partial class Tpm2NvReadResponse: TpmStructureBase
+public partial class Tpm2NvReadResponse : TpmStructureBase
 {
     /// <summary> The data read </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "dataSize", 2)]
     [DataMember]
     public byte[] data;
 
-    public Tpm2NvReadResponse() {}
+    public Tpm2NvReadResponse() { }
 
     public Tpm2NvReadResponse(Tpm2NvReadResponse src) { data = src.data; }
 
@@ -17117,7 +17162,7 @@ public partial class Tpm2NvReadResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_ReadLock_In")]
-public partial class Tpm2NvReadLockRequest: TpmStructureBase
+public partial class Tpm2NvReadLockRequest : TpmStructureBase
 {
     /// <summary> The handle indicating the source of the authorization value
     /// Auth Index: 1
@@ -17158,7 +17203,7 @@ public partial class Tpm2NvReadLockRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("NV_ChangeAuth_In")]
-public partial class Tpm2NvChangeAuthRequest: TpmStructureBase
+public partial class Tpm2NvChangeAuthRequest : TpmStructureBase
 {
     /// <summary> Handle of the entity
     /// Auth Index: 1
@@ -17204,7 +17249,7 @@ public partial class Tpm2NvChangeAuthRequest: TpmStructureBase
 [KnownType(typeof(SigSchemeRsassa))]
 [KnownType(typeof(SigSchemeSm2))]
 [SpecTypeName("NV_Certify_In")]
-public partial class Tpm2NvCertifyRequest: TpmStructureBase
+public partial class Tpm2NvCertifyRequest : TpmStructureBase
 {
     /// <summary> Handle of the key used to sign the attestation structure
     /// Auth Index: 1
@@ -17233,7 +17278,8 @@ public partial class Tpm2NvCertifyRequest: TpmStructureBase
 
     /// <summary> Scheme selector </summary>
     [MarshalAs(4, MarshalType.UnionSelector)]
-    public TpmAlgId inSchemeScheme {
+    public TpmAlgId inSchemeScheme
+    {
         get { return inScheme?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -17309,7 +17355,7 @@ public partial class Tpm2NvCertifyRequest: TpmStructureBase
 [KnownType(typeof(SignatureSm2))]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("NV_Certify_Out")]
-public partial class Tpm2NvCertifyResponse: TpmStructureBase
+public partial class Tpm2NvCertifyResponse : TpmStructureBase
 {
     /// <summary> The structure that was signed </summary>
     [MarshalAs(0, MarshalType.SizedStruct, "certifyInfoSize", 2)]
@@ -17318,7 +17364,8 @@ public partial class Tpm2NvCertifyResponse: TpmStructureBase
 
     /// <summary> Selector of the algorithm used to construct the signature </summary>
     [MarshalAs(1, MarshalType.UnionSelector)]
-    public TpmAlgId signatureSigAlg {
+    public TpmAlgId signatureSigAlg
+    {
         get { return signature?.GetUnionSelector() ?? TpmAlgId.Null; }
     }
 
@@ -17330,7 +17377,7 @@ public partial class Tpm2NvCertifyResponse: TpmStructureBase
     [DataMember]
     public ISignatureUnion signature { get; set; }
 
-    public Tpm2NvCertifyResponse() {}
+    public Tpm2NvCertifyResponse() { }
 
     public Tpm2NvCertifyResponse(Tpm2NvCertifyResponse src)
     {
@@ -17349,7 +17396,7 @@ public partial class Tpm2NvCertifyResponse: TpmStructureBase
 [KnownType(typeof(At))]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("AC_GetCapability_In")]
-public partial class Tpm2AcGetCapabilityRequest: TpmStructureBase
+public partial class Tpm2AcGetCapabilityRequest : TpmStructureBase
 {
     /// <summary> Handle indicating the Attached Component
     /// Auth Index: None </summary>
@@ -17389,7 +17436,7 @@ public partial class Tpm2AcGetCapabilityRequest: TpmStructureBase
 /// Component referenced by an AC handle. </summary>
 [DataContract]
 [SpecTypeName("AC_GetCapability_Out")]
-public partial class Tpm2AcGetCapabilityResponse: TpmStructureBase
+public partial class Tpm2AcGetCapabilityResponse : TpmStructureBase
 {
     /// <summary> Flag to indicate whether there are more values </summary>
     [MarshalAs(0)]
@@ -17401,7 +17448,7 @@ public partial class Tpm2AcGetCapabilityResponse: TpmStructureBase
     [DataMember]
     public AcOutput[] capabilitiesData;
 
-    public Tpm2AcGetCapabilityResponse() {}
+    public Tpm2AcGetCapabilityResponse() { }
 
     public Tpm2AcGetCapabilityResponse(Tpm2AcGetCapabilityResponse src)
     {
@@ -17419,7 +17466,7 @@ public partial class Tpm2AcGetCapabilityResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("AC_Send_In")]
-public partial class Tpm2AcSendRequest: TpmStructureBase
+public partial class Tpm2AcSendRequest : TpmStructureBase
 {
     /// <summary> Handle of the object being sent to ac
     /// Auth Index: 1
@@ -17480,14 +17527,14 @@ public partial class Tpm2AcSendRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(AcOutput))]
 [SpecTypeName("AC_Send_Out")]
-public partial class Tpm2AcSendResponse: TpmStructureBase
+public partial class Tpm2AcSendResponse : TpmStructureBase
 {
     /// <summary> May include AC specific data or information about an error. </summary>
     [MarshalAs(0)]
     [DataMember]
     public AcOutput acDataOut { get; set; }
 
-    public Tpm2AcSendResponse() {}
+    public Tpm2AcSendResponse() { }
 
     public Tpm2AcSendResponse(Tpm2AcSendResponse src) { acDataOut = src.acDataOut; }
 
@@ -17503,7 +17550,7 @@ public partial class Tpm2AcSendResponse: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("Policy_AC_SendSelect_In")]
-public partial class Tpm2PolicyAcSendSelectRequest: TpmStructureBase
+public partial class Tpm2PolicyAcSendSelectRequest : TpmStructureBase
 {
     /// <summary> Handle for the policy session being extended
     /// Auth Index: None </summary>
@@ -17562,7 +17609,7 @@ public partial class Tpm2PolicyAcSendSelectRequest: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHandle))]
 [SpecTypeName("ACT_SetTimeout_In")]
-public partial class Tpm2ActSetTimeoutRequest: TpmStructureBase
+public partial class Tpm2ActSetTimeoutRequest : TpmStructureBase
 {
     /// <summary> Handle of the selected ACT
     /// Auth Index: 1
@@ -17596,14 +17643,14 @@ public partial class Tpm2ActSetTimeoutRequest: TpmStructureBase
 /// <summary> This is a placeholder to allow testing of the dispatch code. </summary>
 [DataContract]
 [SpecTypeName("Vendor_TCG_Test_In")]
-public partial class Tpm2VendorTcgTestRequest: TpmStructureBase
+public partial class Tpm2VendorTcgTestRequest : TpmStructureBase
 {
     /// <summary> Dummy data </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "inputDataSize", 2)]
     [DataMember]
     public byte[] inputData;
 
-    public Tpm2VendorTcgTestRequest() {}
+    public Tpm2VendorTcgTestRequest() { }
 
     /// <param name = "_inputData"> Dummy data </param>
     public Tpm2VendorTcgTestRequest(byte[] _inputData) { inputData = _inputData; }
@@ -17616,14 +17663,14 @@ public partial class Tpm2VendorTcgTestRequest: TpmStructureBase
 /// <summary> This is a placeholder to allow testing of the dispatch code. </summary>
 [DataContract]
 [SpecTypeName("Vendor_TCG_Test_Out")]
-public partial class Tpm2VendorTcgTestResponse: TpmStructureBase
+public partial class Tpm2VendorTcgTestResponse : TpmStructureBase
 {
     /// <summary> Dummy data </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "outputDataSize", 2)]
     [DataMember]
     public byte[] outputData;
 
-    public Tpm2VendorTcgTestResponse() {}
+    public Tpm2VendorTcgTestResponse() { }
 
     public Tpm2VendorTcgTestResponse(Tpm2VendorTcgTestResponse src) { outputData = src.outputData; }
 
@@ -17636,14 +17683,14 @@ public partial class Tpm2VendorTcgTestResponse: TpmStructureBase
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_RSASSA")]
-public partial class SchemeRsassa: SigSchemeRsassa
+public partial class SchemeRsassa : SigSchemeRsassa
 {
-    public SchemeRsassa() {}
+    public SchemeRsassa() { }
 
-    public SchemeRsassa(SchemeRsassa _SchemeRsassa) : base(_SchemeRsassa) {}
+    public SchemeRsassa(SchemeRsassa _SchemeRsassa) : base(_SchemeRsassa) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeRsassa(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeRsassa(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeRsassa Copy() { return CreateCopy<SchemeRsassa>(); }
 
@@ -17654,14 +17701,14 @@ public partial class SchemeRsassa: SigSchemeRsassa
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_RSAPSS")]
-public partial class SchemeRsapss: SigSchemeRsapss
+public partial class SchemeRsapss : SigSchemeRsapss
 {
-    public SchemeRsapss() {}
+    public SchemeRsapss() { }
 
-    public SchemeRsapss(SchemeRsapss _SchemeRsapss) : base(_SchemeRsapss) {}
+    public SchemeRsapss(SchemeRsapss _SchemeRsapss) : base(_SchemeRsapss) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeRsapss(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeRsapss(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeRsapss Copy() { return CreateCopy<SchemeRsapss>(); }
 
@@ -17673,14 +17720,14 @@ public partial class SchemeRsapss: SigSchemeRsapss
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_ECDSA")]
-public partial class SchemeEcdsa: SigSchemeEcdsa
+public partial class SchemeEcdsa : SigSchemeEcdsa
 {
-    public SchemeEcdsa() {}
+    public SchemeEcdsa() { }
 
-    public SchemeEcdsa(SchemeEcdsa _SchemeEcdsa) : base(_SchemeEcdsa) {}
+    public SchemeEcdsa(SchemeEcdsa _SchemeEcdsa) : base(_SchemeEcdsa) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeEcdsa(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeEcdsa(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeEcdsa Copy() { return CreateCopy<SchemeEcdsa>(); }
 
@@ -17692,14 +17739,14 @@ public partial class SchemeEcdsa: SigSchemeEcdsa
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_SM2")]
-public partial class SchemeSm2: SigSchemeSm2
+public partial class SchemeSm2 : SigSchemeSm2
 {
-    public SchemeSm2() {}
+    public SchemeSm2() { }
 
-    public SchemeSm2(SchemeSm2 _SchemeSm2) : base(_SchemeSm2) {}
+    public SchemeSm2(SchemeSm2 _SchemeSm2) : base(_SchemeSm2) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeSm2(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeSm2(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeSm2 Copy() { return CreateCopy<SchemeSm2>(); }
 
@@ -17711,14 +17758,14 @@ public partial class SchemeSm2: SigSchemeSm2
 /// a count value so they are typed to be TPMS_SCHEME_ECDAA. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_ECSCHNORR")]
-public partial class SchemeEcschnorr: SigSchemeEcschnorr
+public partial class SchemeEcschnorr : SigSchemeEcschnorr
 {
-    public SchemeEcschnorr() {}
+    public SchemeEcschnorr() { }
 
-    public SchemeEcschnorr(SchemeEcschnorr _SchemeEcschnorr) : base(_SchemeEcschnorr) {}
+    public SchemeEcschnorr(SchemeEcschnorr _SchemeEcschnorr) : base(_SchemeEcschnorr) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeEcschnorr(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeEcschnorr(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeEcschnorr Copy() { return CreateCopy<SchemeEcschnorr>(); }
 
@@ -17729,14 +17776,14 @@ public partial class SchemeEcschnorr: SigSchemeEcschnorr
 /// controlling parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_OAEP")]
-public partial class SchemeOaep: EncSchemeOaep
+public partial class SchemeOaep : EncSchemeOaep
 {
-    public SchemeOaep() {}
+    public SchemeOaep() { }
 
-    public SchemeOaep(SchemeOaep _SchemeOaep) : base(_SchemeOaep) {}
+    public SchemeOaep(SchemeOaep _SchemeOaep) : base(_SchemeOaep) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeOaep(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeOaep(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeOaep Copy() { return CreateCopy<SchemeOaep>(); }
 
@@ -17747,9 +17794,9 @@ public partial class SchemeOaep: EncSchemeOaep
 /// controlling parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_RSAES")]
-public partial class SchemeRsaes: EncSchemeRsaes
+public partial class SchemeRsaes : EncSchemeRsaes
 {
-    public SchemeRsaes() {}
+    public SchemeRsaes() { }
 
     new public SchemeRsaes Copy() { return CreateCopy<SchemeRsaes>(); }
 
@@ -17760,14 +17807,14 @@ public partial class SchemeRsaes: EncSchemeRsaes
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_ECDH")]
-public partial class SchemeEcdh: KeySchemeEcdh
+public partial class SchemeEcdh : KeySchemeEcdh
 {
-    public SchemeEcdh() {}
+    public SchemeEcdh() { }
 
-    public SchemeEcdh(SchemeEcdh _SchemeEcdh) : base(_SchemeEcdh) {}
+    public SchemeEcdh(SchemeEcdh _SchemeEcdh) : base(_SchemeEcdh) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeEcdh(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeEcdh(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeEcdh Copy() { return CreateCopy<SchemeEcdh>(); }
 
@@ -17778,14 +17825,14 @@ public partial class SchemeEcdh: KeySchemeEcdh
 /// parameter. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_ECMQV")]
-public partial class SchemeEcmqv: KeySchemeEcmqv
+public partial class SchemeEcmqv : KeySchemeEcmqv
 {
-    public SchemeEcmqv() {}
+    public SchemeEcmqv() { }
 
-    public SchemeEcmqv(SchemeEcmqv _SchemeEcmqv) : base(_SchemeEcmqv) {}
+    public SchemeEcmqv(SchemeEcmqv _SchemeEcmqv) : base(_SchemeEcmqv) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeEcmqv(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeEcmqv(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeEcmqv Copy() { return CreateCopy<SchemeEcmqv>(); }
 
@@ -17797,14 +17844,14 @@ public partial class SchemeEcmqv: KeySchemeEcmqv
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_MGF1")]
-public partial class SchemeMgf1: KdfSchemeMgf1
+public partial class SchemeMgf1 : KdfSchemeMgf1
 {
-    public SchemeMgf1() {}
+    public SchemeMgf1() { }
 
-    public SchemeMgf1(SchemeMgf1 _SchemeMgf1) : base(_SchemeMgf1) {}
+    public SchemeMgf1(SchemeMgf1 _SchemeMgf1) : base(_SchemeMgf1) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeMgf1(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeMgf1(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeMgf1 Copy() { return CreateCopy<SchemeMgf1>(); }
 
@@ -17816,14 +17863,14 @@ public partial class SchemeMgf1: KdfSchemeMgf1
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_KDF1_SP800_56A")]
-public partial class SchemeKdf1Sp80056a: KdfSchemeKdf1Sp80056a
+public partial class SchemeKdf1Sp80056a : KdfSchemeKdf1Sp80056a
 {
-    public SchemeKdf1Sp80056a() {}
+    public SchemeKdf1Sp80056a() { }
 
-    public SchemeKdf1Sp80056a(SchemeKdf1Sp80056a _SchemeKdf1Sp80056a) : base(_SchemeKdf1Sp80056a) {}
+    public SchemeKdf1Sp80056a(SchemeKdf1Sp80056a _SchemeKdf1Sp80056a) : base(_SchemeKdf1Sp80056a) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeKdf1Sp80056a(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeKdf1Sp80056a(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeKdf1Sp80056a Copy() { return CreateCopy<SchemeKdf1Sp80056a>(); }
 
@@ -17835,14 +17882,14 @@ public partial class SchemeKdf1Sp80056a: KdfSchemeKdf1Sp80056a
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_KDF2")]
-public partial class SchemeKdf2: KdfSchemeKdf2
+public partial class SchemeKdf2 : KdfSchemeKdf2
 {
-    public SchemeKdf2() {}
+    public SchemeKdf2() { }
 
-    public SchemeKdf2(SchemeKdf2 _SchemeKdf2) : base(_SchemeKdf2) {}
+    public SchemeKdf2(SchemeKdf2 _SchemeKdf2) : base(_SchemeKdf2) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeKdf2(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeKdf2(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeKdf2 Copy() { return CreateCopy<SchemeKdf2>(); }
 
@@ -17854,14 +17901,14 @@ public partial class SchemeKdf2: KdfSchemeKdf2
 /// asymmetric key with the decrypt attribute SET. </summary>
 [DataContract]
 [SpecTypeName("TPMS_SCHEME_KDF1_SP800_108")]
-public partial class SchemeKdf1Sp800108: KdfSchemeKdf1Sp800108
+public partial class SchemeKdf1Sp800108 : KdfSchemeKdf1Sp800108
 {
-    public SchemeKdf1Sp800108() {}
+    public SchemeKdf1Sp800108() { }
 
-    public SchemeKdf1Sp800108(SchemeKdf1Sp800108 _SchemeKdf1Sp800108) : base(_SchemeKdf1Sp800108) {}
+    public SchemeKdf1Sp800108(SchemeKdf1Sp800108 _SchemeKdf1Sp800108) : base(_SchemeKdf1Sp800108) { }
 
     /// <param name = "_hashAlg"> The hash algorithm used to digest the message </param>
-    public SchemeKdf1Sp800108(TpmAlgId _hashAlg) : base(_hashAlg) {}
+    public SchemeKdf1Sp800108(TpmAlgId _hashAlg) : base(_hashAlg) { }
 
     new public SchemeKdf1Sp800108 Copy() { return CreateCopy<SchemeKdf1Sp800108>(); }
 
@@ -17875,7 +17922,7 @@ public partial class SchemeKdf1Sp800108: KdfSchemeKdf1Sp800108
 [KnownType(typeof(TpmPublic))]
 [KnownType(typeof(Sensitive))]
 [SpecTypeName("TssObject")]
-public partial class TssObject: TpmStructureBase
+public partial class TssObject : TpmStructureBase
 {
     /// <summary> Public part of key </summary>
     [MarshalAs(0)]
@@ -17892,7 +17939,7 @@ public partial class TssObject: TpmStructureBase
     [DataMember]
     public TpmPrivate Private { get; set; }
 
-    public TssObject() {}
+    public TssObject() { }
 
     public TssObject(TssObject src)
     {
@@ -17920,7 +17967,7 @@ public partial class TssObject: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmHash))]
 [SpecTypeName("PcrValue")]
-public partial class PcrValue: TpmStructureBase
+public partial class PcrValue : TpmStructureBase
 {
     /// <summary> PCR Index </summary>
     [MarshalAs(0)]
@@ -17932,7 +17979,7 @@ public partial class PcrValue: TpmStructureBase
     [DataMember]
     public TpmHash value { get; set; }
 
-    public PcrValue() {}
+    public PcrValue() { }
 
     public PcrValue(PcrValue src)
     {
@@ -17958,7 +18005,7 @@ public partial class PcrValue: TpmStructureBase
 [KnownType(typeof(TpmHandle))]
 [KnownType(typeof(SessionAttr))]
 [SpecTypeName("SessionIn")]
-public partial class SessionIn: TpmStructureBase
+public partial class SessionIn : TpmStructureBase
 {
     /// <summary> Session handle </summary>
     [MarshalAs(0)]
@@ -18011,7 +18058,7 @@ public partial class SessionIn: TpmStructureBase
 [DataContract]
 [KnownType(typeof(SessionAttr))]
 [SpecTypeName("SessionOut")]
-public partial class SessionOut: TpmStructureBase
+public partial class SessionOut : TpmStructureBase
 {
     /// <summary> TPM nonce </summary>
     [MarshalAs(0, MarshalType.VariableLengthArray, "nonceTpmSize", 2)]
@@ -18028,7 +18075,7 @@ public partial class SessionOut: TpmStructureBase
     [DataMember]
     public byte[] auth;
 
-    public SessionOut() {}
+    public SessionOut() { }
 
     public SessionOut(SessionOut src)
     {
@@ -18057,7 +18104,7 @@ public partial class SessionOut: TpmStructureBase
 [KnownType(typeof(TpmCc))]
 [KnownType(typeof(TpmSt))]
 [SpecTypeName("CommandHeader")]
-public partial class CommandHeader: TpmStructureBase
+public partial class CommandHeader : TpmStructureBase
 {
     /// <summary> Command tag (sessions, or no sessions) </summary>
     [MarshalAs(0)]
@@ -18074,7 +18121,7 @@ public partial class CommandHeader: TpmStructureBase
     [DataMember]
     public TpmCc CommandCode { get; set; }
 
-    public CommandHeader() {}
+    public CommandHeader() { }
 
     public CommandHeader(CommandHeader src)
     {
@@ -18102,7 +18149,7 @@ public partial class CommandHeader: TpmStructureBase
 [DataContract]
 [KnownType(typeof(TpmPublic))]
 [SpecTypeName("TSS_KEY")]
-public partial class TssKey: TpmStructureBase
+public partial class TssKey : TpmStructureBase
 {
     /// <summary> Public part of key </summary>
     [MarshalAs(0)]
@@ -18114,7 +18161,7 @@ public partial class TssKey: TpmStructureBase
     [DataMember]
     public byte[] privatePart;
 
-    public TssKey() {}
+    public TssKey() { }
 
     public TssKey(TssKey src)
     {
@@ -18139,14 +18186,14 @@ public partial class TssKey: TpmStructureBase
 /// implementation </summary>
 [DataContract]
 [SpecTypeName("TPM2B_DIGEST_SYMCIPHER")]
-public partial class Tpm2bDigestSymcipher: Tpm2bDigest
+public partial class Tpm2bDigestSymcipher : Tpm2bDigest
 {
-    public Tpm2bDigestSymcipher() {}
+    public Tpm2bDigestSymcipher() { }
 
-    public Tpm2bDigestSymcipher(Tpm2bDigestSymcipher _Tpm2bDigestSymcipher) : base(_Tpm2bDigestSymcipher) {}
+    public Tpm2bDigestSymcipher(Tpm2bDigestSymcipher _Tpm2bDigestSymcipher) : base(_Tpm2bDigestSymcipher) { }
 
     /// <param name = "_buffer"> The buffer area that can be no larger than a digest </param>
-    public Tpm2bDigestSymcipher(byte[] _buffer) : base(_buffer) {}
+    public Tpm2bDigestSymcipher(byte[] _buffer) : base(_buffer) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Symcipher; }
 
@@ -18158,14 +18205,14 @@ public partial class Tpm2bDigestSymcipher: Tpm2bDigest
 /// <summary> Auto-derived from TPM2B_DIGEST </summary>
 [DataContract]
 [SpecTypeName("TPM2B_DIGEST_KEYEDHASH")]
-public partial class Tpm2bDigestKeyedhash: Tpm2bDigest
+public partial class Tpm2bDigestKeyedhash : Tpm2bDigest
 {
-    public Tpm2bDigestKeyedhash() {}
+    public Tpm2bDigestKeyedhash() { }
 
-    public Tpm2bDigestKeyedhash(Tpm2bDigestKeyedhash _Tpm2bDigestKeyedhash) : base(_Tpm2bDigestKeyedhash) {}
+    public Tpm2bDigestKeyedhash(Tpm2bDigestKeyedhash _Tpm2bDigestKeyedhash) : base(_Tpm2bDigestKeyedhash) { }
 
     /// <param name = "_buffer"> The buffer area that can be no larger than a digest </param>
-    public Tpm2bDigestKeyedhash(byte[] _buffer) : base(_buffer) {}
+    public Tpm2bDigestKeyedhash(byte[] _buffer) : base(_buffer) { }
 
     public override TpmAlgId GetUnionSelector() { return TpmAlgId.Keyedhash; }
 

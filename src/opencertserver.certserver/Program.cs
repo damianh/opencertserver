@@ -1,11 +1,12 @@
 using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("opencertserver.certserver.tests")]
+namespace OpenCertServer.CertServer;
+
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using OpenCertServer.Ca.Utils.Ca;
 using OpenCertServer.Est.Server.Handlers;
-
-[assembly: InternalsVisibleTo("opencertserver.certserver.tests")]
-
-namespace OpenCertServer.CertServer;
 
 using System.Linq;
 using System.Numerics;

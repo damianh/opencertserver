@@ -1,6 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿namespace OpenCertServer.Acme.Abstractions.Tests.HttpModel_Initialization;
 
-namespace OpenCertServer.Acme.Abstractions.Tests.HttpModel_Initialization;
+using Microsoft.IdentityModel.Tokens;
 
 using System;
 using System.Collections.Generic;

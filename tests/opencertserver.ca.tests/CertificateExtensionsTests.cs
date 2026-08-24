@@ -1,11 +1,11 @@
-using System.Net;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using OpenCertServer.Ca.Utils;
-using Xunit;
-
 namespace OpenCertServer.Ca.Tests
 {
+
+    using System.Net;
+    using System.Security.Cryptography;
+    using System.Security.Cryptography.X509Certificates;
+    using OpenCertServer.Ca.Utils;
+    using Xunit;
     public class CertificateExtensionsTests
     {
         [Theory]
@@ -102,4 +102,3 @@ namespace OpenCertServer.Ca.Tests
         }
     }
 }
-

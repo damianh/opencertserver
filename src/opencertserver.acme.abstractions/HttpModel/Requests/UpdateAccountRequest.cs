@@ -1,6 +1,6 @@
-using CertesSlim.Acme.Resource;
-
 namespace OpenCertServer.Acme.Abstractions.HttpModel.Requests;
+
+using CertesSlim.Acme.Resource;
 
 using System.Collections.Generic;
 
@@ -24,4 +24,3 @@ public sealed class UpdateAccountRequest
     /// </summary>
     public AccountStatus? Status { get; set; }
 }
-

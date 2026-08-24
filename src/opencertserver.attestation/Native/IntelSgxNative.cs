@@ -1,6 +1,6 @@
-using System.Runtime.InteropServices;
-
 namespace OpenCertServer.Attestation.Native;
+
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Native bindings for Intel SGX DCAP Quote Loader (libsgx_dcap_ql).

@@ -1,9 +1,9 @@
+namespace OpenCertServer.Attestation;
+
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OpenCertServer.Attestation.Native;
-
-namespace OpenCertServer.Attestation;
 
 /// <summary>
 /// AMD SEV-SNP attestation provider using VCEK retrieval and VPS interaction.

@@ -86,9 +86,9 @@ public class McpServerFixture : IDisposable
         X509Certificate2 cert;
         if (result is SignCertificateResponse.Success success)
         {
-           cert = success.Certificate;
-           foreach (var c in success.Issuers)
-               _issuedCerts.Add(X509CertificateLoader.LoadCertificate(c.GetRawCertData()));
+            cert = success.Certificate;
+            foreach (var c in success.Issuers)
+                _issuedCerts.Add(X509CertificateLoader.LoadCertificate(c.GetRawCertData()));
         }
         else
         {

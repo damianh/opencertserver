@@ -1,5 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("opencertserver.acme.aspnetclient.tests")]
+[assembly: InternalsVisibleTo("opencertserver.certserver.tests")]
+namespace OpenCertServer.Acme.AspNetClient;
+
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -9,11 +13,6 @@ using Microsoft.Extensions.Options;
 using OpenCertServer.Acme.AspNetClient.Certes;
 using OpenCertServer.Acme.AspNetClient.Certificates;
 using OpenCertServer.Acme.AspNetClient.Persistence;
-
-[assembly: InternalsVisibleTo("opencertserver.acme.aspnetclient.tests")]
-[assembly: InternalsVisibleTo("opencertserver.certserver.tests")]
-
-namespace OpenCertServer.Acme.AspNetClient;
 
 public static class RegistrationExtensions
 {
@@ -28,7 +27,7 @@ public static class RegistrationExtensions
 
         public IServiceCollection AddAcmeRenewalLifecycleHook<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            TCertificateRenewalLifecycleHook>()
+        TCertificateRenewalLifecycleHook>()
             where TCertificateRenewalLifecycleHook : class, ICertificateRenewalLifecycleHook
         {
             return services.AddAcmePersistenceService()

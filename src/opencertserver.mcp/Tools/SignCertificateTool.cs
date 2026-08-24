@@ -1,7 +1,7 @@
+namespace OpenCertServer.Mcp.Tools;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
-namespace OpenCertServer.Mcp.Tools;
 
 /// <summary>
 /// Sign a Certificate Signing Request and return the signed certificate.
@@ -51,7 +51,7 @@ public class SignCertificateTool
             {
                 normalized = normalized.NormalizeBase64();
             }
-            
+
             var csrDer = Convert.FromBase64String(normalized);
             request = CertificateRequest.LoadSigningRequest(
                 csrDer,

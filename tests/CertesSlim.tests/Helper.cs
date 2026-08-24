@@ -1,10 +1,10 @@
-﻿using System;
+﻿namespace CertesSlim.Tests;
+
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
-
-namespace CertesSlim.Tests;
 
 public static partial class Helper
 {

@@ -1,11 +1,11 @@
-﻿using System;
+﻿namespace CertesSlim.Tests.Acme.Resource;
+
+using System;
 using System.IO;
 using System.Text.Json;
 using CertesSlim.Acme.Resource;
 using CertesSlim.Json;
 using Xunit;
-
-namespace CertesSlim.Tests.Acme.Resource;
 
 public class AccountTests
 {

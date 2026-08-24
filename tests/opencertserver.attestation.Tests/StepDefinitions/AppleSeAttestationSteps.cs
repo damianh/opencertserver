@@ -1,3 +1,5 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,8 +9,6 @@ using NSubstitute;
 using OpenCertServer.Attestation.Native;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 public class AppleSeAttestationSteps : IDisposable

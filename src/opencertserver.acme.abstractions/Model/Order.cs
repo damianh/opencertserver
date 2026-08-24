@@ -1,6 +1,6 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace OpenCertServer.Acme.Abstractions.Model;
 
-namespace OpenCertServer.Acme.Abstractions.Model;
+using CertesSlim.Acme.Resource;
 
 using System;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ public sealed class Order : IVersioned
 
         AccountId = account.AccountId;
 
-        Identifiers = [..identifiers];
+        Identifiers = [.. identifiers];
         Authorizations = [];
         Profile = profile;
     }

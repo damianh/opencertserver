@@ -18,7 +18,7 @@ public class CertificateItem : CertificateItemInfo
     public CertificateItemInfo AsInfo()
     {
         return new CertificateItemInfo
-         {
+        {
             SerialNumber = SerialNumber,
             DistinguishedName = DistinguishedName,
             Issuer = Issuer,
@@ -36,7 +36,7 @@ public class CertificateItem : CertificateItemInfo
     public static CertificateItem FromX509Certificate2(X509Certificate2 cert)
     {
         return new CertificateItem
-         {
+        {
             SerialNumber = cert.GetSerialNumberString(),
             DistinguishedName = cert.Subject,
             Issuer = cert.Issuer,

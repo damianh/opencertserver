@@ -1,9 +1,9 @@
+namespace OpenCertServer.Ca.Tests.X509;
+
 using System.Formats.Asn1;
 using System.Security.Cryptography;
 using OpenCertServer.Ca.Utils;
 using Xunit;
-
-namespace OpenCertServer.Ca.Tests.X509;
 
 public class SubjectPublicKeyInfoTemplateTests
 {

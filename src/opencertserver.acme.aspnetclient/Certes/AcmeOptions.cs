@@ -1,7 +1,7 @@
+namespace OpenCertServer.Acme.AspNetClient.Certes;
+
 using CertesSlim.Extensions;
 using Microsoft.IdentityModel.Tokens;
-
-namespace OpenCertServer.Acme.AspNetClient.Certes;
 
 public abstract class AcmeOptions
 {

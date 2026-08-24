@@ -1,9 +1,9 @@
-﻿using System;
+﻿namespace CertesSlim.Tests.Pkcs;
+
+using System;
 using CertesSlim.Pkcs;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
-
-namespace CertesSlim.Tests.Pkcs;
 
 public class CertificationRequestBuilderTests
 {

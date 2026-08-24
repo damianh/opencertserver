@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Acme.Resource;
 
-namespace CertesSlim.Acme.Resource;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents the ACME Authorization resource.

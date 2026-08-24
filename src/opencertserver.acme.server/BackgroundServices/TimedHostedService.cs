@@ -40,7 +40,7 @@ public abstract class TimedHostedService : IHostedService, IDisposable
 
     protected async void DoWorkCallback(object? state)
     {
-        if(! await _interlock.WaitAsync(TimerInterval / 2, _cancellationTokenSource.Token).ConfigureAwait(false))
+        if (!await _interlock.WaitAsync(TimerInterval / 2, _cancellationTokenSource.Token).ConfigureAwait(false))
         {
             _logger.LogInformation("Waited half an execution time, but did not get execution lock");
             return;
@@ -55,7 +55,8 @@ public abstract class TimedHostedService : IHostedService, IDisposable
         {
             _logger.LogError(ex, "TimedHostedService failed with exception");
         }
-        finally {
+        finally
+        {
             _interlock.Release();
         }
     }

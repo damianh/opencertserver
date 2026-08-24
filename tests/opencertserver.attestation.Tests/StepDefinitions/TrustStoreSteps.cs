@@ -1,11 +1,11 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
 using Reqnroll;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 [Scope(Feature = "Global Trust Root and Revocation")]
