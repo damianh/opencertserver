@@ -2,10 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Text;
-
-namespace OpenCertServer.Tpm2Lib;
 
 public enum QuoteElt
 {
@@ -373,7 +372,6 @@ public partial class TpmPublic
             Globs.Concatenate(encIdentity, nameOfKeyToBeActivated));
         Transform(outerHmac);
 
-
         encryptedSecret = encSecret;
         return new IdObject(outerHmac, encIdentity);
     }
@@ -430,7 +428,7 @@ public partial class TssObject
         }
     }
 
-    public byte[] EncryptDecrypt (byte[] data, bool decrypt, ref byte[] ivIn, out byte[] ivOut)
+    public byte[] EncryptDecrypt(byte[] data, bool decrypt, ref byte[] ivIn, out byte[] ivOut)
     {
         ivOut = null;
 
@@ -774,7 +772,7 @@ public partial class TssObject
         {
             var scheme = (pub.parameters as KeyedhashParms).scheme;
             var hashAlg = scheme is SchemeHash hash ? hash.hashAlg
-                : scheme is SchemeXor xor  ? xor.hashAlg
+                : scheme is SchemeXor xor ? xor.hashAlg
                 : pub.nameAlg;
             var digestSize = CryptoLib.DigestSize(hashAlg);
 

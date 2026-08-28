@@ -1,10 +1,10 @@
-﻿using System.Security.Cryptography;
+﻿namespace CertesSlim.Tests;
+
+using System.Security.Cryptography;
 using System.Text;
 using CertesSlim.Json;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
-
-namespace CertesSlim.Tests;
 
 public class ISignatureKeyExtensionsTests
 {

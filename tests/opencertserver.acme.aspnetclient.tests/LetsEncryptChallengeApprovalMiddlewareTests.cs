@@ -1,3 +1,5 @@
+namespace OpenCertServer.Acme.AspNetClient.Tests;
+
 using CertesSlim.Acme;
 using CertesSlim.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -6,8 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
-namespace OpenCertServer.Acme.AspNetClient.Tests;
 
 using System;
 using System.Linq;

@@ -1,6 +1,6 @@
-using CertesSlim.Acme.Resource;
-
 namespace OpenCertServer.Acme.Abstractions.Exceptions;
+
+using CertesSlim.Acme.Resource;
 
 /// <summary>
 /// Exception thrown when an ACME resource is in a conflicting state or status.

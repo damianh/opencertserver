@@ -98,8 +98,8 @@ public static class Oids
     /// Represents the member.
     /// </summary>
     public const string RsaPssFriendlyName = "RSASSA-PSS";
-//    public const string RsaPkcs1Md5 = "1.2.840.113549.1.1.4";
-//    public const string RsaPkcs1Sha1 = "1.2.840.113549.1.1.5";
+    //    public const string RsaPkcs1Md5 = "1.2.840.113549.1.1.4";
+    //    public const string RsaPkcs1Sha1 = "1.2.840.113549.1.1.5";
     /// <summary>
     /// Represents the member.
     /// </summary>
@@ -597,7 +597,7 @@ public static class Oids
     /// Represents the member.
     /// </summary>
     public const string EcPublicKeyFriendlyName = "ECC";
-//    public const string ECDsaWithSha1 = "1.2.840.10045.4.1";
+    //    public const string ECDsaWithSha1 = "1.2.840.10045.4.1";
     /// <summary>
     /// Represents the member.
     /// </summary>
@@ -1744,9 +1744,9 @@ public static class Oids
     {
         return (hashAlgorithm.Name, publicKey) switch
         {
-//            (nameof(SHA256), RSA) => "1.2.840.113549.1.1.1", // rsassaPkcs
-//            (nameof(SHA384), RSA) => "1.2.840.113549.1.1.1",
-//            (nameof(SHA512), RSA) => "1.2.840.113549.1.1.1",
+            //            (nameof(SHA256), RSA) => "1.2.840.113549.1.1.1", // rsassaPkcs
+            //            (nameof(SHA384), RSA) => "1.2.840.113549.1.1.1",
+            //            (nameof(SHA512), RSA) => "1.2.840.113549.1.1.1",
             (nameof(SHA256), RSA) => "1.2.840.113549.1.1.10", // rsassaPss
             (nameof(SHA384), RSA) => "1.2.840.113549.1.1.10",
             (nameof(SHA512), RSA) => "1.2.840.113549.1.1.10",

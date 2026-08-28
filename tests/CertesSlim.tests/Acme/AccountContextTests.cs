@@ -1,4 +1,6 @@
-﻿using System;
+﻿namespace CertesSlim.Tests.Acme;
+
+using System;
 using System.Threading.Tasks;
 using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
@@ -6,8 +8,6 @@ using CertesSlim.Json;
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
 using Xunit;
-
-namespace CertesSlim.Tests.Acme;
 
 public class AccountContextTests
 {

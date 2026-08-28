@@ -2,10 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Runtime.Serialization;
-
-namespace OpenCertServer.Tpm2Lib;
 
 public enum PolicySerializationFormat
 {
@@ -186,7 +185,7 @@ public class PolicyTree
     {
         PolicyAce dummyAce = null;
 
-        if(null == PolicyRoot)
+        if (null == PolicyRoot)
         {
             return new TpmHash(PolicyHash.HashAlg);
         }

@@ -32,14 +32,14 @@ public class BitFieldAttribute : MarshalingAttribute
 [Flags]
 public enum MarshalType
 {
-    Normal                  = 0x00,
-    FixedLengthArray        = 0x01,
-    VariableLengthArray     = 0x04,
-    Union                   = 0x08,
-    UnionAllowNull          = 0x10,
-    CustomMarshal           = 0x20,
-    SizedStruct             = 0x40,
-    ArrayCount              = 0x80,
+    Normal = 0x00,
+    FixedLengthArray = 0x01,
+    VariableLengthArray = 0x04,
+    Union = 0x08,
+    UnionAllowNull = 0x10,
+    CustomMarshal = 0x20,
+    SizedStruct = 0x40,
+    ArrayCount = 0x80,
     EncryptedVariableLengthArray = 0x100,
     UnionSelector = 0x200,
     SpecialVariableLengthArray = 0x400,
@@ -86,7 +86,7 @@ public class MarshalAsAttribute : MarshalingAttribute
         {
             AssociatedUnionSelector = associatedVariable;
             return;
-        } 
+        }
         throw new Exception("Unknown MarshallType?");
     }
 }

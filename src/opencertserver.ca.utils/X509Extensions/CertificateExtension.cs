@@ -56,28 +56,28 @@ public class CertificateExtension : IAsnValue
         switch (extnOid.Value)
         {
             case "2.5.29.29": // certificate issuer
-            {
-                var extnReader = new AsnReader(extnValue, AsnEncodingRules.DER);
-                certificateIssuer = extnReader.ReadDistinguishedName();
-                break;
-            }
-            case "2.5.29.24": // invalidity date
-            {
-                var extnReader = new AsnReader(extnValue, AsnEncodingRules.DER);
-                invalidityDate = extnReader.ReadX509Time();
-                break;
-            }
-            case "2.5.29.21": // reason code
-            {
-                var extnReader = new AsnReader(extnValue, AsnEncodingRules.DER);
-                reason = extnReader.ReadEnumeratedValue<X509RevocationReason>();
-                if (!Enum.IsDefined(typeof(X509RevocationReason), (int)reason))
                 {
-                    throw new CryptographicException("Invalid revocation reason code.");
+                    var extnReader = new AsnReader(extnValue, AsnEncodingRules.DER);
+                    certificateIssuer = extnReader.ReadDistinguishedName();
+                    break;
                 }
+            case "2.5.29.24": // invalidity date
+                {
+                    var extnReader = new AsnReader(extnValue, AsnEncodingRules.DER);
+                    invalidityDate = extnReader.ReadX509Time();
+                    break;
+                }
+            case "2.5.29.21": // reason code
+                {
+                    var extnReader = new AsnReader(extnValue, AsnEncodingRules.DER);
+                    reason = extnReader.ReadEnumeratedValue<X509RevocationReason>();
+                    if (!Enum.IsDefined(typeof(X509RevocationReason), (int)reason))
+                    {
+                        throw new CryptographicException("Invalid revocation reason code.");
+                    }
 
-                break;
-            }
+                    break;
+                }
         }
 
         Oid = extnOid;

@@ -1,7 +1,7 @@
-﻿using CertesSlim.Json;
-using CertesSlim.Properties;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using CertesSlim.Json;
+using CertesSlim.Properties;
 
 /// <summary>
 /// Supports HTTP operations for ACME servers.

@@ -9,41 +9,33 @@ using Ca.Utils.X509;
 /// Input: serialNumber (string, required), issuerNameHash (string), issuerKeyHash (string)
 /// Output: McpOcspCheckResult with certificate status (good/revoked/unknown)
 /// </summary>
-public static class CheckOcspStatusTool
+[McpServerToolType]
+public class CheckOcspStatusTool
 {
-    public static async Task<McpToolResult> Handle(McpToolContext context)
+    [McpServerTool(Name = "check_ocsp_status", ReadOnly = true, Idempotent = true, Destructive = false)]
+    [Description("Check certificate status using OCSP-style certificate identifier fields.")]
+    public static async Task<McpOcspCheckResult> CheckOcspStatus(
+        IStoreCertificates store,
+        [Description("Certificate serial number (hex string)")] string serialNumber,
+        [Description("Issuer name hash (SHA-256, hex string)")] string issuerNameHash,
+        [Description("Issuer key hash (SHA-256, hex string)")] string issuerKeyHash,
+        CancellationToken cancellationToken = default)
     {
-        var parameters = context.Parameters as IDictionary<string, object>;
-
-        var serialNumber = parameters?.TryGetValue("serialNumber", out var snObj) ?? false
-            ? snObj.ToString()
-            : null;
-
         if (string.IsNullOrWhiteSpace(serialNumber))
         {
-            return McpToolResult.Fail("serialNumber is required");
+            throw new McpException("serialNumber is required");
         }
 
         // Validate serial number is valid hex
-        if (!ParameterHelper.IsValidHex(serialNumber))
+        if (!IsValidHex(serialNumber))
         {
-            return McpToolResult.Fail("serialNumber must be a valid hex-encoded string");
+            throw new McpException("serialNumber must be a valid hex-encoded string");
         }
-
-        var issuerNameHash = parameters?.TryGetValue("issuerNameHash", out var inhObj) ?? false
-            ? inhObj.ToString()
-            : null;
-
-        var issuerKeyHash = parameters?.TryGetValue("issuerKeyHash", out var ikhObj) ?? false
-            ? ikhObj.ToString()
-            : null;
 
         if (string.IsNullOrWhiteSpace(issuerNameHash) || string.IsNullOrWhiteSpace(issuerKeyHash))
         {
-            return McpToolResult.Fail("issuerNameHash and issuerKeyHash are required");
+            throw new McpException("issuerNameHash and issuerKeyHash are required");
         }
-
-        var store = context.GetService<IStoreCertificates>();
 
         // Build CertId from inputs
         byte[] nameBytes = null!;
@@ -55,13 +47,13 @@ public static class CheckOcspStatusTool
         }
         catch
         {
-            return McpToolResult.Fail("issuerNameHash and issuerKeyHash must be valid hex strings");
+            throw new McpException("issuerNameHash and issuerKeyHash must be valid hex strings");
         }
 
-        var serialBytes = ParameterHelper.HexToBytes(serialNumber);
+        var serialBytes = HexToBytes(serialNumber);
         if (serialBytes == null)
         {
-            return McpToolResult.Fail("Failed to parse serialNumber as hex");
+            throw new McpException("Failed to parse serialNumber as hex");
         }
 
         // Default to SHA-256 for hash algorithm
@@ -73,9 +65,9 @@ public static class CheckOcspStatusTool
             serialBytes
         );
 
-        var (_, status, revokedInfo) = await store.GetCertificateStatus(certId, CancellationToken.None);
+        var (_, status, revokedInfo) = await store.GetCertificateStatus(certId, cancellationToken);
 
-        var result = new McpOcspCheckResult
+        return new McpOcspCheckResult
         {
             SerialNumber = serialNumber,
             Status = status switch
@@ -89,39 +81,46 @@ public static class CheckOcspStatusTool
             ThisUpdate = DateTimeOffset.UtcNow,
             NextUpdate = DateTimeOffset.UtcNow.AddHours(1)
         };
-
-        return McpToolResult.Ok(result);
     }
 
-    public static McpToolDefinition Create()
+    private static bool IsValidHex(string? value)
     {
-        return new McpToolDefinition
+        if (string.IsNullOrWhiteSpace(value))
         {
-            Name = "check_ocsp_status",
-            Description =
-                "Check the revocation status of a certificate using OCSP-style logic. Requires serial number, issuer name hash (hex), and issuer key hash (hex). Returns good, revoked, or unknown status.",
-            InputSchema = """
-                          {
-                                             "type": "object",
-                                             "properties": {
-                                                 "serialNumber": {
-                                                     "type": "string",
-                                                     "description": "Certificate serial number (hex string)"
-                                                 },
-                                                 "issuerNameHash": {
-                                                     "type": "string",
-                                                     "description": "Issuer name hash (SHA-256, hex string)"
-                                                 },
-                                                 "issuerKeyHash": {
-                                                     "type": "string",
-                                                     "description": "Issuer key hash (SHA-256, hex string)"
-                                                 }
-                                             },
-                                             "required": ["serialNumber", "issuerNameHash", "issuerKeyHash"],
-                                             "additionalProperties": false
-                                         }
-                          """,
-            Handler = Handle
-        };
+            return false;
+        }
+
+        foreach (var c in value)
+        {
+            if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static byte[]? HexToBytes(string? hex)
+    {
+        if (string.IsNullOrWhiteSpace(hex))
+        {
+            return null;
+        }
+
+        if (!IsValidHex(hex))
+        {
+            return null;
+        }
+
+        try
+        {
+            var normalized = hex.Length % 2 == 0 ? hex : "0" + hex;
+            return Convert.FromHexString(normalized);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

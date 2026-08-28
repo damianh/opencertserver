@@ -1,8 +1,8 @@
-﻿using CertesSlim.Acme;
-using CertesSlim.Acme.Resource;
-using OpenCertServer.Acme.Abstractions.Exceptions;
-
+﻿using CertesSlim.Acme.Resource;
+using CertesSlim.Acme;
 namespace OpenCertServer.Acme.Server.Services;
+
+using OpenCertServer.Acme.Abstractions.Exceptions;
 
 using System;
 using System.Collections.Generic;

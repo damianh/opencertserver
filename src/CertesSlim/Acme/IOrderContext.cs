@@ -1,6 +1,6 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using CertesSlim.Acme.Resource;
 
 /// <summary>
 /// Presents the context for ACME order operations.

@@ -32,55 +32,55 @@ public static class OrderEndpoints
             using var activity = AcmeInstruments.ActivitySource.StartActivity(ActivityNames.NewOrder);
             try
             {
-            var header = payload.ToAcmeHeader();
-            var account = await accountService.FromRequest(header, cancellationToken).ConfigureAwait(false);
+                var header = payload.ToAcmeHeader();
+                var account = await accountService.FromRequest(header, cancellationToken).ConfigureAwait(false);
 
-            // RFC 8555 §7.3.3: if the server requires ToS agreement and the ToS have been updated
-            // since the account last agreed, reject newOrder with userActionRequired.
-            var tosOptions = optionsAccessor.Value.TOS;
-            if (tosOptions is { RequireAgreement: true, LastUpdate: not null })
-            {
-                if (string.IsNullOrWhiteSpace(tosOptions.Url))
+                // RFC 8555 §7.3.3: if the server requires ToS agreement and the ToS have been updated
+                // since the account last agreed, reject newOrder with userActionRequired.
+                var tosOptions = optionsAccessor.Value.TOS;
+                if (tosOptions is { RequireAgreement: true, LastUpdate: not null })
                 {
-                    throw new InvalidOperationException(
-                        "ACME server configuration is invalid: TOS.Url must be configured when TOS agreement is required and TOS.LastUpdate is set.");
+                    if (string.IsNullOrWhiteSpace(tosOptions.Url))
+                    {
+                        throw new InvalidOperationException(
+                            "ACME server configuration is invalid: TOS.Url must be configured when TOS agreement is required and TOS.LastUpdate is set.");
+                    }
+
+                    if (account.TosAccepted == null || account.TosAccepted.Value < tosOptions.LastUpdate.Value)
+                    {
+                        throw new UserActionRequiredException(
+                            "The server's terms of service have been updated. Please agree to the current terms of service before creating new orders.",
+                            tosOptions.Url);
+                    }
                 }
 
-                if (account.TosAccepted == null || account.TosAccepted.Value < tosOptions.LastUpdate.Value)
+                var orderRequest = payload.ToPayload<CreateOrderRequest>();
+                if (orderRequest?.Identifiers == null || orderRequest.Identifiers.Count == 0)
                 {
-                    throw new UserActionRequiredException(
-                        "The server's terms of service have been updated. Please agree to the current terms of service before creating new orders.",
-                        tosOptions.Url);
+                    throw new MalformedRequestException("No identifiers submitted.");
                 }
-            }
 
-            var orderRequest = payload.ToPayload<CreateOrderRequest>();
-            if (orderRequest?.Identifiers == null || orderRequest.Identifiers.Count == 0)
-            {
-                throw new MalformedRequestException("No identifiers submitted.");
-            }
-
-            foreach (var i in orderRequest.Identifiers.Where(i =>
-                string.IsNullOrWhiteSpace(i.Type) || string.IsNullOrWhiteSpace(i.Value)))
-                throw new MalformedRequestException($"Malformed identifier: (Type: {i.Type}, Value: {i.Value})");
-            var identifiers = orderRequest.Identifiers.Select(x =>
-                new Abstractions.Model.Identifier(x.Type!, x.Value!));
-            var order = await orderService.CreateOrder(orderRequest.Profile, account, identifiers,
-                orderRequest.NotBefore,
-                orderRequest.NotAfter, cancellationToken).ConfigureAwait(false);
-            GetOrderUrls(context, links, order, out var authorizationUrls, out var finalizeUrl, out var certificateUrl);
-            var orderResponse =
-                new OpenCertServer.Acme.Abstractions.HttpModel.Order(order, authorizationUrls, finalizeUrl,
-                    certificateUrl);
-            var orderUrl = links.GetUriByName(context,
-                    "GetOrder",
-                    new RouteValueDictionary([KeyValuePair.Create<string, string?>("orderId", order.OrderId)]),
-                    scheme: Uri.UriSchemeHttps) ??
-                string.Empty;
-            AcmeInstruments.NewOrderSuccesses.Add(1);
-            activity?.SetStatus(ActivityStatusCode.Ok);
-            AcmeInstruments.NewOrderDuration.Record(Stopwatch.GetElapsedTime(sw).TotalSeconds);
-            return Results.Created(orderUrl, orderResponse);
+                foreach (var i in orderRequest.Identifiers.Where(i =>
+                    string.IsNullOrWhiteSpace(i.Type) || string.IsNullOrWhiteSpace(i.Value)))
+                    throw new MalformedRequestException($"Malformed identifier: (Type: {i.Type}, Value: {i.Value})");
+                var identifiers = orderRequest.Identifiers.Select(x =>
+                    new Abstractions.Model.Identifier(x.Type!, x.Value!));
+                var order = await orderService.CreateOrder(orderRequest.Profile, account, identifiers,
+                    orderRequest.NotBefore,
+                    orderRequest.NotAfter, cancellationToken).ConfigureAwait(false);
+                GetOrderUrls(context, links, order, out var authorizationUrls, out var finalizeUrl, out var certificateUrl);
+                var orderResponse =
+                    new OpenCertServer.Acme.Abstractions.HttpModel.Order(order, authorizationUrls, finalizeUrl,
+                        certificateUrl);
+                var orderUrl = links.GetUriByName(context,
+                        "GetOrder",
+                        new RouteValueDictionary([KeyValuePair.Create<string, string?>("orderId", order.OrderId)]),
+                        scheme: Uri.UriSchemeHttps) ??
+                    string.Empty;
+                AcmeInstruments.NewOrderSuccesses.Add(1);
+                activity?.SetStatus(ActivityStatusCode.Ok);
+                AcmeInstruments.NewOrderDuration.Record(Stopwatch.GetElapsedTime(sw).TotalSeconds);
+                return Results.Created(orderUrl, orderResponse);
             }
             catch (Exception ex)
             {

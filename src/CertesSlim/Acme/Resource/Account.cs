@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Acme.Resource;
 
-namespace CertesSlim.Acme.Resource;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents the ACME Account resource.
@@ -36,7 +36,6 @@ public class Account
     /// </value>
     [JsonPropertyName("termsOfServiceAgreed")]
     public bool? TermsOfServiceAgreed { get; set; }
-
 
     /// <summary>
     /// Gets or sets an external account binding

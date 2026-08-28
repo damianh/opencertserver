@@ -1,7 +1,7 @@
+namespace OpenCertServer.Attestation;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-
-namespace OpenCertServer.Attestation;
 
 /// <summary>
 /// Orchestrates attestation provider selection based on cloud context and vendor preference
@@ -73,8 +73,8 @@ public sealed class GlobalAttestationService
             var v when string.Equals(v, "Intel", StringComparison.OrdinalIgnoreCase) =>
                 cloudContext switch
                 {
-                    "AWS"   => "https://nitro-enclaves.us-east-1.amazonaws.com",
-                    _       => _options.IntelSgx.PccsUrl
+                    "AWS" => "https://nitro-enclaves.us-east-1.amazonaws.com",
+                    _ => _options.IntelSgx.PccsUrl
                 },
             var v when string.Equals(v, "AMD", StringComparison.OrdinalIgnoreCase) =>
                 _options.AmdSevSnp.VpsUrl,

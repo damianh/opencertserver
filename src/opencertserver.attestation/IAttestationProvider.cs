@@ -1,6 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace OpenCertServer.Attestation;
+
+using System.Security.Cryptography.X509Certificates;
 
 public interface IAttestationProvider
 {

@@ -1,6 +1,6 @@
-using OpenCertServer.Est.Server.Response;
-
 namespace opencertserver.cli.tests.StepDefinitions;
+
+using OpenCertServer.Est.Server.Response;
 
 using System.Security.Claims;
 using System.Threading;

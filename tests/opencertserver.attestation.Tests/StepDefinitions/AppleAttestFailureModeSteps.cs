@@ -1,3 +1,5 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Net;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -6,8 +8,6 @@ using OpenCertServer.Attestation.Native;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 [Scope(Feature = "Apple Secure Enclave Provider Failure Modes")]

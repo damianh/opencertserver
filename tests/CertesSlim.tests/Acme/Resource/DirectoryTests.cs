@@ -1,8 +1,8 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace CertesSlim.Tests.Acme.Resource;
+
+using CertesSlim.Acme.Resource;
 using Xunit;
 using Directory = CertesSlim.Acme.Resource.Directory;
-
-namespace CertesSlim.Tests.Acme.Resource;
 
 public class DirectoryTests
 {

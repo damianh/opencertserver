@@ -447,7 +447,7 @@ public static class EncodingExtensions
                 "2.5.29.18" => // Issuer Alternative Name
                     new X509IssuerAltNameExtension(extnValue.Span, isCritical),
                 "2.5.29.28" => // Issuing Distribution Point — preserve as raw extension; IDP has a different
-                    // structure to DistributionPoint and requires its own parser.
+                               // structure to DistributionPoint and requires its own parser.
                     new X509RawExtension(extnOid, isCritical, extnValue.ToArray()),
                 _ => new X509RawExtension(extnOid, isCritical, extnValue.ToArray())
             };

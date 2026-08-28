@@ -1,6 +1,6 @@
-using OpenCertServer.Attestation.Native;
-
 namespace OpenCertServer.Attestation.Tests.Mocks;
+
+using OpenCertServer.Attestation.Native;
 
 /// <summary>
 /// Configurable mock AMD SNP native interop for unit tests.

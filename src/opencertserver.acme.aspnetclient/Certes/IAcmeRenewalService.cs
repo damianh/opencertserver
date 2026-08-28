@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 
-public interface IAcmeRenewalService: IHostedService, IDisposable
+public interface IAcmeRenewalService : IHostedService, IDisposable
 {
     Uri LetsEncryptUri { get; }
     Task RunOnce(string password);

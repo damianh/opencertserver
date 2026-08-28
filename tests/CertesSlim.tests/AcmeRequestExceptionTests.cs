@@ -1,8 +1,8 @@
-﻿using Xunit;
-#if !NETCOREAPP1_0
+﻿#if !NETCOREAPP1_0
 #endif
-
 namespace CertesSlim.Tests;
+
+using Xunit;
 
 public class AcmeRequestExceptionTests
 {

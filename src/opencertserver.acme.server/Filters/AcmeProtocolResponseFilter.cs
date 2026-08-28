@@ -1,3 +1,5 @@
+namespace OpenCertServer.Acme.Server.Filters;
+
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
@@ -6,8 +8,6 @@ using OpenCertServer.Acme.Abstractions.Exceptions;
 using OpenCertServer.Acme.Abstractions.HttpModel;
 using OpenCertServer.Acme.Abstractions.Services;
 using OpenCertServer.Acme.Server.Endpoints;
-
-namespace OpenCertServer.Acme.Server.Filters;
 
 public sealed class AcmeProtocolResponseFilter : IEndpointFilter
 {
@@ -90,5 +90,3 @@ public sealed class AcmeProtocolResponseFilter : IEndpointFilter
         };
     }
 }
-
-

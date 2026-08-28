@@ -1,9 +1,9 @@
+namespace OpenCertServer.Build;
+
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.Publish;
 using Cake.Docker;
 using Cake.Frosting;
-
-namespace OpenCertServer.Build;
 
 [TaskName("Linux-Docker-Build")]
 [IsDependentOn(typeof(PackTask))]
@@ -14,15 +14,15 @@ public sealed class LinuxDockerBuildTask : FrostingTask<BuildContext>
     {
         var publishSettings = new DotNetPublishSettings
         {
-            PublishTrimmed = true,
+            PublishTrimmed = false,
             Runtime = "linux-musl-x64",
             SelfContained = true,
             Framework = "net10.0",
             Configuration = context.BuildConfiguration,
             OutputDirectory = "./artifacts/publish/server/linux-musl-x64/"
         };
-
         context.DotNetPublish("./src/opencertserver.certserver/opencertserver.certserver.csproj", publishSettings);
+
         var settings = new DockerImageBuildSettings
         {
             NoCache = true,

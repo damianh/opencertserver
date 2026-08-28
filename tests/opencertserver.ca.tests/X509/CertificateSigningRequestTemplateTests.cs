@@ -1,6 +1,6 @@
-using OpenCertServer.Ca.Utils.X509;
-
 namespace OpenCertServer.Ca.Tests.X509;
+
+using OpenCertServer.Ca.Utils.X509;
 
 using System.Formats.Asn1;
 using Utils;
@@ -26,6 +26,6 @@ public class CertificateSigningRequestTemplateTests
 
         Assert.Equal(requestTemplate.Version, decoded.Version);
         Assert.Equal(Oids.CommonName.InitializeOid(), decoded.Subject!.Name.RelativeNames[0].Attributes.First().Oid, OidComparer.Instance);
-        Assert.Equal(Oids.Rsa.InitializeOid(),decoded.SubjectPublicKeyInfo!.AlgorithmIdentifier.AlgorithmOid, OidComparer.Instance);
+        Assert.Equal(Oids.Rsa.InitializeOid(), decoded.SubjectPublicKeyInfo!.AlgorithmIdentifier.AlgorithmOid, OidComparer.Instance);
     }
 }

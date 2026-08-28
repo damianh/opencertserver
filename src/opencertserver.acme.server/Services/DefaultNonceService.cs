@@ -15,7 +15,7 @@ public sealed class DefaultNonceService : INonceService
         _nonceStore = nonceStore;
     }
 
-    public  async Task<Nonce> CreateNonceAsync(CancellationToken cancellationToken)
+    public async Task<Nonce> CreateNonceAsync(CancellationToken cancellationToken)
     {
         var nonce = new Nonce(GuidString.NewValue());
 

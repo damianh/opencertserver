@@ -11,6 +11,6 @@ public sealed class CertificateRenewalResult
     }
 
     public X509Certificate2? Certificate { get; }
-        
+
     public CertificateRenewalStatus Status { get; }
 }

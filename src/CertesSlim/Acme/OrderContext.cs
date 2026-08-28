@@ -1,7 +1,7 @@
-﻿using CertesSlim.Acme.Resource;
-using CertesSlim.Json;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using CertesSlim.Acme.Resource;
+using CertesSlim.Json;
 
 /// <summary>
 /// Represents the context for ACME order operations.

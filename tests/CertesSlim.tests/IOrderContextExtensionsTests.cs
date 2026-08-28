@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿namespace CertesSlim.Tests;
+
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CertesSlim.Acme;
@@ -7,8 +9,6 @@ using CertesSlim.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using NSubstitute;
 using Xunit;
-
-namespace CertesSlim.Tests;
 
 public class IOrderContextExtensionsTests
 {
@@ -202,7 +202,6 @@ public class IOrderContextExtensionsTests
         await orderCtxMock.Received(7).Resource();
     }
 
-
     [Fact]
     public async Task CanGenerateWithAlternateLink()
     {
@@ -232,16 +231,15 @@ public class IOrderContextExtensionsTests
 
         httpClientMock.Post<Order, object>(finalizeLoc, Arg.Any<object>())
             .Returns(new AcmeHttpResponse<Order>(accountLoc, new Order
-                {
-                    Identifiers =
+            {
+                Identifiers =
                     [
                         new Identifier { Value = "www.certes.com", Type = IdentifierType.Dns }
                     ],
-                    Status = OrderStatus.Valid
-                },
+                Status = OrderStatus.Valid
+            },
                 null,
                 null));
-
 
         var acmeContextMock = Substitute.For<IAcmeContext>();
         acmeContextMock.HttpClient.Returns(httpClientMock);
@@ -356,13 +354,13 @@ public class IOrderContextExtensionsTests
         orderCtxMock.Download().Returns(new CertificateChain(pem));
         orderCtxMock.Resource()
             .Returns(new Order
-                {
-                    Identifiers =
+            {
+                Identifiers =
                     [
                         new Identifier { Value = "www.certes.com", Type = IdentifierType.Dns }
                     ],
-                    Status = OrderStatus.Ready
-                },
+                Status = OrderStatus.Ready
+            },
                 new Order
                 {
                     Identifiers =

@@ -1,6 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿namespace CertesSlim.Acme.Resource;
 
-namespace CertesSlim.Acme.Resource;
+using System.Runtime.Serialization;
 
 /// <summary>
 /// Represents the status of <see cref="Authorization"/>.

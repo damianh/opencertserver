@@ -1,6 +1,6 @@
-﻿using CertesSlim.Acme.Resource;
+﻿namespace CertesSlim.Acme;
 
-namespace CertesSlim.Acme;
+using CertesSlim.Acme.Resource;
 
 /// <summary>
 /// Supports ACME account operations.

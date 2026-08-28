@@ -1,11 +1,10 @@
-﻿using CertesSlim.Acme;
-using CertesSlim.Acme.Resource;
-using CertesSlim.Json;
+﻿namespace CertesSlim;
+
 using Directory = CertesSlim.Acme.Resource.Directory;
 
-namespace CertesSlim;
-
-using Directory = Directory;
+using CertesSlim.Acme;
+using CertesSlim.Acme.Resource;
+using CertesSlim.Json;
 
 /// <summary>
 /// Represents the context for ACME operations.

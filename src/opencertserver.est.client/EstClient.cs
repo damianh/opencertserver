@@ -364,10 +364,10 @@ public sealed class EstClient : IDisposable
     private bool ShouldCaptureBootstrapTrust(Uri requestUri)
     {
         return _options is
-            {
-                AllowBootstrapCaCertsWithoutTrustedServer: true, TrustAnchorMode: EstTrustAnchorMode.ExplicitOnly,
-                ExplicitTrustAnchors.Count: 0
-            } &&
+        {
+            AllowBootstrapCaCertsWithoutTrustedServer: true, TrustAnchorMode: EstTrustAnchorMode.ExplicitOnly,
+            ExplicitTrustAnchors.Count: 0
+        } &&
             PendingBootstrapTrust == null &&
             IsBootstrapPath(requestUri.AbsolutePath);
     }

@@ -1,12 +1,12 @@
-﻿using CertesSlim.Acme;
+﻿namespace CertesSlim;
 
-namespace CertesSlim;
+using CertesSlim.Acme;
 
 /// <summary>
 /// The exception that is thrown when an error occurs while processing ACME operations.
 /// </summary>
 /// <seealso cref="AcmeException" />
- public class AcmeRequestException : AcmeException
+public class AcmeRequestException : AcmeException
 {
     /// <summary>
     /// Gets the error occurred while processing ACME operations.

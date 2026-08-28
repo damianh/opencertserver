@@ -2,14 +2,13 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Numerics;
 using System.Reflection;
 using System.Resources;
 using System.Text;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// A collection of helper routines used by TSS.Net and applications using TSS.Net.
@@ -671,27 +670,27 @@ public class Globs
         return true;
     }
 
-    public static string ToCSharpStyle (string typeName)
+    public static string ToCSharpStyle(string typeName)
     {
         if (typeName.EndsWith("[]"))
         {
             typeName = typeName[..^2];
         }
-        if (typeName == "bool")     { return "bool"; }
-        if (typeName == "Byte")     { return "byte"; }
-        if (typeName == "SByte")    { return "sbyte"; }
-        if (typeName == "Char")     { return "char"; }
-        if (typeName == "Decimal")  { return "decimal"; }
-        if (typeName == "Double")   { return "double"; }
-        if (typeName == "Single")   { return "float"; }
-        if (typeName == "Int32")    { return "int"; }
-        if (typeName == "UInt32")   { return "uint"; }
-        if (typeName == "Int64")    { return "long"; }
-        if (typeName == "UInt64")   { return "ulong"; }
-        if (typeName == "Object")   { return "object"; }
-        if (typeName == "Int16")    { return "short"; }
-        if (typeName == "UInt16")   { return "ushort"; }
-        if (typeName == "String")   { return "string"; }
+        if (typeName == "bool") { return "bool"; }
+        if (typeName == "Byte") { return "byte"; }
+        if (typeName == "SByte") { return "sbyte"; }
+        if (typeName == "Char") { return "char"; }
+        if (typeName == "Decimal") { return "decimal"; }
+        if (typeName == "Double") { return "double"; }
+        if (typeName == "Single") { return "float"; }
+        if (typeName == "Int32") { return "int"; }
+        if (typeName == "UInt32") { return "uint"; }
+        if (typeName == "Int64") { return "long"; }
+        if (typeName == "UInt64") { return "ulong"; }
+        if (typeName == "Object") { return "object"; }
+        if (typeName == "Int16") { return "short"; }
+        if (typeName == "UInt16") { return "ushort"; }
+        if (typeName == "String") { return "string"; }
         return typeName;
     }
 
@@ -767,9 +766,9 @@ public class Globs
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns></returns>
-    public static BigInteger LS (BigInteger a, BigInteger p)
+    public static BigInteger LS(BigInteger a, BigInteger p)
     {
-        return BigInteger.ModPow(a, (p-1)/2, p);
+        return BigInteger.ModPow(a, (p - 1) / 2, p);
     }
 
     /// <summary>
@@ -778,7 +777,7 @@ public class Globs
     /// <returns></returns>
     public static bool TestLS()
     {
-        foreach (var P in new ulong[] {5, 7, /*11, 13, 17, 19, 23,*/ 29, 7919 } )
+        foreach (var P in new ulong[] { 5, 7, /*11, 13, 17, 19, 23,*/ 29, 7919 })
         {
             var nonQuadraticResidues = 0;
 
@@ -843,7 +842,7 @@ public class Globs
     /// <returns></returns>
     public static BigInteger ModSqrt(BigInteger N, BigInteger p)
     {
-        BigInteger  a = 0,
+        BigInteger a = 0,
                     w2 = 0;
         BigInteger ls = 0;
 
@@ -861,7 +860,7 @@ public class Globs
         var s = new Fp2Point(a, 1);
         for (var n = (p + 1) / 2 % p; n > 0; n >>= 1)
         {
-            if ( !n.IsEven )
+            if (!n.IsEven)
             {
                 r = Fp2Point.Mul(r, s, p, w2);
             }
@@ -907,7 +906,7 @@ public class Dbg
         Enabled = enabled;
     }
 
-    public void Trace (string format, params object[] args)
+    public void Trace(string format, params object[] args)
     {
         if (Enabled)
         {
@@ -915,7 +914,7 @@ public class Dbg
         }
     }
 
-    public void Indent ()
+    public void Indent()
     {
         if (Enabled)
         {
@@ -923,7 +922,7 @@ public class Dbg
         }
     }
 
-    public void Unindent ()
+    public void Unindent()
     {
         if (Enabled && CurIndent.Length > 3)
         {

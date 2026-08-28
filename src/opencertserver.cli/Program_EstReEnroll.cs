@@ -1,3 +1,5 @@
+namespace opencertserver.cli;
+
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
@@ -9,8 +11,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using OpenCertServer.Est.Client;
-
-namespace opencertserver.cli;
 
 internal static partial class Program
 {

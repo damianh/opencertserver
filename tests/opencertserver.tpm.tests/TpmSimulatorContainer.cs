@@ -72,17 +72,17 @@ internal sealed class TpmSimulatorContainer : IAsyncDisposable
     public TpmCaOptions CreateOptions(
         uint rsaKeyHandle = 0x81010001,
         uint ecDsaKeyHandle = 0x81010002) => new()
-    {
-        Mode = TpmMode.Simulator,
-        SimulatorHost = Host,
-        SimulatorPort = Port,
-        SimulatorPlatformPort = PlatformPort,
-        CaSubjectName = $"CN=tpm-test-ca-{Guid.NewGuid():N}",
-        RsaKeyHandle = rsaKeyHandle,
-        EcDsaKeyHandle = ecDsaKeyHandle,
-        CaCertificateValidity = TimeSpan.FromDays(1),
-        IssuedCertificateValidity = TimeSpan.FromHours(1),
-    };
+        {
+            Mode = TpmMode.Simulator,
+            SimulatorHost = Host,
+            SimulatorPort = Port,
+            SimulatorPlatformPort = PlatformPort,
+            CaSubjectName = $"CN=tpm-test-ca-{Guid.NewGuid():N}",
+            RsaKeyHandle = rsaKeyHandle,
+            EcDsaKeyHandle = ecDsaKeyHandle,
+            CaCertificateValidity = TimeSpan.FromDays(1),
+            IssuedCertificateValidity = TimeSpan.FromHours(1),
+        };
 
     public async ValueTask DisposeAsync() => await _container.DisposeAsync();
 }

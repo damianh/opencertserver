@@ -1,7 +1,7 @@
+namespace OpenCertServer.Est.Server.Response;
+
 using System.Net;
 using OpenCertServer.Ca.Utils.X509.Templates;
-
-namespace OpenCertServer.Est.Server.Response;
 
 /// <summary>
 /// Represents the EST /csrattrs response selected by the server.
@@ -51,4 +51,3 @@ public sealed class CsrAttributesResponse
         return new CsrAttributesResponse(statusCode);
     }
 }
-

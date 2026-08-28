@@ -4,16 +4,12 @@
         <RootNamespace>CertesSlim.Tests</RootNamespace>
         <NoWarn>1701;1702;1705;0618</NoWarn>
         <PublicSign>False</PublicSign>
+        <OutputType>exe</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="NSubstitute"/>
-        <PackageReference Include="xunit.v3"/>
-        <PackageReference Include="xunit.runner.visualstudio">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="xunit.v3.mtp-v2"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -24,6 +20,10 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\CertesSlim\CertesSlim.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Properties\" />
     </ItemGroup>
 
 </Project>

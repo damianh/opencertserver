@@ -1,9 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace OpenCertServer.Acme.Server;
+
+using System.Text.Json.Serialization;
 using CertesSlim.Json;
 using OpenCertServer.Acme.Abstractions.HttpModel.Requests;
 using OpenCertServer.Acme.Abstractions.Model;
-
-namespace OpenCertServer.Acme.Server;
 
 [JsonSourceGenerationOptions(
     UseStringEnumConverter = true,

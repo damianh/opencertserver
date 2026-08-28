@@ -1,6 +1,6 @@
-using OpenCertServer.Est.Server.Response;
-
 namespace OpenCertServer.Est.Tests;
+
+using OpenCertServer.Est.Server.Response;
 
 using System.Security.Claims;
 using Server.Handlers;

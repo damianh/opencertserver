@@ -1,6 +1,6 @@
-using System.Runtime.InteropServices;
-
 namespace OpenCertServer.Attestation.Native;
+
+using System.Runtime.InteropServices;
 
 /// <summary>
 /// Low-level P/Invoke bindings for Apple CoreFoundation and Security frameworks.

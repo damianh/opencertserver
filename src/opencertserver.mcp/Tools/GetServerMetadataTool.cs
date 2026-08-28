@@ -4,18 +4,23 @@ namespace OpenCertServer.Mcp.Tools;
 /// Returns CA server metadata: CA name, distinguished name, supported profiles,
 /// key types, signature algorithms, OCSP/CRL URLs, and EST endpoint URLs.
 /// </summary>
-public static class GetServerMetadataTool
+[McpServerToolType]
+public class GetServerMetadataTool
 {
-    public static async Task<McpToolResult> Handle(McpToolContext context)
+    [McpServerTool(Name = "get_server_metadata", ReadOnly = true, Idempotent = true, Destructive = false)]
+    [Description("Get CA server metadata including profiles, URLs, supported keys, and EST endpoints.")]
+    public static async Task<McpServerMetadata> GetServerMetadata(
+        CaConfiguration caConfig,
+        IStoreCaProfiles profiles,
+        IOptions<McpServerOptions> options,
+        CancellationToken cancellationToken)
     {
-        var options = context.GetService<IOptionsMonitor<McpServerOptions>>().CurrentValue;
-        var caConfig = context.GetService<CaConfiguration>();
-        var profiles = context.GetService<IStoreCaProfiles>();
+        var mcpOptions = options.Value;
 
         var profileList = new List<CaProfileInfo>();
         var caProfiles = await profiles
-            .GetProfiles(CancellationToken.None)
-            .ToListAsync(CancellationToken.None);
+            .GetProfiles(cancellationToken)
+            .ToListAsync(cancellationToken);
 
         foreach (var profile in caProfiles)
         {
@@ -33,10 +38,10 @@ public static class GetServerMetadataTool
             });
         }
 
-        var result = new McpServerMetadata
+        return new McpServerMetadata
         {
-            ServerName = options.ServerName,
-            ServerVersion = options.ServerVersion,
+            ServerName = mcpOptions.ServerName,
+            ServerVersion = mcpOptions.ServerVersion,
             CaProfiles = profileList,
             OcspUrls = caConfig.OcspUrls,
             CrlUrls = caConfig.CrlUrls,
@@ -56,19 +61,6 @@ public static class GetServerMetadataTool
             ],
             MaxCsrKeySize = 4096,
             MinCsrKeySize = 2048
-        };
-
-        return McpToolResult.Ok(result);
-    }
-
-    public static McpToolDefinition Create()
-    {
-        return new McpToolDefinition
-        {
-            Name = "get_server_metadata",
-            Description = "Get CA server metadata: CA profiles, distinguished names, supported key types, signature algorithms, OCSP/CRL URLs, and EST endpoint URLs.",
-            InputSchema = "{\"type\": \"object\", \"properties\": {}, \"additionalProperties\": false}",
-            Handler = Handle
         };
     }
 }

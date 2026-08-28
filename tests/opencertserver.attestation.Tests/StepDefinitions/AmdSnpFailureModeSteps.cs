@@ -1,3 +1,5 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
@@ -7,8 +9,6 @@ using OpenCertServer.Attestation.Native;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 [Scope(Feature = "AMD SEV-SNP Provider Failure Modes")]

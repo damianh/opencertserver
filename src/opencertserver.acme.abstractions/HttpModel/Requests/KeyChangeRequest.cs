@@ -1,6 +1,6 @@
-using Microsoft.IdentityModel.Tokens;
-
 namespace OpenCertServer.Acme.Abstractions.HttpModel.Requests;
+
+using Microsoft.IdentityModel.Tokens;
 
 /// <summary>
 /// Represents the inner payload for an ACME account key rollover request.
@@ -17,4 +17,3 @@ public sealed class KeyChangeRequest
     /// </summary>
     public JsonWebKey? OldKey { get; set; }
 }
-

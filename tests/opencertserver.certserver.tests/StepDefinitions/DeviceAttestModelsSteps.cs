@@ -1,10 +1,10 @@
+namespace OpenCertServer.CertServer.Tests.StepDefinitions;
+
 using System.Text.Json;
 using OpenCertServer.Acme.Abstractions.Model;
 using OpenCertServer.Acme.Abstractions.Services;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.CertServer.Tests.StepDefinitions;
 
 /// <summary>
 /// Step definitions for device-attest-models.feature (GROUP 1).

@@ -83,7 +83,7 @@ public partial class CertificateServerFeatures
                 .AddSingleton(sp => sp.GetRequiredService<ICertificateAuthority>().GetRootCertificates())
                 .AddAcmeServer(ctx.Configuration, _ => _server.CreateClient(),
                     new AcmeServerOptions
-                        { HostedWorkers = new BackgroundServiceOptions { EnableIssuanceService = false } })
+                    { HostedWorkers = new BackgroundServiceOptions { EnableIssuanceService = false } })
                 .AddSingleton<ICsrValidator, DefaultCsrValidator>()
                 .AddAcmeInMemoryStore()
                 .ConfigureOptions<ConfigureCertificateAuthenticationOptions>()
@@ -109,9 +109,12 @@ public partial class CertificateServerFeatures
                                         JwtBearerDefaults.AuthenticationScheme));
                             c.Properties = new OAuthChallengeProperties
                             {
-                                AllowRefresh = false, RedirectUri = "http://localhost",
-                                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1), IssuedUtc = DateTimeOffset.UtcNow,
-                                IsPersistent = false, Scope = ["openid"]
+                                AllowRefresh = false,
+                                RedirectUri = "http://localhost",
+                                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1),
+                                IssuedUtc = DateTimeOffset.UtcNow,
+                                IsPersistent = false,
+                                Scope = ["openid"]
                             };
                             c.Success();
 
@@ -157,7 +160,7 @@ public partial class CertificateServerFeatures
     [When(@"the client requests a certificate")]
     public async Task WhenTheClientRequestsACertificate()
     {
-        var placedOrder = await _acmeClient.PlaceOrder( ["localhost"]);
+        var placedOrder = await _acmeClient.PlaceOrder(["localhost"]);
 
         Assert.NotNull(placedOrder);
 

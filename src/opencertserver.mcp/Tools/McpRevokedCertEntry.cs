@@ -5,15 +5,15 @@ namespace OpenCertServer.Mcp.Tools;
 /// </summary>
 public class McpRevokedCertEntry
 {
-     /// <summary>Serial number (hex string).</summary>
+    /// <summary>Serial number (hex string).</summary>
     public required string SerialNumber { get; set; }
 
-     /// <summary>When the certificate was revoked (UTC).</summary>
+    /// <summary>When the certificate was revoked (UTC).</summary>
     public DateTimeOffset RevocationTime { get; set; }
 
-     /// <summary>Revocation reason code, if present.</summary>
+    /// <summary>Revocation reason code, if present.</summary>
     public string? Reason { get; set; }
 
-     /// <summary>Optional invalidity date (different from actual revocation time).</summary>
+    /// <summary>Optional invalidity date (different from actual revocation time).</summary>
     public DateTimeOffset? InvalidityDate { get; set; }
 }

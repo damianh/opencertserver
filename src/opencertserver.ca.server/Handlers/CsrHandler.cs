@@ -1,8 +1,8 @@
+namespace OpenCertServer.Ca.Server.Handlers;
+
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-
-namespace OpenCertServer.Ca.Server.Handlers;
 
 using System.Diagnostics;
 using System.Net;

@@ -1,9 +1,9 @@
-﻿using System;
+﻿namespace CertesSlim.Tests.Acme.Resource;
+
+using System;
 using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using Xunit;
-
-namespace CertesSlim.Tests.Acme.Resource;
 
 public class ChallengeTests
 {

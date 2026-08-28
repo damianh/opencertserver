@@ -1,19 +1,19 @@
-﻿using System.Threading.Tasks;
+﻿namespace CertesSlim.Tests;
+
+using System.Threading.Tasks;
 using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using CertesSlim.Extensions;
 using NSubstitute;
 using Xunit;
 
-namespace CertesSlim.Tests;
-
 public class IAuthorizationContextExtensionsTests
 {
     [Fact]
     public async Task CanGetTlsAlpnChallenge()
     {
-        var ctxMock =Substitute.For<IAuthorizationContext>();
-        var challengeMock =Substitute.For<IChallengeContext>();
+        var ctxMock = Substitute.For<IAuthorizationContext>();
+        var challengeMock = Substitute.For<IChallengeContext>();
 
         challengeMock.Type.Returns(ChallengeTypes.Dns01);
         ctxMock.Challenges().Returns([challengeMock]);

@@ -1,7 +1,7 @@
+namespace OpenCertServer.Attestation.Tests.Mocks;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
-namespace OpenCertServer.Attestation.Tests.Mocks;
 
 public class MockProvider : IAttestationProvider
 {

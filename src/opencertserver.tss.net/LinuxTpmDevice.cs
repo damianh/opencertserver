@@ -2,16 +2,15 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
-
 #if WINDOWS_UWP
-using System.Threading.Tasks;
 #else
 #endif
+namespace OpenCertServer.Tpm2Lib;
+
+using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Interop = System.Runtime.InteropServices;
-
-namespace OpenCertServer.Tpm2Lib;
 
 // TODO: Make tpm2-abrmd interface architecture agnostic (now 64-bit only)
 internal class AbrmdWrapper
@@ -130,14 +129,14 @@ public sealed class LinuxTpmDevice : Tpm2Device
 
     // This contained TPM device is used in case there is a user mode TPM Resourse Manager
     // (TRM) running on Linux (it comes from the tpm2-tools package).
-    Tpm2Device  TrmDevice = null;
-    IntPtr      TctiCtxPtr = IntPtr.Zero;
-    AbrmdWrapper.TctiContext    TctiCtx = null;
+    Tpm2Device TrmDevice = null;
+    IntPtr TctiCtxPtr = IntPtr.Zero;
+    AbrmdWrapper.TctiContext TctiCtx = null;
 
     public LinuxTpmDevice(string tpmDevicePath = null)
     {
         _tpmDevicePath = tpmDevicePath ?? "/dev/tpm0";
-//            _tpmDevicePath = tpmDevicePath ?? "/dev/tpmrm0";
+        //            _tpmDevicePath = tpmDevicePath ?? "/dev/tpmrm0";
         try
         {
             Connect();
@@ -205,7 +204,7 @@ public sealed class LinuxTpmDevice : Tpm2Device
     // Send TPM-command buffer to device
     public override void DispatchCommand(
         CommandModifier mod,
-        byte[] cmdBuf, 
+        byte[] cmdBuf,
         out byte[] respBuf)
     {
         if (TctiCtx != null && TctiCtxPtr != IntPtr.Zero)
@@ -276,7 +275,8 @@ public sealed class LinuxTpmDevice : Tpm2Device
             Console.WriteLine("TCTI conn closed!");
             TctiCtxPtr = IntPtr.Zero;
         }
-        else {
+        else
+        {
             if (_tpmIO != null)
             {
                 _tpmIO.Close();

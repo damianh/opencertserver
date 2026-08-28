@@ -1,7 +1,7 @@
-﻿using CertesSlim.Acme;
-using Xunit;
+﻿namespace CertesSlim.Tests.Acme;
 
-namespace CertesSlim.Tests.Acme;
+using CertesSlim.Acme;
+using Xunit;
 
 public class WellKnownServersTests
 {

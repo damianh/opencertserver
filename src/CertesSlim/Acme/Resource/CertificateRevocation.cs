@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Acme.Resource;
 
-namespace CertesSlim.Acme.Resource;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents the payload for certificate revocation.
@@ -15,7 +15,6 @@ internal class CertificateRevocation
     /// </value>
     [JsonPropertyName("certificate")]
     public required string Certificate { get; set; }
-
 
     /// <summary>
     /// Gets or sets the revocation reason.

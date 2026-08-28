@@ -1,12 +1,12 @@
-﻿using CertesSlim.Acme;
+﻿namespace CertesSlim.Tests.Acme;
+
+using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using Microsoft.IdentityModel.Tokens;
 using NSubstitute;
 using Xunit;
 using static CertesSlim.Tests.Helper;
 using Directory = CertesSlim.Acme.Resource.Directory;
-
-namespace CertesSlim.Tests.Acme;
 
 public class AcmeContextTests
 {

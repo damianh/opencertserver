@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿namespace CertesSlim.Tests;
+
+using System.Threading.Tasks;
 using CertesSlim.Acme;
 using CertesSlim.Extensions;
 using NSubstitute;
 using Xunit;
-
-namespace CertesSlim.Tests;
 
 public class IAccountContextExtensionsTests
 {

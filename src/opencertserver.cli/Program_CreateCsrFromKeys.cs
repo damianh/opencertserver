@@ -1,10 +1,10 @@
+namespace opencertserver.cli;
+
 using System;
 using System.CommandLine;
 using System.IO;
 using System.Threading.Tasks;
 using OpenCertServer.Ca.Utils;
-
-namespace opencertserver.cli;
 
 internal static partial class Program
 {
@@ -104,8 +104,3 @@ internal static partial class Program
         }
     }
 }
-
-
-
-
-

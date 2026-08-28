@@ -2,9 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
-
-using System.Diagnostics;
-
 /*
  * This file and the associated SlotContext.cs contains three classes that together
  * perform TPM "handle management." TbsContext implements an Tpm2Device interface
@@ -14,8 +11,9 @@ using System.Diagnostics;
  * ObjectContextManager encapsulates the state for TPM clients.
  * 
  */
-
 namespace OpenCertServer.Tpm2Lib;
+
+using System.Diagnostics;
 
 /// <summary>
 /// Instances of the class TPM are created on top of TPM devices (either a physical
@@ -223,7 +221,7 @@ public sealed class Tbs : IDisposable
             }
 
             byte[] responseBuf;
-                
+
             // TODO: Virtualize TPM2_GetCapability() for handle enumeration.
 
             //
@@ -346,41 +344,41 @@ public sealed class Tbs : IDisposable
             case TpmCc.MacStart:
             case TpmCc.HashSequenceStart:
             case TpmCc.StartAuthSession:
-            {
-                var t = new TpmHandle(responseHandles[0].handle);
-                // ReSharper disable once UnusedVariable
-                var context2 = ContextManager.CreateObjectContext(caller, t);
-                break;
-            }
+                {
+                    var t = new TpmHandle(responseHandles[0].handle);
+                    // ReSharper disable once UnusedVariable
+                    var context2 = ContextManager.CreateObjectContext(caller, t);
+                    break;
+                }
             case TpmCc.ContextLoad:
             case TpmCc.ContextSave:
-            {
-                throw new Exception("ProcessUpdatedTpmState: Should not be here");
-            }
+                {
+                    throw new Exception("ProcessUpdatedTpmState: Should not be here");
+                }
             case TpmCc.FlushContext:
             case TpmCc.SequenceComplete:
-            {
-                if (inputObjects != null)
                 {
-                    ContextManager.Remove(inputObjects[0]);
-                }
+                    if (inputObjects != null)
+                    {
+                        ContextManager.Remove(inputObjects[0]);
+                    }
 
-                break;
-            }
+                    break;
+                }
             case TpmCc.EventSequenceComplete:
-            {
-                if (inputObjects != null)
                 {
-                    ContextManager.Remove(inputObjects[1]);
-                }
+                    if (inputObjects != null)
+                    {
+                        ContextManager.Remove(inputObjects[1]);
+                    }
 
-                break;
-            }
+                    break;
+                }
             case TpmCc.Clear:
-            {
-                ProcessTpmClear(caller, SlotType.SessionSlot);
-                break;
-            }
+                {
+                    ProcessTpmClear(caller, SlotType.SessionSlot);
+                    break;
+                }
         }
     }
 
@@ -647,7 +645,8 @@ public sealed class Tbs : IDisposable
     /// <param name="neededContexts"></param>
     private bool LoadEntities(ObjectContext[] neededContexts)
     {
-        return (from t in neededContexts where !t.Loaded
+        return (from t in neededContexts
+                where !t.Loaded
                 select LoadObject(t, neededContexts))
             .All(loaded => loaded);
     }
@@ -869,7 +868,7 @@ public sealed class Tbs : IDisposable
         {
             throw new NotImplementedException("Too much data returned");
         }
-        if (h.GetType() != typeof (HandleArray))
+        if (h.GetType() != typeof(HandleArray))
         {
             throw new Exception("Incorrect type");
         }

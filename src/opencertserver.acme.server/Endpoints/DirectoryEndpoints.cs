@@ -26,18 +26,18 @@ public static class DirectoryEndpoints
             var options = optionsAccessor.Value;
             var directory = new OpenCertServer.Acme.Abstractions.HttpModel.Directory
             {
-                NewNonce    = GetUrl("NewNonce"),
-                NewAccount  = GetUrl("NewAccount"),
-                NewOrder    = GetUrl("NewOrder"),
-                NewAuthz    = null,
-                RevokeCert  = GetUrl("RevokeCert"),
-                KeyChange   = GetUrl("KeyChange"),
+                NewNonce = GetUrl("NewNonce"),
+                NewAccount = GetUrl("NewAccount"),
+                NewOrder = GetUrl("NewOrder"),
+                NewAuthz = null,
+                RevokeCert = GetUrl("RevokeCert"),
+                KeyChange = GetUrl("KeyChange"),
                 Meta = new Abstractions.HttpModel.DirectoryMetadata
                 {
                     ExternalAccountRequired = options.ExternalAccountRequired,
-                    CAAIdentities           = options.CAAIdentities,
-                    TermsOfService          = options.TOS.RequireAgreement ? options.TOS.Url : null,
-                    Website                 = options.WebsiteUrl,
+                    CAAIdentities = options.CAAIdentities,
+                    TermsOfService = options.TOS.RequireAgreement ? options.TOS.Url : null,
+                    Website = options.WebsiteUrl,
                     ChallengeTypesWithAdditionalContent = ChallengeTypes.AllTypes
                 }
             };

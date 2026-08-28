@@ -28,7 +28,7 @@ public partial class Tpm2
         SessionAttr initialialAttrs,
         int nonceCallerSize = 0)
     {
-        return StartAuthSessionEx(sessionType, authHash, 
+        return StartAuthSessionEx(sessionType, authHash,
             initialialAttrs, new SymDef(), nonceCallerSize);
     }
 
@@ -42,7 +42,7 @@ public partial class Tpm2
         SymDef symDef,
         int nonceCallerSize = 0)
     {
-        return StartAuthSessionEx(TpmRh.Null, sessionType, authHash, 
+        return StartAuthSessionEx(TpmRh.Null, sessionType, authHash,
             initialialAttrs, symDef, nonceCallerSize);
     }
 
@@ -102,7 +102,7 @@ public partial class Tpm2
             }
         }
 
-        var ret = new[] {fwV1, fwV2, revision};
+        var ret = new[] { fwV1, fwV2, revision };
         return ret;
     }
 

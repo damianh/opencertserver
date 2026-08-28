@@ -1,6 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace OpenCertServer.Mcp.Tools;
+
+using System.Security.Cryptography.X509Certificates;
 
 /// <summary>
 /// Revoke a certificate by serial number.
@@ -8,78 +8,38 @@ namespace OpenCertServer.Mcp.Tools;
 /// Input: serialNumber (string, required), reason (string, required, one of: Unspecified, KeyCompromise, CACompromise, AffiliationChanged, Superseded, CessationOfOperation, CertificateHold, RemoveFromCRL, PrivilegeWithdrawn, AACompromise)
 /// Output: Success/failure status with message
 /// </summary>
-public static class RevokeCertificateTool
+[McpServerToolType]
+public class RevokeCertificateTool
 {
-    public static async Task<McpToolResult> Handle(McpToolContext context)
+    [McpServerTool(Name = "revoke_certificate", ReadOnly = false, Idempotent = false, Destructive = true)]
+    [Description("Revoke a certificate by serial number with a revocation reason.")]
+    public static async Task<object> RevokeCertificate(
+        ICertificateAuthority ca,
+        [Description("Certificate serial number (hex string)")] string serialNumber,
+        [Description("Revocation reason")] string reason = "Unspecified",
+        CancellationToken cancellationToken = default)
     {
-        var parameters = context.Parameters as IDictionary<string, object>;
-
-        var serialNumber = parameters?.TryGetValue("serialNumber", out var snObj) ?? false
-            ? snObj.ToString()
-            : null;
-
         if (string.IsNullOrWhiteSpace(serialNumber))
         {
-            return McpToolResult.Fail("serialNumber is required");
+            throw new McpException("serialNumber is required");
         }
 
-        var reasonStr = parameters?.TryGetValue("reason", out var reasonObj) ?? false
-            ? reasonObj.ToString()
-            : "Unspecified";
-
-        if (!Enum.TryParse(reasonStr, ignoreCase: true, out X509RevocationReason reason))
+        if (!Enum.TryParse(reason, ignoreCase: true, out X509RevocationReason revocationReason))
         {
-            return McpToolResult.Fail(
-                $"Invalid revocation reason: {reasonStr}. " +
+            throw new McpException(
+                $"Invalid revocation reason: {reason}. " +
                 "Valid values: Unspecified, KeyCompromise, CACompromise, " +
                 "AffiliationChanged, Superseded, CessationOfOperation, " +
                 "CertificateHold, RemoveFromCRL, PrivilegeWithdrawn, AACompromise");
         }
 
-        var ca = context.GetService<ICertificateAuthority>();
-        var result = await ca.RevokeCertificate(serialNumber, reason, CancellationToken.None);
+        var result = await ca.RevokeCertificate(serialNumber, revocationReason, cancellationToken);
 
         if (result)
         {
-            return McpToolResult.Ok(new { SerialNumber = serialNumber, Reason = reasonStr, Status = "Revoked" });
+            return new { SerialNumber = serialNumber, Reason = reason, Status = "Revoked" };
         }
 
-        return McpToolResult.Fail($"Certificate with serial number {serialNumber} not found or revocation failed",
-            (int)McpErrorCode.CertificateRevocationFailed);
-    }
-
-    public static McpToolDefinition Create()
-    {
-        return new McpToolDefinition
-        {
-            Name = "revoke_certificate",
-            Description =
-                "Revoke a certificate by its serial number. Requires serial number and revocation reason. Returns success/failure status.",
-            InputSchema = """
-                          {
-                                            "type": "object",
-                                            "properties": {
-                                                "serialNumber": {
-                                                    "type": "string",
-                                                    "description": "Certificate serial number (hex string)"
-                                                },
-                                                "reason": {
-                                                    "type": "string",
-                                                    "description": "Revocation reason",
-                                                    "enum": [
-                                                        "Unspecified", "KeyCompromise", "CACompromise",
-                                                        "AffiliationChanged", "Superseded",
-                                                        "CessationOfOperation", "CertificateHold",
-                                                        "RemoveFromCRL", "PrivilegeWithdrawn",
-                                                        "AACompromise"
-                                                    ]
-                                                }
-                                            },
-                                            "required": ["serialNumber", "reason"],
-                                            "additionalProperties": false
-                                        }
-                          """,
-            Handler = Handle
-        };
+        throw new McpException($"Certificate with serial number {serialNumber} not found or revocation failed");
     }
 }

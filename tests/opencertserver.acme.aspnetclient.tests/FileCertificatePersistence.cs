@@ -1,7 +1,7 @@
-﻿using CertesSlim;
-using Microsoft.IdentityModel.Tokens;
+﻿namespace OpenCertServer.Acme.AspNetClient.Tests;
 
-namespace OpenCertServer.Acme.AspNetClient.Tests;
+using CertesSlim;
+using Microsoft.IdentityModel.Tokens;
 
 using System;
 using System.IO;

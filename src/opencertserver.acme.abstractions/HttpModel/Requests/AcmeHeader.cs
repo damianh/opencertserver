@@ -1,6 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿namespace OpenCertServer.Acme.Abstractions.HttpModel.Requests;
 
-namespace OpenCertServer.Acme.Abstractions.HttpModel.Requests;
+using Microsoft.IdentityModel.Tokens;
 
 using System;
 

@@ -1,6 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace OpenCertServer.Mcp.Tools;
+
+using System.Security.Cryptography.X509Certificates;
 
 public class McpCertStatusCheckResult
 {

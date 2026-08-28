@@ -27,7 +27,7 @@ public sealed class AcmeLocationFilter : IEndpointFilter
 
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
-        var locationAttribute =context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<AcmeLocationAttribute>();
+        var locationAttribute = context.HttpContext.GetEndpoint()?.Metadata.GetMetadata<AcmeLocationAttribute>();
         if (locationAttribute == null)
         {
             return await next(context).ConfigureAwait(false);

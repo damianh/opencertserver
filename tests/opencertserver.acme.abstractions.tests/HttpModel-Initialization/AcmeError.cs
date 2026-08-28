@@ -25,7 +25,7 @@ public sealed class AcmeError
 
         Assert.Equal(acmeError.Type, sut.Type);
         Assert.Equal(acmeError.Detail, sut.Detail);
-            
+
         Assert.NotNull(sut.Identifier);
 
         Assert.NotNull(sut.Subproblems);

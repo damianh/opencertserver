@@ -14,7 +14,7 @@ using Utils;
 /// <summary>
 /// Defines the certificate authority class.
 /// </summary>
-public sealed partial class CertificateAuthority : ICertificateAuthority, IDisposable
+public sealed partial class CertificateAuthority : ICertificateAuthority
 {
     private const X509KeyUsageFlags UsageFlags = X509KeyUsageFlags.CrlSign
       | X509KeyUsageFlags.DataEncipherment
@@ -54,7 +54,7 @@ public sealed partial class CertificateAuthority : ICertificateAuthority, IDispo
         _x509ChainValidation = x509ChainValidation;
         _validators =
         [
-            ..validators,
+            .. validators,
             new OwnCertificateValidation(_config.Profiles, _logger),
             new DistinguishedNameValidation(_logger)
         ];

@@ -148,7 +148,7 @@ internal static class SimpleReEnrollHandler
                 return Results.Text(success.Certificate.ToPemChain(success.Issuers), Constants.PemFile);
             }
 
-            X509Certificate2[] content = [success.Certificate, ..success.Issuers];
+            X509Certificate2[] content = [success.Certificate, .. success.Issuers];
             var signedResponse = new SignedData(version: 1, certificates: content);
             var contentInfo = new CmsContentInfo(
                 Oids.Pkcs7Signed.InitializeOid(Oids.Pkcs7SignedFriendlyName),

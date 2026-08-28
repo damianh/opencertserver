@@ -1,10 +1,10 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Security.Cryptography;
 using System.Text;
 using OpenCertServer.Attestation.Native;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 /// <summary>
 /// Validates Apple attestation objects against the Apple validation spec.

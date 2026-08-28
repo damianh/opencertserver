@@ -1,8 +1,9 @@
 namespace OpenCertServer.Mcp.Tests;
 
+using OpenCertServer.Mcp.Tests.Support;
+
 using OpenCertServer.Ca.Utils.Ca;
 using System.Security.Cryptography.X509Certificates;
-using Mcp;
 using Tools;
 
 /// <summary>

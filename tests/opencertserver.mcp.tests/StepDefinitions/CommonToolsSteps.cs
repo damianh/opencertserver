@@ -33,7 +33,7 @@ public sealed class CommonToolsSteps : IDisposable
         // Ensure tools are initialized (needed by metadata steps in Scenario Outline)
         if (TestSharedState.Tools == null)
         {
-            TestSharedState.Tools = _fixture.McpServer.GetTools();
+            TestSharedState.Tools = _fixture.ToolDefinitions;
         }
 
         // Strip surrounding quotes that Scenario Outline substitution may add
@@ -42,9 +42,9 @@ public sealed class CommonToolsSteps : IDisposable
         TestSharedState.ToolResult = result;
     }
 
-      [Then("the result MUST succeed")]
+    [Then("the result MUST succeed")]
     public void ThenResultMustSucceed()
-      {
+    {
         var r = TestSharedState.ToolResult;
         var cert = TestSharedState.SignedCert;
         var rev = TestSharedState.RevocationStatusResult;

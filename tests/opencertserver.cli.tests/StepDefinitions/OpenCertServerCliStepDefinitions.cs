@@ -1,7 +1,7 @@
-using Xunit;
-
 namespace opencertserver.cli.tests.StepDefinitions
 {
+
+    using Xunit;
     using System;
     using System.Collections.Generic;
     using System.IO;

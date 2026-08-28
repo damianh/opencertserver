@@ -76,6 +76,7 @@ public sealed class CertificateAuthorityTests : IDisposable
                 cancellationToken: CancellationToken.None) as SignCertificateResponse.Success;
 
         Assert.Equal(GetParts(req.SubjectName), GetParts(cert!.Certificate.SubjectName));
+        return;
 
         static IEnumerable<string> GetParts(X500DistinguishedName name)
         {
@@ -125,7 +126,7 @@ public sealed class CertificateAuthorityTests : IDisposable
 
         // Time stamping
         req.CertificateExtensions.Add(
-            new X509EnhancedKeyUsageExtension([new("1.3.6.1.5.5.7.3.8")], true));
+            new X509EnhancedKeyUsageExtension([new Oid("1.3.6.1.5.5.7.3.8")], true));
 
         req.CertificateExtensions.Add(new X509SubjectKeyIdentifierExtension(req.PublicKey, false));
         return req;
@@ -133,6 +134,6 @@ public sealed class CertificateAuthorityTests : IDisposable
 
     public void Dispose()
     {
-        (_authority as IDisposable)?.Dispose();
+        _authority.Dispose();
     }
 }

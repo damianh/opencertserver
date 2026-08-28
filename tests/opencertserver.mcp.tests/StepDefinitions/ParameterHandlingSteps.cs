@@ -1,6 +1,6 @@
-using OpenCertServer.Ca.Utils.Ca;
-
 namespace OpenCertServer.Mcp.Tests.StepDefinitions;
+
+using OpenCertServer.Ca.Utils.Ca;
 
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;

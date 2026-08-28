@@ -1,15 +1,14 @@
-﻿using System.Net.Http.Headers;
+﻿namespace CertesSlim.Acme;
+
+using Directory = CertesSlim.Acme.Resource.Directory;
+
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using CertesSlim.Json;
-using Directory = CertesSlim.Acme.Resource.Directory;
 using Strings = CertesSlim.Properties.Strings;
-
-namespace CertesSlim.Acme;
-
-using Directory = Directory;
 
 /// <summary>
 /// HTTP client handling ACME operations.
@@ -134,7 +133,6 @@ public class AcmeHttpClient : IAcmeHttpClient
 
         return nonce;
     }
-
 
     private double ExtractRetryAfterHeaderFromResponse(HttpResponseMessage response)
     {

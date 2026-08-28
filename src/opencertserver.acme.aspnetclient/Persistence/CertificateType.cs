@@ -1,6 +1,7 @@
 ﻿namespace OpenCertServer.Acme.AspNetClient.Persistence;
 
-public enum CertificateType {
+public enum CertificateType
+{
     Account,
     Site
 }

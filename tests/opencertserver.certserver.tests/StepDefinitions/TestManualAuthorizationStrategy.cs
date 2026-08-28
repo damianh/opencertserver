@@ -1,6 +1,6 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace OpenCertServer.CertServer.Tests.StepDefinitions;
+
+using System.Security.Cryptography.X509Certificates;
 
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
@@ -30,4 +30,3 @@ internal sealed class TestManualAuthorizationStrategy : IManualAuthorizationStra
         return true;
     }
 }
-

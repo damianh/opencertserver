@@ -1,6 +1,6 @@
-using OpenCertServer.Ca.Utils.X509Extensions;
-
 namespace OpenCertServer.Ca.Utils;
+
+using OpenCertServer.Ca.Utils.X509Extensions;
 
 using System.Collections.ObjectModel;
 using System.Formats.Asn1;

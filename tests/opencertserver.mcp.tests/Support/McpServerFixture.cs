@@ -2,6 +2,9 @@ namespace OpenCertServer.Mcp.Tests.Support;
 
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.ComponentModel;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,21 +13,21 @@ using Ca.Utils;
 using OpenCertServer.Ca.Utils.Ca;
 using Ca.Utils.Ocsp;
 using Ca.Server;
-using Mcp;
+using OpenCertServer.Mcp.Tools;
+using ModelContextProtocol.Server;
 using Microsoft.Extensions.Options;
 
 public class McpServerFixture : IDisposable
 {
     private readonly IHost _host;
-    public McpServer McpServer { get; }
+    public IReadOnlyDictionary<string, McpToolDefinition> ToolDefinitions { get; }
     public CertificateAuthority CertificateAuthority { get; }
     public IStoreCertificates Store { get; }
     private readonly List<X509Certificate2> _issuedCerts = new();
 
     public McpServerFixture()
-     {
+    {
         var loggerFactory = LoggerFactory.Create(builder => { });
-        var mcpLogger = loggerFactory.CreateLogger<McpServer>();
         var caLogger = loggerFactory.CreateLogger<CertificateAuthority>();
         var store = new InMemoryCertificateStore();
 
@@ -46,14 +49,10 @@ public class McpServerFixture : IDisposable
             new NullChainValidator(),
             caLogger);
 
-        var mcpServer = new McpServer(
-            new McpServerOptions { ServerName = "TestMcpServer", ServerVersion = "1.0.0" }, mcpLogger, loggerFactory);
-        mcpServer.RegisterAll();
-
-         _host = Host.CreateDefaultBuilder()
-             .ConfigureServices((_, services) =>
-             {
-                services.Configure<McpServerOptions>(o =>
+        _host = Host.CreateDefaultBuilder()
+            .ConfigureServices((_, services) =>
+            {
+                services.Configure<OpenCertServer.Mcp.McpServerOptions>(o =>
                 {
                     o.ServerName = "TestMcpServer";
                     o.ServerVersion = "1.0.0";
@@ -64,23 +63,18 @@ public class McpServerFixture : IDisposable
                 services.AddSingleton<ICertificateAuthority>(certAuthority);
                 services.AddSingleton<CertificateAuthority>(certAuthority);
                 services.AddSingleton<IResponderId>(new ResponderIdByKey(RSA.Create(2048)!.ExportSubjectPublicKeyInfo()));
-                services.AddSingleton(mcpServer);
-             })
-             .Build();
-         _host.Start();
+            })
+            .Build();
+        _host.Start();
 
         var resolved = _host.Services.GetRequiredService<IStoreCertificates>();
-        var resolvedMcp = _host.Services.GetRequiredService<McpServer>();
-
-        McpServer = resolvedMcp;
         CertificateAuthority = certAuthority;
         Store = resolved;
-
-        McpServer.InitializeAsync(_host.Services).GetAwaiter().GetResult();
-     }
+        ToolDefinitions = BuildToolDefinitions();
+    }
 
     private async Task<(string csrPem, X509Certificate2 cert)> CreateAndSignCertificate(string cn)
-     {
+    {
         using var rsa = RSA.Create(3072);
         var request = new CertificateRequest(
             new X500DistinguishedName($"CN={cn}"),
@@ -91,28 +85,28 @@ public class McpServerFixture : IDisposable
         var result = await CertificateAuthority.SignCertificateRequestPem(pemCsr, "rsa");
         X509Certificate2 cert;
         if (result is SignCertificateResponse.Success success)
-         {
-           cert = success.Certificate;
-           foreach (var c in success.Issuers)
-                 _issuedCerts.Add(X509CertificateLoader.LoadCertificate(c.GetRawCertData()));
-         }
+        {
+            cert = success.Certificate;
+            foreach (var c in success.Issuers)
+                _issuedCerts.Add(X509CertificateLoader.LoadCertificate(c.GetRawCertData()));
+        }
         else
-         {
+        {
             var error = (SignCertificateResponse.Error)result;
             throw new InvalidOperationException(
-                 $"Signing failed: {string.Join(", ", error.Errors)}");
-         }
-         _issuedCerts.Add(cert);
+               $"Signing failed: {string.Join(", ", error.Errors)}");
+        }
+        _issuedCerts.Add(cert);
         return (pemCsr, cert);
-     }
+    }
 
     public async Task<X509Certificate2> CreateAndIssueCertificateAsync(string cn)
-     {
+    {
         return (await CreateAndSignCertificate(cn)).cert;
-     }
+    }
 
     public static string CreateBase64DerCsr()
-     {
+    {
         using var rsa = RSA.Create();
         var request = new CertificateRequest(
             new X500DistinguishedName("CN=test"),
@@ -120,16 +114,100 @@ public class McpServerFixture : IDisposable
             HashAlgorithmName.SHA256,
             RSASignaturePadding.Pss);
         return Convert.ToBase64String(request.CreateSigningRequest());
-     }
+    }
 
-    public Task<McpToolResult> InvokeMcpToolAsync(string toolName, object parameters)
-        {
+    public async Task<McpToolResult> InvokeMcpToolAsync(string toolName, object parameters)
+    {
         var dict = ConvertToDict(parameters);
-        return McpServer.InvokeTool(toolName, dict);
+        var services = _host.Services;
+        var cancellationToken = CancellationToken.None;
+
+        try
+        {
+            object result = toolName switch
+            {
+                "get_server_metadata" => await GetServerMetadataTool.GetServerMetadata(
+                    services.GetRequiredService<CaConfiguration>(),
+                    services.GetRequiredService<IStoreCaProfiles>(),
+                    services.GetRequiredService<IOptions<OpenCertServer.Mcp.McpServerOptions>>(),
+                    cancellationToken),
+                "list_certificates" => await ListCertificatesTool.ListCertificatesAsync(
+                    services.GetRequiredService<IStoreCertificates>(),
+                    GetInt32(dict, "page", 0),
+                    GetInt32(dict, "pageSize", 100),
+                    cancellationToken),
+                "search_certificates" => await SearchCertificatesTool.SearchCertificates(
+                    services.GetRequiredService<IStoreCertificates>(),
+                    GetString(dict, "subjectCN"),
+                    GetString(dict, "subjectContains"),
+                    GetString(dict, "issuerContains"),
+                    GetString(dict, "serialNumber"),
+                    GetString(dict, "thumbprint"),
+                    GetDateTimeOffset(dict, "notBeforeAfter"),
+                    GetDateTimeOffset(dict, "notBeforeBefore"),
+                    GetDateTimeOffset(dict, "notAfterAfter"),
+                    GetDateTimeOffset(dict, "notAfterBefore"),
+                    GetString(dict, "status"),
+                    GetStringArray(dict, "keyAlgorithms"),
+                    GetInt32(dict, "page", 0),
+                    GetInt32(dict, "pageSize", 100),
+                    cancellationToken),
+                "get_certificate" => await GetCertificateTool.GetCertificate(
+                    services.GetRequiredService<IStoreCertificates>(),
+                    GetString(dict, "serialNumber") ?? string.Empty,
+                    GetBoolean(dict, "includePem", false),
+                    cancellationToken),
+                "get_ca_certificates" => await GetCaCertificatesTool.GetCaCertificates(
+                    services.GetRequiredService<ICertificateAuthority>(),
+                    GetString(dict, "profileName"),
+                    GetBoolean(dict, "includeFullChain", false),
+                    cancellationToken),
+                "sign_certificate" => await SignCertificateTool.SignCertificate(
+                    services.GetRequiredService<ICertificateAuthority>(),
+                    GetString(dict, "csr") ?? string.Empty,
+                    GetString(dict, "profileName"),
+                    GetDateTimeOffset(dict, "notBefore"),
+                    GetDateTimeOffset(dict, "notAfter"),
+                    GetBoolean(dict, "includePem", false),
+                    cancellationToken),
+                "revoke_certificate" => await RevokeCertificateTool.RevokeCertificate(
+                    services.GetRequiredService<ICertificateAuthority>(),
+                    GetString(dict, "serialNumber") ?? string.Empty,
+                    GetString(dict, "reason") ?? "Unspecified",
+                    cancellationToken),
+                "get_revocation_status" => await GetRevocationStatusTool.GetRevocationStatus(
+                    services.GetRequiredService<IStoreCertificates>(),
+                    GetStringArray(dict, "serialNumbers") ?? Array.Empty<string>(),
+                    GetString(dict, "profileName"),
+                    cancellationToken),
+                "check_ocsp_status" => await CheckOcspStatusTool.CheckOcspStatus(
+                    services.GetRequiredService<IStoreCertificates>(),
+                    GetString(dict, "serialNumber") ?? string.Empty,
+                    GetString(dict, "issuerNameHash") ?? string.Empty,
+                    GetString(dict, "issuerKeyHash") ?? string.Empty,
+                    cancellationToken),
+                "get_crl" => await GetCrlTool.GetCrl(
+                    services.GetRequiredService<ICertificateAuthority>(),
+                    GetString(dict, "profileName"),
+                    GetBoolean(dict, "includePem", false),
+                    cancellationToken),
+                _ => throw new UnknownToolException(toolName)
+            };
+
+            return McpToolResult.Ok(result);
         }
+        catch (UnknownToolException)
+        {
+            return McpToolResult.Fail($"Tool not found: {toolName}", (int)McpErrorCode.ToolNotFound);
+        }
+        catch (Exception ex)
+        {
+            return McpToolResult.Fail(ex.Message);
+        }
+    }
 
     private static Dictionary<string, object> ConvertToDict(object obj)
-     {
+    {
         if (obj is IDictionary<string, object> existing)
         {
             return new Dictionary<string, object>(existing);
@@ -148,16 +226,179 @@ public class McpServerFixture : IDisposable
             }
         }
         return dict;
-     }
+    }
+
+    private static IReadOnlyDictionary<string, McpToolDefinition> BuildToolDefinitions()
+    {
+        var toolMethods = typeof(GetServerMetadataTool).Assembly
+            .GetTypes()
+            .Where(t => t.GetCustomAttributes(typeof(McpServerToolTypeAttribute), inherit: false).Any())
+            .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Static))
+            .Select(m => new
+            {
+                Method = m,
+                Attribute = m.GetCustomAttribute<McpServerToolAttribute>(),
+                Description = m.GetCustomAttribute<DescriptionAttribute>()?.Description ?? string.Empty
+            })
+            .Where(x => x.Attribute != null)
+            .ToDictionary(
+                x => x.Attribute!.Name ?? x.Method.Name,
+                x => new McpToolDefinition
+                {
+                    Name = x.Attribute!.Name ?? x.Method.Name,
+                    Description = x.Description,
+                    InputSchema = "{\"type\":\"object\",\"properties\":{}}"
+                },
+                StringComparer.Ordinal);
+
+        return toolMethods;
+    }
+
+    private static string? GetString(IDictionary<string, object> parameters, string key)
+    {
+        if (!parameters.TryGetValue(key, out var value) || value == null)
+        {
+            return null;
+        }
+
+        return value is JsonElement element && element.ValueKind == JsonValueKind.String
+            ? element.GetString()
+            : value.ToString();
+    }
+
+    private static int GetInt32(IDictionary<string, object> parameters, string key, int defaultValue)
+    {
+        if (!parameters.TryGetValue(key, out var value) || value == null)
+        {
+            return defaultValue;
+        }
+
+        if (value is JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out var i))
+            {
+                return i;
+            }
+
+            if (element.ValueKind == JsonValueKind.String && int.TryParse(element.GetString(), out var parsed))
+            {
+                return parsed;
+            }
+        }
+
+        if (value is int intValue)
+        {
+            return intValue;
+        }
+
+        return int.TryParse(value.ToString(), out var result) ? result : defaultValue;
+    }
+
+    private static bool GetBoolean(IDictionary<string, object> parameters, string key, bool defaultValue)
+    {
+        if (!parameters.TryGetValue(key, out var value) || value == null)
+        {
+            return defaultValue;
+        }
+
+        if (value is JsonElement element)
+        {
+            if (element.ValueKind is JsonValueKind.True or JsonValueKind.False)
+            {
+                return element.GetBoolean();
+            }
+
+            if (element.ValueKind == JsonValueKind.String && bool.TryParse(element.GetString(), out var parsed))
+            {
+                return parsed;
+            }
+        }
+
+        if (value is bool boolValue)
+        {
+            return boolValue;
+        }
+
+        return bool.TryParse(value.ToString(), out var result) ? result : defaultValue;
+    }
+
+    private static DateTimeOffset? GetDateTimeOffset(IDictionary<string, object> parameters, string key)
+    {
+        if (!parameters.TryGetValue(key, out var value) || value == null)
+        {
+            return null;
+        }
+
+        if (value is DateTimeOffset dto)
+        {
+            return dto;
+        }
+
+        if (value is JsonElement element && element.ValueKind == JsonValueKind.String &&
+            DateTimeOffset.TryParse(element.GetString(), out var parsedElement))
+        {
+            return parsedElement;
+        }
+
+        return DateTimeOffset.TryParse(value.ToString(), out var parsed) ? parsed : null;
+    }
+
+    private static string[]? GetStringArray(IDictionary<string, object> parameters, string key)
+    {
+        if (!parameters.TryGetValue(key, out var value) || value == null)
+        {
+            return null;
+        }
+
+        if (value is string[] stringArray)
+        {
+            return stringArray;
+        }
+
+        if (value is IEnumerable<string> enumerable)
+        {
+            return enumerable.ToArray();
+        }
+
+        if (value is JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Array)
+            {
+                return element.EnumerateArray()
+                    .Select(item => item.ValueKind == JsonValueKind.String ? item.GetString() : item.ToString())
+                    .Where(item => !string.IsNullOrWhiteSpace(item))
+                    .Cast<string>()
+                    .ToArray();
+            }
+
+            if (element.ValueKind == JsonValueKind.String)
+            {
+                return element.GetString()?.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+            }
+        }
+
+        if (value is IEnumerable<object> objects)
+        {
+            return objects.Select(o => o.ToString()).Where(s => !string.IsNullOrWhiteSpace(s)).Cast<string>().ToArray();
+        }
+
+        if (value is string s)
+        {
+            return s.Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        return null;
+    }
 
     public void Dispose()
-     {
-         _host?.Dispose();
-        McpServer?.Dispose();
+    {
+        _host?.Dispose();
         foreach (var cert in _issuedCerts)
             cert.Dispose();
-     }
+    }
 }
+
+internal sealed class UnknownToolException(string toolName) : Exception($"Tool not found: {toolName}");
 
 /// <summary>
 /// A null chain validator that always passes - used for testing.

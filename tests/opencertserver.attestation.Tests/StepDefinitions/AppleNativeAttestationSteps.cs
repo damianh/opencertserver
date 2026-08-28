@@ -1,10 +1,10 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Security.Cryptography;
 using System.Text;
 using OpenCertServer.Attestation.Native;
 using Reqnroll;
 using Xunit;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 /// <summary>
 /// Step definitions for the <c>AppleNativeAttestation.feature</c> feature.

@@ -2,8 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
-
-
 /*
  * This file contains classes that support the dozen-or-so TPM policy commands.
  * The companion file Policy.cs contains the remainder of the TSS.Net support library
@@ -19,11 +17,10 @@
  * replace with the specific Branch-ID pseudo-ACE
  *
  * */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// PolicyAce is the abstract base-class for the TPM policy operators
@@ -207,7 +204,7 @@ public abstract class PolicyAce
 
     internal abstract TpmRc Execute(Tpm2 tpm, AuthSession sess, PolicyTree policy);
 
-    [DataMember(EmitDefaultValue=false)]
+    [DataMember(EmitDefaultValue = false)]
     public string NodeId = null;
 } // abstract class PolicyAce
 
@@ -609,7 +606,7 @@ public class TpmPolicyNV : PolicyAce
         IndexName = Globs.CopyData(indexName);
     }
 
-    public TpmPolicyNV() : base("") {}
+    public TpmPolicyNV() : base("") { }
 
     public TpmPolicyNV(byte[] nvIndexName, byte[] operandB, ushort offset, Eo operation)
         : base("")
@@ -681,9 +678,9 @@ public class TpmPolicyAuthValue : PolicyAce
 {
     public TpmPolicyAuthValue(string branchName = "", string nodeId = null)
         : base(branchName, nodeId)
-    {}
+    { }
 
-    public TpmPolicyAuthValue() : base("") {}
+    public TpmPolicyAuthValue() : base("") { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {
@@ -707,7 +704,7 @@ public class TpmPolicyRestart : PolicyAce
 {
     public TpmPolicyRestart(string branchName = "", string nodeId = null)
         : base(branchName, nodeId)
-    {}
+    { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {
@@ -728,9 +725,9 @@ public class TpmPolicyPassword : PolicyAce
 {
     public TpmPolicyPassword(string branchName = "", string nodeId = null)
         : base(branchName, nodeId)
-    {}
+    { }
 
-    public TpmPolicyPassword() : base("") {}
+    public TpmPolicyPassword() : base("") { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {
@@ -755,9 +752,9 @@ public class TpmPolicyPhysicalPresence : PolicyAce
 {
     public TpmPolicyPhysicalPresence(string branchName = "", string nodeId = null)
         : base(branchName, nodeId)
-    {}
+    { }
 
-    public TpmPolicyPhysicalPresence() : base("") {}
+    public TpmPolicyPhysicalPresence() : base("") { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {
@@ -820,7 +817,7 @@ public class TpmPolicySigned : TpmPolicyWithExpiration
 
     public byte[] AuthObjectName;
 
-    public TpmPolicySigned() {}
+    public TpmPolicySigned() { }
 
     public TpmPolicySigned(AsymCryptoSystem authorityKey,
         bool useNonceTpm, int expirationTime,
@@ -909,7 +906,7 @@ public class TpmPolicySecret : TpmPolicyWithExpiration
     public TpmHandle AuthEntity;
     public SessionBase AuthSess;
 
-    public TpmPolicySecret() {}
+    public TpmPolicySecret() { }
 
     public TpmPolicySecret(TpmHandle hAuth,
         bool useNonceTpm, int expirationTime,
@@ -968,7 +965,7 @@ public class TpmPolicyTicket : PolicyAce
         TicketType = ticket.tag;
     }
 
-    public TpmPolicyTicket() : base("") {}
+    public TpmPolicyTicket() : base("") { }
 
     public TpmPolicyTicket(TpmPublic authorizingKey, byte[] policyRef, TpmSt ticketType)
         : base("")
@@ -1056,7 +1053,7 @@ public class TpmPolicyAuthorize : PolicyAce
         Ticket = tkVerified;
     }
 
-    public TpmPolicyAuthorize() : base("") {}
+    public TpmPolicyAuthorize() : base("") { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {
@@ -1101,7 +1098,6 @@ public class TpmPolicyAuthorize : PolicyAce
     }
 } // class TpmPolicyAuthorize
 
-
 /// <summary>
 /// Allows policies to change by indirection. It allows creation of a policy that
 /// refers to a policy that exists in a specified NV location. When executed, the
@@ -1114,9 +1110,9 @@ public class TpmPolicyAuthorize : PolicyAce
 /// </summary>
 public class TpmPolicyAuthorizeNV : PolicyAce
 {
-    public TpmHandle   AuthHandle;
-    public TpmHandle   NvIndex;
-    public byte[]      NvIndexName;
+    public TpmHandle AuthHandle;
+    public TpmHandle NvIndex;
+    public byte[] NvIndexName;
 
     public TpmPolicyAuthorizeNV(TpmHandle authHandle, TpmHandle nvIndex,
         byte[] nvIndexName,
@@ -1142,7 +1138,6 @@ public class TpmPolicyAuthorizeNV : PolicyAce
     }
 } // class TpmPolicyAuthorizeNV
 
-
 /// <summary>
 /// This command allows qualification of duplication to allow duplication to a
 /// selected new parent. If this command is used without a subsequent
@@ -1163,7 +1158,7 @@ public class TpmPolicyDuplicationSelect : PolicyAce
         IncludeObjectNameInPolicyHash = includeObjectNameInPolicyHash;
     }
 
-    public TpmPolicyDuplicationSelect() : base("") {}
+    public TpmPolicyDuplicationSelect() : base("") { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {
@@ -1198,7 +1193,7 @@ public class TpmPolicyDuplicationSelect : PolicyAce
 /// </summary>
 public class TpmPolicyChainId : PolicyAce
 {
-    public TpmPolicyChainId() : base("") {}
+    public TpmPolicyChainId() : base("") { }
 
     public TpmPolicyChainId(string branchName, string nodeId = null)
         : base(branchName, nodeId)
@@ -1244,7 +1239,7 @@ public class TpmPolicyAction : PolicyAce
 {
     public string Action = "";
 
-    public TpmPolicyAction() : base("") {}
+    public TpmPolicyAction() : base("") { }
 
     public TpmPolicyAction(string action,
         string branchName = "", string nodeId = null)
@@ -1289,7 +1284,7 @@ public class TpmPolicyNvWritten : PolicyAce
         IsNvIndexRequiredToHaveBeenWritten = isNvIndexRequiredToHaveBeenWritten;
     }
 
-    public TpmPolicyNvWritten() : base("") {}
+    public TpmPolicyNvWritten() : base("") { }
 
     internal override TpmHash GetPolicyDigest(TpmAlgId hashAlg)
     {

@@ -1,3 +1,5 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -5,7 +7,6 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
-using OpenCertServer.Attestation;
 using OpenCertServer.Attestation.Native;
 using OpenCertServer.Attestation.Tests.Mocks;
 using Reqnroll;
@@ -39,7 +40,7 @@ public class SgxAttestationSteps
             _native = new MockSgxNativeInterop
             {
                 PckIdBytes = [0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6, 0x01, 0x02,
-                              0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A],
+                    0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A],
                 QuoteBytes = new byte[256]
             };
             Random.Shared.NextBytes(((MockSgxNativeInterop)_native).QuoteBytes);

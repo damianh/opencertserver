@@ -1,7 +1,7 @@
+namespace OpenCertServer.Mcp.Tools;
+
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-
-namespace OpenCertServer.Mcp.Tools;
 
 /// <summary>
 /// Sign a Certificate Signing Request and return the signed certificate.
@@ -13,46 +13,24 @@ namespace OpenCertServer.Mcp.Tools;
 ///        includePem (bool, optional) - Include PEM cert in response
 /// Output: Signed certificate metadata + optionally PEM
 /// </summary>
-public static class SignCertificateTool
+[McpServerToolType]
+public class SignCertificateTool
 {
-    public static async Task<McpToolResult> Handle(McpToolContext context)
+    [McpServerTool(Name = "sign_certificate", ReadOnly = false, Idempotent = false, Destructive = true)]
+    [Description("Sign a Certificate Signing Request (CSR) and return signed certificate metadata.")]
+    public static async Task<McpCertificateItem> SignCertificate(
+        ICertificateAuthority ca,
+        [Description("PEM or Base64-encoded Certificate Signing Request")] string csr,
+        [Description("CA profile name (optional, uses default if omitted)")] string? profileName = null,
+        [Description("Certificate validity start (ISO 8601, optional)")] DateTimeOffset? notBefore = null,
+        [Description("Certificate validity end (ISO 8601, optional)")] DateTimeOffset? notAfter = null,
+        [Description("Include PEM-encoded cert and chain in response")] bool includePem = false,
+        CancellationToken cancellationToken = default)
     {
-        var parameters = context.Parameters as IDictionary<string, object>;
-
-        var csr = parameters?.TryGetValue("csr", out var csrObj) ?? false
-            ? csrObj.ToString()
-            : null;
-
         if (string.IsNullOrWhiteSpace(csr))
         {
-            return McpToolResult.Fail("csr is required");
+            throw new McpException("csr is required");
         }
-
-        var profileName = parameters?.TryGetValue("profileName", out var profileObj) ?? false
-            ? profileObj.ToString()
-            : null;
-
-        // Parse dates as DateTimeOffset to preserve timezone information
-        var notBefore =
-            parameters?.TryGetValue("notBefore", out var nbObj) == true &&
-            DateTimeOffset.TryParse(nbObj.ToString(), System.Globalization.CultureInfo.InvariantCulture, 
-                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, 
-                out var nb)
-                ? (DateTimeOffset?)nb
-                : null;
-
-        var notAfter =
-            parameters?.TryGetValue("notAfter", out var naObj) == true &&
-            DateTimeOffset.TryParse(naObj.ToString(), System.Globalization.CultureInfo.InvariantCulture,
-                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal,
-                out var na)
-                ? (DateTimeOffset?)na
-                : null;
-
-        var includePem = parameters?.TryGetValue("includePem", out var pemObj3) == true &&
-            ParameterHelper.GetBoolean(pemObj3, false);
-
-        var ca = context.GetService<ICertificateAuthority>();
 
         CertificateRequest request;
         try
@@ -73,7 +51,7 @@ public static class SignCertificateTool
             {
                 normalized = normalized.NormalizeBase64();
             }
-            
+
             var csrDer = Convert.FromBase64String(normalized);
             request = CertificateRequest.LoadSigningRequest(
                 csrDer,
@@ -83,8 +61,7 @@ public static class SignCertificateTool
         }
         catch (Exception ex)
         {
-            return McpToolResult.Fail($"CSR could not be parsed: {ex.Message}",
-                (int)McpErrorCode.CertificateSigningFailed);
+            throw new McpException($"CSR could not be parsed: {ex.Message}");
         }
 
         var result = await ca.SignCertificateRequest(
@@ -94,7 +71,7 @@ public static class SignCertificateTool
             reenrollingFrom: null,
             notBefore,
             notAfter,
-            CancellationToken.None);
+            cancellationToken);
 
         if (result is SignCertificateResponse.Success success)
         {
@@ -104,7 +81,7 @@ public static class SignCertificateTool
                 string.Join("\n", success.Issuers.Select(c => c.ExportCertificatePem()))
                 : null;
 
-            return McpToolResult.Ok(new McpCertificateItem
+            return new McpCertificateItem
             {
                 SerialNumber = success.Certificate.GetSerialNumberString(),
                 Subject = success.Certificate.Subject,
@@ -121,55 +98,10 @@ public static class SignCertificateTool
                 RevocationDate = null,
                 Pem = pem,
                 PemChain = pemChain
-            });
+            };
         }
 
         var error = (SignCertificateResponse.Error)result;
-        return McpToolResult.Fail(
-            $"Certificate signing failed: {string.Join("; ", error.Errors)}",
-            (int)McpErrorCode.CertificateSigningFailed);
-    }
-
-    public static McpToolDefinition Create()
-    {
-        return new McpToolDefinition
-        {
-            Name = "sign_certificate",
-            Description =
-                "Sign a Certificate Signing Request (CSR) and return the signed certificate. Supports PEM or Base64-encoded CSR input, optional profile selection, and custom validity dates.",
-            InputSchema = """
-                          {
-                                            "type": "object",
-                                            "properties": {
-                                                "csr": {
-                                                    "type": "string",
-                                                    "description": "PEM or Base64-encoded Certificate Signing Request"
-                                                },
-                                                "profileName": {
-                                                    "type": "string",
-                                                    "description": "CA profile name (optional, uses default if omitted)"
-                                                },
-                                                "notBefore": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "description": "Certificate validity start (ISO 8601, optional)"
-                                                },
-                                                "notAfter": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "description": "Certificate validity end (ISO 8601, optional)"
-                                                },
-                                                "includePem": {
-                                                    "type": "boolean",
-                                                    "description": "Include PEM-encoded cert and chain in response",
-                                                    "default": false
-                                                }
-                                            },
-                                            "required": ["csr"],
-                                            "additionalProperties": false
-                                        }
-                          """,
-            Handler = Handle
-        };
+        throw new McpException($"Certificate signing failed: {string.Join("; ", error.Errors)}");
     }
 }

@@ -2,12 +2,11 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
-
-namespace OpenCertServer.Tpm2Lib;
 
 public sealed class TbsDevice : Tpm2Device
 {
@@ -257,44 +256,44 @@ internal class TbsWrapper
         [DllImport("tbs.dll", CharSet = CharSet.Unicode)]
         internal static extern TbsResult
             Tbsi_Context_Create(
-            ref TbsContextParams  contextParams,
-            ref UIntPtr             context
+            ref TbsContextParams contextParams,
+            ref UIntPtr context
             );
 
         [DllImport("tbs.dll", CharSet = CharSet.Unicode)]
         internal static extern TbsResult
             Tbsi_Get_OwnerAuth(
-            UIntPtr                 hContext,
-            uint                    ownerAuthType,
+            UIntPtr hContext,
+            uint ownerAuthType,
             [System.Runtime.InteropServices.MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3), Out]
             byte[]                  outBuf,
-            ref uint                outBufLen
+            ref uint outBufLen
             );
 
         [DllImport("tbs.dll", CharSet = CharSet.Unicode)]
         internal static extern TbsResult
             Tbsip_Context_Close(
-            UIntPtr                 context
+            UIntPtr context
             );
 
         [DllImport("tbs.dll", CharSet = CharSet.Unicode)]
         internal static extern TbsResult
             Tbsip_Submit_Command(
-            UIntPtr                 context,
-            TbsCommandLocality    locality,
+            UIntPtr context,
+            TbsCommandLocality locality,
             TbsCommandPriority priority,
             [System.Runtime.InteropServices.MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 4), In]
             byte[]                  inBuffer,
-            uint                    inBufferSize,
+            uint inBufferSize,
             [System.Runtime.InteropServices.MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 6), Out]
             byte[]                  outBuf,
-            ref uint                outBufLen
+            ref uint outBufLen
             );
 
         [DllImport("tbs.dll", CharSet = CharSet.Unicode)]
         internal static extern TbsResult
             Tbsip_Cancel_Commands(
-            UIntPtr                 context
+            UIntPtr context
             );
 
     }

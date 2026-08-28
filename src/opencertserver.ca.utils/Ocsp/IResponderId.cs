@@ -1,6 +1,6 @@
-using OpenCertServer.Ca.Utils.X509;
-
 namespace OpenCertServer.Ca.Utils.Ocsp;
+
+using OpenCertServer.Ca.Utils.X509;
 
 /// <summary>
 /// Defines the ResponderID structure as per RFC 6960.

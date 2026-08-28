@@ -1,7 +1,7 @@
+namespace OpenCertServer.Acme.Server.Filters;
+
 using CertesSlim.Json;
 using OpenCertServer.Acme.Server.Extensions;
-
-namespace OpenCertServer.Acme.Server.Filters;
 
 using Abstractions.RequestServices;
 using Abstractions.Exceptions;

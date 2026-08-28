@@ -1,6 +1,6 @@
-﻿using System.Text.Json;
+﻿namespace OpenCertServer.Acme.AspNetClient.Persistence;
 
-namespace OpenCertServer.Acme.AspNetClient.Persistence;
+using System.Text.Json;
 
 using System.Collections.Generic;
 using System.IO;

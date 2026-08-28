@@ -1,9 +1,9 @@
+namespace OpenCertServer.Est.Tests.Configuration;
+
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.Extensions.Options;
-
-namespace OpenCertServer.Est.Tests.Configuration;
 
 internal class ConfigureOauthOptions : IPostConfigureOptions<JwtBearerOptions>
 {
@@ -21,7 +21,7 @@ internal class ConfigureOauthOptions : IPostConfigureOptions<JwtBearerOptions>
                     return Task.CompletedTask;
                 }
                 token = token.ToString().Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
-                if(token != "valid-jwt")
+                if (token != "valid-jwt")
                 {
                     c.NoResult();
                     return Task.CompletedTask;
@@ -33,9 +33,12 @@ internal class ConfigureOauthOptions : IPostConfigureOptions<JwtBearerOptions>
                             JwtBearerDefaults.AuthenticationScheme));
                 c.Properties = new OAuthChallengeProperties
                 {
-                    AllowRefresh = false, RedirectUri = "http://localhost",
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1), IssuedUtc = DateTimeOffset.UtcNow,
-                    IsPersistent = false, Scope = ["openid"]
+                    AllowRefresh = false,
+                    RedirectUri = "http://localhost",
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(1),
+                    IssuedUtc = DateTimeOffset.UtcNow,
+                    IsPersistent = false,
+                    Scope = ["openid"]
                 };
                 c.Success();
 

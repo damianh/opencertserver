@@ -1,8 +1,8 @@
+namespace OpenCertServer.Attestation;
+
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
-namespace OpenCertServer.Attestation;
 
 /// <summary>
 /// Validates device certificate trust chains against hard-pinned vendor root CAs per spec section 4.3.
@@ -66,9 +66,9 @@ public sealed class TrustStore
             return;
         }
 
-var certBytes = new byte[stream.Length];
-stream.ReadExactly(certBytes);
-_pinnedRoots[vendor] = X509CertificateLoader.LoadCertificate(certBytes);
+        var certBytes = new byte[stream.Length];
+        stream.ReadExactly(certBytes);
+        _pinnedRoots[vendor] = X509CertificateLoader.LoadCertificate(certBytes);
         _logger.LogInformation("Pinned {Vendor} root CA loaded from embedded resources.", vendor);
     }
 

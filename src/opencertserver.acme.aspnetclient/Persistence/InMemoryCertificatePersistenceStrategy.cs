@@ -33,6 +33,6 @@ internal sealed class InMemoryCertificatePersistenceStrategy : ICertificatePersi
 
     public Task<X509Certificate2?> RetrieveSiteCertificate()
     {
-        return Task.FromResult(_siteCertificate == null ? null :  X509CertificateLoader.LoadCertificate(_siteCertificate));
+        return Task.FromResult(_siteCertificate == null ? null : X509CertificateLoader.LoadCertificate(_siteCertificate));
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Text.Json.Serialization;
+﻿namespace CertesSlim.Acme.Resource;
 
-namespace CertesSlim.Acme.Resource;
+using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// Represents the metadata for a ACME directory.

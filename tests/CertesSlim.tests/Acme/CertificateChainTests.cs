@@ -1,10 +1,10 @@
-﻿using System;
+﻿namespace CertesSlim.Tests.Acme;
+
+using System;
 using System.IO;
 using CertesSlim.Acme;
 using Microsoft.IdentityModel.Tokens;
 using Xunit;
-
-namespace CertesSlim.Tests.Acme;
 
 public class CertificateChainTests
 {
@@ -33,7 +33,7 @@ public class CertificateChainTests
 
         var expectedPem =
             key.ToPem().Trim() +
-            Environment.NewLine + 
+            Environment.NewLine +
             pem +
             Environment.NewLine +
             File.ReadAllText("./Data/dst-root-ca-x3.pem").Trim();

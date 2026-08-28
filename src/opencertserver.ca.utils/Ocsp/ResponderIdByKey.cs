@@ -1,6 +1,6 @@
-using System.Formats.Asn1;
-
 namespace OpenCertServer.Ca.Utils.Ocsp;
+
+using System.Formats.Asn1;
 
 /// <summary>
 /// Represents a ResponderID identified by responder key hash.

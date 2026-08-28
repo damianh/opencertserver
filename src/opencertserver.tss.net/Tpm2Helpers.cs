@@ -2,10 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See the LICENSE file in the project root for full license information.
  */
+namespace OpenCertServer.Tpm2Lib;
 
 using System.Diagnostics;
-
-namespace OpenCertServer.Tpm2Lib;
 
 /// <summary>
 /// TpmHelpers is a set of routines accessible like
@@ -36,7 +35,6 @@ public class TpmHelpers
     /// Caches algorithm IDs implemented by this TPM instance.
     /// </summary>
     private TpmAlgId[] ImplementedAlgs;
-
 
     internal TpmHelpers(Tpm2 associatedTpm)
     {
@@ -94,7 +92,7 @@ public class TpmHelpers
     public static E GetEnumerator<E>(string oldName, string newName) where E : struct
     {
         E val;
-        if (   !Enum.TryParse(newName, out val)
+        if (!Enum.TryParse(newName, out val)
          && !Enum.TryParse(oldName, out val))
         {
             throw new Exception("Invalid enumerator names " + oldName + ", "
@@ -109,7 +107,7 @@ public class TpmErrorHelpers
     /// <summary>
     /// Checks if the given response code uses Format-One.
     /// </summary>
-    public static bool IsFmt1 (TpmRc responseCode)
+    public static bool IsFmt1(TpmRc responseCode)
     {
         return ((uint)responseCode & 0x80) != 0;
     }
@@ -119,7 +117,7 @@ public class TpmErrorHelpers
     /// (such as format selector, version, and bad parameter index) from the
     /// response code returned by TPM.
     /// </summary>
-    public static TpmRc ErrorNumber (TpmRc rawResponse)
+    public static TpmRc ErrorNumber(TpmRc rawResponse)
     {
         if (Tpm2.IsTbsError(rawResponse) || Tpm2.IsTssError(rawResponse))
         {
@@ -139,7 +137,7 @@ public class TpmErrorHelpers
     /// </summary>
     /// <param name="errorCode"></param>
     /// <returns></returns>
-    public static byte[] BuildErrorResponseBuffer (TpmRc errorCode)
+    public static byte[] BuildErrorResponseBuffer(TpmRc errorCode)
     {
         return Marshaller.GetTpmRepresentation(new object[] {
             TpmSt.NoSessions,
@@ -221,7 +219,7 @@ public class PrimaryHelpers
             new Tpm2bPublicKeyRsa());
 
         var outsideInfo = Globs.GetRandomBytes(8);
-        return  await H.Tpm.CreatePrimaryAsync(TpmRh.Owner, sensCreate,
+        return await H.Tpm.CreatePrimaryAsync(TpmRh.Owner, sensCreate,
             parms, outsideInfo, theSelection);
     }
 } // class PrimaryHelpers

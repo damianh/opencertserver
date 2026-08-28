@@ -1,8 +1,8 @@
+namespace OpenCertServer.Attestation.Tests.StepDefinitions;
+
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Reqnroll;
-
-namespace OpenCertServer.Attestation.Tests.StepDefinitions;
 
 [Binding]
 public class ConfigSteps

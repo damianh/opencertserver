@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿namespace CertesSlim.Tests.Acme;
+
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -11,8 +13,6 @@ using NSubstitute;
 using Xunit;
 using static CertesSlim.Tests.Helper;
 using Directory = CertesSlim.Acme.Resource.Directory;
-
-namespace CertesSlim.Tests.Acme;
 
 public class AcmeHttpClientTests
 {

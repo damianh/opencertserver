@@ -1,7 +1,7 @@
+namespace OpenCertServer.Attestation;
+
 using System.Collections.Concurrent;
 using System.Security.Cryptography.X509Certificates;
-
-namespace OpenCertServer.Attestation;
 
 /// <summary>
 /// Per-provider cache for device certificates to prevent hitting vendor gateways (PCCS/VPS)

@@ -16,10 +16,11 @@ internal static partial class Program
         var caKeyOption = new Option<string>("--ca-key") { Description = "Path to the CA private key (PEM format)" };
         var caCertOption = new Option<string>("--ca-cert") { Description = "Path to the CA certificate (PEM or DER)" };
         var outOption = new Option<string>("--out")
-            { Description = "Output path for the signed certificate (PEM format)" };
+        { Description = "Output path for the signed certificate (PEM format)" };
         var signCsrCommand = new Command("sign-csr")
         {
-            Description = "Sign a certificate signing request (CSR)", Options =
+            Description = "Sign a certificate signing request (CSR)",
+            Options =
             {
                 csrOption,
                 caKeyOption,

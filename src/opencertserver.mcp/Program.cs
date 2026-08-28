@@ -1,13 +1,13 @@
 namespace OpenCertServer.Mcp;
 
 using System.Security.Cryptography.X509Certificates;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Ca;
 using Ca.Server;
+using ModelContextProtocol.Server;
+using OpenCertServer.Mcp.Tools;
 
 /// <summary>
 /// Entry point for the MCP certificate server (stdio transport).
@@ -17,19 +17,25 @@ public static class Program
 {
     public static async Task Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        var builder = Host.CreateApplicationBuilder(args);
         var services = builder.Services;
 
         services.AddLogging(logging =>
         {
-            logging.AddConsole();
+            logging.AddConsole(consoleLogOptions =>
+            {
+                // MCP stdio protocol uses stdout for framing, so logs must be on stderr.
+                consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace;
+            });
             logging.SetMinimumLevel(LogLevel.Information);
         });
+
         builder.Configuration.AddEnvironmentVariables("MCP_");
+        services.Configure<McpServerOptions>(builder.Configuration.GetSection("McpServer"));
 
         // Register CA services required by MCP tools
         services.AddInMemoryCertificateStore();
-        
+
         // Configure CA based on environment or use self-signed for testing
         var dn = builder.Configuration.GetValue<string>("CA_DN") ?? "CN=MCP Test CA";
         services.AddSelfSignedCertificateAuthority(
@@ -39,47 +45,20 @@ public static class Program
             Array.Empty<string>(), // CA Issuer URLs
             TimeSpan.FromDays(90));
 
-        var host = builder.Build();
+        services
+            .AddMcpServer()
+            .WithStdioServerTransport()
+            .WithTools<GetServerMetadataTool>()
+            .WithTools<ListCertificatesTool>()
+            .WithTools<SearchCertificatesTool>()
+            .WithTools<GetCertificateTool>()
+            .WithTools<GetCaCertificatesTool>()
+            .WithTools<SignCertificateTool>()
+            .WithTools<RevokeCertificateTool>()
+            .WithTools<GetRevocationStatusTool>()
+            .WithTools<CheckOcspStatusTool>()
+            .WithTools<GetCrlTool>();
 
-        // Configure MCP server options
-        var options = new McpServerOptions();
-        host.Configuration
-            .GetSection("McpServer")
-            .Bind(options);
-
-        // Create and initialize the MCP server
-        var logger = host.Services.GetRequiredService<ILogger<McpServer>>();
-        var loggerFactory = host.Services.GetRequiredService<ILoggerFactory>();
-        var mcpServer = new McpServer(options, logger, loggerFactory);
-
-        // Register all tools
-        mcpServer.RegisterAll();
-
-        // Initialize with DI services
-        await mcpServer.InitializeAsync(host.Services);
-
-        // Wait for cancellation
-        using var cts = new CancellationTokenSource();
-        ConsoleCancelEventHandler? cancelHandler = (s, e) =>
-        {
-            cts.Cancel();
-            e.Cancel = true;
-        };
-        Console.CancelKeyPress += cancelHandler;
-
-        var startTask = mcpServer.StartAsync(cts.Token);
-
-        try
-        {
-            await Task.WhenAny(startTask, Task.Delay(Timeout.Infinite, cts.Token));
-        }
-        finally
-        {
-            await mcpServer.StopAsync();
-            Console.CancelKeyPress -= cancelHandler;
-        }
-
-        // Propagate any server start/transport failures after shutdown.
-        await startTask;
+        await builder.Build().RunAsync();
     }
 }

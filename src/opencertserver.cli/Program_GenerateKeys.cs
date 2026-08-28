@@ -1,10 +1,10 @@
+namespace opencertserver.cli;
+
 using System;
 using System.CommandLine;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-
-namespace opencertserver.cli;
 
 internal static partial class Program
 {
@@ -235,8 +235,3 @@ internal static partial class Program
         await File.WriteAllTextAsync(path, pem).ConfigureAwait(false);
     }
 }
-
-
-
-
-

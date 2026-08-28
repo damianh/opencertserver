@@ -1,3 +1,5 @@
+namespace OpenCertServer.Acme.Server.Services;
+
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -5,8 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using OpenCertServer.Acme.Abstractions.Exceptions;
 using OpenCertServer.Acme.Abstractions.Services;
 using OpenCertServer.Acme.Abstractions.Storage;
-
-namespace OpenCertServer.Acme.Server.Services;
 
 /// <summary>
 /// Default implementation of <see cref="IExternalAccountBindingService"/>.
@@ -265,4 +265,3 @@ public sealed class DefaultExternalAccountBindingService : IExternalAccountBindi
             _ => throw new NotSupportedException($"HMAC algorithm '{algorithm}' is not supported.")
         };
 }
-

@@ -1,11 +1,11 @@
-﻿using System;
+﻿namespace CertesSlim.Tests;
+
+using System;
 using System.Net.Http;
 using CertesSlim.Acme;
 using CertesSlim.Acme.Resource;
 using Microsoft.IdentityModel.Tokens;
 using Directory = CertesSlim.Acme.Resource.Directory;
-
-namespace CertesSlim.Tests;
 
 public static partial class Helper
 {

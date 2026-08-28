@@ -1,7 +1,7 @@
+namespace OpenCertServer.Acme.Server.RequestServices;
+
 using CertesSlim.Json;
 using OpenCertServer.Acme.Abstractions.Exceptions;
-
-namespace OpenCertServer.Acme.Server.RequestServices;
 
 using System;
 using System.Collections.Generic;
@@ -161,7 +161,6 @@ public sealed class DefaultRequestValidationService : IRequestValidationService
             {
                 throw new MalformedRequestException("newAccount requests must be signed with a JWK and must not contain a Kid.");
             }
-
 
             return;
         }

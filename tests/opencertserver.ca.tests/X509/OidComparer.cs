@@ -1,10 +1,10 @@
-using System.Security.Cryptography;
-
 namespace OpenCertServer.Ca.Tests.X509;
+
+using System.Security.Cryptography;
 
 internal class OidComparer : IEqualityComparer<Oid>
 {
-    public  static readonly OidComparer Instance = new();
+    public static readonly OidComparer Instance = new();
 
     private OidComparer()
     {

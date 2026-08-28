@@ -1,7 +1,7 @@
+namespace OpenCertServer.Attestation.Native;
+
 using System.Collections.Concurrent;
 using System.Security.Cryptography;
-
-namespace OpenCertServer.Attestation.Native;
 
 /// <summary>
 /// <see cref="IAppleAttestNativeInterop"/> implementation that calls Apple's

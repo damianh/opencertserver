@@ -111,43 +111,43 @@ public static class CertificateExtensions
                     switch (oid)
                     {
                         case "2.5.29.15": // Key Usage
-                        {
-                            var ku = new X509KeyUsageExtension(ext, ext.Critical);
-                            sb.AppendLine($"\t\t\tX509v3 Key Usage: ");
-                            var names = KeyUsageNames(ku.KeyUsages);
-                            sb.AppendLine($"\t\t\t\t{string.Join(", ", names)}");
-                            break;
-                        }
+                            {
+                                var ku = new X509KeyUsageExtension(ext, ext.Critical);
+                                sb.AppendLine($"\t\t\tX509v3 Key Usage: ");
+                                var names = KeyUsageNames(ku.KeyUsages);
+                                sb.AppendLine($"\t\t\t\t{string.Join(", ", names)}");
+                                break;
+                            }
                         case "2.5.29.37": // EKU
-                        {
-                            var eku = new X509EnhancedKeyUsageExtension(ext, ext.Critical);
-                            sb.AppendLine($"\t\t\tX509v3 Extended Key Usage: ");
-                            var list = eku.EnhancedKeyUsages.Cast<Oid>().Select(o => OidFriendlyName(o));
-                            sb.AppendLine($"\t\t\t\t{string.Join(", ", list)}");
-                            break;
-                        }
+                            {
+                                var eku = new X509EnhancedKeyUsageExtension(ext, ext.Critical);
+                                sb.AppendLine($"\t\t\tX509v3 Extended Key Usage: ");
+                                var list = eku.EnhancedKeyUsages.Cast<Oid>().Select(o => OidFriendlyName(o));
+                                sb.AppendLine($"\t\t\t\t{string.Join(", ", list)}");
+                                break;
+                            }
                         case "2.5.29.14": // Subject Key Identifier
-                        {
-                            var skid = new X509SubjectKeyIdentifierExtension(ext, ext.Critical);
-                            sb.AppendLine($"\t\t\tX509v3 Subject Key Identifier:");
-                            sb.AppendLine($"\t\t\t\t{skid.SubjectKeyIdentifier}");
-                            break;
-                        }
+                            {
+                                var skid = new X509SubjectKeyIdentifierExtension(ext, ext.Critical);
+                                sb.AppendLine($"\t\t\tX509v3 Subject Key Identifier:");
+                                sb.AppendLine($"\t\t\t\t{skid.SubjectKeyIdentifier}");
+                                break;
+                            }
                         case "2.5.29.35": // Authority Key Identifier
-                        {
-                            sb.AppendLine($"\t\t\tX509v3 Authority Key Identifier:");
-                            var formatted = ext.Format(true).Trim();
-                            sb.Append(FormatMultiline(formatted, "\t\t\t\t"));
-                            break;
-                        }
+                            {
+                                sb.AppendLine($"\t\t\tX509v3 Authority Key Identifier:");
+                                var formatted = ext.Format(true).Trim();
+                                sb.Append(FormatMultiline(formatted, "\t\t\t\t"));
+                                break;
+                            }
                         default:
-                        {
-                            var name = ext.Oid?.FriendlyName ?? ext.Oid?.Value ?? "<unknown>";
-                            sb.AppendLine($"\t\t\t{name}: ");
-                            var raw = ext.RawData;
-                            sb.Append(FormatHexDumpWithOffsets(raw, "\t\t\t\t"));
-                            break;
-                        }
+                            {
+                                var name = ext.Oid?.FriendlyName ?? ext.Oid?.Value ?? "<unknown>";
+                                sb.AppendLine($"\t\t\t{name}: ");
+                                var raw = ext.RawData;
+                                sb.Append(FormatHexDumpWithOffsets(raw, "\t\t\t\t"));
+                                break;
+                            }
                     }
                 }
                 catch (Exception ex)

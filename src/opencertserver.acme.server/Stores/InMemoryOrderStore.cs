@@ -1,6 +1,6 @@
 ﻿using CertesSlim.Acme.Resource;
-
 namespace OpenCertServer.Acme.Server.Stores;
+
 
 using Abstractions.Model;
 using Abstractions.Storage;
