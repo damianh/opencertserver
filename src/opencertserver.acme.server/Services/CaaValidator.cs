@@ -60,9 +60,14 @@ public sealed partial class CaaValidator : ICaaValidator
     {
         ArgumentNullException.ThrowIfNull(identifier);
 
+        var caaIdentities = _options.Value.CAAIdentities;
+        if (caaIdentities == null || caaIdentities.Length == 0)
+        {
+            return null;
+        }
+
         var fqdn = identifier.Value.Replace("*.", "", StringComparison.OrdinalIgnoreCase);
         var isWildcard = identifier.IsWildcard;
-
         IReadOnlyList<CaaRecord>? relevantSet;
         try
         {
